@@ -509,6 +509,22 @@
         "type": "github"
       }
     },
+    "nyoom-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672853223,
+        "narHash": "sha256-2NgVbWaNQBzI7j4coxfjngASTgY9OnaSDa4ARY3wyGw=",
+        "owner": "nyoom-engineering",
+        "repo": "nyoom.nvim",
+        "rev": "83f04131319cbf0ef0b123e34e7f9c87a0448042",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nyoom-engineering",
+        "repo": "nyoom.nvim",
+        "type": "github"
+      }
+    },
     "river-src": {
       "flake": false,
       "locked": {
@@ -539,6 +555,7 @@
         "nixpkgs-f2k": "nixpkgs-f2k",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur",
+        "nyoom-src": "nyoom-src",
         "swww-src": "swww-src",
         "xdg-desktop-portal-hyprland": "xdg-desktop-portal-hyprland",
         "xresources": "xresources"
