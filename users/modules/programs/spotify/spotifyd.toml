@@ -1,0 +1,16 @@
+[global]
+autoplay = true
+backend = "alsa"
+bitrate = 320
+device = "pipewire"
+device_name = "gamer_pc"
+device_type = "computer"
+initial_volume = "90"
+max_cache_size = 1000000000
+mixer = "PCM"
+no_audio_cache = true
+normalisation_pregain = -10
+use_mpris = true
+volume_controller = "alsa"
+volume_normalisation = true
+zeroconf_port = 1234

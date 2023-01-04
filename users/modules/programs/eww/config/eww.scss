@@ -1,0 +1,125 @@
+$mocha: (
+  "rosewater": #f5e0dc,
+  "flamingo": #f2cdcd,
+  "pink": #f5c2e7,
+  "mauve": #cba6f7,
+  "red": #f38ba8,
+  "maroon": #eba0ac,
+  "peach": #fab387,
+  "yellow": #f9e2af,
+  "green": #a6e3a1,
+  "teal": #94e2d5,
+  "sky": #89dceb,
+  "sapphire": #74c7ec,
+  "blue": #89b4fa,
+  "lavender": #b4befe,
+  "text": #cdd6f4,
+  "subtext1": #bac2de,
+  "subtext0": #a6adc8,
+  "overlay2": #9399b2,
+  "overlay1": #7f849c,
+  "overlay0": #6c7086,
+  "surface2": #585b70,
+  "surface1": #45475a,
+  "surface0": #313244,
+  "base": #1e1e2e,
+  "mantle": #181825,
+  "crust": #11111b,
+);
+
+$sizedProperties: ("rounded": "border-radius", "p": "padding", "m": "margin", "text": "font-size");
+$sizes: ("none": 0px, "sm": 0.5rem, "smd": 0.75rem, "md": 1rem, "lg": 1.5rem, "xl": 2rem);
+
+@each $name, $property in $sizedProperties {
+  @each $size, $value in $sizes {
+    .#{$name}-#{$size} {
+      #{$property}: $value;
+    }
+  }
+}
+
+@each $size, $value in $sizes {
+    .pl-#{$size} {
+      padding-left: $value;
+    }
+
+    .pr-#{$size} {
+      padding-right: $value;
+    }
+
+    .pt-#{$size} {
+      padding-top: $value;
+    }
+
+    .pb-#{$size} {
+      padding-bottom: $value;
+    }
+
+    .px-#{$size} {
+      padding-left: $value;
+      padding-right: $value;
+    }
+
+    .py-#{$size} {
+      padding-top: $value;
+      padding-bottom: $value;
+    }
+}
+
+@each $name, $value in $mocha {
+  .bg-#{$name} {
+    background-color: $value;
+  }
+  .#{$name} {
+      color: $value;
+  }
+}
+
+.bg-none {
+  background-color: transparent;
+}
+
+.systemStats,
+.bgSel,
+.powerModeLeft,
+.powerModeRight,
+.powerModeTop,
+.powerModeBottom {
+  background-color: transparent;
+}
+
+.pmt {
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.pmr {
+  border-radius: 1.5rem 0 0 1.5rem;
+}
+
+.pml {
+  border-radius: 0 1.5rem 1.5rem 0;
+}
+
+.pmb {
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.cmicon {
+  font-size: 3rem;
+}
+
+.metric {
+  scale trough highlight {
+    all: unset;
+    background-color: map-get($mocha, "sapphire");
+    color: #000000;
+    border-radius: 10px;
+  }
+
+  scale trough {
+    all: unset;
+    background-color: map-get($mocha, "surface0");
+    border-radius: 2rem;
+    min-height: 12px;
+  }
+}
