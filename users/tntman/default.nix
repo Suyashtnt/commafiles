@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  ...
+{ lib
+, pkgs
+, inputs
+, ...
 }: {
   imports = [
     ../modules/git
@@ -34,6 +33,7 @@
       wofi
       authy
       dolphin
+      kooha # for screen recording
 
       kitty # temporary until kitty is setup
 

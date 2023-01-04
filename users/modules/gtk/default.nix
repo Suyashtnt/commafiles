@@ -1,19 +1,18 @@
-{
-  self,
-  pkgs,
-  config,
-  packages,
-  inputs,
-  ...
+{ self
+, pkgs
+, config
+, packages
+, inputs
+, ...
 }: {
   gtk = {
     enable = true;
     theme = {
       name = "Catppuccin-Mocha-Standard-Lavender-Dark";
-      package = self.packages.${pkgs.system}.catppuccin-gtk;
+      package = packages.catppuccin-gtk;
     };
     iconTheme = {
-      package = self.packages.${pkgs.system}.catppuccin-folders;
+      package = packages.catppuccin-folders;
       name = "Papirus";
     };
     font = {
@@ -36,7 +35,7 @@
 
   # cursor theme
   home.pointerCursor = {
-    package = self.packages.${pkgs.system}.catppuccin-cursors;
+    package = packages.catppuccin-cursors;
     name = "Catppuccin-Mocha-Dark";
     size = 16;
   };
@@ -44,7 +43,7 @@
 
   # credits: bruhvko
   # catppuccin theme for qt-apps
-  home.packages = with pkgs; [libsForQt5.qtstyleplugin-kvantum];
+  home.packages = with pkgs; [ libsForQt5.qtstyleplugin-kvantum ];
 
   xdg.configFile."Kvantum/catppuccin/catppuccin.kvconfig".source = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.kvconfig";
