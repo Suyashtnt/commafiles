@@ -13,6 +13,7 @@
     ../modules/programs/firefox
     ../modules/programs/kitty
     ../modules/programs/neofetch
+    ../modules/programs/neovim
     ../modules/programs/spotify
     ../modules/swaylock
     ../modules/direnv
@@ -34,7 +35,6 @@
       authy
       dolphin
 
-      neovim # temporary until nyoom module is setup
       kitty # temporary until kitty is setup
 
       # CLI utils
