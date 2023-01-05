@@ -10,7 +10,7 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Standard-Sapphire-Dark";
+      name = "Catppuccin-Mocha-Standard-Blue-Dark";
       package = packages.catppuccin-gtk;
     };
     iconTheme = {
@@ -54,13 +54,13 @@
   home.packages = with pkgs; [ libsForQt5.qtstyleplugin-kvantum ];
 
   xdg.configFile."Kvantum/catppuccin/catppuccin.kvconfig".source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.kvconfig";
-    sha256 = "0n9f5hysr4k1sf9fd3sgd9fvqwrxrpcvj6vajqmb5c5ji8nv2w3c";
+    url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Blue/Catppuccin-Mocha-Blue.kvconfig";
+    sha256 = "1f8xicnc5696g0a7wak749hf85ynfq16jyf4jjg4dad56y4csm6s";
   };
 
   xdg.configFile."Kvantum/catppuccin/catppuccin.svg".source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Sapphire/Catppuccin-Mocha-Sapphire.svg";
-    sha256 = "1hq9h34178h0d288hgwb0ngqnixz24m9lk0ahc4dahwqn77fndwf";
+    url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Blue/Catppuccin-Mocha-Blue.svg";
+    sha256 = "6ff34420f7f33cdfc67aaaf6d59f608858d839cc7663a232d91049196602da6f";
   };
 
   xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
@@ -72,9 +72,14 @@
   '';
 
   xdg.configFile."gtk-4.0/assets" = {
-    source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Sapphire-Dark/gtk-4.0/assets";
+    source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Blue-Dark/gtk-4.0/assets";
     recursive = true;
   };
-  xdg.configFile."gtk-4.0/gtk.css".source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Sapphire-Dark/gtk-4.0/gtk.css";
-  xdg.configFile."gtk-4.0/gtk-dark.css".source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Sapphire-Dark/gtk-4.0/gtk-dark.css";
+  xdg.configFile."gtk-4.0/gtk.css".source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Blue-Dark/gtk-4.0/gtk.css";
+  xdg.configFile."gtk-4.0/gtk-dark.css".source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Blue-Dark/gtk-4.0/gtk-dark.css";
+
+  home.sessionVariables = {
+    QT_STYLE_OVERRIDE = "kvantum";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+  };
 }
