@@ -1,21 +1,20 @@
-{
-  lib,
-  stdenv,
-  fetchzip,
-  ...
+{ lib
+, stdenv
+, fetchzip
+, ...
 }:
 stdenv.mkDerivation rec {
   pname = "cattpuccin-cursors";
-  version = "0.2.7";
+  version = "0.2.0";
 
   src = fetchzip {
-    url = "https://github.com/catppuccin/cursors/raw/21942800ad34b357a12079718a1faa88f0bccf28/cursors/Catppuccin-Mocha-Dark-Cursors.zip";
-    sha256 = "I/QSk9mXrijf3LBs93XotbxIwe0xNu5xbtADIuGMDz8=";
+    url = "https://github.com/catppuccin/cursors/releases/download/v0.2.0/Catppuccin-Mocha-Lavender-Cursors.zip";
+    sha256 = "sha256-j9G/4FX8yh4LC8cPpHfDozS68bal4w/VhPgGw2wbW4Q=";
   };
 
   installPhase = ''
-    mkdir -p $out/share/icons/Catppuccin-Mocha-Dark
-    cp -va index.theme cursors $out/share/icons/Catppuccin-Mocha-Dark
+    mkdir -p $out/share/icons/Catppuccin-Mocha-Lavendar
+    cp -va index.theme cursors $out/share/icons/Catppuccin-Mocha-Lavendar
   '';
 
   meta = {
