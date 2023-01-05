@@ -12,6 +12,7 @@
 (local {: build} (autoload :hotpot.api.make))
 (local {: init} (autoload :packer))
 (local {: echo!} (autoload :core.lib.io))
+
 ;; Load packer
 
 (echo! "Loading Packer")
@@ -33,18 +34,15 @@
 ;; packer can manage itself
 
 (use-package! :EdenEast/packer.nvim {:opt true :branch :feat/lockfile})
-
 ;; libraries
 
 (use-package! :nvim-lua/plenary.nvim {:module :plenary})
 (use-package! :MunifTanjim/nui.nvim {:module :nui})
-
 ;; include modules
 
 (echo! "Initializing Module System")
 (include :fnl.modules)
 (nyoom-init-modules!)
-
 ;; To install a package with Nyoom you must declare them here and run 'nyoom sync'
 ;; on the command line, then restart nvim for the changes to take effect
 ;; The syntax is as follows: 
@@ -73,7 +71,6 @@
                :config (fn []
                          ((. (require :catppuccin) :setup) {:flavour :mocha
                                                             :integrations {:cmp true
-                                                                           :alpha true
                                                                            :fidget true
                                                                            :gitgutter true
                                                                            :gitsigns true
@@ -95,7 +92,6 @@
 
 (echo! "Installing Packages")
 (unpack!)
-
 ;; Compile modules 
 
 (echo! "Compiling Nyoom Modules")
