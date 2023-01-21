@@ -1,14 +1,19 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human";
-    extraGroups = ["networkmanager" "wheel" "scanner" "lp" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "docker" ];
     initialPassword = "password"; # Change this with passwd
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
     shell = pkgs.nushell;
   };
 
   networking.hostName = "GAMER-PC";
+
+  #  networking.interfaces.eth0.ipv4.addresses = [{
+  #    address = "192.168.0.110";
+  #  }];
+
   time.timeZone = "Africa/Johannesburg";
   i18n.defaultLocale = "en_ZA.UTF-8";
 

@@ -1,7 +1,6 @@
-{
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }: {
   boot = {
     loader = {
@@ -20,9 +19,9 @@
     };
 
     extraModprobeConfig = "options kvm_intel nested=1";
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" "mtpfs" ];
 
-    kernelModules = ["kvm-intel"];
+    kernelModules = [ "kvm-intel" ];
     kernelPackages = pkgs.linuxPackages_latest;
   };
 }

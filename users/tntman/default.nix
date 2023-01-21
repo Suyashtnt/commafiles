@@ -4,6 +4,8 @@
 , ...
 }: {
   imports = [
+    ../modules/direnv
+    ../modules/electron
     ../modules/git
     ../modules/gtk
     ../modules/hyprland
@@ -13,9 +15,9 @@
     ../modules/programs/kitty
     ../modules/programs/neofetch
     ../modules/programs/neovim
+    ../modules/programs/vscode # when neovim simply isn't enough
     ../modules/programs/spotify
     ../modules/swaylock
-    ../modules/direnv
     ../modules/xdg
 
     inputs.hyprland.homeManagerModules.default
@@ -29,20 +31,23 @@
     stateVersion = "22.05";
 
     packages = with pkgs; [
-      chromium #for js debugging and lighthoouse
-      wofi
-      authy
-      dolphin
+      chromium # js debugging and lighthoouse
+      obsidian # notes
+      wofi # launcher
+      authy # 2fa
+      gnome.nautilus # file manager
       kooha # for screen recording
+
+      prismlauncher # minecraft go brrr
+      temurin-jre-bin-17 # prism go brrr
 
       kitty # temporary until kitty is setup
 
       # CLI utils
-      xorg.xhost
-      unzip
-      ripgrep
-      cachix
-      docker-compose
+      unzip # unzipping stuff
+      ripgrep # searching stuff
+      cachix # caching stuff
+      docker-compose # docker-ing stuff
     ];
   };
 
