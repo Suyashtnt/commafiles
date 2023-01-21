@@ -1,8 +1,8 @@
-{
-  nixpkgs,
-  self,
-  ...
-}: let
+{ nixpkgs
+, self
+, ...
+}:
+let
   inputs = self.inputs;
   bootloader = ./modules/core/bootloader.nix;
   core = ./modules/core;
@@ -10,10 +10,12 @@
   nvidia = ./modules/nvidia;
   wayland = ./modules/wayland;
   printing = ./modules/printing;
+  teamviewer = ./modules/teamviewer;
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
   tntman = ../users/tntman;
-in {
+in
+{
   GAMER-PC = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {
@@ -29,6 +31,7 @@ in {
       printing
       nvidia
       wayland
+      teamviewer
       hmModule
       {
         home-manager = {
@@ -37,7 +40,7 @@ in {
           extraSpecialArgs = {
             inherit inputs;
             inherit self;
-  	    packages = self.packages."x86_64-linux";
+            packages = self.packages."x86_64-linux";
           };
           users.tntman = tntman;
         };
