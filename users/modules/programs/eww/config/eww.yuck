@@ -92,15 +92,13 @@
         :space-evenly false
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/universeBox.png" :name "unzip universe.zip")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.png" :name "W A V E S")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.jpg" :name "W A V E S")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/launch.png" :name "Prepare for launch")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/nix.png" :name "NixOS shill mode 2")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/rustShilling.png" :name "Rust shill mode")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/rustShillingAlt.png" :name "Rust shill mode alt")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/nixAtNight.png" :name "Using nix at 00:00")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/intoTheCatrix.png" :name "Into The Catrix")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/longRoadAhead.png" :name "A long road ahead")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/JsPain.jpg" :name "Experiencing pain")))))
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/longRoadAhead.png" :name "A long road ahead")))))
 
 (defwindow powerModeBottom
   :monitor 0
