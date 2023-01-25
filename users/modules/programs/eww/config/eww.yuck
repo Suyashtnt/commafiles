@@ -91,9 +91,9 @@
         :orientation "v"
         :space-evenly false
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.png" :name "W A V E S")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/launch.jpg" :name "Prepare for launch")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.jpg" :name "W A V E S")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/launch.png" :name "Prepare for launch")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/nix.png" :name "NixOS shill mode 2")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/rustShilling.png" :name "Rust shill mode")
