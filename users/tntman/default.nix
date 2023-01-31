@@ -43,6 +43,8 @@
 
       kitty # temporary until kitty is setup
 
+      jetbrains.clion # clion gaming
+
       # CLI utils
       unzip # unzipping stuff
       ripgrep # searching stuff

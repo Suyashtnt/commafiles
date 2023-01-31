@@ -49,7 +49,8 @@
 (defwidget bgSelImg [path name]
   (button
     :class "bg-surface0 rounded-lg p-md m-lg"
-    :onclick "swww img -t wipe --transition-angle 30 --transition-bezier 0.41,0.26,0.98,1 --transition-step 20 --transition-fps 60 --transition-duration 0.6 ${path}"
+    :onclick "swww img -t wave --transition-angle 30 --transition-bezier 0.41,0.26,0.98,1 --transition-step 180 --transition-fps 60 --transition-duration 1.2 ${path}"
+    :timeout "10s"
     (box
       :orientation "v"
       :space-evenly false
