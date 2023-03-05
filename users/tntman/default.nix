@@ -1,7 +1,8 @@
-{ lib
-, pkgs
-, inputs
-, ...
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
 }: {
   imports = [
     ../modules/direnv
@@ -40,10 +41,10 @@
 
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # prism go brrr
+      zotero # reference manager go brrr
+      jetbrains.clion # clion go brrr
 
       kitty # temporary until kitty is setup
-
-      jetbrains.clion # clion gaming
 
       # CLI utils
       unzip # unzipping stuff

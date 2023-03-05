@@ -15,20 +15,6 @@ in {
 
   programs.firefox = {
     enable = true;
-    extensions = with nur.repos.rycee.firefox-addons; [
-      adnauseam
-      augmented-steam
-      enhanced-github
-      enhancer-for-youtube
-      honey
-      refined-github
-      return-youtube-dislikes
-      sidebery
-      stylus
-      terms-of-service-didnt-read
-      vimium
-      vue-js-devtools
-    ];
     package = pkgs.firefox;
     profiles = {
       tntman = {
@@ -44,6 +30,20 @@ in {
           user_pref("media.ffmpeg.vaapi.enabled", true);
           user_pref("media.rdd-vpx.enabled", true);
         '';
+        extensions = with nur.repos.rycee.firefox-addons; [
+          adnauseam
+          augmented-steam
+          enhanced-github
+          enhancer-for-youtube
+          honey
+          refined-github
+          return-youtube-dislikes
+          sidebery
+          stylus
+          terms-of-service-didnt-read
+          vimium
+          vue-js-devtools
+        ];
       };
     };
   };
