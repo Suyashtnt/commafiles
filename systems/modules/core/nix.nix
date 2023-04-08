@@ -29,6 +29,10 @@ in {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
 
+      spotifyd = super.spotifyd.override {
+        withMpris = true;
+      };
+
       inherit swww hyprland-nvidia hyprland;
     })
   ];

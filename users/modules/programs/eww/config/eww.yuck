@@ -1,18 +1,53 @@
 ;; system monitor
-(defpoll time :interval "1s"
-"date '+%H:%M:%S'")
+(defpoll time :interval "1s")
+ "date '+%H:%M:%S'"
 
-(defpoll clients :interval "1s"
-"hyprctl clients -j")
+(defpoll clients :interval "1s")
+ "hyprctl clients -j"
 
-(defpoll volume :interval "1s"
-"scripts/getvol")
+(defpoll volume :interval "1s")
+ "scripts/getvol"
+
+(defpoll songArt
+  :interval "1s"
+  :initial "")
+  "scripts/getcoverArt"
+
+
+(defpoll songName
+  :interval "1s"
+  :initial "")
+  "playerctl metadata xesam:title"
+
+
+(defpoll songArtist
+  :interval "1s"
+  :initial "")
+  "playerctl metadata xesam:artist"
+
+
+(defpoll songStatus
+  :interval "1s"
+  :initial "")
+"playerctl status"
+
+(defpoll progress
+  :interval "1s"
+  :initial 0)
+  "playerctl position"
+
+
+(defpoll duration
+  :interval "1s"
+  :initial 0)
+  "playerctl metadata mpris:length | awk '{print $1/1000000}'"
+
 
 (defwindow systemStats
   :monitor 0
-  :geometry (geometry :x "1%"
+  :geometry (geometry :x "1%")
     :y "4%"
-  :anchor "top right")
+  :anchor "top right"
   :stacking "bottom"
   (box
     :orientation "v"
@@ -20,17 +55,17 @@
     :space-evenly false
     (label :class "text-xl" :text time)
     (metric :name "🔊"
-      :value volume
-    :onchange "amixer sset Master {}%")
+      :value volume)
+    :onchange "amixer sset Master {}%"
     (metric :name "﬙"
-      :value {EWW_CPU.avg}
-    :onchange "")
+      :value {EWW_CPU.avg})
+    :onchange ""
     (metric :name ""
-      :value {EWW_RAM.used_mem_perc}
-    :onchange "")
+      :value {EWW_RAM.used_mem_perc})
+    :onchange ""
     (metric :name "💾"
-      :value {EWW_DISK["/"].used_perc}
-    :onchange "")))
+      :value {EWW_DISK["/"].used_perc})
+    :onchange ""))
 
 (defwidget metric [name value onchange]
   (box :orientation "h"
@@ -41,8 +76,8 @@
       :max 101
       :width 200
       :active {onchange != ""}
-      :value value
-    :onchange onchange)))
+      :value value)
+    :onchange onchange))
 
 ;; POWER MODE
 
@@ -57,27 +92,61 @@
       :spacing 10
       (image
         :path path
-        :class "rounded-md"
+        :class "rounded-md")
       :image-height 200)
-    name)))
+    name))
 
 (defwidget circularMetric [name icon value color]
   (box :orientation "h" :space-evenly true
     (circular-progress :class "${color}" :height 75 :width 75 :value value :thickness 10 :start-at 76 (label :text icon :class "cmicon"))
     (label :text "${name} ${round(value, 0)}%" :class "text-xl")))
 
+(defwidget music []
+  (box
+    :orientation "v"
+    :class "bg-surface0 rounded-lg p-sm"
+    :space-evenly false
+    :spacing 5
+    (label :class "text-lg" :text "${songName}")
+    (label :class "text-md" :text "${songArtist}")
+    (box
+      :class "rounded-xl"
+      :height 300
+      :style "background-image: url('${songArt}'); background-size: contain; background-repeat: no-repeat; background-position: center;"
+    )
+    (box
+      :orientation "h"
+      :class "mt-sm"
+      :valign "center"
+      (button :class "bg-transparent rounded-sm mx-md" :timeout "100s" :onclick "playerctl previous" (label :class "text-xl" :text ""))
+      (button :class "bg-transparent rounded-sm mx-md" :timeout "100s" :onclick "playerctl play-pause"
+        (label :class "text-xl" :text "${songStatus == 'Playing' ? '' : ''}"
+        ))
+      (button :class "bg-transparent rounded-sm mx-md" :timeout "100s" :onclick "playerctl next" (label :class "text-xl" :text ""))
+    )
+  )
+)
+
+
 (defwindow powerModeRight
   :monitor 0
-  :geometry (geometry :height "80%"
+  :geometry (geometry :height "80%")
     :width "18%"
-  :anchor "right center")
+e r")
   :exclusive true
-  (box :class "bg-mantle pmr p-md" :orientation "v" :space-evenly false :spacing 10
+  (box :class "bg-mantle pmr p-md" :orientation "v" :space-evenly false :spacing 15
     (label :class "text-xl" :text time)
-    (for client in clients
-      (button :class "p-md bg-surface0 rounded-sm" :onclick "hyprctl dispatch focuswindow pid:${client.pid}"
-        (box :orientation "h" :space-evenly false
-          (label :class "text-smd" :text "${client.title}"))))))
+    (music)
+    (scroll :hscroll false :height 300
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 10
+        (for client in clients
+          (button :class "p-md bg-surface0 rounded-sm" :onclick "hyprctl dispatch focuswindow address:${client.address}"
+            (box :orientation "h" :space-evenly false
+              (label :class "text-smd" :text "${client.title}"))))))
+  ))
 
 (defwindow powerModeLeft
   :monitor 0
@@ -92,14 +161,11 @@
         :orientation "v"
         :space-evenly false
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png" :name "The almighty shape")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/justAReallyCoolArtwork.png" :name "I don't know how to describe this")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.png" :name "W A V E S")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/launch.jpg" :name "Prepare for launch")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/oceanWaves.jpg" :name "Ocean Current")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/nixShilling.png" :name "NixOS shill mode")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/nix.png" :name "NixOS shill mode 2")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/rustShilling.png" :name "Rust shill mode")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/intoTheCatrix.png" :name "Into The Catrix")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/longRoadAhead.png" :name "A long road ahead")))))
+      ))))
 
 (defwindow powerModeBottom
   :monitor 0
@@ -133,4 +199,5 @@
     :width "98%"
   :anchor "top center")
   :exclusive true
-  (box :class "bg-mantle pmt p-md" "sample text"))
+  (box :class "bg-mantle pmt p-md" "sample text")
+)

@@ -27,8 +27,20 @@ $mocha: (
   "crust": #11111b,
 );
 
-$sizedProperties: ("rounded": "border-radius", "p": "padding", "m": "margin", "text": "font-size");
-$sizes: ("none": 0px, "sm": 0.5rem, "smd": 0.75rem, "md": 1rem, "lg": 1.5rem, "xl": 2rem);
+$sizedProperties: (
+  "rounded": "border-radius",
+  "p": "padding",
+  "m": "margin",
+  "text": "font-size",
+);
+$sizes: (
+  "none": 0px,
+  "sm": 0.5rem,
+  "smd": 0.75rem,
+  "md": 1rem,
+  "lg": 1.5rem,
+  "xl": 2rem,
+);
 
 @each $name, $property in $sizedProperties {
   @each $size, $value in $sizes {
@@ -39,31 +51,57 @@ $sizes: ("none": 0px, "sm": 0.5rem, "smd": 0.75rem, "md": 1rem, "lg": 1.5rem, "x
 }
 
 @each $size, $value in $sizes {
-    .pl-#{$size} {
-      padding-left: $value;
-    }
+  .pl-#{$size} {
+    padding-left: $value;
+  }
 
-    .pr-#{$size} {
-      padding-right: $value;
-    }
+  .pr-#{$size} {
+    padding-right: $value;
+  }
 
-    .pt-#{$size} {
-      padding-top: $value;
-    }
+  .pt-#{$size} {
+    padding-top: $value;
+  }
 
-    .pb-#{$size} {
-      padding-bottom: $value;
-    }
+  .pb-#{$size} {
+    padding-bottom: $value;
+  }
 
-    .px-#{$size} {
-      padding-left: $value;
-      padding-right: $value;
-    }
+  .px-#{$size} {
+    padding-left: $value;
+    padding-right: $value;
+  }
 
-    .py-#{$size} {
-      padding-top: $value;
-      padding-bottom: $value;
-    }
+  .py-#{$size} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+
+  .ml-#{$size} {
+    margin-left: $value;
+  }
+
+  .mr-#{$size} {
+    margin-right: $value;
+  }
+
+  .mt-#{$size} {
+    margin-top: $value;
+  }
+
+  .mb-#{$size} {
+    margin-bottom: $value;
+  }
+
+  .mx-#{$size} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  .my-#{$size} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
 }
 
 @each $name, $value in $mocha {
@@ -71,7 +109,7 @@ $sizes: ("none": 0px, "sm": 0.5rem, "smd": 0.75rem, "md": 1rem, "lg": 1.5rem, "x
     background-color: $value;
   }
   .#{$name} {
-      color: $value;
+    color: $value;
   }
 }
 

@@ -10,6 +10,7 @@
     ../modules/git
     ../modules/gtk
     ../modules/hyprland
+    ../modules/playerctl
     ../modules/programs/dunst
     ../modules/programs/eww
     ../modules/programs/firefox
@@ -38,11 +39,12 @@
       authy # 2fa
       gnome.nautilus # file manager
       kooha # for screen recording
+      btop # system monitor
 
       prismlauncher # minecraft go brrr
-      temurin-jre-bin-17 # prism go brrr
+      temurin-jre-bin-17 # java go brrr
       zotero # reference manager go brrr
-      jetbrains.clion # clion go brrr
+      jetbrains-toolbox # jetbran go brrr
 
       kitty # temporary until kitty is setup
 
