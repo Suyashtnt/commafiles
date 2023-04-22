@@ -1,10 +1,10 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "scanner" "lp" "docker"];
     initialPassword = "password"; # Change this with passwd
-    packages = with pkgs; [ ];
+    packages = with pkgs; [];
     shell = pkgs.nushell;
   };
 
@@ -59,7 +59,6 @@
 
   environment.systemPackages = with pkgs; [
     vim # backup editor
-    nushell
     libimobiledevice
     gnome.adwaita-icon-theme
     ifuse

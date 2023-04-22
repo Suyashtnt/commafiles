@@ -1,5 +1,3 @@
-# Nushell Config File
-
 module completions {
   # Custom completions for external commands (those outside of Nushell)
   # Each completions has two parts: the form of the external command, including its flags and parameters
