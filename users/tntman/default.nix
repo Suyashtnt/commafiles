@@ -5,20 +5,20 @@
   ...
 }: {
   imports = [
-    ../modules/direnv
+    ../modules/dunst
     ../modules/electron
+    ../modules/eww
     ../modules/git
     ../modules/gtk
     ../modules/hyprland
     ../modules/playerctl
-    ../modules/programs/dunst
-    ../modules/programs/eww
     ../modules/programs/firefox
     ../modules/programs/kitty
     ../modules/programs/neofetch
     ../modules/programs/neovim
     ../modules/programs/vscode # when neovim simply isn't enough
-    ../modules/programs/spotify
+    ../modules/shell
+    ../modules/spotify
     ../modules/swaylock
     ../modules/xdg
 

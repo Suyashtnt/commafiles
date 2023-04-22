@@ -1,53 +1,50 @@
 ;; system monitor
-(defpoll time :interval "1s")
- "date '+%H:%M:%S'"
+(defpoll time :interval "1s" "date '+%H:%M:%S'")
 
-(defpoll clients :interval "1s")
- "hyprctl clients -j"
+(defpoll clients :interval "1s" "hyprctl clients -j")
 
-(defpoll volume :interval "1s")
- "scripts/getvol"
+(defpoll volume :interval "1s" "scripts/getvol")
 
 (defpoll songArt
   :interval "1s"
-  :initial "")
-  "scripts/getcoverArt"
+:initial "" "scripts/getcoverArt")
 
 
 (defpoll songName
   :interval "1s"
-  :initial "")
-  "playerctl metadata xesam:title"
+  :initial ""
+"playerctl metadata xesam:title")
 
 
 (defpoll songArtist
   :interval "1s"
-  :initial "")
-  "playerctl metadata xesam:artist"
+  :initial ""
+"playerctl metadata xesam:artist")
 
 
 (defpoll songStatus
   :interval "1s"
-  :initial "")
-"playerctl status"
+  :initial ""
+"playerctl status")
 
 (defpoll progress
   :interval "1s"
-  :initial 0)
-  "playerctl position"
+  :initial 0
+"playerctl position")
 
 
 (defpoll duration
   :interval "1s"
-  :initial 0)
-  "playerctl metadata mpris:length | awk '{print $1/1000000}'"
+  :initial 0
+"playerctl metadata mpris:length | awk '{print $1/1000000}'")
 
 
 (defwindow systemStats
   :monitor 0
-  :geometry (geometry :x "1%")
+  :geometry (geometry :x "1%"
     :y "4%"
-  :anchor "top right"
+    :anchor "top right"
+  )
   :stacking "bottom"
   (box
     :orientation "v"
@@ -55,17 +52,18 @@
     :space-evenly false
     (label :class "text-xl" :text time)
     (metric :name "🔊"
-      :value volume)
-    :onchange "amixer sset Master {}%"
+      :onchange "amixer sset Master {}%"
+    :value volume)
     (metric :name "﬙"
-      :value {EWW_CPU.avg})
-    :onchange ""
+      :onchange ""
+    :value {EWW_CPU.avg})
     (metric :name ""
-      :value {EWW_RAM.used_mem_perc})
-    :onchange ""
+      :onchange ""
+    :value {EWW_RAM.used_mem_perc})
     (metric :name "💾"
-      :value {EWW_DISK["/"].used_perc})
-    :onchange ""))
+      :onchange ""
+    :value {EWW_DISK["/"].used_perc})
+  ))
 
 (defwidget metric [name value onchange]
   (box :orientation "h"
@@ -75,9 +73,10 @@
     (scale :min 0
       :max 101
       :width 200
+      :onchange onchange
       :active {onchange != ""}
-      :value value)
-    :onchange onchange))
+    :value value)
+  ))
 
 ;; POWER MODE
 
@@ -92,9 +91,11 @@
       :spacing 10
       (image
         :path path
-        :class "rounded-md")
-      :image-height 200)
-    name))
+        :image-height 200
+      :class "rounded-md")
+      name
+    )
+  ))
 
 (defwidget circularMetric [name icon value color]
   (box :orientation "h" :space-evenly true
@@ -130,9 +131,11 @@
 
 (defwindow powerModeRight
   :monitor 0
-  :geometry (geometry :height "80%")
+  :geometry (geometry
+    :height "80%"
     :width "18%"
-e r")
+    :anchor "right center"
+  )
   :exclusive true
   (box :class "bg-mantle pmr p-md" :orientation "v" :space-evenly false :spacing 15
     (label :class "text-xl" :text time)
