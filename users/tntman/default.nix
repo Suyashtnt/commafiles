@@ -12,17 +12,19 @@
     ../modules/gtk
     ../modules/hyprland
     ../modules/playerctl
+    ../modules/programs/emacs
     ../modules/programs/firefox
     ../modules/programs/kitty
     ../modules/programs/neofetch
     ../modules/programs/neovim
+    ../modules/programs/spotify
     ../modules/programs/vscode # when neovim simply isn't enough
     ../modules/shell
-    ../modules/spotify
     ../modules/swaylock
     ../modules/xdg
 
     inputs.hyprland.homeManagerModules.default
+    inputs.nix-doom-emacs.hmModule
   ];
   manual.manpages.enable = false;
 

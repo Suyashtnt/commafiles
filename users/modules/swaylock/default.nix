@@ -28,7 +28,7 @@
       ring-clear-color = "a3be8c";
       bs-hl-color = "bf616a";
       line-uses-ring = false;
-      grace = 2;
+      grace = 0;
       grace-no-mouse = true;
       grace-no-touch = true;
       datestr = "%d.%m";

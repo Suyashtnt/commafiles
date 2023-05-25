@@ -1,0 +1,8 @@
+(defwindow powerModeTop
+  :monitor 0
+  :geometry (geometry :x "0%"
+                      :height "9%"
+                      :width "98%"
+                      :anchor "top center")
+  :exclusive true
+  (box :class "bg-mantle pmt p-md" "sample text"))

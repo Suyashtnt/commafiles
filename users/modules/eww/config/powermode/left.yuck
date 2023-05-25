@@ -1,0 +1,33 @@
+(defwidget bgSelImg [path name]
+  (button
+    :class "bg-surface0 rounded-lg p-md m-lg"
+    :onclick "swww img -t wave --transition-angle 30 --transition-bezier 0.41,0.26,0.98,1 --transition-step 180 --transition-fps 60 --transition-duration 1.2 ${path}"
+    :timeout "10s"
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 10
+      (image
+        :path path
+        :image-height 200
+        :class "rounded-md")
+      name)))
+
+
+(defwindow powerModeLeft
+  :monitor 0
+  :geometry (geometry :height "80%"
+                      :width "18%"
+                      :anchor "left center")
+  :exclusive true
+  (box :orientation "v" :space-evenly false :spacing 20 :class "bg-mantle pml p-md"
+    (calendar :class "rounded-lg")
+    (scroll :hscroll false :height 530
+      (box
+        :orientation "v"
+        :space-evenly false
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png" :name "The almighty shape")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/justAReallyCoolArtwork.png" :name "I don't know how to describe this")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.png" :name "W A V E S")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/launch.jpg" :name "Prepare for launch")))))

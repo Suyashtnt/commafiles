@@ -11,17 +11,6 @@
     doCheck = false; # breaks on nixOS
   };
 
-  spotifyPlayerName = craneLib.crateNameFromCargoToml {
-    cargoToml = "${inputs.spotify-player-src}/spotify_player/Cargo.toml";
-  };
-
-  spotifyPlayer = craneLib.buildPackage ({
-      src = craneLib.cleanCargoSource inputs.spotify-player-src;
-      nativeBuildInputs = with pkgs; [pkg-config alsaLib.dev dbus.dev libpulseaudio libiconv openssl];
-      cargoFlags = "--no-default-features --features pulseaudio-backend,lyric-finder,image,notify";
-    }
-    // spotifyPlayerName);
-
   hyprland-nvidia = inputs.hyprland.packages.${pkgs.system}.default.override {
     nvidiaPatches = true;
     wlroots = inputs.hyprland.packages.${pkgs.system}.wlroots-hyprland;
@@ -36,6 +25,7 @@ in {
   nixpkgs.overlays = [
     inputs.nixpkgs-f2k.overlays.default
     inputs.xdg-desktop-portal-hyprland.overlays.default
+    inputs.emacs-overlay.overlays.default
     (final: super: {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
@@ -48,7 +38,7 @@ in {
         additionalFeatures = features: features ++ ["dataframe"];
       });
 
-      inherit swww hyprland-nvidia hyprland spotifyPlayer;
+      inherit swww hyprland-nvidia hyprland craneLib;
     })
   ];
 

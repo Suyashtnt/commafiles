@@ -1,0 +1,29 @@
+(defwidget circularMetric [name icon value color]
+  (box :orientation "h" :space-evenly true
+    (circular-progress :class "${color}" :height 75 :width 75 :value value :thickness 10 :start-at 76 (label :text icon :class "cmicon"))
+    (label :text "${name} ${round(value, 0)}%" :class "text-xl")))
+
+(defwindow powerModeBottom
+  :monitor 0
+  :geometry (geometry :height "9%"
+                      :width "98%"
+                      :anchor "bottom center")
+  :exclusive true
+  (box :class "bg-mantle pmb p-md"
+    (box :orientation "h" :spacing 50
+      (circularMetric
+        :name "CPU"
+        :icon "﬙"
+        :value {EWW_CPU.avg}
+        :color "blue")
+      (circularMetric
+        :name "RAM"
+        :icon ""
+        :value {EWW_RAM.used_mem_perc}
+        :color "green")
+      (circularMetric
+        :name "DISK"
+        :icon ""
+        :value {EWW_DISK["/"].used_perc}
+        :color "sapphire")
+      (label :class "text-xl" :text " ${EWW_NET["eno1"].NET_UP}  ${EWW_NET["eno1"].NET_DOWN}"))))

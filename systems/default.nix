@@ -1,8 +1,8 @@
-{ nixpkgs
-, self
-, ...
-}:
-let
+{
+  nixpkgs,
+  self,
+  ...
+}: let
   inputs = self.inputs;
   bootloader = ./modules/core/bootloader.nix;
   core = ./modules/core;
@@ -11,11 +11,12 @@ let
   wayland = ./modules/wayland;
   printing = ./modules/printing;
   teamviewer = ./modules/teamviewer;
+  ld = ./modules/ld;
+
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
   tntman = ../users/tntman;
-in
-{
+in {
   GAMER-PC = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {
@@ -28,6 +29,7 @@ in
       bootloader
       core
       intel
+      ld
       printing
       nvidia
       wayland

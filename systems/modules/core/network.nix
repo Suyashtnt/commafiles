@@ -1,7 +1,4 @@
-{ pkgs
-, hostname
-, ...
-}: {
+{ hostname, ... }: {
   networking = {
     firewall = {
       enable = false;

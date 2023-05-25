@@ -1,0 +1,35 @@
+(defwindow systemStats
+  :monitor 0
+  :geometry (geometry :x "1%"
+                      :y "4%"
+                      :anchor "top right")
+  :stacking "bottom"
+  (box
+    :orientation "v"
+    :class "rounded-xl bg-mantle p-xl"
+    :space-evenly false
+    (label :class "text-xl" :text time)
+    (metric :name "🔊"
+      :onchange "amixer sset Master {}%"
+      :value volume)
+    (metric :name "﬙"
+      :onchange ""
+      :value {EWW_CPU.avg})
+    (metric :name ""
+      :onchange ""
+      :value {EWW_RAM.used_mem_perc})
+    (metric :name "💾"
+      :onchange ""
+      :value {EWW_DISK["/"].used_perc})))
+
+(defwidget metric [name value onchange]
+  (box :orientation "h"
+    :class "metric mx-md"
+    :space-evenly false
+    (label :class "text-xl icon" :text name)
+    (scale :min 0
+      :max 101
+      :width 200
+      :onchange onchange
+      :active {onchange != ""}
+      :value value)))

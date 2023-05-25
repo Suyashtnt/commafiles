@@ -1,0 +1,41 @@
+(defpoll time :interval "1s" "date '+%H:%M:%S'")
+
+(defpoll volume :interval "1s" "scripts/getvol")
+
+(defpoll clients :interval "1s" "hyprctl clients -j")
+
+;; music related
+(defpoll songArt
+  :interval "1s"
+  :initial ""
+  "scripts/getcoverArt")
+
+(defpoll queue
+  :interval "1s"
+  :initial '[]'
+  "nu -c 'spotify_player get key queue | from json | get queue | each { get name } | to json'")
+
+(defpoll songName
+  :interval "1s"
+  :initial ""
+  "playerctl metadata xesam:title")
+
+(defpoll songArtist
+  :interval "1s"
+  :initial ""
+  "playerctl metadata xesam:artist")
+
+(defpoll songStatus
+  :interval "1s"
+  :initial ""
+  "playerctl status")
+
+(defpoll progress
+  :interval "1s"
+  :initial 0
+  "playerctl position")
+
+(defpoll duration
+  :interval "1s"
+  :initial 0
+  "playerctl metadata mpris:length | awk '{print $1/1000000}'")

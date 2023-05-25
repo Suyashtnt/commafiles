@@ -4,7 +4,6 @@
     fonts = with pkgs; [
       (nerdfonts.override {fonts = ["JetBrainsMono"];})
       font-awesome
-      emacs-all-the-icons-fonts
       inter
     ];
 

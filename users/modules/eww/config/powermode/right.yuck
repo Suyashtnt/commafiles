@@ -1,0 +1,50 @@
+(defwidget music []
+  (box
+    :orientation "v"
+    :class "bg-surface0 rounded-lg p-sm"
+    :style "background-image: linear-gradient(0deg, rgba(1,1,1,1) 0%, rgba(51,51,51,0.2) 40%, rgba(77,77,77,0.7) 75%, rgba(51,51,51,0.8) 90%, rgba(0,0,0,0.8) 100%), url('${songArt}'); background-size: cover; background-repeat: no-repeat; background-position: center;"
+    :height 500
+    (box
+      :orientation "v"
+      :space-evenly false
+      :spacing 5
+      (label :class "text-lg" :text "${songName}")
+      (label :class "text-md" :text "${songArtist}"))
+    (box
+      :orientation "v"
+      :class "mx-md"
+      (progress
+        :orientation "h"
+        :value "${progress / duration * 100}")
+      (box
+        :orientation "h"
+        :valign "center"
+        :class ""
+        :space-evenly true
+        :spacing 15
+        (button :class "bg-transparent rounded-sm" :timeout "100s" :onclick "playerctl previous" (label :class "text-xl" :text ""))
+        (button :class "bg-transparent rounded-sm" :timeout "100s" :onclick "playerctl play-pause"
+          (label :class "text-xl" :text "${songStatus == 'Playing' ? '' : ''}"))
+        (button :class "bg-transparent rounded-sm" :timeout "100s" :onclick "playerctl next" (label :class "text-xl" :text ""))))))
+
+
+
+(defwindow powerModeRight
+  :monitor 0
+  :geometry (geometry :height "80%"
+                      :width "18%"
+                      :anchor "right center")
+  :exclusive true
+  (box :class "bg-mantle pmr p-md" :orientation "v" :space-evenly false :spacing 15
+    (label :class "text-xl" :text time)
+    (music)
+    (label :class "text-xl" :text "Queue")
+    (scroll :hscroll false :height 300
+      (box
+        :orientation "v"
+        :space-evenly false
+        :spacing 10
+        (for item in queue
+          (box
+            :class "bg-base rounded-xl py-sm"
+            (label :class "text-lmg" :text item)))))))
