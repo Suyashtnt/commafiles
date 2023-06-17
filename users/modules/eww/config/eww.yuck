@@ -3,4 +3,6 @@
 (include "./powermode/left.yuck")
 (include "./powermode/right.yuck")
 
+(include "./systemStats.yuck")
+
 (include "./polls.yuck")

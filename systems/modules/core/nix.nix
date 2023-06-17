@@ -26,6 +26,9 @@ in {
     inputs.nixpkgs-f2k.overlays.default
     inputs.xdg-desktop-portal-hyprland.overlays.default
     inputs.emacs-overlay.overlays.default
+    inputs.neovim-nightly-overlay.overlay
+    inputs.rust-overlay.overlays.default
+    inputs.eww.overlays.default
     (final: super: {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
@@ -52,7 +55,7 @@ in {
       experimental-features = nix-command flakes
     '';
     settings = {
-      trusted-users = ["root" "tntman"];
+      trusted-users = ["@wheel"];
       auto-optimise-store = true;
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="

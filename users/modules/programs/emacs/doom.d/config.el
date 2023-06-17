@@ -82,9 +82,25 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration
+    '("\\.typ$" . "typst"))
+
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-stdio-connection "typst-lsp")
+                     :activation-fn (lsp-activate-on "typst")
+                     :environment-fn (lambda ()
+                                       '(("RUST_BACKTRACE" . lsp-typst-enable-backtrace)))
+                     :server-id 'typst-lsp)))
+
+(setq lsp-typst-enable-backtrace "1")
+
 (after! lsp-ui
  (setq lsp-ui-doc-enable t)
  (setq lsp-ui-doc-position 'at-point))
+
+(after! centaur-tabs (centaur-tabs-group-by-projectile-project))
 
 (use-package! lsp-nix
   :ensure lsp-mode
@@ -97,6 +113,15 @@
   :hook (nix-mode . lsp-deferred)
   :ensure t)
 
+(use-package! typst-mode)
+
 (add-hook 'nix-mode-local-vars-hook #'lsp!)
+(add-hook 'typst-mode-local-vars-hook #'lsp!)
+(add-hook 'typst--markup-mode-local-vars-hook #'lsp!)
+(add-hook 'typst--code-mode-local-vars-hook #'lsp!)
+
+;; tree sitter enabled packages
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;;; config.el ends here

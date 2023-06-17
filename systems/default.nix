@@ -13,6 +13,8 @@
   teamviewer = ./modules/teamviewer;
   ld = ./modules/ld;
 
+  greetd = ./modules/loginManager/greetd.nix;
+
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
   tntman = ../users/tntman;
@@ -35,6 +37,7 @@ in {
       wayland
       teamviewer
       hmModule
+      greetd
       {
         home-manager = {
           useUserPackages = true;

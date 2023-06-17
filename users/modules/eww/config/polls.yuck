@@ -10,10 +10,11 @@
   :initial ""
   "scripts/getcoverArt")
 
+;; this command stupidly long but it works
 (defpoll queue
   :interval "1s"
   :initial '[]'
-  "nu -c 'spotify_player get key queue | from json | get queue | each { get name } | to json'")
+  "nu -c 'spotify_player get key queue | from json | get queue | each { get name artists } | each { |it| $it | update 1 ($it | get 1 | each { get name }) } | each { |it| { name: ($it | get 0), artists: ($it | get 1) } } | to json'")
 
 (defpoll songName
   :interval "1s"

@@ -6,6 +6,10 @@
 
 ;;; Code:
 
-(package! catppuccin-theme)
+(when (package! polymode)
+  (package! typst-mode))
+
+(unpin! tree-sitter)
+(unpin! tree-sitter-langs)
 
 ;;; packages.el ends here

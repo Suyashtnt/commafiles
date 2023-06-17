@@ -87,6 +87,6 @@
         :config
         ;;literate           ; FIXME: Disguise your config as poor documentation
         (default             ; Reasonable defaults for reasonable people
-          +bindings 
+          +bindings
           +which-key
           +smartparens))

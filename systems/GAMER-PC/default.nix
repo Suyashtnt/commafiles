@@ -4,7 +4,6 @@
     description = "Tabiasgeee Human";
     extraGroups = ["networkmanager" "wheel" "scanner" "lp" "docker"];
     initialPassword = "password"; # Change this with passwd
-    packages = with pkgs; [];
     shell = pkgs.nushell;
   };
 

@@ -27,8 +27,6 @@
           (label :class "text-xl" :text "${songStatus == 'Playing' ? '' : ''}"))
         (button :class "bg-transparent rounded-sm" :timeout "100s" :onclick "playerctl next" (label :class "text-xl" :text ""))))))
 
-
-
 (defwindow powerModeRight
   :monitor 0
   :geometry (geometry :height "80%"
@@ -47,4 +45,4 @@
         (for item in queue
           (box
             :class "bg-base rounded-xl py-sm"
-            (label :class "text-lmg" :text item)))))))
+            (label :class "text-lmg" :text "${item.name} - ${jq(item.artists, 'join(\", \")')}")))))))

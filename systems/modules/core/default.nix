@@ -9,6 +9,7 @@
     ./network.nix
     ./nix.nix
     ./opengl.nix
+    ./security.nix
     ./sound.nix
   ];
 }

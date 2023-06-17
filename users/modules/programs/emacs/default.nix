@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, inputs, ...}: let
   emc = pkgs.writeShellScriptBin "em" ''
     #!/bin/sh
     emacsclient -nc $@
@@ -10,6 +10,7 @@ in {
     enable = true;
     doomPrivateDir = ./doom.d;
     emacsPackage = pkgs.emacsPgtk;
+
 
     # Only init/packages so we only rebuild when those change.
     doomPackageDir = let
@@ -34,6 +35,16 @@ in {
           path = pkgs.emptyFile;
         }
       ];
+
+    emacsPackagesOverlay = self: super: {
+      typst-mode = self.trivialBuild {
+        pname = "typst-mode";
+        ename = "typst-mode";
+        version = "unstable-2023-04-25";
+        buildInputs = [ self.polymode ];
+        src = inputs.typst-mode-src;
+      };
+    };
   };
 
   services.emacs.enable = true;
