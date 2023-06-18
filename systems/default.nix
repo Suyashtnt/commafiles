@@ -15,6 +15,7 @@
 
   greetd = ./modules/loginManager/greetd.nix;
   geoclue = ./modules/geoclue;
+  openrgb = ./modules/openrgb;
 
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
@@ -40,6 +41,7 @@ in {
       hmModule
       greetd
       geoclue
+      openrgb
       {
         home-manager = {
           useUserPackages = true;

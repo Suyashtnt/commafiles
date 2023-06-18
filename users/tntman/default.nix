@@ -12,6 +12,7 @@
     ../modules/git
     ../modules/gtk
     ../modules/hyprland
+    ../modules/openrgb
     ../modules/playerctl
     ../modules/programs/emacs
     ../modules/programs/firefox

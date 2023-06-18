@@ -8,4 +8,5 @@
   ];
 
   services.xserver.videoDrivers = ["intel"];
+  services.hardware.openrgb.motherboard = "intel";
 }
