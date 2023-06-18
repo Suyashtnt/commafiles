@@ -8,6 +8,7 @@
     ../modules/dunst
     ../modules/electron
     ../modules/eww
+    ../modules/gammastep
     ../modules/git
     ../modules/gtk
     ../modules/hyprland

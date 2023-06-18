@@ -14,6 +14,7 @@
   ld = ./modules/ld;
 
   greetd = ./modules/loginManager/greetd.nix;
+  geoclue = ./modules/geoclue;
 
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
@@ -38,6 +39,7 @@ in {
       teamviewer
       hmModule
       greetd
+      geoclue
       {
         home-manager = {
           useUserPackages = true;
