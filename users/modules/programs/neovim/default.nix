@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   lib,
+  config ? "gabriel",
   ...
 }: let
   custom-neovide-name = pkgs.craneLib.crateNameFromCargoToml {
@@ -150,16 +151,26 @@ in {
   };
 
   xdg.configFile.nvim = {
-    source = pkgs.buildEnv {
-      name = "nyoom";
-      paths = [
-        inputs.nyoom-src
-        {
-          outPath = ./config;
-          meta.priority = 4;
-        }
-      ];
-    };
+    # source =
+    #   {
+    #     nyoom = pkgs.buildEnv {
+    #       name = "nyoom";
+    #       paths = [
+    #         inputs.nyoom-src
+    #         {
+    #           outPath = ./nyoom;
+    #           meta.priority = 2;
+    #         }
+    #       ];
+    #     };
+
+    #     gabriel = ./gabriel;
+    #     weaponized-gopro = ./weaponized-gopro;
+    #   }
+    #   .${config};
+
+    source = ./gabriel;
+
     recursive = true;
   };
 }

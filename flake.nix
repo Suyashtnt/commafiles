@@ -116,6 +116,7 @@
         yaml-language-server # yaml LSP
         alejandra # uncomprimising nix formatter
         fnlfmt # fennel formatter
+        fennel # fennel compiler
       ];
     };
 
