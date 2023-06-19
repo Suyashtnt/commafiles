@@ -24,6 +24,11 @@
 (let! neovide_refresh_rate 120)
 (let! neovide_transparency 0.8)
 
+(let! neovide_padding_top 0)
+(let! neovide_padding_bottom 0)
+(let! neovide_padding_left 0)
+(let! neovide_padding_right 0)
+
 ;; map! is used for mappings
 ;; Heres an example, preseing esc should also remove search highlights
 
