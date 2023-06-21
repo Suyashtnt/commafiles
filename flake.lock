@@ -299,6 +299,22 @@
         "type": "github"
       }
     },
+    "fennel-lsp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1686292619,
+        "narHash": "sha256-bLXCKDht5LAKaQQSo2CMgpxx/IUl4yiDK+6marp6OsE=",
+        "owner": "~xerool",
+        "repo": "fennel-ls",
+        "rev": "e5742bbc4e6a62db0e8ad15d638fcb05e1e6d453",
+        "type": "sourcehut"
+      },
+      "original": {
+        "owner": "~xerool",
+        "repo": "fennel-ls",
+        "type": "sourcehut"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -1350,6 +1366,7 @@
         "crane": "crane",
         "emacs-overlay": "emacs-overlay",
         "eww": "eww",
+        "fennel-lsp": "fennel-lsp",
         "flake-utils": "flake-utils_2",
         "grub-theme": "grub-theme",
         "home-manager": "home-manager",

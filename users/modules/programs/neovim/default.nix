@@ -13,6 +13,8 @@
     stdenv = pkgs.clangStdenv;
     src = inputs.neovide-src;
 
+    cargoExtraArgs = "--locked";
+
     SKIA_SOURCE_DIR = let
       repo = pkgs.fetchFromGitHub {
         owner = "rust-skia";
@@ -102,7 +104,7 @@
       buildPhase = ''
         mkdir -p .cargo
         cp ${custom-neovide-deps}/config.toml .cargo/config.toml
-        cargo build --release
+        cargo build --release --locked
       '';
 
       installPhase = ''

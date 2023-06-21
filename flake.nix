@@ -99,6 +99,11 @@
       url = "github:catppuccin/xresources";
       flake = false;
     };
+
+    fennel-lsp = {
+      url = "sourcehut:~xerool/fennel-ls";
+      flake = false;
+    };
   };
 
   outputs = {...} @ inputs: let
@@ -106,6 +111,22 @@
 
     pkgs = import inputs.nixpkgs {
       inherit system;
+    };
+
+    fennel-ls = pkgs.stdenv.mkDerivation {
+      pname = "fennel-ls";
+      version = "git-unstable";
+      src = inputs.fennel-lsp;
+
+      nativeBuildInputs = with pkgs; [
+        luajit
+        fennel
+      ];
+
+      installPhase = ''
+        DESTDIR=$out PREFIX=$out make install
+        install -Dm755 fennel-ls $out/bin/fennel-ls
+      '';
     };
   in {
     nixosConfigurations = import ./systems inputs;
@@ -117,6 +138,8 @@
         alejandra # uncomprimising nix formatter
         fnlfmt # fennel formatter
         fennel # fennel compiler
+        fennel-ls # fennel LSP
+        lua-language-server
       ];
     };
 
@@ -124,6 +147,7 @@
       catppuccin-folders = pkgs.callPackage ./pkgs/catppuccin-folders.nix {};
       catppuccin-gtk = pkgs.callPackage ./pkgs/catppuccin-gtk.nix {};
       catppuccin-cursors = pkgs.callPackage ./pkgs/catppuccin-cursors.nix {};
+      fennel-ls = fennel-ls;
     };
   };
 }
