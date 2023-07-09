@@ -2,6 +2,7 @@
 (tset vim.wo :number true)
 (tset vim.opt :guifont "ComicCodeLigatures Nerd Font:h12")
 (tset vim.opt :mouse "a")
+(tset vim.opt :clipboard :unnamedplus)
 
 ;; for nvim-ufo
 (tset vim.o :foldcolumn :1)
@@ -15,7 +16,7 @@
 
 ;; https://github.com/neovide/neovide/pull/1870 60 for wayland, else it breaks
 (tset vim.g :neovide_refresh_rate 60)
-(tset vim.g :neovide_transparency 0.8)
+(tset vim.g :neovide_transparency 0.4)
 
 (tset vim.g :neovide_padding_top 0)
 (tset vim.g :neovide_padding_bottom 0)

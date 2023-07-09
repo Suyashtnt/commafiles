@@ -7,6 +7,7 @@
                       :neotree true
                       :notify true
                       :treesitter_context true
+                      :harpoon true
                       :which_key true})
 
 (catppuccin.setup {:intergrations intergrations})

@@ -1,17 +1,31 @@
-{ pkgs
-, packages
-, ...
-}:
+{ pkgs, ... }:
+let 
+  cat-gtk = pkgs.catppuccin-gtk.override {
+    variant = "mocha";
+    accents = [ "lavender" ];
+  };
+
+  cat-folders = pkgs.catppuccin-papirus-folders.override {
+    flavor = "mocha";
+    accent = "lavender";
+  };
+
+  # TODO: figure out how this works
+  cat-kvantum = pkgs.catppuccin-kvantum.override {
+    variant = "Mocha";
+    accent = "Lavender";
+  };
+in
 {
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Standard-Blue-Dark";
-      package = packages.catppuccin-gtk;
+      name = "Catppuccin-Mocha-Standard-Lavender-dark";
+      package = cat-gtk;
     };
     iconTheme = {
-      package = packages.catppuccin-folders;
-      name = "Papirus";
+      package = cat-folders;
+      name = "Papirus-Dark";
     };
     font = {
       name = "Inter";
@@ -39,43 +53,34 @@
 
   # cursor theme
   home.pointerCursor = {
-    package = packages.catppuccin-cursors;
-    name = "Catppuccin-Mocha-Lavendar";
+    package = pkgs.catppuccin-cursors.mochaLavender;
+    name = "Catppuccin-Mocha-Lavender-Cursors";
     size = 16;
   };
   home.pointerCursor.gtk.enable = true;
+  home.packages = [
+    cat-kvantum
+  ];
 
-  # credits: bruhvko
-  # catppuccin theme for qt-apps
-  home.packages = with pkgs; [ libsForQt5.qtstyleplugin-kvantum ];
-
-  xdg.configFile."Kvantum/catppuccin/catppuccin.kvconfig".source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Blue/Catppuccin-Mocha-Blue.kvconfig";
-    sha256 = "1f8xicnc5696g0a7wak749hf85ynfq16jyf4jjg4dad56y4csm6s";
-  };
-
-  xdg.configFile."Kvantum/catppuccin/catppuccin.svg".source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/Kvantum/main/src/Catppuccin-Mocha-Blue/Catppuccin-Mocha-Blue.svg";
-    sha256 = "6ff34420f7f33cdfc67aaaf6d59f608858d839cc7663a232d91049196602da6f";
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+    style.name = "kvantum";
   };
 
   xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
     [General]
-    theme=catppuccin
+    theme=Catppuccin-Mocha-Lavender
 
     [Applications]
     catppuccin=Dolphin, dolphin, Nextcloud, nextcloud, qt5ct, org.kde.dolphin, org.kde.kalendar, kalendar, Kalendar, qbittorrent, org.qbittorrent.qBittorrent
   '';
 
   xdg.configFile."gtk-4.0/assets" = {
-    source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Blue-Dark/gtk-4.0/assets";
+    source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/assets";
     recursive = true;
   };
-  xdg.configFile."gtk-4.0/gtk.css".source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Blue-Dark/gtk-4.0/gtk.css";
-  xdg.configFile."gtk-4.0/gtk-dark.css".source = "${packages.catppuccin-gtk}/share/themes/Catppuccin-Mocha-Standard-Blue-Dark/gtk-4.0/gtk-dark.css";
-
-  home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "kvantum";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
-  };
+  xdg.configFile."gtk-4.0/gtk.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/gtk.css";
+  xdg.configFile."gtk-4.0/gtk-dark.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/gtk-dark.css";
 }
+

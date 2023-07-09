@@ -49,6 +49,7 @@
       temurin-jre-bin-17 # java go brrr
       zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
+      webcord # discord go brrr
 
       kitty # temporary until kitty is setup
 

@@ -7,6 +7,11 @@
       flake = false;
     };
 
+    cavalier-src = {
+      url = "github:NickvisionApps/Cavalier";
+      flake = false;
+    };
+
     crane = {
       url = "github:ipetkov/crane";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -128,6 +133,33 @@
         install -Dm755 fennel-ls $out/bin/fennel-ls
       '';
     };
+
+    cavalier = pkgs.buildDotnetModule {
+      pname = "cavalier";
+      version = "2023.7.0-beta2"; # assuming based on https://github.com/NickvisionApps/Cavalier/tags
+      src = inputs.cavalier-src;
+
+      runtimeDeps = with pkgs; [
+        gtk4
+        libadwaita
+      ];
+
+      nativeBuildInputs = with pkgs; [
+        gtk4
+        libadwaita
+        blueprint-compiler
+        wrapGAppsHook
+      ];
+
+      dotnet-sdk = pkgs.dotnet-sdk_7;
+      dotnet-runtime = pkgs.dotnet-runtime_7;
+      executables = [ "NickvisionCavalier.GNOME" ];
+      selfContainedBuild = true;
+      nugetDeps = ./pkgs/cavalier/deps.nix;
+      dontWrapGApps = false;
+
+      projectFile = "NickvisionCavalier.GNOME/NickvisionCavalier.GNOME.csproj";
+  };
   in {
     nixosConfigurations = import ./systems inputs;
 
@@ -144,10 +176,8 @@
     };
 
     packages.${system} = {
-      catppuccin-folders = pkgs.callPackage ./pkgs/catppuccin-folders.nix {};
-      catppuccin-gtk = pkgs.callPackage ./pkgs/catppuccin-gtk.nix {};
-      catppuccin-cursors = pkgs.callPackage ./pkgs/catppuccin-cursors.nix {};
       fennel-ls = fennel-ls;
+      cavalier = cavalier;
     };
   };
 }

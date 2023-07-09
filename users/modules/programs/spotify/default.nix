@@ -1,5 +1,6 @@
 {
   pkgs,
+  packages,
   inputs,
   ...
 }: let
@@ -19,7 +20,7 @@ in {
     spotifyPlayer # spotify terminal edition
     sptlrx # spotify lyrics
     cava # the funny music visualizer
-    cavalier # the funnier music visualizer
+    packages.cavalier # the funnier music visualizer
   ];
 
   xdg.configFile.cava.source = ./config;

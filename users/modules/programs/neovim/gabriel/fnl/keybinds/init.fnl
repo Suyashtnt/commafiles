@@ -7,6 +7,9 @@
 (local whichkeyOpts {})
 ((. (require :which-key) :setup) whichkeyOpts)
 
+(require :keybinds.core)
+(require :keybinds.flash)
+(require :keybinds.harpoon)
+;; init would be here
 (require :keybinds.lsp)
 (require :keybinds.telescope)
-(require :keybinds.core)

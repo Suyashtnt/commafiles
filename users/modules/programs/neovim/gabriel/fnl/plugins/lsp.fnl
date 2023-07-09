@@ -1,11 +1,15 @@
 (local lspconfig (require :lspconfig))
 (local coq (require :coq))
+(local coq_3p (require :coq_3p))
 (local fidget (require :fidget))
 (local inc_rename (require :inc_rename))
 (local dressing (require :dressing))
 (local aerial (require :aerial))
 (local ufo (require :ufo))
 (local lspsaga (require :lspsaga))
+(local lsp-format (require :lsp-format))
+
+(local null-ls (require :null-ls))
 
 (local servers [
                 :rust_analyzer
@@ -15,10 +19,13 @@
                 :unocss
                 :nil_ls
                 :fennel_ls
-                :lua_ls])
+                :lua_ls
+                :marksman])
 
-(fn on-attach [_client bufnr]
+
+(fn on-attach [client bufnr]
   (local lsp_signature (require :lsp_signature))
+  (lsp-format.on_attach client)
   (lsp_signature.on_attach
     {:bind true :handler_opts {:border :rounded}}
     bufnr))
@@ -28,6 +35,13 @@
                                               :dynamicRegistration false
                                               :lineFoldingOnly true})
 
+(null-ls.setup {
+                :sources [
+                          null-ls.builtins.formatting.rustfmt
+                          null-ls.builtins.diagnostics.xo
+                          null-ls.builtins.code_actions.xo
+                          null-ls.builtins.formatting.alejandra]}
+         :on_attach on-attach)
 
 (each [_ lsp (ipairs servers)]
   ((. (. lspconfig lsp) :setup) (coq.lsp_ensure_capabilities {
@@ -76,3 +90,8 @@
 (lspsaga.setup {:ui {:kind ((. (require :catppuccin.groups.integrations.lsp_saga)
                               :custom_kind))
                      :border "rounded"}})
+(lsp-format.setup)
+(coq_3p [{:src :copilot
+          :short_name :COP 
+          :tmp_accept_key "<c-r>"}])
+
