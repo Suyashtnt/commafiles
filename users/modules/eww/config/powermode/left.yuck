@@ -26,8 +26,7 @@
       (box
         :orientation "v"
         :space-evenly false
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/gabriel.png" :name "Gabriel Ultrakill")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png" :name "The almighty shape")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/justAReallyCoolArtwork.png" :name "I don't know how to describe this")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.png" :name "W A V E S")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/launch.jpg" :name "Prepare for launch")))))
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/linox.png" :name "Linox")))))

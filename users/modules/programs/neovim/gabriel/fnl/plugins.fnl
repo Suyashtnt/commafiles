@@ -49,7 +49,7 @@
         { 1 :nvim-treesitter/nvim-treesitter
           :dependencies [
                           :nvim-treesitter/nvim-treesitter-context
-                          :HiPhish/nvim-ts-rainbow2]
+                          :HiPhish/rainbow-delimiters.nvim]
           :config #(require :plugins.treesitter)}
 
         ;; Folke you absolute madlad for creating lazy, which-key, trouble, AND this

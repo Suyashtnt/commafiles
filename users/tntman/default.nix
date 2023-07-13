@@ -44,6 +44,8 @@
       gnome.nautilus # file manager
       kooha # for screen recording
       btop # system monitor
+      postman # api testing
+      insomnia # api testing 2: sleepless boogaloo
 
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
