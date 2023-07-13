@@ -7,6 +7,8 @@
                       :neotree true
                       :notify true
                       :treesitter_context true
+                      :treesitter true
+                      :ts_rainbow2 true
                       :harpoon true
                       :which_key true})
 

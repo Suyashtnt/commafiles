@@ -6,7 +6,7 @@
 (reg {
       :g {
             :name "+LSP"
-            :r ["<cmd>Lspsaga lsp_finder<CR>" "LSP Finder"]
+            :r ["<cmd>Lspsaga finder<CR>" "LSP Finder"]
             :d ["<cmd>Lspsaga peek_definition<CR>" "LSP Preview Definition"]
             :D ["<cmd>Lspsaga goto_definition<CR>" "LSP Go To Definition"]}
       :K ["<cmd>Lspsaga hover_doc<CR>" "LSP Hover Doc"]

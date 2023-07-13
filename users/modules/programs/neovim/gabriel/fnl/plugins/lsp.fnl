@@ -93,5 +93,5 @@
 (lsp-format.setup)
 (coq_3p [{:src :copilot
           :short_name :COP 
-          :tmp_accept_key "<c-r>"}])
+          :accept_key "<c-f>"}])
 

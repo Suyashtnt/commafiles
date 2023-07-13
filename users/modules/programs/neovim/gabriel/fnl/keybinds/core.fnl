@@ -17,5 +17,7 @@
       :zM [#(ufo.closeAllFolds) "Close all folds"]
       :k [:gk "Go up"]
       :j [:gj "Go down"]
+      :<A-d> ["<cmd>Lspsaga term_toggle<cr>" "Toggle terminal"]
+      :<C-Space> ["<C-\\><C-n>" "Exit terminal mode"]
       :<C-d> ["<C-d>zz" "Half page down"]
       :<C-u> ["<C-u>zz" "Half page up"]})

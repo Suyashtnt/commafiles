@@ -3,6 +3,7 @@
 (tset vim.opt :guifont "ComicCodeLigatures Nerd Font:h12")
 (tset vim.opt :mouse "a")
 (tset vim.opt :clipboard :unnamedplus)
+(tset vim.opt :linespace -4)
 
 ;; for nvim-ufo
 (tset vim.o :foldcolumn :1)
