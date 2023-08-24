@@ -14,12 +14,17 @@
       cargoExtraArgs = "-p spotify_player --no-default-features --features image,notify,daemon,media-control,pulseaudio-backend";
     }
     // spotifyPlayerName);
-in {
+
+  custom-cava = pkgs.cava.overrideAttrs (oldAttrs: {
+    buildInputs = oldAttrs.buildInputs ++ [ pkgs.pipewire ];
+  });
+
+  in {
   home.packages = with pkgs; [
     spotify # used as a way to give auth creds to spotifyd, rather use spt when actually playing music
     spotifyPlayer # spotify terminal edition
     sptlrx # spotify lyrics
-    cava # the funny music visualizer
+    custom-cava # the funny music visualizer
     packages.cavalier # the funnier music visualizer
   ];
 

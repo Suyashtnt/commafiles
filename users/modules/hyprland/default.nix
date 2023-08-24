@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  config,
   inputs,
   ...
 }:
@@ -24,10 +23,7 @@ with lib; let
 in {
   home.packages = with pkgs; [
     xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
     libnotify
-    wf-recorder
     brightnessctl
     pamixer
     python39Packages.requests
@@ -44,7 +40,11 @@ in {
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = pkgs.hyprland-nvidia;
+    package = pkgs.hyprland;
+    enableNvidiaPatches = true;
+    xwayland = {
+      enable = true;
+    };
     systemdIntegration = true;
     extraConfig = builtins.readFile ./hyprland.conf;
   };

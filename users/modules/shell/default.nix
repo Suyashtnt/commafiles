@@ -3,12 +3,14 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      enableNushellIntegration = true;
+      # bugged, uses let-env
+      enableNushellIntegration = false;
     };
 
     atuin = {
       enable = true;
-      enableNushellIntegration = true;
+      # bugged, let-env still being used
+      enableNushellIntegration = false;
     };
 
     nushell = {

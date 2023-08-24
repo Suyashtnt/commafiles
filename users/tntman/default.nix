@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ../modules/programs/ags
     ../modules/dunst
     ../modules/electron
     ../modules/eww
@@ -14,18 +15,16 @@
     ../modules/hyprland
     ../modules/openrgb
     ../modules/playerctl
-    ../modules/programs/emacs
-    ../modules/programs/firefox
     ../modules/programs/kitty
     ../modules/programs/neofetch
     ../modules/programs/neovim
     ../modules/programs/spotify
-    ../modules/programs/vscode # when neovim simply isn't enough
+    ../modules/programs/vscode
+    ../modules/programs/webcord
     ../modules/shell
     ../modules/swaylock
     ../modules/xdg
 
-    inputs.hyprland.homeManagerModules.default
     inputs.nix-doom-emacs.hmModule
   ];
   manual.manpages.enable = false;
@@ -37,29 +36,24 @@
     stateVersion = "22.05";
 
     packages = with pkgs; [
-      chromium # js debugging and lighthoouse
+      vivaldi # chrome but better
       obsidian # notes
+      obs-studio # fullscreen sharing. Basically run obs in fullscreen preview and share that. It's goofy as hell
       wofi # launcher
       authy # 2fa
       gnome.nautilus # file manager
       kooha # for screen recording
       btop # system monitor
-      postman # api testing
-      insomnia # api testing 2: sleepless boogaloo
 
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
       zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
-      webcord # discord go brrr
-
-      kitty # temporary until kitty is setup
 
       # CLI utils
       unzip # unzipping stuff
       ripgrep # searching stuff
       cachix # caching stuff
-      docker-compose # docker-ing stuff
     ];
   };
 

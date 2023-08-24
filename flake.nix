@@ -2,6 +2,8 @@
   description = "Suyashtnt's (maybe) good dotfiles";
 
   inputs = {
+    ags.url = "github:Aylur/ags";
+
     btop-theme = {
       url = "github:catppuccin/btop";
       flake = false;
@@ -87,6 +89,11 @@
 
     swww-src = {
       url = "github:Horus645/swww";
+      flake = false;
+    };
+
+    webcord-src = {
+      url = "github:kakxem/WebCord/feature/screenshare-with-audio";
       flake = false;
     };
 

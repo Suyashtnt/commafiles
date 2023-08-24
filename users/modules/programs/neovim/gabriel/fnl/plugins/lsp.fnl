@@ -8,45 +8,49 @@
 (local ufo (require :ufo))
 (local lspsaga (require :lspsaga))
 (local lsp-format (require :lsp-format))
+(local rust-tools (require :rust-tools))
+(local crates (require :crates))
 
 (local null-ls (require :null-ls))
 
-(local servers [
-                :rust_analyzer
-                :tsserver
+(local servers [:tsserver
                 :svelte
                 :prismals
                 :unocss
                 :nil_ls
                 :fennel_ls
                 :lua_ls
+                :typst_lsp
+                :hls
                 :marksman])
 
+(local settings {:typst_lsp {:exportPdf :onType}})
 
 (fn on-attach [client bufnr]
   (local lsp_signature (require :lsp_signature))
   (lsp-format.on_attach client)
-  (lsp_signature.on_attach
-    {:bind true :handler_opts {:border :rounded}}
-    bufnr))
+  (lsp_signature.on_attach {:bind true :handler_opts {:border :rounded}} bufnr))
 
 (local capabilities (vim.lsp.protocol.make_client_capabilities))
-(set capabilities.textDocument.foldingRange {
-                                              :dynamicRegistration false
-                                              :lineFoldingOnly true})
+(set capabilities.textDocument.foldingRange
+     {:dynamicRegistration false :lineFoldingOnly true})
 
-(null-ls.setup {
-                :sources [
-                          null-ls.builtins.formatting.rustfmt
+(null-ls.setup {:sources [null-ls.builtins.formatting.rustfmt
                           null-ls.builtins.diagnostics.xo
-                          null-ls.builtins.code_actions.xo
                           null-ls.builtins.formatting.alejandra]}
-         :on_attach on-attach)
+               :on_attach on-attach)
 
 (each [_ lsp (ipairs servers)]
-  ((. (. lspconfig lsp) :setup) (coq.lsp_ensure_capabilities {
-                                                              :on_attach on-attach
-                                                              :capabilities capabilities})))
+  (let [settings (if (not= (. settings lsp) nil) (. settings lsp) {})
+        server (. lspconfig lsp)]
+    (server.setup (coq.lsp_ensure_capabilities {: on-attach
+                                                : settings
+                                                : capabilities}))))
+
+(rust-tools.setup {:server (coq.lsp_ensure_capabilities {:on_attach on-attach
+                                                         :settings {:rust-analyzer {:checkOnSave {:command :clippy}}}
+                                                         : capabilities})})
+
 (fn handler [virt-text lnum end-lnum width truncate]
   (let [new-virt-text {}]
     (var suffix (: "  %d " :format (- end-lnum lnum)))
@@ -72,26 +76,25 @@
     (table.insert new-virt-text [suffix :MoreMsg])
     new-virt-text))
 
-(ufo.setup {
-            :fold_virt_text_handler handler})
+(ufo.setup {:fold_virt_text_handler handler})
 
-(fidget.setup {
-                :window {:blend 0}})
+(fidget.setup {:window {:blend 0}})
+
 (lspsaga.setup)
 (aerial.setup)
-(inc_rename.setup {
-                    :input_buffer_type :dressing})
+(inc_rename.setup {:input_buffer_type :dressing})
 
 (dressing.setup {:input {:override (fn [conf]
-                                      (set conf.col (- 1))
-                                      (set conf.row 0)
-                                      conf)}})
+                                     (set conf.col (- 1))
+                                     (set conf.row 0)
+                                     conf)}})
 
 (lspsaga.setup {:ui {:kind ((. (require :catppuccin.groups.integrations.lsp_saga)
-                              :custom_kind))
-                     :border "rounded"}})
-(lsp-format.setup)
-(coq_3p [{:src :copilot
-          :short_name :COP 
-          :accept_key "<c-f>"}])
+                               :custom_kind))
+                     :border :rounded}})
 
+(lsp-format.setup)
+(coq_3p [{:src :copilot :short_name :COP :accept_key :<c-f>}])
+
+(crates.setup {:src {:coq {:enabled true :name :crates}}
+               :null_ls {:enabled true :name :crates}})

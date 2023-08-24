@@ -1,9 +1,8 @@
 {
   pkgs,
-  inputs,
   ...
 }: let
-  browser = ["firefox.desktop"];
+  browser = ["vivaldi.desktop"];
 
   associations = {
     "text/html" = browser;
@@ -27,6 +26,7 @@
   };
 in {
   home.packages = with pkgs; [mpv xdg-utils firefox];
+
   xdg = {
     mimeApps.enable = true;
     mimeApps.associations.added = associations;

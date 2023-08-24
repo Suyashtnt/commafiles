@@ -28,5 +28,5 @@
         :space-evenly false
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png" :name "The almighty shape")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/justAReallyCoolArtwork.png" :name "I don't know how to describe this")
-        (bgSelImg :path "/home/tntman/commafiles/wallpapers/waves.png" :name "W A V E S")
+        (bgSelImg :path "/home/tntman/commafiles/wallpapers/Particles.png" :name "Particle system (OC!)")
         (bgSelImg :path "/home/tntman/commafiles/wallpapers/linox.png" :name "Linox")))))

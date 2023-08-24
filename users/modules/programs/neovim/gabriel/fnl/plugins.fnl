@@ -4,6 +4,7 @@
 (setup [
         :rktjmp/hotpot.nvim
         :editorconfig/editorconfig-vim
+        :kaarmu/typst.vim
 
         { 1 :windwp/windline.nvim
           :dependencies [:lewis6991/gitsigns.nvim 
@@ -28,6 +29,9 @@
         { 1 :beauwilliams/focus.nvim
           :config #((. (require :focus) :setup))}
 
+        { 1 :numToStr/Comment.nvim
+          :config #((. (require :Comment) :setup))}
+
         { 1 :mrjones2014/smart-splits.nvim
           :config #((. (require :smart-splits) :setup))}
 
@@ -36,7 +40,7 @@
           :config #(require :plugins.telescope)}
 
         { 1 :nvim-neo-tree/neo-tree.nvim
-          :branch :v2.x
+          :branch :v3.x
           :dependencies [
                           :nvim-tree/nvim-web-devicons
                           :nvim-lua/plenary.nvim
@@ -61,7 +65,9 @@
           :dependencies [
                           :ms-jpq/coq_nvim
                           :ms-jpq/coq.artifacts
-                          :github/copilot.vim ;; coq.thirdparty
+                          :github/copilot.vim ;; for coq.thirdparty
+                          :saecki/crates.nvim
+                          :simrat39/rust-tools.nvim
                           :ms-jpq/coq.thirdparty
                           :jose-elias-alvarez/null-ls.nvim
                           :j-hui/fidget.nvim

@@ -51,6 +51,7 @@
   };
 
   programs.dconf.enable = true;
+  services.onedrive.enable = true;
 
   virtualisation = {
     docker.enable = true;
