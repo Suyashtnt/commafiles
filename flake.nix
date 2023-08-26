@@ -178,7 +178,9 @@
         fnlfmt # fennel formatter
         fennel # fennel compiler
         fennel-ls # fennel LSP
-        lua-language-server
+        lua-language-server # lua LSP
+        marksman # markdown LSP
+        deno # deno LSP + runtime for ags
       ];
     };
 

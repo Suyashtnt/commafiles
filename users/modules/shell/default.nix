@@ -1,16 +1,24 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    carapace
+    fish # nushell completion partly relies on it
+  ];
+
   programs = {
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-      # bugged, uses let-env
-      enableNushellIntegration = false;
+      enableNushellIntegration = true;
     };
 
     atuin = {
       enable = true;
-      # bugged, let-env still being used
-      enableNushellIntegration = false;
+      enableNushellIntegration = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
     };
 
     nushell = {

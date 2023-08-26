@@ -29,6 +29,9 @@
 (let! neovide_padding_left 0)
 (let! neovide_padding_right 0)
 
+(let! neovide_floating_blur_amount_x 10)
+(let! neovide_floating_blur_amount_y 10)
+
 ;; map! is used for mappings
 ;; Heres an example, preseing esc should also remove search highlights
 
