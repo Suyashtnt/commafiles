@@ -24,4 +24,7 @@
 (tset vim.g :neovide_padding_left 0)
 (tset vim.g :neovide_padding_right 0)
 
+(tset vim.g :neovide_floating_blur_amount_x 10)
+(tset vim.g :neovide_floating_blur_amount_y 10)
+
 (require :plugins)

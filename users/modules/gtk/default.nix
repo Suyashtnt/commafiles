@@ -57,6 +57,7 @@ in
     name = "Catppuccin-Mocha-Lavender-Cursors";
     size = 16;
   };
+
   home.pointerCursor.gtk.enable = true;
   home.packages = [
     cat-kvantum
@@ -66,15 +67,18 @@ in
     enable = true;
     platformTheme = "gtk";
     style.name = "kvantum";
+    style.package = with pkgs; [
+      libsForQt5.qtstyleplugin-kvantum
+      qt6Packages.qtstyleplugin-kvantum
+    ];
   };
 
   xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
     [General]
     theme=Catppuccin-Mocha-Lavender
-
-    [Applications]
-    catppuccin=Dolphin, dolphin, Nextcloud, nextcloud, qt5ct, org.kde.dolphin, org.kde.kalendar, kalendar, Kalendar, qbittorrent, org.qbittorrent.qBittorrent
   '';
+
+  xdg.configFile."Kvantum/Catppuccin-Mocha-Lavender".source = "${cat-kvantum}/share/Kvantum/Catppuccin-Mocha-Lavender";
 
   xdg.configFile."gtk-4.0/assets" = {
     source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/assets";

@@ -19,7 +19,7 @@ in {
 
     Service = {
       Type = "simple";
-      ExecStart = "${ags}/ags";
+      ExecStart = "${ags}/bin/ags";
       Restart = "always";
       RestartSec = 5;
     };
@@ -53,7 +53,7 @@ in {
         '';
 
         outputHashMode = "recursive";
-        outputHash = "sha256-SAmwQNGBglO/o+mJjxCuhuajZwI2uQ+30kB1PqNWjkM=";
+        outputHash = "sha256-ezNHflu2wNugKJury8lbr9P2kSuKBghnSlK/yha2qUE=";
       };
 
       configurePhase = ''

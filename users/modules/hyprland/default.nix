@@ -22,7 +22,7 @@ with lib; let
   '';
 in {
   home.packages = with pkgs; [
-    xdg-desktop-portal
+    xdg-desktop-portal-hyprland
     libnotify
     brightnessctl
     pamixer

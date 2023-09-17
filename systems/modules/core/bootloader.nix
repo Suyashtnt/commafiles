@@ -1,7 +1,12 @@
-{ pkgs
-, inputs
-, ...
-}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  catppuccin-plymouth-mocha = pkgs.catppuccin-plymouth.override {
+    variant = "mocha";
+  };
+in {
   boot = {
     loader = {
       grub = {
@@ -18,9 +23,16 @@
     };
 
     extraModprobeConfig = "options kvm_intel nested=1";
-    supportedFilesystems = [ "ntfs" "mtpfs" ];
+    supportedFilesystems = ["ntfs" "mtpfs"];
 
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = ["kvm-intel"];
     kernelPackages = pkgs.linuxPackages_latest;
+
+    plymouth = {
+      enable = true;
+      logo = ./nix.png;
+      theme = "catppuccin-mocha";
+      themePackages = [catppuccin-plymouth-mocha];
+    };
   };
 }

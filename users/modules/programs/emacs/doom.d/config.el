@@ -21,23 +21,13 @@
 ;;
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
-;;
 (setq doom-font (font-spec :family "ComicCodeLigatures Nerd Font" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Inter" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme 'catppuccin)
-(setq custom-safe-themes t)
+(setq catppuccin-flavor 'mocha)
+(setq custom-safe-themes 't)
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
 ;; Makes sure that if there is a massive mouse movement, it recenters.
@@ -46,10 +36,19 @@
       scroll-margin 3
       maximum-scroll-margin 0.2)
 
+;; smooth scrolling stuff
 (setq pixel-scroll-precision-large-scroll-height 40.0)
-
 (setq-hook! 'term-mode-hook scroll-margin 0)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+(setq mouse-wheel-progressive-speed nil)
+(setq mouse-wheel-follow-mouse 't)
+(setq scroll-step 1)
+(add-hook 'text-mode-hook 'pixel-scroll-precision-mode)
 
+(setq fancy-splash-image (expand-file-name "splash.svg" doom-user-dir))
+
+(set-frame-parameter nil 'alpha-background 40)
+(add-to-list 'default-frame-alist '(alpha-background . 40))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -94,6 +93,21 @@
                                        '(("RUST_BACKTRACE" . lsp-typst-enable-backtrace)))
                      :server-id 'typst-lsp)))
 
+(defun scroll-down-and-recenter ()
+  "Scrolls down and recenters the screen."
+  (interactive)
+  (evil-scroll-down 0))
+
+(defun scroll-up-and-recenter ()
+  "Scrolls up and recenters the screen."
+  (interactive)
+  (evil-scroll-up 0))
+
+(map!
+  :after evil
+  :n "C-d" 'scroll-down-and-recenter
+  :n "C-u" 'scroll-up-and-recenter)
+
 (setq lsp-typst-enable-backtrace "1")
 
 (after! lsp-ui
@@ -113,7 +127,35 @@
   :hook (nix-mode . lsp-deferred)
   :ensure t)
 
+(use-package! good-scroll
+  :hook (doom-first-input . good-scroll-mode)
+  :config
+  (defun good-scroll--convert-line-to-step (line)
+    (cl-typecase line
+      (integer (* line (line-pixel-height)))
+      ((or null (member -))
+       (- (good-scroll--window-usable-height)
+          (* next-screen-context-lines (line-pixel-height))))
+      (t (line-pixel-height))))
+
+  (defadvice! good-scroll--scroll-up (&optional arg)
+    :override 'scroll-up
+    (good-scroll-move (good-scroll--convert-line-to-step arg)))
+
+  (defadvice! good-scroll--scroll-down (&optional arg)
+    :override 'scroll-down
+    (good-scroll-move (- (good-scroll--convert-line-to-step arg)))))
+
 (use-package! typst-mode)
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 (add-hook 'nix-mode-local-vars-hook #'lsp!)
 (add-hook 'typst-mode-local-vars-hook #'lsp!)

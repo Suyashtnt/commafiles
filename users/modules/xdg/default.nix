@@ -25,7 +25,7 @@
     "x-scheme-handler/spotify" = ["spotify.desktop"];
   };
 in {
-  home.packages = with pkgs; [mpv xdg-utils firefox];
+  home.packages = with pkgs; [mpv xdg-utils];
 
   xdg = {
     mimeApps.enable = true;

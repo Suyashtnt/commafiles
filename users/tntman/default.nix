@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../modules/programs/ags
+    inputs.nix-index-database.hmModules.nix-index
     ../modules/dunst
     ../modules/electron
     ../modules/gammastep
@@ -13,6 +13,8 @@
     ../modules/hyprland
     ../modules/openrgb
     ../modules/playerctl
+    ../modules/programs/ags
+    # ../modules/programs/emacs
     ../modules/programs/kitty
     ../modules/programs/neofetch
     ../modules/programs/neovim
@@ -22,10 +24,7 @@
     ../modules/shell
     ../modules/swaylock
     ../modules/xdg
-
-    inputs.nix-doom-emacs.hmModule
   ];
-  manual.manpages.enable = false;
 
   home = {
     username = "tntman";
@@ -41,14 +40,15 @@
       authy # 2fa
       gnome.nautilus # file manager
       kooha # for screen recording
-      btop # system monitor
 
+      blender # 3D monitor go brrr
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
       zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
 
       # CLI utils
+      btop # monitoring stuff
       unzip # unzipping stuff
       ripgrep # searching stuff
       cachix # caching stuff
@@ -57,6 +57,7 @@
 
   programs = {
     home-manager.enable = true;
+    nix-index-database.comma.enable = true;
   };
 
   xresources.extraConfig = builtins.readFile (

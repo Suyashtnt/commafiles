@@ -1,0 +1,41 @@
+{
+    "cavalier": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "cavalier",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "NickvisionApps",
+            "repo": "Cavalier",
+            "rev": "2023.8.1",
+            "sha256": "sha256-ITmGXHTxcWpW43Ppye69W2FkFjjZrgL4R1g9svGvqm0=",
+            "type": "github"
+        },
+        "version": "2023.8.1"
+    },
+    "fennel-ls": {
+        "cargoLocks": null,
+        "date": "2023-09-03",
+        "extract": null,
+        "name": "fennel-ls",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "rev": "364d02b90de6e41c40fc31a19665cad20041c63a",
+            "sha256": "sha256-SAu/i3g1jXMCq/gE9nwxvWQ2eE8qGB4mxvVIzypmVOw=",
+            "type": "git",
+            "url": "https://git.sr.ht/~xerool/fennel-ls"
+        },
+        "version": "364d02b90de6e41c40fc31a19665cad20041c63a"
+    }
+}

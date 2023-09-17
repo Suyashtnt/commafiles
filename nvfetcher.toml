@@ -1,0 +1,7 @@
+[cavalier]
+src.github = "NickvisionApps/Cavalier"
+fetch.github = "NickvisionApps/Cavalier"
+
+[fennel-ls]
+src.git = "https://git.sr.ht/~xerool/fennel-ls"
+fetch.git = "https://git.sr.ht/~xerool/fennel-ls"

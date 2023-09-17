@@ -459,18 +459,12 @@ let carapace_completer = {|spans: list<string>|
 }
 
 let multiple_completers = {|spans|
-    let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
-
-    let spans = (if $expanded_alias != null  {
-        $spans | skip 1 | prepend ($expanded_alias | split words)
-    } else { $spans })
-
     {
       # zoxide alias
-      __zoxide_z: $zoxide_completer
+      z: $zoxide_completer
 
       # zoxide alias
-      __zoxide_zi: $zoxide_completer
+      zi: $zoxide_completer
 
       # carapace completions are incorrect for nu
       nu: $fish_completer

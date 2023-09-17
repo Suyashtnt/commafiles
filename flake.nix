@@ -9,8 +9,8 @@
       flake = false;
     };
 
-    cavalier-src = {
-      url = "github:NickvisionApps/Cavalier";
+    copilot-mode-src = {
+      url = "github:zerolfx/copilot.el";
       flake = false;
     };
 
@@ -20,8 +20,7 @@
     };
 
     emacs-overlay = {
-      # https://github.com/nix-community/nix-doom-emacs/issues/409
-      url = "github:nix-community/emacs-overlay/c16be6de78ea878aedd0292aa5d4a1ee0a5da501";
+      url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -56,24 +55,35 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    nix-doom-emacs = {
-      url = "github:nix-community/nix-doom-emacs";
-      inputs.emacs-overlay.follows = "emacs-overlay";
+    doom-emacs = {
+      url = "github:doomemacs/doomemacs";
+      flake = false;
     };
 
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    nixpkgs-f2k = {
+      url = "github:fortuneteller2k/nixpkgs-f2k";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-wayland = {
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur.url = "github:nix-community/NUR";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nyoom-src = {
       url = "github:nyoom-engineering/nyoom.nvim";
+      flake = false;
+    };
+
+    plymouth-theme = {
+      url = "github:catppuccin/plymouth";
       flake = false;
     };
 
@@ -87,7 +97,7 @@
       flake = false;
     };
 
-    swww-src = {
+   swww-src = {
       url = "github:Horus645/swww";
       flake = false;
     };
@@ -111,11 +121,6 @@
       url = "github:catppuccin/xresources";
       flake = false;
     };
-
-    fennel-lsp = {
-      url = "sourcehut:~xerool/fennel-ls";
-      flake = false;
-    };
   };
 
   outputs = {...} @ inputs: let
@@ -124,50 +129,7 @@
     pkgs = import inputs.nixpkgs {
       inherit system;
     };
-
-    fennel-ls = pkgs.stdenv.mkDerivation {
-      pname = "fennel-ls";
-      version = "git-unstable";
-      src = inputs.fennel-lsp;
-
-      nativeBuildInputs = with pkgs; [
-        luajit
-        fennel
-      ];
-
-      installPhase = ''
-        DESTDIR=$out PREFIX=$out make install
-        install -Dm755 fennel-ls $out/bin/fennel-ls
-      '';
-    };
-
-    cavalier = pkgs.buildDotnetModule {
-      pname = "cavalier";
-      version = "2023.7.0-beta2"; # assuming based on https://github.com/NickvisionApps/Cavalier/tags
-      src = inputs.cavalier-src;
-
-      runtimeDeps = with pkgs; [
-        gtk4
-        libadwaita
-      ];
-
-      nativeBuildInputs = with pkgs; [
-        gtk4
-        libadwaita
-        blueprint-compiler
-        wrapGAppsHook
-      ];
-
-      dotnet-sdk = pkgs.dotnet-sdk_7;
-      dotnet-runtime = pkgs.dotnet-runtime_7;
-      executables = [ "NickvisionCavalier.GNOME" ];
-      selfContainedBuild = true;
-      nugetDeps = ./pkgs/cavalier/deps.nix;
-      dontWrapGApps = false;
-
-      projectFile = "NickvisionCavalier.GNOME/NickvisionCavalier.GNOME.csproj";
-  };
-  in {
+  in rec {
     nixosConfigurations = import ./systems inputs;
 
     devShells.${system}.default = pkgs.mkShell {
@@ -177,16 +139,29 @@
         alejandra # uncomprimising nix formatter
         fnlfmt # fennel formatter
         fennel # fennel compiler
-        fennel-ls # fennel LSP
         lua-language-server # lua LSP
+        packages.${system}.fennel-ls
         marksman # markdown LSP
         deno # deno LSP + runtime for ags
       ];
     };
 
-    packages.${system} = {
-      fennel-ls = fennel-ls;
-      cavalier = cavalier;
+    packages.${system} = let
+      getPackage = pname: (pkgs.callPackage ./_sources/generated.nix {}).${pname};
+    in {
+      fennel-ls = let
+        package = getPackage "fennel-ls";
+      in
+        pkgs.callPackage ./pkgs/fennel-ls {
+          inherit (package) src version;
+        };
+      cavalier = let
+        package = getPackage "cavalier";
+      in
+        pkgs.callPackage ./pkgs/cavalier
+        {
+          inherit (package) src version;
+        };
     };
   };
 }

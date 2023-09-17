@@ -10,9 +10,9 @@
   nixpkgs.overlays = [
     inputs.nixpkgs-f2k.overlays.default
     inputs.xdg-desktop-portal-hyprland.overlays.default
-    inputs.emacs-overlay.overlays.default
     inputs.neovim-nightly-overlay.overlay
     inputs.rust-overlay.overlays.default
+    inputs.emacs-overlay.overlays.default
     inputs.eww.overlays.default
     (final: super: rec {
       makeModulesClosure = x:
@@ -69,8 +69,8 @@
 
   # who needs documentation anyways
   documentation = {
-    enable = false;
-    doc.enable = false;
+    enable = true;
+    doc.enable = true;
     man.enable = true;
     dev.enable = false;
   };
