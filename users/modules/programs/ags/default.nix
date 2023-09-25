@@ -13,7 +13,7 @@ in {
   systemd.user.services.ags = {
     Unit = {
       Description = "ags";
-      After = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session.target" ];
       PartOf = [ "graphical-session.target" ];
     };
 
@@ -53,7 +53,7 @@ in {
         '';
 
         outputHashMode = "recursive";
-        outputHash = "sha256-ezNHflu2wNugKJury8lbr9P2kSuKBghnSlK/yha2qUE=";
+        outputHash = "sha256-+I2GtHpV/RA82BnWojqSsTP+hKJuPmhoi9u5sZKxoKI=";
       };
 
       configurePhase = ''

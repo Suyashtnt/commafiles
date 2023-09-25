@@ -25,6 +25,12 @@ lib,
       enableNushellIntegration = true;
     };
 
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+      settings = builtins.fromTOML (builtins.readFile ./config/starship.toml);
+    };
+
     nushell = {
       enable = true;
       configFile.source = ./config/config.nu;

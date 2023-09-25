@@ -18,6 +18,7 @@
     ../modules/programs/kitty
     ../modules/programs/neofetch
     ../modules/programs/neovim
+    ../modules/programs/obs
     ../modules/programs/spotify
     ../modules/programs/vscode
     ../modules/programs/webcord
@@ -35,7 +36,6 @@
     packages = with pkgs; [
       vivaldi # chrome but better
       obsidian # notes
-      obs-studio # fullscreen sharing. Basically run obs in fullscreen preview and share that. It's goofy as hell
       wofi # launcher
       authy # 2fa
       gnome.nautilus # file manager
