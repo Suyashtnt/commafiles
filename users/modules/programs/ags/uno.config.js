@@ -1,8 +1,5 @@
 import { variants } from "./pallete.js";
-import {
-  defineConfig,
-  presetUno,
-} from "https://esm.sh/unocss@0.55.7?target=deno";
+import presetUno from "@unocss/preset-uno";
 
 const createTheme = (colors) => {
   const values = Object.fromEntries(
@@ -41,7 +38,7 @@ const createTheme = (colors) => {
   return finalTheme;
 };
 
-export default defineConfig({
+export default {
   presets: [
     presetUno({
       preflight: false,
@@ -51,4 +48,4 @@ export default defineConfig({
     colors: createTheme(variants.mocha),
   },
   preflights: false,
-});
+};

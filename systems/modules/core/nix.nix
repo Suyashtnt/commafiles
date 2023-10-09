@@ -14,6 +14,7 @@
     inputs.rust-overlay.overlays.default
     inputs.emacs-overlay.overlays.default
     inputs.eww.overlays.default
+    inputs.deno2nix.overlays.default
     (final: super: rec {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});

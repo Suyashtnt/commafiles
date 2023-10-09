@@ -1,6 +1,6 @@
 import unocssConfig from "./uno.config.js";
-import { createGenerator } from "https://esm.sh/unocss@0.55.7?target=deno";
-import { walk } from "https://deno.land/std@0.200.0/fs/walk.ts";
+import { createGenerator } from "@unocss/core";
+import { walk } from "https://deno.land/std@0.203.0/fs/walk.ts";
 
 const codeFiles = [];
 
@@ -24,12 +24,21 @@ const propertiesToYeet = [
   "line-height",
 ];
 
-// I should learn regex at some point rather than using copilot
-const regex = new RegExp(
+const classesToYeet = [
+  ".text-shadow"
+]
+
+const propertyRegex = new RegExp(
   `(${propertiesToYeet.join("|")})\\s*:\\s*([^;]+);`,
   "g",
 );
-const newCss = css.replaceAll(regex, "");
+
+const classesRegex = new RegExp(
+  `(${classesToYeet.join("|")})\\s*{[^}]+}`,
+  "g",
+);
+
+const newCss = css.replaceAll(propertyRegex, "").replaceAll(classesRegex, "");
 
 const outputCssLocation = Deno.cwd() + "/config/uno.css";
 await Deno.writeTextFile(outputCssLocation, newCss);

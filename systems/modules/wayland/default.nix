@@ -1,10 +1,7 @@
 {
   pkgs,
-  inputs,
   ...
 }: {
-  nixpkgs.overlays = [inputs.nixpkgs-wayland.overlay];
-
   environment = {
     variables = {
       NIXOS_OZONE_WL = "1";

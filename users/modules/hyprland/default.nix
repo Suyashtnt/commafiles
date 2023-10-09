@@ -41,11 +41,11 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
+
     enableNvidiaPatches = true;
-    xwayland = {
-      enable = true;
-    };
-    systemdIntegration = true;
+    xwayland.enable = true;
+    systemd.enable = true;
+
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 

@@ -24,11 +24,6 @@
       xkbVariant = "";
     };
 
-    plex = {
-      enable = true;
-      openFirewall = true;
-    };
-
     gnome = {
       glib-networking.enable = true;
       gnome-keyring.enable = true;
@@ -38,11 +33,13 @@
       gnome.gnome-settings-daemon
     ];
 
+    onedrive.enable = true;
     usbmuxd.enable = true;
     avahi.enable = true;
     avahi.nssmdns = true;
     flatpak.enable = true;
     openssh.enable = true;
+    jellyfin.enable = true;
   };
 
   security = {
@@ -51,7 +48,6 @@
   };
 
   programs.dconf.enable = true;
-  services.onedrive.enable = true;
 
   virtualisation = {
     docker.enable = true;

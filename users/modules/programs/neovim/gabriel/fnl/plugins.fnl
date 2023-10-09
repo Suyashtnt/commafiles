@@ -5,6 +5,7 @@
         :rktjmp/hotpot.nvim
         :editorconfig/editorconfig-vim
         :kaarmu/typst.vim
+        :wakatime/vim-wakatime
 
         { 1 :windwp/windline.nvim
           :dependencies [:lewis6991/gitsigns.nvim 
@@ -25,9 +26,6 @@
         { 1 :ThePrimeagen/harpoon 
           :dependencies [:nvim-lua/plenary.nvim]
           :config #(require :plugins.harpoon)}
-
-        { 1 :beauwilliams/focus.nvim
-          :config #((. (require :focus) :setup))}
 
         { 1 :numToStr/Comment.nvim
           :config #((. (require :Comment) :setup))}

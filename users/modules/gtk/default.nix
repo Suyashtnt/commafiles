@@ -20,7 +20,7 @@ in
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Standard-Lavender-dark";
+      name = "Catppuccin-Mocha-Standard-Lavender-Dark";
       package = cat-gtk;
     };
     iconTheme = {
@@ -80,11 +80,8 @@ in
 
   xdg.configFile."Kvantum/Catppuccin-Mocha-Lavender".source = "${cat-kvantum}/share/Kvantum/Catppuccin-Mocha-Lavender";
 
-  xdg.configFile."gtk-4.0/assets" = {
-    source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/assets";
-    recursive = true;
-  };
-  xdg.configFile."gtk-4.0/gtk.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/gtk.css";
-  xdg.configFile."gtk-4.0/gtk-dark.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-dark/gtk-4.0/gtk-dark.css";
+  xdg.configFile."gtk-4.0/assets".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-Dark/gtk-4.0/assets";
+  xdg.configFile."gtk-4.0/gtk.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-Dark/gtk-4.0/gtk.css";
+  xdg.configFile."gtk-4.0/gtk-dark.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-Dark/gtk-4.0/gtk-dark.css";
 }
 

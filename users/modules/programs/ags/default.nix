@@ -14,7 +14,6 @@ in {
     Unit = {
       Description = "ags";
       After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
     };
 
     Service = {
@@ -35,36 +34,24 @@ in {
       src = ./.;
       nativeBuildInputs = [pkgs.deno pkgs.nodejs];
 
-      deno-cache = pkgs.stdenv.mkDerivation {
-        name = "ags-config-deno-cache";
+      uno-comp = pkgs.deno2nix.mkExecutable {
+        pname = "ags-uno-compiler";
+        version = "0.1.0";
+
         src = ./.;
-        nativeBuildInputs = with pkgs; [deno];
+        bin = "uno-comp";
 
-        buildPhase = ''
-          export DENO_DIR=.deno;
-          mkdir -p $DENO_DIR/deps; mkdir -p $DENO_DIR/npm
-          deno cache ./createUnoFile.js --lock=deno.lock
-        '';
+        entrypoint = "./createUnoFile.js";
+        lockfile = "./deno.lock";
+        config = "./deno.json";
 
-        installPhase = ''
-          mkdir $out
-          cp -r $DENO_DIR/deps $out
-          cp -r $DENO_DIR/npm $out
-        '';
-
-        outputHashMode = "recursive";
-        outputHash = "sha256-+I2GtHpV/RA82BnWojqSsTP+hKJuPmhoi9u5sZKxoKI=";
+        additionalDenoFlags = "-A";
       };
-
-      configurePhase = ''
-        export DENO_DIR=.deno; mkdir $DENO_DIR
-        ln -s ${deno-cache}/deps $DENO_DIR/deps
-        ln -s ${deno-cache}/npm $DENO_DIR/npm
-      '';
 
       installPhase = ''
         mkdir $out
-        deno run -A --cached-only --lock deno.lock ./createUnoFile.js
+        ls ${uno-comp}/bin
+        ${uno-comp}/bin/uno-comp
         cp -r ./config/* $out
       '';
     };

@@ -1,15 +1,14 @@
 import {
   Box,
   Button,
-  CenterBox,
   Gtk,
-  Label,
   Scrollable,
   Utils,
   Window,
+  Widget
 } from "../imports.js";
 
-const Calendar = ags.Widget({
+const Calendar = Widget({
   type: Gtk.Calendar,
   showDayNames: false,
   showHeading: true,
@@ -18,7 +17,6 @@ const Calendar = ags.Widget({
 
 const ImageSelector = ({
   imagePath,
-  name,
 }) =>
   Button({
     className: "rounded-xl pa-0",
@@ -26,58 +24,36 @@ const ImageSelector = ({
       Utils.execAsync(
         `swww img -t wave --transition-angle 30 --transition-bezier 0.41,0.26,0.98,1 --transition-step 180 --transition-fps 60 --transition-duration 1.2 ${imagePath}`,
       ),
-    child: CenterBox({
+    child: Box({
       spacing: 10,
       style:
-        `background-image: linear-gradient(0deg, rgba(1,1,1,1) 0%, rgba(0,0,0,0) 40%), url('${imagePath}'); background-size: cover; background-repeat: no-repeat; background-position: center;`,
+      // 21:9 aspect ratio
+        `
+          background-image: url('${imagePath}');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          min-width: 450px;
+          min-height: 190px;
+      `
+          .trim()
+          .replaceAll("\n", " "),
       className: "min-h-38 rounded-xl",
-      endWidget: Label({
-        valign: Gtk.Align.END,
-        className: "text-2xl font-bold mx-8 mb-2",
-        label: name,
-      }),
     }),
   });
 
 export const Images = () => {
   const images = [
-    {
-      name: "Gabriel ultrakill",
-      path: "/home/tntman/commafiles/wallpapers/gabriel.png",
-    },
-    {
-      name: "Into the catrix",
-      path: "/home/tntman/commafiles/wallpapers/intoTheCatrix.png",
-    },
-    {
-      name: "I don't know how to describe this",
-      path: "/home/tntman/commafiles/wallpapers/justAReallyCoolArtwork.png",
-    },
-    {
-      name: "Takeoff",
-      path: "/home/tntman/commafiles/wallpapers/launch.jpg",
-    },
-    {
-      name: "Linox",
-      path: "/home/tntman/commafiles/wallpapers/linox.png",
-    },
-    {
-      name: "Long road ahead",
-      path: "/home/tntman/commafiles/wallpapers/longRoadAhead.png",
-    },
-    {
-      name: "Particle system (OC!)",
-      path: "/home/tntman/commafiles/wallpapers/Particles.png",
-    },
-    {
-      name: "The almighty shape",
-      path: "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png",
-    },
-    {
-      name: "wavy",
-      path: "/home/tntman/commafiles/wallpapers/waves.png",
-    },
-  ].map(({ name, path }) => ImageSelector({ name, imagePath: path }));
+    "/home/tntman/commafiles/wallpapers/gabriel.png",
+    "/home/tntman/commafiles/wallpapers/intoTheCatrix.png",
+    "/home/tntman/commafiles/wallpapers/justAReallyCoolArtwork.png",
+    "/home/tntman/commafiles/wallpapers/launch.jpg",
+    "/home/tntman/commafiles/wallpapers/linox.png",
+    "/home/tntman/commafiles/wallpapers/longRoadAhead.png",
+    "/home/tntman/commafiles/wallpapers/Particles.png",
+    "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png",
+    "/home/tntman/commafiles/wallpapers/waves.png",
+  ].map((path) => ImageSelector({ imagePath: path }));
 
   return Box({
     className: "rounded-xl mx-4",

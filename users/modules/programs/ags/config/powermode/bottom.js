@@ -3,7 +3,7 @@ import { Label, Window } from "../imports.js";
 export const Bottom = () => {
   const content = Label({
     className: "bg-mantle/100 pmb p-md mx-md",
-    label: "Sample text",
+    label: "Sample text"
   });
 
   return Window({

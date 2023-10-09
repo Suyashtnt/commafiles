@@ -41,17 +41,19 @@
       gnome.nautilus # file manager
       kooha # for screen recording
 
-      blender # 3D monitor go brrr
+      blender # 3D modeling go brrr
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
       zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
+      bitwarden # password manager go brrr
 
       # CLI utils
       btop # monitoring stuff
       unzip # unzipping stuff
       ripgrep # searching stuff
       cachix # caching stuff
+      bitwarden-cli # password manager stuff
     ];
   };
 

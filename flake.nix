@@ -19,6 +19,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deno2nix = {
+      url = "github:SnO2WMaN/deno2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,11 +70,6 @@
 
     nixpkgs-f2k = {
       url = "github:fortuneteller2k/nixpkgs-f2k";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs-wayland = {
-      url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -139,10 +140,10 @@
         alejandra # uncomprimising nix formatter
         fnlfmt # fennel formatter
         fennel # fennel compiler
-        lua-language-server # lua LSP
         packages.${system}.fennel-ls
         marksman # markdown LSP
-        deno # deno LSP + runtime for ags
+        deno # deno LSP for ags transpiler
+        nodePackages.typescript-language-server # typescript LSP for ags autocomplete
       ];
     };
 
