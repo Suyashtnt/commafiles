@@ -8,6 +8,8 @@ import {
   Widget
 } from "../imports.js";
 
+const { execAsync } = Utils
+
 const Calendar = Widget({
   type: Gtk.Calendar,
   showDayNames: false,
@@ -21,7 +23,7 @@ const ImageSelector = ({
   Button({
     className: "rounded-xl pa-0",
     onClicked: () =>
-      Utils.execAsync(
+      execAsync(
         `swww img -t wave --transition-angle 30 --transition-bezier 0.41,0.26,0.98,1 --transition-step 180 --transition-fps 60 --transition-duration 1.2 ${imagePath}`,
       ),
     child: Box({
@@ -33,8 +35,8 @@ const ImageSelector = ({
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center;
-          min-width: 450px;
-          min-height: 190px;
+          min-width: 380px;
+          min-height: 180px;
       `
           .trim()
           .replaceAll("\n", " "),
@@ -65,7 +67,7 @@ export const Images = () => {
 
 export const Left = () => {
   const content = Box({
-    className: "bg-mantle/100 rounded-r-6 p-md my-lg",
+    className: "bg-mantle/100 rounded-r-6 p-md my-lg min-w-48",
     vertical: true,
     spacing: 8,
     children: [

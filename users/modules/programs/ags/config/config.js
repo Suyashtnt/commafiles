@@ -1,11 +1,11 @@
 import { PowerMode } from "./powermode/index.js";
-
-const css = ags.App.configDir + "/style.css";
+import { NotificationsPopup } from "./notifications/index.js";
 
 export default {
   notificationPopupTimeout: 5000, // milliseconds
-  style: css,
+  style: ags.App.configDir + "/style.css",
   windows: [
     ...PowerMode(),
+    NotificationsPopup(),
   ],
 };

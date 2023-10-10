@@ -1,3 +1,4 @@
+
 declare module 'resource:///com/github/Aylur/ags/service/applications.js' {
     const exports: typeof import('./service/applications')
     export = exports

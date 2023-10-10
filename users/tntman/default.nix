@@ -5,7 +5,7 @@
 }: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
-    ../modules/dunst
+    # ../modules/dunst replaced by ags
     ../modules/electron
     ../modules/gammastep
     ../modules/git

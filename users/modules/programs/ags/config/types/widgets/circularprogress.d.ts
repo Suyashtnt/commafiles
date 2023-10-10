@@ -5,6 +5,7 @@ import "../gtk-types/gnomebluetooth-3.0-ambient";
 import "../gtk-types/dbusmenugtk3-0.4-ambient";
 import "../gtk-types/gobject-2.0-ambient";
 import "../gtk-types/nm-1.0-ambient";
+import "../gtk-types/soup-3.0-ambient";
 import "../gtk-types/gvc-1.0-ambient";
 import Gtk from 'gi://Gtk?version=3.0';
 interface Context {
@@ -20,7 +21,7 @@ export default class AgsCircularProgress extends Gtk.Bin {
     get rounded(): boolean;
     set rounded(r: boolean);
     get inverted(): boolean;
-    set inverted(c: boolean);
+    set inverted(inverted: boolean);
     get start_at(): number;
     set start_at(value: number);
     get value(): number;

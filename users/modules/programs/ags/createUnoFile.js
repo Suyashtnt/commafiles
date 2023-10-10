@@ -25,7 +25,8 @@ const propertiesToYeet = [
 ];
 
 const classesToYeet = [
-  ".text-shadow"
+  ".text-shadow",
+  ".truncate"
 ]
 
 const propertyRegex = new RegExp(

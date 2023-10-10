@@ -2,7 +2,7 @@
   description = "Suyashtnt's (maybe) good dotfiles";
 
   inputs = {
-    ags.url = "github:Aylur/ags";
+    ags.url = "github:Suyashtnt/ags/feat/typescript-typegen";
 
     btop-theme = {
       url = "github:catppuccin/btop";
