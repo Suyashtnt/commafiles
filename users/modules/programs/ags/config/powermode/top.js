@@ -1,4 +1,18 @@
-import { Window, Hyprland, CenterBox, Button, Box, Label, Utils, SystemTray, Icon, GLib, Variable, ProgressBar } from "../imports.js";
+import { 
+  Window,
+  Hyprland,
+  CenterBox,
+  Button,
+  Box,
+  Label,
+  Utils,
+  SystemTray,
+  Icon,
+  GLib,
+  Variable,
+  ProgressBar
+} from "../imports.js";
+import { SetupRevealer } from "./index.js";
 
 const Workspaces = () => {
   const baseClasses = "rounded-full text-0 ma-2 py-0 px-[5px]"
@@ -195,7 +209,9 @@ const Right = () => Box({
 
 export const Top = () => {
   const content = CenterBox({
-    className: "bg-mantle/100 pmt p-md mx-md",
+    className: "bg-mantle/60 rounded-b-6 mx-4",
+    vexpand: true,
+    hexpand: true,
     startWidget: Workspaces(),
     centerWidget: Clock(),
     endWidget: Right()
@@ -206,7 +222,7 @@ export const Top = () => {
     className: "bg-transparent",
     anchor: ["top", "left", "right"],
     exclusive: true,
-    popup: true,
-    child: content,
+    visible: true,
+    child: SetupRevealer("slide_down", content),
   });
 };

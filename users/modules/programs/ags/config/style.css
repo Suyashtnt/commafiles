@@ -1,13 +1,5 @@
 @import url('./uno.css');
 
-.pmt {
-  border-radius: 0 0 1.5rem 1.5rem;
-}
-
-.pmb {
-  border-radius: 1.5rem 1.5rem 0 0;
-}
-
 .icon {
   font-family: "JetBrains Mono Nerd Font Mono", monospace;
 }

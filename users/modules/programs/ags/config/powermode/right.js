@@ -11,6 +11,8 @@ import {
   Variable,
   Window,
 } from "../imports.js";
+import { SetupRevealer } from "./index.js";
+import { ShowPowerMode } from "./variables.js";0
 
 const { execAsync, exec } = Utils
 
@@ -28,7 +30,7 @@ const getAlbumArtPath = (song) => {
   }
 
   const homePath = GLib.get_home_dir();
-  const filePath = `${homePath}/Pictures/${filename}`
+  const filePath = `${homePath}/.cache/ags/media/${filename}`
 
   fileExists(filePath).then(exists => {
     if(!exists) {
@@ -59,8 +61,9 @@ const MusicHeader = () => {
   });
 
   box.updateInfo = (newInfo) => {
-    box.children[0].label = newInfo.title;
-    box.children[1].label = newInfo.artist;
+    box.children[0].label = newInfo.title.substring(0, 22)
+    box.children[1].label = newInfo.artist.substring(0, 25)
+                                           
   };
 
   return box;
@@ -181,7 +184,7 @@ const MusicControls = () => {
   };
 
   const box = Box({
-    className: "bg-surface0/100 rounded-2xl p-sm",
+    className: "bg-surface0/90 rounded-2xl p-sm",
     vertical: true,
     vexpand: true,
     valign: "end",
@@ -208,6 +211,8 @@ const Music = () => {
       [Mpris, (box) => {
         try {
           const player = Mpris.getPlayer("spotify_player");
+          if (!player) throw new Error("No player");
+
           const song = JSON.parse(exec("spotify_player get key playback"))
           const songArt = getAlbumArtPath(song.item);
 
@@ -221,7 +226,6 @@ const Music = () => {
 
           endWidget.updatePlayer(player);
         } catch (_e)  {
-          console.log(_e)
           box.style = "";
           startWidget.updateInfo({
             title: "No title",
@@ -239,7 +243,7 @@ const Music = () => {
 };
 
 const currentQueue = Variable([], {
-  poll: [1000, "spotify_player get key queue", (out) => {
+  poll: [10000, "spotify_player get key queue", (out) => {
     try {
       const { queue } = JSON.parse(out);
 
@@ -259,9 +263,19 @@ const currentQueue = Variable([], {
   }],
 });
 
+// since we refresh so often its beneficial to only start polling when we need to
+ShowPowerMode.connect("changed", () => {
+  if (ShowPowerMode.value.powerMode || ShowPowerMode.value.musicOnly) {
+    currentQueue.startPoll();
+  } else {
+    currentQueue.stopPoll();
+  }
+});
+
+
 const UpNext = () => {
   return Box({
-    className: "rounded-xl mx-4 my-sm",
+    className: "rounded-xl mx-4 my-4",
     vertical: true,
     connections: [
       [
@@ -281,7 +295,7 @@ const UpNext = () => {
     spacing: 8,
     children: Array(10).fill(0).map((_, idx) =>
       Box({
-        className: "bg-surface0/100 rounded-lg p-sm",
+        className: "bg-surface0/80 rounded-lg pa-3",
         hexpand: true,
         children: [
           Box({
@@ -292,7 +306,7 @@ const UpNext = () => {
             className: "mx-2",
             children: [
               Label({
-                className: "text-lg",
+                className: "text-lg mb-1",
                 xalign: 0,
                 truncate: 'end',
                 label: `Title`,
@@ -323,7 +337,7 @@ const UpNext = () => {
 
 export const Right = () => {
   const content = Box({
-    className: "bg-mantle/100 rounded-l-6 p-md my-lg min-w-48",
+    className: "bg-mantle/60 rounded-l-6 my-4 min-w-48",
     vertical: true,
     children: [
       Music(),
@@ -339,10 +353,10 @@ export const Right = () => {
 
   return Window({
     name: "powermode-right",
-    className: "bg-transparent my-lg",
+    className: "bg-transparent",
     anchor: ["top", "bottom", "right"],
     exclusive: true,
-    popup: true,
-    child: content,
+    visible: true,
+    child: SetupRevealer("slide_left", content, true),
   });
 };

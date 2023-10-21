@@ -7,6 +7,7 @@ import {
   Window,
   Widget
 } from "../imports.js";
+import { SetupRevealer } from "./index.js";
 
 const { execAsync } = Utils
 
@@ -67,7 +68,7 @@ export const Images = () => {
 
 export const Left = () => {
   const content = Box({
-    className: "bg-mantle/100 rounded-r-6 p-md my-lg min-w-48",
+    className: "bg-mantle/60 rounded-r-6 my-4 min-w-48",
     vertical: true,
     spacing: 8,
     children: [
@@ -84,10 +85,10 @@ export const Left = () => {
 
   return Window({
     name: "powermode-left",
-    className: "bg-transparent my-lg",
+    className: "bg-transparent",
     anchor: ["top", "left", "bottom"],
     exclusive: true,
-    popup: true,
-    child: content,
+    visible: true,
+    child: SetupRevealer("slide_right", content),
   });
 };

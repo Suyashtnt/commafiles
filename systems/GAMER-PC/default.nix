@@ -40,6 +40,7 @@
     flatpak.enable = true;
     openssh.enable = true;
     jellyfin.enable = true;
+    gvfs.enable = true;
   };
 
   security = {

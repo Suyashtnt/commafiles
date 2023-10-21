@@ -26,6 +26,7 @@ export {
   Button,
   Scrollable,
   Icon,
+  Revealer,
   default as Widget,
 } from "resource:///com/github/Aylur/ags/widget.js"
 

@@ -1,11 +1,12 @@
-import { PowerMode } from "./powermode/index.js";
+import { SetupPowerMode } from "./powermode/index.js";
+import { App } from './imports.js'
 import { NotificationsPopup } from "./notifications/index.js";
 
 export default {
   notificationPopupTimeout: 5000, // milliseconds
-  style: ags.App.configDir + "/style.css",
+  style: App.configDir + "/style.css",
   windows: [
-    ...PowerMode(),
+    ...SetupPowerMode(),
     NotificationsPopup(),
   ],
 };

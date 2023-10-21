@@ -9,24 +9,24 @@ in {
     ags
   ];
 
-  # ags service for after desktop login
-  systemd.user.services.ags = {
-    Unit = {
-      Description = "ags";
-      After = [ "graphical-session.target" ];
-    };
-
-    Service = {
-      Type = "simple";
-      ExecStart = "${ags}/bin/ags";
-      Restart = "always";
-      RestartSec = 5;
-    };
-
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
+  # ags service for after desktop login (TODO: figure out why its broken)
+  # systemd.user.services.ags = {
+  #   Unit = {
+  #     Description = "ags";
+  #     After = [ "graphical-session.target" ];
+  #   };
+  #
+  #   Service = {
+  #     Type = "simple";
+  #     ExecStart = "${ags}/bin/ags";
+  #     Restart = "always";
+  #     RestartSec = 5;
+  #   };
+  #
+  #   Install = {
+  #     WantedBy = [ "graphical-session.target" ];
+  #   };
+  # };
 
   xdg.configFile.ags = {
     source = pkgs.stdenv.mkDerivation rec {

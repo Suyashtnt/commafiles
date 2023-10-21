@@ -26,6 +26,7 @@ const propertiesToYeet = [
 
 const classesToYeet = [
   ".text-shadow",
+  ".visible",
   ".truncate"
 ]
 

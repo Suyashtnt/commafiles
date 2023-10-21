@@ -7,7 +7,6 @@ import "./gtk-types/gobject-2.0-ambient";
 import "./gtk-types/nm-1.0-ambient";
 import "./gtk-types/soup-3.0-ambient";
 import "./gtk-types/gvc-1.0-ambient";
-import './widgets/overrides.js';
 import AgsBox from './widgets/box.js';
 import AgsCenterBox from './widgets/centerbox.js';
 import AgsEventBox from './widgets/eventbox.js';
@@ -22,60 +21,49 @@ import AgsRevealer from './widgets/revealer.js';
 import AgsProgressBar from './widgets/progressbar.js';
 import AgsEntry from './widgets/entry.js';
 import { AgsMenu, AgsMenuItem } from './widgets/menu.js';
+import AgsWindow from './widgets/window.js';
 import AgsCircularProgress from './widgets/circularprogress.js';
-import { CommonParams } from './widgets/constructor.js';
-import type Gtk from 'types/gtk-types/gtk-3.0.js';
-export interface WidgetParams<T extends Gtk.Widget> extends CommonParams {
-    type: new (arg: Omit<WidgetParams<T>, keyof CommonParams | "type">) => T;
-}
-export default function Widget<Output extends InstanceType<typeof Gtk.Widget>, Params extends WidgetParams<Output>, Class extends new (arg: Omit<Params, keyof WidgetParams<Output>>) => Output>({ type, ...params }: {
+import { type BaseProps } from './widgets/widget.js';
+import type Gtk from 'gi://Gtk';
+export declare function createConstructor<Output extends InstanceType<typeof Gtk.Widget>, Props extends BaseProps<Output> | ConstructorParameters<Class>[0], Class extends typeof Gtk.Widget & (new (arg: Omit<Props, keyof BaseProps<Output>>) => InstanceType<Class> & Output)>(w: Class, name?: string): (props: Props & BaseProps<typeof w>) => InstanceType<Class>;
+declare function _Widget<Output extends InstanceType<typeof Gtk.Widget>, Props extends BaseProps<Output> | ConstructorParameters<Class>[0], Class extends typeof Gtk.Widget & (new (arg: Omit<Props, keyof BaseProps<Output>>) => InstanceType<Class> & Output)>({ type, ...params }: {
     type: Class;
-} & Params): InstanceType<Class>;
-export declare const Window: (args: CommonParams & Omit<unknown, keyof CommonParams>) => Gtk.Widget;
-export declare const Box: (args: CommonParams & {
-    children?: Gtk.Widget[] | null | undefined;
-}) => AgsBox;
-export declare const Button: (args: CommonParams & {
-    onClicked?: string | undefined;
-    onPrimaryClick?: string | undefined;
-    onSecondaryClick?: string | undefined;
-    onMiddleClick?: string | undefined;
-    onPrimaryClickRelease?: string | undefined;
-    onSecondaryClickRelease?: string | undefined;
-    onMiddleClickRelease?: string | undefined;
-    onHover?: string | undefined;
-    onHoverLost?: string | undefined;
-    onScrollUp?: string | undefined;
-    onScrollDown?: string | undefined;
-}) => AgsButton;
-export declare const CenterBox: (args: CommonParams & {
-    children?: Gtk.Widget[] | null | undefined;
-}) => AgsCenterBox;
-export declare const CircularProgress: (args: CommonParams & Gtk.Bin.ConstructorProperties) => AgsCircularProgress;
-export declare const Entry: (args: CommonParams & {
-    [key: string]: import("./widgets/constructor.js").Command;
-}) => AgsEntry;
-export declare const EventBox: (args: CommonParams & {
-    onPrimaryClick?: string | undefined;
-    onSecondaryClick?: string | undefined;
-    onMiddleClick?: string | undefined;
-    onPrimaryClickRelease?: string | undefined;
-    onSecondaryClickRelease?: string | undefined;
-    onMiddleClickRelease?: string | undefined;
-    onHover?: string | undefined;
-    onHoverLost?: string | undefined;
-    onScrollUp?: string | undefined;
-    onScrollDown?: string | undefined;
-}) => AgsEventBox;
-export declare const Icon: (args: CommonParams & (string | object | import("../types/gtk-types/gdkpixbuf-2.0.js").GdkPixbuf.Pixbuf)) => AgsIcon;
-export declare const Label: (args: CommonParams & (string | import("./widgets/label.js").Params)) => AgsLabel;
-export declare const Menu: (args: CommonParams & import("./widgets/menu.js").Params) => AgsMenu;
-export declare const MenuItem: (args: CommonParams & {
-    [key: string]: import("./widgets/constructor.js").Command;
-}) => AgsMenuItem;
-export declare const Overlay: (args: never) => AgsOverlay;
-export declare const ProgressBar: (args: never) => AgsProgressBar;
-export declare const Revealer: (args: never) => AgsRevealer;
-export declare const Scrollable: (args: CommonParams & object) => AgsScrollable;
-export declare const Slider: (args: CommonParams & import("./widgets/slider.js").Params) => AgsSlider;
-export declare const Stack: (args: never) => AgsStack;
+} & Props): InstanceType<Class>;
+export declare const Window: (props: (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> | Omit<unknown, keyof BaseProps<Output>>) & BaseProps<typeof import("../types/gtk-types/gtk-3.0.js").Gtk.Widget & (new (arg: Omit<unknown, keyof BaseProps<Output>>) => AgsWindow & import("../types/gtk-types/gtk-3.0.js").Gtk.Widget)>) => AgsWindow & import("../types/gtk-types/gtk-3.0.js").Gtk.Widget;
+export declare const Box: (props: (import("./widgets/box.js").BoxProps & BaseProps<typeof AgsBox>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsBox>)) => AgsBox;
+export declare const Button: (props: (import("./widgets/button.js").ButtonProps & BaseProps<typeof AgsButton>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsButton>)) => AgsButton;
+export declare const CenterBox: (props: (import("./widgets/box.js").BoxProps & BaseProps<typeof AgsCenterBox>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsCenterBox>)) => AgsCenterBox;
+export declare const CircularProgress: (props: (import("../types/gtk-types/gtk-3.0.js").Gtk.Bin.ConstructorProperties & BaseProps<typeof AgsCircularProgress>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsCircularProgress>)) => AgsCircularProgress;
+export declare const Entry: (props: (import("./widgets/entry.js").EntryProps & BaseProps<typeof AgsEntry>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsEntry>)) => AgsEntry;
+export declare const EventBox: (props: (import("./widgets/eventbox.js").EventBoxProps & BaseProps<typeof AgsEventBox>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsEventBox>)) => AgsEventBox;
+export declare const Icon: (props: (import("./widgets/icon.js").IconProps | BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget>) & BaseProps<typeof AgsIcon>) => AgsIcon;
+export declare const Label: (props: (import("./widgets/label.js").LabelProps | BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget>) & BaseProps<typeof AgsLabel>) => AgsLabel;
+export declare const Menu: (props: (import("./widgets/menu.js").MenuProps & BaseProps<typeof AgsMenu>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsMenu>)) => AgsMenu;
+export declare const MenuItem: (props: (import("./widgets/menu.js").MenuItemProps & BaseProps<typeof AgsMenuItem>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsMenuItem>)) => AgsMenuItem;
+export declare const Overlay: (props: BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsOverlay>) => AgsOverlay;
+export declare const ProgressBar: (props: BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsProgressBar>) => AgsProgressBar;
+export declare const Revealer: (props: BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsRevealer>) => AgsRevealer;
+export declare const Scrollable: (props: (import("./widgets/scrollable.js").ScrollableProps & BaseProps<typeof AgsScrollable>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsScrollable>)) => AgsScrollable;
+export declare const Slider: (props: (import("./widgets/slider.js").SliderProps & BaseProps<typeof AgsSlider>) | (BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsSlider>)) => AgsSlider;
+export declare const Stack: (props: BaseProps<import("../types/gtk-types/gtk-3.0.js").Gtk.Widget> & BaseProps<typeof AgsStack>) => AgsStack;
+declare const defaultWidgets: {
+    Window: typeof Window;
+    Box: typeof Box;
+    Button: typeof Button;
+    CenterBox: typeof CenterBox;
+    CircularProgress: typeof CircularProgress;
+    Entry: typeof Entry;
+    EventBox: typeof EventBox;
+    Icon: typeof Icon;
+    Label: typeof Label;
+    Menu: typeof Menu;
+    MenuItem: typeof MenuItem;
+    Overlay: typeof Overlay;
+    ProgressBar: typeof ProgressBar;
+    Revealer: typeof Revealer;
+    Scrollable: typeof Scrollable;
+    Slider: typeof Slider;
+    Stack: typeof Stack;
+};
+export declare const Widget: typeof _Widget & typeof defaultWidgets;
+export default Widget;

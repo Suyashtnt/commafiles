@@ -10,7 +10,7 @@ import "./gtk-types/gvc-1.0-ambient";
 import Gtk from 'gi://Gtk?version=3.0';
 import Gio from 'gi://Gio';
 import GObject from 'gi://GObject';
-import { Command } from './widgets/constructor.js';
+import { type Command } from './widgets/widget.js';
 export declare const USER: string;
 export declare const CACHE_DIR: string;
 export declare function readFile(path: string): string;
@@ -22,7 +22,7 @@ export declare function bulkConnect(service: InstanceType<typeof GObject.Object>
     callback: (...args: any[]) => void
 ][]): number[];
 export declare function bulkDisconnect(service: InstanceType<typeof GObject.Object>, ids: number[]): void;
-export declare function connect(service: InstanceType<typeof GObject.Object>, widget: InstanceType<typeof Gtk.Widget>, callback: (widget: InstanceType<typeof Gtk.Widget>, ...args: unknown[]) => void, event?: string): void;
+export declare function connect<Widget extends InstanceType<typeof Gtk.Widget>>(obj: InstanceType<typeof GObject.Object>, _widget: Widget, callback: (widget: Widget, ...args: unknown[]) => void, event?: string): void;
 export declare function interval(interval: number, callback: () => void, bind?: InstanceType<typeof Gtk.Widget>): number;
 export declare function timeout(ms: number, callback: () => void): number;
 export declare function runCmd(cmd: Command, ...args: unknown[]): boolean;
@@ -30,4 +30,4 @@ export declare function lookUpIcon(name?: string, size?: number): import("../typ
 export declare function ensureDirectory(path?: string): void;
 export declare function execAsync(cmd: string | string[]): Promise<string>;
 export declare function exec(cmd: string): string;
-export declare function subprocess(cmd: string | string[], callback: (out: string) => void, onError?: typeof logError, bind?: InstanceType<typeof Gtk.Widget>): import("../types/gtk-types/gio-2.0.js").Gio.Subprocess | null;
+export declare function subprocess(cmd: string | string[], callback: (out: string) => void, onError?: (message?: any, ...optionalParams: any[]) => void, bind?: InstanceType<typeof Gtk.Widget>): import("../types/gtk-types/gio-2.0.js").Gio.Subprocess | null;

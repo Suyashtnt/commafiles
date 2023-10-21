@@ -103,11 +103,6 @@
       flake = false;
     };
 
-    webcord-src = {
-      url = "github:kakxem/WebCord/feature/screenshare-with-audio";
-      flake = false;
-    };
-
     typst-mode-src = {
       url = "github:Ziqi-Yang/typst-mode.el";
       flake = false;
