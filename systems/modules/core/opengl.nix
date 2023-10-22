@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   hardware = {
     opengl = {
-      enable = true;
+      enable = pkgs.lib.mkDefault true;
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [

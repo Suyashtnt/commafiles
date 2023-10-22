@@ -56,4 +56,20 @@ in {
       }
     ];
   };
+  tau = nixpkgs.lib.nixosSystem {
+    system = "aarch64-linux";
+    specialArgs = {
+      inherit inputs;
+      hostname = "tau";
+    };
+    modules = [
+      "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+      "${inputs.nixos-hardware}/raspberry-pi/4"
+      {
+        nixpkgs.config.allowUnsupportedSystem = true;
+      }
+      ./tau
+      ./tau/hardware.nix
+    ];
+  };
 }

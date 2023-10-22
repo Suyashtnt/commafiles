@@ -66,6 +66,8 @@
       flake = false;
     };
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     nixpkgs-f2k = {
@@ -98,7 +100,7 @@
       flake = false;
     };
 
-   swww-src = {
+    swww-src = {
       url = "github:Horus645/swww";
       flake = false;
     };
@@ -119,45 +121,46 @@
     };
   };
 
-  outputs = {...} @ inputs: let
-    system = "x86_64-linux";
+  outputs = {...} @ inputs:
+    inputs.flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+      };
+    in rec {
+      devShells.default = pkgs.mkShell {
+        packages = with pkgs; [
+          nil # nix LSP
+          yaml-language-server # yaml LSP
+          alejandra # uncomprimising nix formatter
+          fnlfmt # fennel formatter
+          fennel # fennel compiler
+          packages.fennel-ls
+          marksman # markdown LSP
+          deno # deno LSP for ags transpiler
+          nodePackages.typescript-language-server # typescript LSP for ags autocomplete
+        ];
+      };
 
-    pkgs = import inputs.nixpkgs {
-      inherit system;
+      packages = let
+        getPackage = pname: (pkgs.callPackage ./_sources/generated.nix {}).${pname};
+      in {
+        fennel-ls = let
+          package = getPackage "fennel-ls";
+        in
+          pkgs.callPackage ./pkgs/fennel-ls {
+            inherit (package) src version;
+          };
+        cavalier = let
+          package = getPackage "cavalier";
+        in
+          pkgs.callPackage ./pkgs/cavalier
+          {
+            inherit (package) src version;
+          };
+      };
+    })
+    // {
+      nixosConfigurations = import ./systems inputs;
+      images = import ./systems/images.nix inputs;
     };
-  in rec {
-    nixosConfigurations = import ./systems inputs;
-
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [
-        nil # nix LSP
-        yaml-language-server # yaml LSP
-        alejandra # uncomprimising nix formatter
-        fnlfmt # fennel formatter
-        fennel # fennel compiler
-        packages.${system}.fennel-ls
-        marksman # markdown LSP
-        deno # deno LSP for ags transpiler
-        nodePackages.typescript-language-server # typescript LSP for ags autocomplete
-      ];
-    };
-
-    packages.${system} = let
-      getPackage = pname: (pkgs.callPackage ./_sources/generated.nix {}).${pname};
-    in {
-      fennel-ls = let
-        package = getPackage "fennel-ls";
-      in
-        pkgs.callPackage ./pkgs/fennel-ls {
-          inherit (package) src version;
-        };
-      cavalier = let
-        package = getPackage "cavalier";
-      in
-        pkgs.callPackage ./pkgs/cavalier
-        {
-          inherit (package) src version;
-        };
-    };
-  };
 }
