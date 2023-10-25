@@ -20,7 +20,6 @@ in {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
       };
-      kernelPackages = pkgs.linuxPackages_latest;
     };
 
     extraModprobeConfig = "options kvm_intel nested=1";
