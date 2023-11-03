@@ -33,7 +33,6 @@
       gnome.gnome-settings-daemon
     ];
 
-    onedrive.enable = true;
     usbmuxd.enable = true;
     avahi.enable = true;
     avahi.nssmdns = true;

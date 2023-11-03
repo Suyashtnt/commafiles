@@ -20,6 +20,7 @@
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
   tntman = ../users/tntman;
+  tau = ../users/tau;
 in {
   GAMER-PC = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
@@ -63,13 +64,29 @@ in {
       hostname = "tau";
     };
     modules = [
-      "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-      "${inputs.nixos-hardware}/raspberry-pi/4"
-      {
-        nixpkgs.config.allowUnsupportedSystem = true;
-      }
       ./tau
       ./tau/hardware.nix
+
+      # ./modules/core/nix.nix
+      # ./modules/core/network.nix
+      # ./modules/core/security.nix
+
+      # hmModule
+      "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+      "${inputs.nixos-hardware}/raspberry-pi/4"
+
+      # {
+      #   home-manager = {
+      #     useUserPackages = true;
+      #     useGlobalPkgs = true;
+      #     extraSpecialArgs = {
+      #       inherit inputs;
+      #       inherit self;
+      #       packages = self.packages."aarch64-linux";
+      #     };
+      #     users.tau = tau;
+      #   };
+      # }
     ];
   };
 }

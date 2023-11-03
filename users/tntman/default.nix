@@ -24,6 +24,7 @@
     ../modules/programs/webcord
     ../modules/shell
     ../modules/swaylock
+    ../modules/syncthing
     ../modules/xdg
   ];
 
