@@ -142,31 +142,12 @@
         inputs.ez-configs.flakeModule
         ./devshell.nix
         ./pkgs
+        ./systems
+        ./users
       ];
 
       ezConfigs = {
-        root = ./.;
-
-        nixos = {
-          hostsDirectory = ./systems;
-          modulesDirectory = ./systems/modules;
-
-          hosts = {
-            GAMER-PC = {
-              arch = "x86_64";
-              userHomeModules = ["tntman"];
-            };
-            tau = {
-              arch = "aarch64";
-              userHomeModules = ["tau"];
-            };
-          };
-        };
-
-        hm = {
-          modulesDirectory = ./users/modules;
-          usersDirectory = ./users;
-        };
+        root = ./..;
 
         globalArgs = {
           inherit inputs;
