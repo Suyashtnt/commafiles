@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-let 
+{pkgs, ...}: let
   cat-gtk = pkgs.catppuccin-gtk.override {
     variant = "mocha";
-    accents = [ "lavender" ];
+    accents = ["lavender"];
   };
 
   cat-folders = pkgs.catppuccin-papirus-folders.override {
@@ -15,8 +14,7 @@ let
     variant = "Mocha";
     accent = "Lavender";
   };
-in
-{
+in {
   gtk = {
     enable = true;
     theme = {
@@ -84,4 +82,3 @@ in
   xdg.configFile."gtk-4.0/gtk.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-Dark/gtk-4.0/gtk.css";
   xdg.configFile."gtk-4.0/gtk-dark.css".source = "${cat-gtk}/share/themes/Catppuccin-Mocha-Standard-Lavender-Dark/gtk-4.0/gtk-dark.css";
 }
-

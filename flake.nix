@@ -9,6 +9,8 @@
       flake = false;
     };
 
+    camillemndn.url = "github:camillemndn/nixos-config";
+
     copilot-mode-src = {
       url = "github:zerolfx/copilot.el";
       flake = false;

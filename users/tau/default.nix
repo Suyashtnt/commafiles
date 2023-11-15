@@ -6,9 +6,11 @@
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     ../modules/git
+    ../modules/programs/kitty
+    ../modules/programs/neofetch
     ../modules/shell
-    ../modules/xdg
     ../modules/syncthing
+    ../modules/xdg
   ];
 
   home = {

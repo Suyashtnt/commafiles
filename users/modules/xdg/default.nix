@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   browser = ["vivaldi.desktop"];
 
   associations = {

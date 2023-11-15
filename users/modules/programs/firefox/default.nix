@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.file.".mozilla/firefox/tntman/chrome/img" = {
     source = ./images;
     recursive = true;

@@ -22,10 +22,10 @@
   tntman = ../users/tntman;
   tau = ../users/tau;
 in {
-  GAMER-PC = nixpkgs.lib.nixosSystem {
+  GAMER-PC = nixpkgs.lib.nixosSystem rec {
     system = "x86_64-linux";
     specialArgs = {
-      inherit inputs;
+      inherit inputs system;
       hostname = "GAMER-PC";
     };
     modules = [
@@ -48,8 +48,7 @@ in {
           useUserPackages = true;
           useGlobalPkgs = true;
           extraSpecialArgs = {
-            inherit inputs;
-            inherit self;
+            inherit inputs self system;
             packages = self.packages."x86_64-linux";
           };
           users.tntman = tntman;
@@ -57,36 +56,35 @@ in {
       }
     ];
   };
-  tau = nixpkgs.lib.nixosSystem {
+  tau = nixpkgs.lib.nixosSystem rec {
     system = "aarch64-linux";
     specialArgs = {
-      inherit inputs;
+      inherit inputs system;
       hostname = "tau";
     };
     modules = [
       ./tau
       ./tau/hardware.nix
 
-      # ./modules/core/nix.nix
-      # ./modules/core/network.nix
-      # ./modules/core/security.nix
+      ./modules/core/nix.nix
+      ./modules/core/network.nix
+      ./modules/core/security.nix
 
-      # hmModule
-      "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+      hmModule
+      "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
       "${inputs.nixos-hardware}/raspberry-pi/4"
 
-      # {
-      #   home-manager = {
-      #     useUserPackages = true;
-      #     useGlobalPkgs = true;
-      #     extraSpecialArgs = {
-      #       inherit inputs;
-      #       inherit self;
-      #       packages = self.packages."aarch64-linux";
-      #     };
-      #     users.tau = tau;
-      #   };
-      # }
+      {
+        home-manager = {
+          useUserPackages = true;
+          useGlobalPkgs = true;
+          extraSpecialArgs = {
+            inherit inputs self system;
+            packages = self.packages."aarch64-linux";
+          };
+          users.tau = tau;
+        };
+      }
     ];
   };
 }

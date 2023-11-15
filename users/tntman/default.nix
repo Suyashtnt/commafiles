@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  system,
   ...
 }: {
   imports = [
@@ -45,7 +46,7 @@
       blender # 3D modeling go brrr
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
-      zotero # reference manager go brrr
+      inputs.camillemndn.packages.${system}.zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
 

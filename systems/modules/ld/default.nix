@@ -1,5 +1,5 @@
 # taken from https://github.com/Mic92/dotfiles/blob/main/nixos/modules/nix-ld.nix
-{ pkgs, ... }: {
+{pkgs, ...}: {
   # Enable nix ld
   programs.nix-ld.enable = true;
 

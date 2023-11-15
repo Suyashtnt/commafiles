@@ -19,12 +19,9 @@
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
 
-      spotifyd = super.spotifyd.override {
-        withMpris = true;
-      };
-
       nushell = super.nushell.override (old: {
         additionalFeatures = features: features ++ ["dataframe"];
+        doCheck = false;
       });
 
       #hyprland = inputs.hyprland.packages.${pkgs.system}.default;
