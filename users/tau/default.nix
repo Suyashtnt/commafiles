@@ -1,16 +1,20 @@
 {
-  pkgs,
+  self,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
+    self.homeModules.common
+    self.homeModules.linux
+
     inputs.nix-index-database.hmModules.nix-index
-    ../modules/git
-    ../modules/programs/kitty
-    ../modules/programs/neofetch
-    ../modules/shell
-    ../modules/syncthing
-    ../modules/xdg
+    self.homeModules.git
+    self.homeModules.kitty
+    self.homeModules.neofetch
+    self.homeModules.shell
+    self.homeModules.syncthing
+    self.homeModules.xdg
   ];
 
   home = {

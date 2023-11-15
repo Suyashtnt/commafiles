@@ -2,6 +2,18 @@
   description = "Suyashtnt's (maybe) good dotfiles";
 
   inputs = {
+    # Principle inputs (updated by `nix run .#update`)
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-darwin.url = "github:lnl7/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
     ags.url = "github:Suyashtnt/ags/feat/typescript-typegen";
 
     btop-theme = {
@@ -24,13 +36,11 @@
     deno2nix = {
       url = "github:SnO2WMaN/deno2nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
 
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
 
     eww = {
@@ -39,16 +49,19 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
+    ez-configs = {
+      url = "github:ehllie/ez-configs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        home-manager.follows = "home-manager";
+      };
+    };
 
     grub-theme = {
       url = "github:catppuccin/grub";
       flake = false;
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
@@ -69,8 +82,6 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-
-    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     nixpkgs-f2k = {
       url = "github:fortuneteller2k/nixpkgs-f2k";
@@ -123,46 +134,44 @@
     };
   };
 
-  outputs = {...} @ inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-      };
-    in rec {
-      devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          nil # nix LSP
-          yaml-language-server # yaml LSP
-          alejandra # uncomprimising nix formatter
-          fnlfmt # fennel formatter
-          fennel # fennel compiler
-          packages.fennel-ls
-          marksman # markdown LSP
-          deno # deno LSP for ags transpiler
-          nodePackages.typescript-language-server # typescript LSP for ags autocomplete
-        ];
-      };
+  outputs = inputs @ {self, ...}:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux" "aarch64-darwin" "x86_64-darwin" "aarch64-linux"];
 
-      packages = let
-        getPackage = pname: (pkgs.callPackage ./_sources/generated.nix {}).${pname};
-      in {
-        fennel-ls = let
-          package = getPackage "fennel-ls";
-        in
-          pkgs.callPackage ./pkgs/fennel-ls {
-            inherit (package) src version;
+      imports = [
+        inputs.ez-configs.flakeModule
+        ./devshell.nix
+        ./pkgs
+      ];
+
+      ezConfigs = {
+        root = ./.;
+
+        nixos = {
+          hostsDirectory = ./systems;
+          modulesDirectory = ./systems/modules;
+
+          hosts = {
+            GAMER-PC = {
+              arch = "x86_64";
+              userHomeModules = ["tntman"];
+            };
+            tau = {
+              arch = "aarch64";
+              userHomeModules = ["tau"];
+            };
           };
-        cavalier = let
-          package = getPackage "cavalier";
-        in
-          pkgs.callPackage ./pkgs/cavalier
-          {
-            inherit (package) src version;
-          };
+        };
+
+        hm = {
+          modulesDirectory = ./users/modules;
+          usersDirectory = ./users;
+        };
+
+        globalArgs = {
+          inherit inputs;
+          inherit (self) packages;
+        };
       };
-    })
-    // {
-      nixosConfigurations = import ./systems inputs;
-      images = import ./systems/images.nix inputs;
     };
 }

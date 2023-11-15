@@ -1,0 +1,20 @@
+{
+  "importMap": "./deno.json",
+  "imports": {
+    "@unocss/core": "https://ga.jspm.io/npm:@unocss/core@0.56.4/dist/index.mjs",
+    "@unocss/preset-uno": "https://ga.jspm.io/npm:@unocss/preset-uno@0.56.1/dist/index.mjs"
+  },
+  "scopes": {
+    "https://ga.jspm.io/": {
+      "@unocss/core": "https://ga.jspm.io/npm:@unocss/core@0.56.1/dist/index.mjs",
+      "@unocss/extractor-arbitrary-variants": "https://ga.jspm.io/npm:@unocss/extractor-arbitrary-variants@0.56.1/dist/index.mjs",
+      "@unocss/preset-mini": "https://ga.jspm.io/npm:@unocss/preset-mini@0.56.1/dist/index.mjs",
+      "@unocss/preset-mini/rules": "https://ga.jspm.io/npm:@unocss/preset-mini@0.56.1/dist/rules.mjs",
+      "@unocss/preset-mini/theme": "https://ga.jspm.io/npm:@unocss/preset-mini@0.56.1/dist/theme.mjs",
+      "@unocss/preset-mini/utils": "https://ga.jspm.io/npm:@unocss/preset-mini@0.56.1/dist/utils.mjs",
+      "@unocss/preset-mini/variants": "https://ga.jspm.io/npm:@unocss/preset-mini@0.56.1/dist/variants.mjs",
+      "@unocss/preset-wind": "https://ga.jspm.io/npm:@unocss/preset-wind@0.56.1/dist/index.mjs",
+      "@unocss/rule-utils": "https://ga.jspm.io/npm:@unocss/rule-utils@0.56.1/dist/index.mjs"
+    }
+  }
+}
