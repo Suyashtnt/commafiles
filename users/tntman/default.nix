@@ -1,32 +1,32 @@
 {
   pkgs,
+  ezModules,
   inputs,
-  system,
   ...
 }: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
-    # ../modules/dunst replaced by ags
-    ../modules/electron
-    ../modules/gammastep
-    ../modules/git
-    ../modules/gtk
-    ../modules/hyprland
-    ../modules/openrgb
-    ../modules/playerctl
-    ../modules/programs/ags
-    # ../modules/programs/emacs
-    ../modules/programs/kitty
-    ../modules/programs/neofetch
-    ../modules/programs/neovim
-    ../modules/programs/obs
-    ../modules/programs/spotify
-    ../modules/programs/vscode
-    ../modules/programs/webcord
-    ../modules/shell
-    ../modules/swaylock
-    ../modules/syncthing
-    ../modules/xdg
+
+    ezModules.electron
+    ezModules.gammastep
+    ezModules.git
+    ezModules.gtk
+    ezModules.hyprland
+    ezModules.openrgb
+    ezModules.playerctl
+    ezModules.shell
+    ezModules.swaylock
+    ezModules.syncthing
+    ezModules.xdg
+
+    ezModules.ags
+    ezModules.kitty
+    ezModules.neofetch
+    ezModules.neovim
+    ezModules.obs
+    ezModules.spotify
+    ezModules.vscode
+    ezModules.webcord
   ];
 
   home = {
@@ -46,7 +46,7 @@
       blender # 3D modeling go brrr
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
-      inputs.camillemndn.packages.${system}.zotero # reference manager go brrr
+      inputs.camillemndn.packages.${pkgs.system}.zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
 

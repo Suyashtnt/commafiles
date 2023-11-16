@@ -24,8 +24,6 @@
         doCheck = false;
       });
 
-      #hyprland = inputs.hyprland.packages.${pkgs.system}.default;
-
       craneLib = inputs.crane.lib.${pkgs.system};
 
       swww = craneLib.buildPackage {

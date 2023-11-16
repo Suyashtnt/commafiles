@@ -1,16 +1,18 @@
 {
-  pkgs,
   inputs,
+  ezModules,
+  pkgs,
   ...
 }: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
-    ../modules/git
-    ../modules/programs/kitty
-    ../modules/programs/neofetch
-    ../modules/shell
-    ../modules/syncthing
-    ../modules/xdg
+
+    ezModules.git
+    ezModules.kitty
+    ezModules.neofetch
+    ezModules.shell
+    ezModules.syncthing
+    ezModules.xdg
   ];
 
   home = {

@@ -1,0 +1,3 @@
+{...}: {
+  home-manager.useGlobalPkgs = true;
+}
