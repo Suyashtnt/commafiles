@@ -5,7 +5,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    carapace
     fish # nushell completion partly relies on it
   ];
 
@@ -24,6 +23,11 @@
     zoxide = {
       enable = true;
       enableNushellIntegration = true;
+    };
+
+    carapace = {
+      enable = true;
+      enableNushellIntegration = false; # handled manually
     };
 
     starship = {

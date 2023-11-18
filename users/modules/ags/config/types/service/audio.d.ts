@@ -1,21 +1,12 @@
-import "../gtk-types/gtk-3.0-ambient.js";
-import "../gtk-types/gdk-3.0-ambient.js";
-import "../gtk-types/cairo-1.0-ambient.js";
-import "../gtk-types/gnomebluetooth-3.0-ambient.js";
-import "../gtk-types/dbusmenugtk3-0.4-ambient.js";
-import "../gtk-types/gobject-2.0-ambient.js";
-import "../gtk-types/nm-1.0-ambient.js";
-import "../gtk-types/soup-3.0-ambient.js";
-import "../gtk-types/gvc-1.0-ambient.js";
 import Service from '../service.js';
-import Gvc from 'gi://Gvc';
-declare class Stream extends Service {
+import Gvc from 'node_modules/@girs/gvc-1.0/gvc-1.0';
+export declare class Stream extends Service {
     private _stream;
     private _ids;
     private _oldVolume;
-    constructor(stream: InstanceType<typeof Gvc.MixerStream>);
+    constructor(stream: Gvc.MixerStream);
     get application_id(): string | null;
-    get stream(): import("../gtk-types/gvc-1.0.js").Gvc.MixerStream;
+    get stream(): Gvc.MixerStream;
     get description(): string | null;
     get icon_name(): string | null;
     get id(): number;
@@ -27,7 +18,7 @@ declare class Stream extends Service {
     set volume(value: number);
     close(): void;
 }
-declare class Audio extends Service {
+export declare class Audio extends Service {
     private _control;
     private _streams;
     private _streamBindings;
@@ -36,10 +27,10 @@ declare class Audio extends Service {
     private _speakerBinding;
     private _microphoneBinding;
     constructor();
-    get control(): import("../gtk-types/gvc-1.0.js").Gvc.MixerControl;
-    get speaker(): Stream;
+    get control(): Gvc.MixerControl;
+    get speaker(): Stream | undefined;
     set speaker(stream: Stream);
-    get microphone(): Stream;
+    get microphone(): Stream | undefined;
     set microphone(stream: Stream);
     get microphones(): Stream[];
     get speakers(): Stream[];
@@ -52,5 +43,5 @@ declare class Audio extends Service {
     private _getStreams;
     private _notifyStreams;
 }
-declare const audioService: Audio;
-export default audioService;
+declare const audio: Audio;
+export default audio;

@@ -1,14 +1,5 @@
-import "../gtk-types/gtk-3.0-ambient.js";
-import "../gtk-types/gdk-3.0-ambient.js";
-import "../gtk-types/cairo-1.0-ambient.js";
-import "../gtk-types/gnomebluetooth-3.0-ambient.js";
-import "../gtk-types/dbusmenugtk3-0.4-ambient.js";
-import "../gtk-types/gobject-2.0-ambient.js";
-import "../gtk-types/nm-1.0-ambient.js";
-import "../gtk-types/soup-3.0-ambient.js";
-import "../gtk-types/gvc-1.0-ambient.js";
 import Service from '../service.js';
-declare class Battery extends Service {
+export declare class Battery extends Service {
     private _proxy;
     private _available;
     private _percent;
@@ -31,5 +22,5 @@ declare class Battery extends Service {
     constructor();
     private _sync;
 }
-declare const _default: Battery;
-export default _default;
+export declare const battery: Battery;
+export default battery;

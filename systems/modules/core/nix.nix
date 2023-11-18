@@ -65,12 +65,9 @@
     };
   };
 
-  # who needs documentation anyways
   documentation = {
     enable = true;
-    doc.enable = true;
     man.enable = true;
-    dev.enable = false;
   };
 
   # This value determines the NixOS release from which the default

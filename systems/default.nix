@@ -4,8 +4,8 @@
 }: {
   ezConfigs = {
     nixos = {
-      hostsDirectory = ./.;
       modulesDirectory = ./modules;
+      configurationsDirectory = ./.;
 
       hosts = {
         GAMER-PC = {

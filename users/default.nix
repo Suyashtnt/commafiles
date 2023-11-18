@@ -1,8 +1,8 @@
 { ... }: {
   ezConfigs = {
-    hm = {
+    home = {
       modulesDirectory = ./modules;
-      usersDirectory = ./.;
+      configurationsDirectory = ./.;
     };
   };
 }

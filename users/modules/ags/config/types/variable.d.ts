@@ -1,28 +1,6 @@
-import "./gtk-types/gtk-3.0-ambient";
-import "./gtk-types/gdk-3.0-ambient";
-import "./gtk-types/cairo-1.0-ambient";
-import "./gtk-types/gnomebluetooth-3.0-ambient";
-import "./gtk-types/dbusmenugtk3-0.4-ambient";
-import "./gtk-types/gobject-2.0-ambient";
-import "./gtk-types/nm-1.0-ambient";
-import "./gtk-types/soup-3.0-ambient";
-import "./gtk-types/gvc-1.0-ambient";
-import GObject from 'gi://GObject';
-import type GObjectTypes from './gtk-types/gobject-2.0';
-type Listen<T> = [
-    string[] | string,
-    (out: string) => T
-] | [
-    string[] | string
-] | string[] | string;
-type Poll<T> = [
-    number,
-    string[] | string | (() => T)
-] | [
-    number,
-    string[] | string | (() => T),
-    (out: string) => T
-];
+import GObject from 'node_modules/@girs/gobject-2.0/gobject-2.0';
+type Listen<T> = [string[] | string, (out: string) => T] | [string[] | string] | string[] | string;
+type Poll<T> = [number, string[] | string | (() => T)] | [number, string[] | string | (() => T), (out: string) => T];
 interface Options<T> {
     poll?: Poll<T>;
     listen?: Listen<T>;
@@ -34,7 +12,7 @@ export declare class Variable<T> extends GObject.Object {
     private _interval?;
     private _subprocess?;
     constructor(value: T, { poll, listen }?: Options<T>);
-    connect(signal: string | undefined, callback: GObjectTypes.Object.NotifySignalCallback): number;
+    connect(signal: string | undefined, callback: GObject.Object.NotifySignalCallback): number;
     startPoll(): void;
     stopPoll(): void;
     startListen(): void;

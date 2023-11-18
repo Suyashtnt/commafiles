@@ -2,19 +2,24 @@
   description = "Suyashtnt's (maybe) good dotfiles";
 
   inputs = {
-    # Principle inputs (updated by `nix run .#update`)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nix-darwin.url = "github:lnl7/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-darwin = {
+        url = "github:lnl7/nix-darwin/master";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    ags.url = "github:Suyashtnt/ags/feat/typescript-typegen";
+    ags.url = "github:Aylur/ags";
 
     btop-theme = {
       url = "github:catppuccin/btop";
@@ -55,7 +60,6 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
-        home-manager.follows = "home-manager";
       };
     };
 
@@ -70,7 +74,7 @@
     };
 
     neovide-src = {
-      url = "github:fredizzimo/neovide/fsundvik/improve-render-loop";
+      url = "github:neovide/neovide";
       flake = false;
     };
 

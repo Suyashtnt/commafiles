@@ -1,16 +1,7 @@
-import "../gtk-types/gtk-3.0-ambient.js";
-import "../gtk-types/gdk-3.0-ambient.js";
-import "../gtk-types/cairo-1.0-ambient.js";
-import "../gtk-types/gnomebluetooth-3.0-ambient.js";
-import "../gtk-types/dbusmenugtk3-0.4-ambient.js";
-import "../gtk-types/gobject-2.0-ambient.js";
-import "../gtk-types/nm-1.0-ambient.js";
-import "../gtk-types/soup-3.0-ambient.js";
-import "../gtk-types/gvc-1.0-ambient.js";
 import Service from '../service.js';
 type PlaybackStatus = 'Playing' | 'Paused' | 'Stopped';
 type LoopStatus = 'None' | 'Track' | 'Playlist';
-declare class MprisPlayer extends Service {
+export declare class MprisPlayer extends Service {
     get bus_name(): string;
     get name(): string;
     get entry(): string;
@@ -64,7 +55,7 @@ declare class MprisPlayer extends Service {
     shuffle(): void;
     loop(): void;
 }
-declare class Mpris extends Service {
+export declare class Mpris extends Service {
     private _players;
     private _proxy;
     get players(): MprisPlayer[];
@@ -74,5 +65,5 @@ declare class Mpris extends Service {
     private _onNameOwnerChanged;
     getPlayer(name?: string): MprisPlayer | null;
 }
-declare const _default: Mpris;
-export default _default;
+export declare const mpris: Mpris;
+export default mpris;

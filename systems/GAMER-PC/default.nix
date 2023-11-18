@@ -8,6 +8,7 @@
 
     ezModules.core
     ezModules.intel
+    ezModules.nvidia
     ezModules.ld
     ezModules.printing
     ezModules.wayland

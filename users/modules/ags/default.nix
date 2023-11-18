@@ -2,34 +2,13 @@
   inputs,
   pkgs,
   ...
-}: let
-  ags = inputs.ags.packages.${pkgs.system}.default;
-in {
-  home.packages = [
-    ags
-  ];
+}: {
+  imports = [ inputs.ags.homeManagerModules.default ];
 
-  # ags service for after desktop login (TODO: figure out why its broken)
-  # systemd.user.services.ags = {
-  #   Unit = {
-  #     Description = "ags";
-  #     After = [ "graphical-session.target" ];
-  #   };
-  #
-  #   Service = {
-  #     Type = "simple";
-  #     ExecStart = "${ags}/bin/ags";
-  #     Restart = "always";
-  #     RestartSec = 5;
-  #   };
-  #
-  #   Install = {
-  #     WantedBy = [ "graphical-session.target" ];
-  #   };
-  # };
+  programs.ags = {
+    enable = true;
 
-  xdg.configFile.ags = {
-    source = pkgs.stdenv.mkDerivation rec {
+    configDir = pkgs.stdenv.mkDerivation rec {
       name = "ags-config";
       src = ./.;
       nativeBuildInputs = [pkgs.deno pkgs.nodejs];

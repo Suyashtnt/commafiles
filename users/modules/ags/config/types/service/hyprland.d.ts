@@ -1,17 +1,8 @@
-import "../gtk-types/gtk-3.0-ambient.js";
-import "../gtk-types/gdk-3.0-ambient.js";
-import "../gtk-types/cairo-1.0-ambient.js";
-import "../gtk-types/gnomebluetooth-3.0-ambient.js";
-import "../gtk-types/dbusmenugtk3-0.4-ambient.js";
-import "../gtk-types/gobject-2.0-ambient.js";
-import "../gtk-types/nm-1.0-ambient.js";
-import "../gtk-types/soup-3.0-ambient.js";
-import "../gtk-types/gvc-1.0-ambient.js";
 import Service from '../service.js';
-declare class Active extends Service {
+export declare class Active extends Service {
     updateProperty(prop: string, value: unknown): void;
 }
-declare class ActiveClient extends Active {
+export declare class ActiveClient extends Active {
     private _address;
     private _title;
     private _class;
@@ -19,13 +10,13 @@ declare class ActiveClient extends Active {
     get title(): string;
     get class(): string;
 }
-declare class ActiveWorkspace extends Active {
+export declare class ActiveWorkspace extends Active {
     private _id;
     private _name;
     get id(): number;
     get name(): string;
 }
-declare class Actives extends Service {
+export declare class Actives extends Service {
     constructor();
     private _client;
     private _monitor;
@@ -34,12 +25,13 @@ declare class Actives extends Service {
     get monitor(): string;
     get workspace(): ActiveWorkspace;
 }
-declare class Hyprland extends Service {
+export declare class Hyprland extends Service {
     private _active;
     private _monitors;
     private _workspaces;
     private _clients;
     private _decoder;
+    private _encoder;
     get active(): Actives;
     get monitors(): object[];
     get workspaces(): object[];
@@ -49,10 +41,11 @@ declare class Hyprland extends Service {
     getClient(address: string): object | undefined;
     constructor();
     private _watchSocket;
+    sendMessage(cmd: string): Promise<string>;
     private _syncMonitors;
     private _syncWorkspaces;
     private _syncClients;
     private _onEvent;
 }
-declare const _default: Hyprland;
-export default _default;
+export declare const hyprland: Hyprland;
+export default hyprland;

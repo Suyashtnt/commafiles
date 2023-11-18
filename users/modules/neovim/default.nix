@@ -2,12 +2,33 @@
   inputs,
   pkgs,
   lib,
-  config ? "gabriel",
   ...
 }: let
   custom-neovide-name = pkgs.craneLib.crateNameFromCargoToml {
     cargoToml = "${inputs.neovide-src}/Cargo.toml";
   };
+
+  SKIA_SOURCE_DIR = let
+    repo = pkgs.fetchFromGitHub {
+      owner = "rust-skia";
+      repo = "skia";
+      # see rust-skia:skia-bindings/Cargo.toml#package.metadata.skia when updating
+      rev = "m119-0.67.3";
+      sha256 = "sha256-U75NuJnQa5+SNlOrsBmdlvflGdjo3el63EeIsbnE7ms=";
+    };
+    # The externals for skia are taken from skia/DEPS
+    externals = pkgs.linkFarm "skia-externals" (lib.mapAttrsToList
+      (name: value: {
+        inherit name;
+        path = pkgs.fetchgit value;
+      })
+      (lib.importJSON ./skia-externals.json));
+  in
+    pkgs.runCommand "source" {} ''
+      cp -R ${repo} $out
+      chmod -R +w $out
+      ln -s ${externals} $out/third_party/externals
+    '';
 
   custom-neovide-deps = pkgs.craneLib.vendorCargoDeps {
     stdenv = pkgs.clangStdenv;
@@ -15,28 +36,7 @@
 
     cargoExtraArgs = "--locked";
 
-    SKIA_SOURCE_DIR = let
-      repo = pkgs.fetchFromGitHub {
-        owner = "rust-skia";
-        repo = "skia";
-        # see rust-skia:skia-bindings/Cargo.toml#package.metadata.skia when updating
-        rev = "m113-0.61.8";
-        sha256 = "sha256-xGfkc1JLBGQW4WcblFyluZ2paEuisCVPNDU4Rfkv3BE=";
-      };
-      # The externals for skia are taken from skia/DEPS
-      externals = pkgs.linkFarm "skia-externals" (lib.mapAttrsToList
-        (name: value: {
-          inherit name;
-          path = pkgs.fetchgit value;
-        })
-        (lib.importJSON ./skia-externals.json));
-    in
-      pkgs.runCommand "source" {} ''
-        cp -R ${repo} $out
-        chmod -R +w $out
-        ln -s ${externals} $out/third_party/externals
-      '';
-
+    inherit SKIA_SOURCE_DIR;
     SKIA_GN_COMMAND = "${pkgs.gn}/bin/gn";
     SKIA_NINJA_COMMAND = "${pkgs.ninja}/bin/ninja";
 
@@ -66,28 +66,7 @@
         ]
         ++ lib.optionals stdenv.isDarwin [xcbuild];
 
-      SKIA_SOURCE_DIR = let
-        repo = pkgs.fetchFromGitHub {
-          owner = "rust-skia";
-          repo = "skia";
-          # see rust-skia:skia-bindings/Cargo.toml#package.metadata.skia when updating
-          rev = "m113-0.61.8";
-          sha256 = "sha256-xGfkc1JLBGQW4WcblFyluZ2paEuisCVPNDU4Rfkv3BE=";
-        };
-        # The externals for skia are taken from skia/DEPS
-        externals = pkgs.linkFarm "skia-externals" (lib.mapAttrsToList
-          (name: value: {
-            inherit name;
-            path = pkgs.fetchgit value;
-          })
-          (lib.importJSON ./skia-externals.json));
-      in
-        pkgs.runCommand "source" {} ''
-          cp -R ${repo} $out
-          chmod -R +w $out
-          ln -s ${externals} $out/third_party/externals
-        '';
-
+      inherit SKIA_SOURCE_DIR;
       SKIA_GN_COMMAND = "${pkgs.gn}/bin/gn";
       SKIA_NINJA_COMMAND = "${pkgs.ninja}/bin/ninja";
 
@@ -153,25 +132,7 @@ in {
   };
 
   xdg.configFile.nvim = {
-    # source =
-    #   {
-    #     nyoom = pkgs.buildEnv {
-    #       name = "nyoom";
-    #       paths = [
-    #         inputs.nyoom-src
-    #         {
-    #           outPath = ./nyoom;
-    #           meta.priority = 2;
-    #         }
-    #       ];
-    #     };
-
-    #     gabriel = ./gabriel;
-    #     weaponized-gopro = ./weaponized-gopro;
-    #   }
-    #   .${config};
-
-    source = ./gabriel;
+    source = ./config;
 
     recursive = true;
   };

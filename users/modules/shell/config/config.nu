@@ -517,28 +517,49 @@ let fish_completer = {|spans: list<string>|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
     | $"value(char tab)description(char newline)" + $in
     | from tsv --flexible --no-infer
+    | if ($in | default [] | is-empty) { null } else { $in }
 }
+
+def --env get-env [name] { $env | get $name }
+def --env set-env [name, value] { load-env { $name: $value } }
+def --env unset-env [name] { hide-env $name }
 
 let carapace_completer = {|spans: list<string>|
-    carapace $spans.0 nushell $spans
-    | from json
-    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+  carapace $spans.0 nushell $spans | from json
 }
 
-let multiple_completers = {|spans: list<string>|
+let specialized_completer = {|spans: list<string>|
     {
       # zoxide alias
       z: $zoxide_completer
 
       # zoxide alias
       zi: $zoxide_completer
-    } | get -i $spans.0 | default $fish_completer | do $in $spans
+    }  | get -i $spans.0 |
+    | if ($in == null) { null } else { do $in $spans }
+}
+
+let multiple_completers = {|spans: list<string>|
+  let specialized_completer_result = do $specialized_completer $spans
+  if $specialized_completer_result != null {
+    return $specialized_completer_result
+  }
+
+  let carapace_completer_result = do $carapace_completer $spans
+  if $carapace_completer_result != null {
+    return $carapace_completer_result
+  }
+
+  let fish_completer_result = do $fish_completer $spans
+  if $fish_completer_result != null {
+    return $fish_completer_result
+  }
 }
 
 $env.config.completions.external = {
-   enable: true
-   max_results: 100
-   completer: $multiple_completers
+  enable: true
+  max_results: 100
+  completer: $multiple_completers
 }
 
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env

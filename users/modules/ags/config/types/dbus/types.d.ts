@@ -1,20 +1,10 @@
-import "../gtk-types/gtk-3.0-ambient";
-import "../gtk-types/gdk-3.0-ambient";
-import "../gtk-types/cairo-1.0-ambient";
-import "../gtk-types/gnomebluetooth-3.0-ambient";
-import "../gtk-types/dbusmenugtk3-0.4-ambient";
-import "../gtk-types/gobject-2.0-ambient";
-import "../gtk-types/nm-1.0-ambient";
-import "../gtk-types/soup-3.0-ambient";
-import "../gtk-types/gvc-1.0-ambient";
-import GLib from 'gi://GLib';
-import Gio from 'gi://Gio';
-type GioDBusProxy = InstanceType<typeof Gio.DBusProxy>;
-export interface DBusProxy extends GioDBusProxy {
+import GLib from 'node_modules/@girs/glib-2.0/glib-2.0';
+import Gio from 'node_modules/@girs/gio-2.0/gio-2.0';
+export interface DBusProxy extends Gio.DBusProxy {
     new (...args: unknown[]): DBusProxy;
     ListNamesRemote: (callback: (names: string[][]) => void) => void;
 }
-export interface PlayerProxy extends GioDBusProxy {
+export interface PlayerProxy extends Gio.DBusProxy {
     new (...args: unknown[]): PlayerProxy;
     CanControl: boolean;
     CanGoNext: boolean;
@@ -22,7 +12,7 @@ export interface PlayerProxy extends GioDBusProxy {
     CanPlay: boolean;
     CanPause: boolean;
     Metadata: {
-        [key: string]: InstanceType<typeof GLib.Variant>;
+        [key: string]: GLib.Variant;
     };
     PlaybackStatus: string;
     Shuffle: boolean | null;
@@ -36,7 +26,7 @@ export interface PlayerProxy extends GioDBusProxy {
     StopAsync: () => Promise<void>;
     PlayAsync: () => Promise<void>;
 }
-export interface MprisProxy extends GioDBusProxy {
+export interface MprisProxy extends Gio.DBusProxy {
     new (...args: unknown[]): MprisProxy;
     Raise: () => void;
     Quit: () => void;
@@ -45,7 +35,7 @@ export interface MprisProxy extends GioDBusProxy {
     Identity: string;
     DesktopEntry: string;
 }
-export interface BatteryProxy extends GioDBusProxy {
+export interface BatteryProxy extends Gio.DBusProxy {
     new (...args: unknown[]): BatteryProxy;
     State: number;
     Percentage: number;
@@ -56,7 +46,7 @@ export interface BatteryProxy extends GioDBusProxy {
     EnergyFull: number;
     EnergyRate: number;
 }
-export interface StatusNotifierItemProxy extends GioDBusProxy {
+export interface StatusNotifierItemProxy extends Gio.DBusProxy {
     new (...args: unknown[]): StatusNotifierItemProxy;
     Category: string;
     Id: string;
@@ -76,7 +66,7 @@ export interface StatusNotifierItemProxy extends GioDBusProxy {
     SecondaryActivateAsync: (x: number, y: number) => Promise<void>;
     ScrollAsync: (delta: number, orientation: string) => Promise<void>;
 }
-export interface AgsProxy extends GioDBusProxy {
+export interface AgsProxy extends Gio.DBusProxy {
     new (...args: unknown[]): AgsProxy;
     InspectorRemote: () => void;
     QuitRemote: () => void;
@@ -84,7 +74,7 @@ export interface AgsProxy extends GioDBusProxy {
     RunJsSync: (js: string) => string;
     RunPromiseRemote: (js: string, busName?: string, objPath?: string) => void;
 }
-export interface StatusNotifierItemProxy extends GioDBusProxy {
+export interface StatusNotifierItemProxy extends Gio.DBusProxy {
     new (...args: unknown[]): StatusNotifierItemProxy;
     Category: string;
     Id: string;
@@ -104,4 +94,3 @@ export interface StatusNotifierItemProxy extends GioDBusProxy {
     SecondaryActivateAsync: (x: number, y: number) => Promise<void>;
     ScrollAsync: (delta: number, orientation: string) => Promise<void>;
 }
-export {};

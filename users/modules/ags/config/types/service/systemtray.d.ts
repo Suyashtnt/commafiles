@@ -1,26 +1,18 @@
-import "../gtk-types/gtk-3.0-ambient.js";
-import "../gtk-types/gdk-3.0-ambient.js";
-import "../gtk-types/cairo-1.0-ambient.js";
-import "../gtk-types/gnomebluetooth-3.0-ambient.js";
-import "../gtk-types/dbusmenugtk3-0.4-ambient.js";
-import "../gtk-types/gobject-2.0-ambient.js";
-import "../gtk-types/nm-1.0-ambient.js";
-import "../gtk-types/soup-3.0-ambient.js";
-import "../gtk-types/gvc-1.0-ambient.js";
-import Gio from 'gi://Gio';
-import Gdk from 'gi://Gdk?version=3.0';
-import DbusmenuGtk3 from 'gi://DbusmenuGtk3';
+import Gio from 'node_modules/@girs/gio-2.0/gio-2.0';
+import Gdk from 'node_modules/@girs/gdk-2.0/gdk-2.0?version=3.0';
+import GdkPixbuf from 'node_modules/@girs/gdkpixbuf-2.0/gdkpixbuf-2.0';
+import DbusmenuGtk3 from 'node_modules/@girs/dbusmenugtk3-0.4/dbusmenugtk3-0.4';
 import Service from '../service.js';
 export declare class TrayItem extends Service {
     private _proxy;
     private _busName;
     private _iconTheme?;
-    menu?: InstanceType<typeof DbusmenuGtk3.Menu>;
+    menu?: DbusmenuGtk3.Menu;
     constructor(busName: string, objectPath: string);
-    activate(event: InstanceType<typeof Gdk.Event>): void;
-    secondaryActivate(event: InstanceType<typeof Gdk.Event>): void;
-    scroll(event: InstanceType<typeof Gdk.EventScroll>): void;
-    openMenu(event: InstanceType<typeof Gdk.Event>): void;
+    activate(event: Gdk.Event): void;
+    secondaryActivate(event: Gdk.Event): void;
+    scroll(event: Gdk.EventScroll): void;
+    openMenu(event: Gdk.Event): void;
     get category(): string;
     get id(): string;
     get title(): string;
@@ -28,13 +20,13 @@ export declare class TrayItem extends Service {
     get window_id(): number;
     get is_menu(): boolean;
     get tooltip_markup(): string;
-    get icon(): string | import("../gtk-types/gdkpixbuf-2.0.js").GdkPixbuf.Pixbuf;
+    get icon(): string | GdkPixbuf.Pixbuf;
     private _itemProxyAcquired;
     _notify(): void;
     private _refreshAllProperties;
     private _getPixbuf;
 }
-declare class SystemTray extends Service {
+export declare class SystemTray extends Service {
     private _dbus;
     private _items;
     get IsStatusNotifierHostRegistered(): boolean;
@@ -44,7 +36,7 @@ declare class SystemTray extends Service {
     getItem(name: string): TrayItem | undefined;
     constructor();
     private _register;
-    RegisterStatusNotifierItemAsync(serviceName: string[], invocation: InstanceType<typeof Gio.DBusMethodInvocation>): void;
+    RegisterStatusNotifierItemAsync(serviceName: string[], invocation: Gio.DBusMethodInvocation): void;
 }
-declare const _default: SystemTray;
-export default _default;
+export declare const systemTray: SystemTray;
+export default systemTray;

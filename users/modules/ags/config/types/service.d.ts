@@ -1,19 +1,9 @@
-import "./gtk-types/gtk-3.0-ambient";
-import "./gtk-types/gdk-3.0-ambient";
-import "./gtk-types/cairo-1.0-ambient";
-import "./gtk-types/gnomebluetooth-3.0-ambient";
-import "./gtk-types/dbusmenugtk3-0.4-ambient";
-import "./gtk-types/gobject-2.0-ambient";
-import "./gtk-types/nm-1.0-ambient";
-import "./gtk-types/soup-3.0-ambient";
-import "./gtk-types/gvc-1.0-ambient";
-import GObject from 'gi://GObject';
-import type GObjectTypes from './gtk-types/gobject-2.0';
+import GObject from 'node_modules/@girs/gobject-2.0/gobject-2.0';
 type PspecType = 'jsobject' | 'string' | 'int' | 'float' | 'double' | 'boolean' | 'gobject';
 type PspecFlag = 'rw' | 'r' | 'w';
 export default class Service extends GObject.Object {
-    static pspec(name: string, type?: PspecType, handle?: PspecFlag): GObjectTypes.ParamSpecString | GObjectTypes.ParamSpecInt64 | GObjectTypes.ParamSpecFloat | GObjectTypes.ParamSpecDouble | GObjectTypes.ParamSpecBoolean | GObjectTypes.ParamSpecObject | GObjectTypes.ParamSpecBoxed;
-    static register(service: new (...args: any[]) => unknown, signals?: {
+    static pspec(name: string, type?: PspecType, handle?: PspecFlag): GObject.ParamSpecString | GObject.ParamSpecInt64 | GObject.ParamSpecFloat | GObject.ParamSpecDouble | GObject.ParamSpecBoolean | GObject.ParamSpecObject | GObject.ParamSpecBoxed;
+    static register(service: new (...args: any[]) => GObject.Object, signals?: {
         [signal: string]: string[];
     }, properties?: {
         [prop: string]: [type?: PspecType, handle?: PspecFlag];
