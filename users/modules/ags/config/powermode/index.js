@@ -3,14 +3,20 @@ import { Top } from "./top.js";
 import { Bottom } from "./bottom.js";
 import { Left } from "./left.js";
 import { Right } from "./right.js";
-import { Revealer, Box } from "../imports.js";
+import { Revealer, Box, toCSS } from "../imports.js";
 
-export const SetupRevealer = (transition, content, isMusic = false) => Box({
-  style: 'padding: 1px;',
+export const SetupRevealer = (
+  /** @type {string} */ transition,
+  /** @type {any} */ content,
+  isMusic = false
+) => Box({
+  css: toCSS({
+    padding: '1px'
+  }),
   child: Revealer({
     revealChild: false,
     transition,
-    connections: [[ShowPowerMode, revealer => {
+    connections: [[ShowPowerMode, (/** @type {InstanceType<Revealer>} */ revealer) => {
       if (isMusic) {
         revealer.revealChild = ShowPowerMode.value.powerMode || ShowPowerMode.value.musicOnly
       } else {

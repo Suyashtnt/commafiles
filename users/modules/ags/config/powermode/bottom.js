@@ -15,8 +15,8 @@ export const Bottom = () => {
     name: "powermode-bottom",
     className: "bg-transparent",
     anchor: ["bottom", "left", "right"],
-    exclusive: true,
     visible: true,
+    exclusivity: "exclusive",
     child: SetupRevealer("slide_up", content),
   });
 };

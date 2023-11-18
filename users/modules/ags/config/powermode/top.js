@@ -26,10 +26,11 @@ const Workspaces = () => {
         child: Label({
             label: `${i}`,
             className: baseClasses,
-            valign: 'center',
+            vpack: 'center',
         }),
         connections: [[Hyprland, btn => {
             const active = Hyprland.active.workspace.id === i;
+            // @ts-ignore
             const occupied = Hyprland.getWorkspace(i)?.windows > 0 && !active;
             btn.className = `${baseClasses} ${occupied ? 'bg-surface2/100' : ''} ${active ? 'bg-lavender/100' : ''}`;
         }]],
@@ -39,7 +40,7 @@ const Workspaces = () => {
 
 const Clock = () => Label({
     className: 'text-2xl ma-2 py-2 px-4 bg-base/100 rounded-full',
-    valign: 'center',
+    vpack: 'center',
     connections: [[1000, label =>
          label.label = GLib.DateTime.new_now_local().format("%H:%M:%S · %A %d/%m")
     ]],
@@ -66,7 +67,7 @@ const Weather = () => {
   const temperatureSlider = ProgressBar({
     value: 0,
     className: "min-w-24 mx-2",
-    valign: 'center',
+    vpack: 'center',
     connections: [[WeatherInfo, slider => {
       const { current, daily } = WeatherInfo.value
 
@@ -100,7 +101,7 @@ const Weather = () => {
   const weatherIcon = Icon({
     className: 'bg-transparent mx-2',
     size: 24,
-    valign: 'center',
+    vpack: 'center',
     connections: [[WeatherInfo, icon => {
       const { current: { weathercode, is_day } } = WeatherInfo.value
 
@@ -188,8 +189,8 @@ const SysTrayItem = item => Button({
     child: Icon({ 
       binds: [['icon', item, 'icon']],
       size: 24,
-      halign: 'center',
-      valign: 'center',
+      hpack: 'center',
+      vpack: 'center',
       className: 'bg-transparent'
     }),
     className: "ma-2 rounded-full bg-transparent",
@@ -221,8 +222,8 @@ export const Top = () => {
     name: "powermode-top",
     className: "bg-transparent",
     anchor: ["top", "left", "right"],
-    exclusive: true,
     visible: true,
+    exclusivity: "exclusive",
     child: SetupRevealer("slide_down", content),
   });
 };

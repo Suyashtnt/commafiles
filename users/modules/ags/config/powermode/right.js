@@ -10,6 +10,7 @@ import {
   Utils,
   Variable,
   Window,
+  toCSS,
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 import { ShowPowerMode } from "./variables.js";0
@@ -145,7 +146,7 @@ const MusicControls = () => {
   const controls = Box({
     className: "min-h-2",
     spacing: 16,
-    valign: "end",
+    vpack: "end",
     hexpand: true,
     children: [
       Button({
@@ -187,7 +188,7 @@ const MusicControls = () => {
     className: "bg-surface0/90 rounded-2xl p-sm",
     vertical: true,
     vexpand: true,
-    valign: "end",
+    vpack: "end",
     children: [
       progress,
       controls,
@@ -216,17 +217,22 @@ const Music = () => {
           const song = JSON.parse(exec("spotify_player get key playback"))
           const songArt = getAlbumArtPath(song.item);
 
-          box.style =
-            `background-image: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.6) 15%, rgba(34,34,34,0) 100%), url('${songArt}'); background-size: cover; background-repeat: no-repeat; background-position: center; min-height: 280px;`;
+          box.css = toCSS({
+            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.6) 15%, rgba(34,34,34,0) 100%), url('${songArt}')`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            minHeight: '280px'
+          })
 
           startWidget.updateInfo({
-            title: player?.trackTitle || "No title",
-            artist: player?.trackArtists.join(", ") || "No artist",
+            title: player?.track_title || "No title",
+            artist: player?.track_artists.join(", ") || "No artist",
           });
 
           endWidget.updatePlayer(player);
         } catch (_e)  {
-          box.style = "";
+          box.css = "";
           startWidget.updateInfo({
             title: "No title",
             artist: "No artist",
@@ -257,6 +263,7 @@ const currentQueue = Variable([], {
         };
       });
     } catch (e) {
+      // @ts-ignore
       console.log(e)
       return [];
     }
@@ -283,7 +290,12 @@ const UpNext = () => {
         (box) => {
           currentQueue.value.slice(0, 10).forEach(({ name, artists, coverArt }, idx) => {
             const coverArtBox = box.children[idx].children[0];
-            coverArtBox.style = `background-image: url('${coverArt}'); background-size: cover; background-repeat: no-repeat; background-position: center;`;
+            coverArtBox.css = toCSS({
+              backgroundImage: `url('${coverArt}')`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center'
+            })
 
             const songInfo = box.children[idx].children[1]
             songInfo.children[0].label = name;
@@ -325,7 +337,7 @@ const UpNext = () => {
             child: Label("󰒬"),
             onClicked: () => {
               for (let i = 0; i <= idx; i++) {
-                Mpris.getPlayer("spotify_player").next();
+                Mpris.getPlayer("spotify_player")?.next();
               }
             },
           }),
@@ -355,8 +367,8 @@ export const Right = () => {
     name: "powermode-right",
     className: "bg-transparent",
     anchor: ["top", "bottom", "right"],
-    exclusive: true,
     visible: true,
+    exclusivity: "exclusive",
     child: SetupRevealer("slide_left", content, true),
   });
 };

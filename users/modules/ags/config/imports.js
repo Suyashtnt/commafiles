@@ -1,4 +1,4 @@
-export { default as Gtk } from 'gi://Gtk?version=3.0';
+export { default as Gtk } from 'gi://Gtk';
 export { default as GLib }  from 'gi://GLib';
 
 export {
@@ -13,6 +13,7 @@ export {
   Scrollable,
   Icon,
   Revealer,
+  Calendar,
   default as Widget,
 } from "resource:///com/github/Aylur/ags/widget.js"
 
@@ -22,9 +23,21 @@ export { default as Hyprland } from "resource:///com/github/Aylur/ags/service/hy
 export { default as SystemTray } from "resource:///com/github/Aylur/ags/service/systemtray.js"
 export { default as Variable } from "resource:///com/github/Aylur/ags/variable.js"
 
-import { default as App } from "resource:///com/github/Aylur/ags/app.js"
-App.connect = (...args) => App.instance.connect(...args);
+export { default as App } from "resource:///com/github/Aylur/ags/app.js"
 
-export * as Utils from "resource:///com/github/Aylur/ags/utils.js"
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js"
+export { Utils }
 
-export { App }
+export const toCSS = (/** @type {Record<string, any>} */ style) => {
+  return Object.entries(style).map(([key, value]) => {
+    return `${toKebabCase(key)}: ${value}`;
+  }).join(';\n');
+}
+
+const toKebabCase = (/** @type {string} */ str) => {
+   return str.split('').map((letter, idx) => {
+     return letter.toUpperCase() === letter
+      ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
+      : letter;
+   }).join('');
+}

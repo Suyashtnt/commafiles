@@ -1,20 +1,23 @@
-import { EventBox, Icon, Box, Button, Label, Utils, Notifications } from '../imports.js'
+import { EventBox, Icon, Box, Button, Label, Utils, Notifications, toCSS } from '../imports.js'
 /** @typedef {NonNullable<ReturnType<typeof Notifications.getNotification>>} Notification */
 
 const { lookUpIcon, timeout } = Utils
 
-const NotificationIcon = ({ appEntry, appIcon, image }) => {
+const NotificationIcon = (
+  /** @type {Notification} */
+  { image, app_icon: appIcon, app_entry: appEntry }
+) => {
     if (image) {
         return Box({
-            valign: 'start',
+            vpack: 'start',
             hexpand: false,
             className: 'rounded-xl mr-2 min-w-18 min-h-18 bg-mantle/100',
-            style: `
-                background-image: url('${image}');
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-            `,
+            css: toCSS({
+                backgroundImage: `url('${image}')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center'
+            }),
         });
     }
 
@@ -22,18 +25,18 @@ const NotificationIcon = ({ appEntry, appIcon, image }) => {
     if (lookUpIcon(appIcon))
         icon = appIcon;
 
-    if (lookUpIcon(appEntry))
+    if (appEntry && lookUpIcon(appEntry))
         icon = appEntry;
 
     return Box({
-        valign: 'start',
+        vpack: 'start',
         hexpand: false,
         className: 'rounded-xl mr-2 min-w-24 min-h-24',
         children: [Icon({
             icon, 
             size: 58,
-            halign: 'center', hexpand: true,
-            valign: 'center', vexpand: true,
+            hpack: 'center', hexpand: true,
+            vpack: 'center', vexpand: true,
         })],
     });
 };
@@ -85,7 +88,7 @@ export const Notification = notification => EventBox({
                                     }),
                                     Button({
                                         className: 'ma-0 pa-0 min-h-10 min-w-10 rounded-full bg-transparent',
-                                        valign: 'start',
+                                        vpack: 'start',
                                         child: Icon('window-close-symbolic'),
                                         onClicked: notification.close.bind(notification),
                                     }),

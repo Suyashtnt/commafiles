@@ -1,22 +1,15 @@
 import {
   Box,
   Button,
-  Gtk,
   Scrollable,
   Utils,
   Window,
-  Widget
+  Calendar,
+  toCSS
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 
 const { execAsync } = Utils
-
-const Calendar = Widget({
-  type: Gtk.Calendar,
-  showDayNames: false,
-  showHeading: true,
-  className: "rounded-rt-6 border-none",
-});
 
 const ImageSelector = ({
   imagePath,
@@ -29,18 +22,14 @@ const ImageSelector = ({
       ),
     child: Box({
       spacing: 10,
-      style:
-      // 21:9 aspect ratio
-        `
-          background-image: url('${imagePath}');
-          background-size: cover;
-          background-repeat: no-repeat;
-          background-position: center;
-          min-width: 380px;
-          min-height: 180px;
-      `
-          .trim()
-          .replaceAll("\n", " "),
+      css: toCSS({
+          backgroundImage: `url('${imagePath}')`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          minWidth: '380px',
+          minHeight: '180px'
+      }),
       className: "min-h-38 rounded-xl",
     }),
   });
@@ -72,7 +61,11 @@ export const Left = () => {
     vertical: true,
     spacing: 8,
     children: [
-      Calendar,
+      Calendar({
+        showDayNames: false,
+        showHeading: true,
+        className: "rounded-rt-6 border-none",
+      }),
       Scrollable({
         className: "min-h-100",
         vscroll: "automatic",
@@ -87,8 +80,8 @@ export const Left = () => {
     name: "powermode-left",
     className: "bg-transparent",
     anchor: ["top", "left", "bottom"],
-    exclusive: true,
     visible: true,
+    exclusivity: "exclusive",
     child: SetupRevealer("slide_right", content),
   });
 };

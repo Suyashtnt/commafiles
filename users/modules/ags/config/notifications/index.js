@@ -1,9 +1,11 @@
-import { Box, Notifications, Window } from '../imports.js'
+import { Box, Notifications, Window, toCSS } from '../imports.js'
 import { Notification } from './popup.js'
 
 const PopupList = () => Box({
     className: 'ma-8 bg-transparent',
-    style: 'padding: 1px;', // so it shows up
+    css: toCSS({
+      padding: '1px'
+    }), 
     vertical: true,
     binds: [['children', Notifications, 'popups',
         popups => popups.map(Notification)]],
