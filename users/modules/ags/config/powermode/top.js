@@ -18,7 +18,7 @@ const Workspaces = () => {
   const baseClasses = "rounded-full text-0 ma-2 py-0 px-[5px]"
 
   return Box({
-    className: 'bg-base/100 rounded-full ma-2',
+    className: 'bg-surface_background/60 rounded-full ma-2',
     children: Array
       .from({ length: 10 }, (_, i) => i + 1)
       .map(i => Button({
@@ -32,14 +32,14 @@ const Workspaces = () => {
             const active = Hyprland.active.workspace.id === i;
             // @ts-ignore
             const occupied = Hyprland.getWorkspace(i)?.windows > 0 && !active;
-            btn.className = `${baseClasses} ${occupied ? 'bg-surface2/100' : ''} ${active ? 'bg-lavender/100' : ''}`;
+            btn.className = `${baseClasses} ${occupied ? 'bg-overlay_background/100' : ''} ${active ? 'bg-primary_foreground/100' : ''}`;
         }]],
     })),
   })
 }
 
 const Clock = () => Label({
-    className: 'text-2xl ma-2 py-2 px-4 bg-base/100 rounded-full',
+    className: 'text-2xl ma-2 py-2 px-4 bg-surface_background/60 rounded-full',
     vpack: 'center',
     connections: [[1000, label =>
          label.label = GLib.DateTime.new_now_local().format("%H:%M:%S · %A %d/%m")
@@ -174,7 +174,7 @@ const Weather = () => {
   })
 
   return Box({
-    className: 'bg-base/100 rounded-full my-2 mx-4',
+    className: 'bg-transparent rounded-full my-2 mx-4',
     vertical: false,
     hexpand: true,
     children: [
@@ -200,7 +200,7 @@ const SysTrayItem = item => Button({
 });
 
 const Right = () => Box({
-    className: 'rounded-full bg-base/100 ma-2',
+    className: 'rounded-full bg-surface_background/60 ma-2',
     binds: [['children', SystemTray, 'items', item => [
       Weather(),
       Box({ hexpand: true }),
@@ -210,7 +210,7 @@ const Right = () => Box({
 
 export const Top = () => {
   const content = CenterBox({
-    className: "bg-mantle/60 rounded-b-6 mx-4",
+    className: "bg-base_background/60 rounded-b-6 mx-4",
     vexpand: true,
     hexpand: true,
     startWidget: Workspaces(),

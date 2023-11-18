@@ -1,7 +1,6 @@
 (local lspconfig (require :lspconfig))
 (local coq (require :coq))
 (local coq_3p (require :coq_3p))
-(local fidget (require :fidget))
 (local inc_rename (require :inc_rename))
 (local dressing (require :dressing))
 (local aerial (require :aerial))
@@ -70,8 +69,6 @@
     new-virt-text))
 
 (ufo.setup {:fold_virt_text_handler handler})
-
-(fidget.setup {:window {:blend 0}})
 
 (lspsaga.setup)
 (aerial.setup)

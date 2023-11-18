@@ -49,9 +49,9 @@ export const SetupPowerMode = () => {
   }
 
   return [
-    Left(),
-    Right(),
     Top(),
     Bottom(),
+    Left(),
+    Right(),
   ];
 }

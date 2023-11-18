@@ -3,7 +3,7 @@ import { SetupRevealer } from "./index.js";
 
 export const Bottom = () => {
   const content = Box({
-    className: "bg-mantle/60 rounded-t-6 pa-2 mx-4",
+    className: "bg-base_background/60 rounded-t-6 pa-2 mx-4",
     vexpand: true,
     hexpand: true,
     child: Label({

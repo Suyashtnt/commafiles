@@ -8,7 +8,7 @@
       :<leader> {
                   "<leader>" ["<cmd>Telescope find_files<cr>" "Find File"]
                   :b ["<cmd>Telescope buffers<cr>" "Find Buffer"]
-                  :p ["<cmd>Neotree toggle<cr>" "File explorer"]
+                  :p ["<cmd>Neotree toggle position=float<cr>" "File explorer"]
                   :k ["<cmd>Legendary<cr>" "Keybind explorer"]
                   :o ["<cmd>AerialToggle<cr>" "Open code outline"]
                   :r ["<cmd>FocusToggle<cr>" "Toggle automatic split resizing"]

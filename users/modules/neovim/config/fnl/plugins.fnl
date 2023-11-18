@@ -18,9 +18,18 @@
         { 1 :eraserhd/parinfer-rust 
           :build "nix-shell --run \"cargo build --release \""}
 
+        { 1 :mrjones2014/legendary.nvim
+          :priority 100000
+          :opts {
+                  :extensions {
+                                :lazy_nvim {:enable true :auto_register true}
+                                :smart_splits {:enable true}
+                                :which_key {:auto_register true}}}
+          :lazy false}
+
         { 1 :folke/which-key.nvim
-          :dependencies [ :mrjones2014/legendary.nvim
-                          :mrjones2014/smart-splits.nvim]
+          :dependencies [:mrjones2014/smart-splits.nvim]
+          :opts {}
           :config #(require :keybinds)}
 
         { 1 :ThePrimeagen/harpoon 
@@ -34,7 +43,9 @@
           :config #((. (require :smart-splits) :setup))}
 
         { 1 :nvim-focus/focus.nvim
-          :version :*} 
+          :version :*
+          :opts {
+                 :enable true}}
 
         { 1 :nvim-telescope/telescope.nvim
           :dependencies [:nvim-lua/plenary.nvim]
@@ -54,7 +65,11 @@
                           :nvim-tree/nvim-web-devicons
                           :nvim-lua/plenary.nvim
                           :MunifTanjim/nui.nvim]
-          :config #(vim.cmd "let g:neo_tree_remove_legacy_commands = 1")}
+          :config #(
+                    vim.cmd "let g:neo_tree_remove_legacy_commands = 1"
+                    ((. (require :neo-tree) :setup) {
+                                                      :popup_border_style :rounded}))}
+                 
 
         { 1 :nvim-treesitter/nvim-treesitter
           :dependencies [
@@ -70,7 +85,10 @@
         { 1 :j-hui/fidget.nvim
           :opts {
                  :notification {
-                                :override_vim_notify true}}}
+                                :override_vim_notify true
+                                :window {
+                                         :winblend 90
+                                         :border :rounded}}}}
 
         { 1 :neovim/nvim-lspconfig
           :dependencies [

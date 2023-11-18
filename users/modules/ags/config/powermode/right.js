@@ -17,11 +17,11 @@ import { ShowPowerMode } from "./variables.js";0
 
 const { execAsync, exec } = Utils
 
-const getAlbumArtPath = (song) => {
+const getAlbumArtPath = (/** @type {{ album: { images: { url: string; }[]; }; }} */ song) => {
   const url = song.album.images[0].url;
   const filename = url.split("/").pop();
 
-  const fileExists = async (path) => {
+  const fileExists = async (/** @type {string} */ path) => {
     try {
           await execAsync(`test -f ${path}`);
           return true;
@@ -46,10 +46,13 @@ const getAlbumArtPath = (song) => {
 
 const MusicHeader = () => {
   const box = Box({
+    className: "bg-overlay_background/90 rounded-2xl p-sm",
+    hexpand: false,
+    vpack: "start",
     vertical: true,
     children: [
       Label({
-        className: "text-2xl",
+        className: "text-2xl text-bold text-primary_foreground/100",
         wrap: true,
         label: "No title",
       }),
@@ -61,10 +64,9 @@ const MusicHeader = () => {
     ],
   });
 
-  box.updateInfo = (newInfo) => {
-    box.children[0].label = newInfo.title.substring(0, 22)
+  box.updateInfo = (/** @type {{ title: string; artist: string; }} */ newInfo) => {
+    box.children[0].label = newInfo.title.substring(0, 20)
     box.children[1].label = newInfo.artist.substring(0, 25)
-                                           
   };
 
   return box;
@@ -127,7 +129,7 @@ const MusicProgress = () => {
   return progress
 };
 
-const formatTime = (millis) => {
+const formatTime = (/** @type {number} */ millis) => {
   // format as hh:mm:ss (remove hours if less than 1 hour)
   const hours = Math.floor(millis / 3600);
   const minutes = Math.floor((millis % 3600) / 60);
@@ -141,7 +143,7 @@ const formatTime = (millis) => {
 }
 
 const MusicControls = () => {
-  const buttonCss = "rounded-2xl mx-md min-h-12 min-w-12 text-4xl icon";
+  const buttonCss = "rounded-2xl mx-md min-h-12 min-w-12 text-4xl icon text-primary_foreground/100 bg-primary_background/60";
 
   const controls = Box({
     className: "min-h-2",
@@ -185,7 +187,7 @@ const MusicControls = () => {
   };
 
   const box = Box({
-    className: "bg-surface0/90 rounded-2xl p-sm",
+    className: "bg-overlay_background/90 rounded-2xl p-sm",
     vertical: true,
     vexpand: true,
     vpack: "end",
@@ -218,11 +220,11 @@ const Music = () => {
           const songArt = getAlbumArtPath(song.item);
 
           box.css = toCSS({
-            backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.6) 15%, rgba(34,34,34,0) 100%), url('${songArt}')`,
+            backgroundImage: `url('${songArt}')`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            minHeight: '280px'
+            minHeight: '240px'
           })
 
           startWidget.updateInfo({
@@ -244,7 +246,7 @@ const Music = () => {
     vertical: true,
     startWidget,
     endWidget,
-    className: "bg-surface0/100 p-sm rounded-tl-6",
+    className: "bg-surface_background/100 pa-4 rounded-tl-6 rounded-b-6",
   });
 };
 
@@ -282,7 +284,6 @@ ShowPowerMode.connect("changed", () => {
 
 const UpNext = () => {
   return Box({
-    className: "rounded-xl mx-4 my-4",
     vertical: true,
     connections: [
       [
@@ -307,11 +308,11 @@ const UpNext = () => {
     spacing: 8,
     children: Array(10).fill(0).map((_, idx) =>
       Box({
-        className: "bg-surface0/80 rounded-lg pa-3",
+        className: "bg-overlay_background/40 rounded-lg pa-3",
         hexpand: true,
         children: [
           Box({
-            className: "bg-surface0/100 rounded-lg min-h-10 min-w-10",
+            className: "bg-overlay_background/100 rounded-lg min-h-10 min-w-10",
           }),
           Box({
             vertical: true,
@@ -324,7 +325,7 @@ const UpNext = () => {
                 label: `Title`,
               }),
               Label({
-                className: "text-md text-subtext0/80",
+                className: "text-md text-subtle/80",
                 xalign: 0,
                 truncate: 'end',
                 label: `Artist`,
@@ -333,7 +334,7 @@ const UpNext = () => {
           }),
           Box({ hexpand: true }),
           Button({
-            className: "icon text-2xl px-4 py-2 ml-4",
+            className: "icon text-2xl px-4 py-2 ml-4 bg-overlay_background/60 text-primary_foreground/100",
             child: Label("󰒬"),
             onClicked: () => {
               for (let i = 0; i <= idx; i++) {
@@ -349,12 +350,12 @@ const UpNext = () => {
 
 export const Right = () => {
   const content = Box({
-    className: "bg-mantle/60 rounded-l-6 my-4 min-w-48",
+    className: "bg-base_background/60 rounded-l-6 min-w-48 my-2",
     vertical: true,
     children: [
       Music(),
       Scrollable({
-        className: "min-h-100",
+        className: "min-h-100 ma-3 pa-3 bg-surface_background/60 rounded-4",
         vscroll: "automatic",
         hscroll: "never",
         vexpand: true,

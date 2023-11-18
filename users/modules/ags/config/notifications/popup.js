@@ -11,7 +11,7 @@ const NotificationIcon = (
         return Box({
             vpack: 'start',
             hexpand: false,
-            className: 'rounded-xl mr-2 min-w-18 min-h-18 bg-mantle/100',
+            className: 'rounded-xl mr-2 min-w-18 min-h-18 bg-overlay_background/100',
             css: toCSS({
                 backgroundImage: `url('${image}')`,
                 backgroundSize: 'contain',
@@ -65,8 +65,10 @@ export const Notification = notification => EventBox({
     vexpand: false,
     child: Box({
         vertical: true,
-        style: 'box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);',
-        className: 'mb-4 rounded-xl bg-mantle/100',
+        css: toCSS({
+          boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.5)'
+        }),
+        className: 'mb-4 rounded-xl bg-overlay_background/100',
         children: [
             Box({
                 children: [

@@ -57,17 +57,17 @@ export const Images = () => {
 
 export const Left = () => {
   const content = Box({
-    className: "bg-mantle/60 rounded-r-6 my-4 min-w-48",
+    className: "bg-base_background/60 rounded-r-6 min-w-48 my-2",
     vertical: true,
     spacing: 8,
     children: [
       Calendar({
         showDayNames: false,
         showHeading: true,
-        className: "rounded-rt-6 border-none",
+        className: "rounded-rt-6 bg-surface_background/60 border-none",
       }),
       Scrollable({
-        className: "min-h-100",
+        className: "min-h-100 ma-3 mt-0 pa-3 bg-surface_background/60 rounded-4",
         vscroll: "automatic",
         hscroll: "never",
         vexpand: true,
