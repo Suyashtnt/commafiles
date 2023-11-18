@@ -509,8 +509,14 @@ $env.config = {
   ]
 }
 
+def --env get-env [name] { $env | get $name }
+def --env set-env [name, value] { load-env { $name: $value } }
+def --env unset-env [name] { hide-env $name }
+
+let null_completer = {|spans: list<string>| null }
+
 let zoxide_completer = {|spans: list<string>|
-    $spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
+  $spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD } | if ($in | default [] | is-empty) { null } else { $in }
 }
 
 let fish_completer = {|spans: list<string>|
@@ -520,26 +526,29 @@ let fish_completer = {|spans: list<string>|
     | if ($in | default [] | is-empty) { null } else { $in }
 }
 
-def --env get-env [name] { $env | get $name }
-def --env set-env [name, value] { load-env { $name: $value } }
-def --env unset-env [name] { hide-env $name }
-
 let carapace_completer = {|spans: list<string>|
-  carapace $spans.0 nushell $spans | from json
+  carapace $spans.0 nushell $spans | from json | if ($in | default [] | is-empty) { null } else { $in }
 }
 
 let specialized_completer = {|spans: list<string>|
-    {
-      # zoxide alias
-      z: $zoxide_completer
-
-      # zoxide alias
-      zi: $zoxide_completer
-    }  | get -i $spans.0 |
-    | if ($in == null) { null } else { do $in $spans }
+    match $spans.0 {
+      __zoxide_z => $zoxide_completer
+      __zoxide_zi => $zoxide_completer
+      _ => $null_completer
+    } | do $in $spans
 }
 
 let multiple_completers = {|spans: list<string>|
+  let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
+
+  let spans = if $expanded_alias != null {
+      $spans
+      | skip 1
+      | prepend ($expanded_alias | split row ' ')
+  } else {
+      $spans
+  }
+
   let specialized_completer_result = do $specialized_completer $spans
   if $specialized_completer_result != null {
     return $specialized_completer_result
@@ -554,11 +563,12 @@ let multiple_completers = {|spans: list<string>|
   if $fish_completer_result != null {
     return $fish_completer_result
   }
+
+  $null_completer
 }
 
 $env.config.completions.external = {
   enable: true
-  max_results: 100
   completer: $multiple_completers
 }
 
