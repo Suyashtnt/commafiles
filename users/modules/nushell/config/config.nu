@@ -120,7 +120,7 @@ let catppuccin = {
 }
 
 # Regenerate with `run-external --redirect-stdout "nix" "run" "nixpkgs#vivid" "--" "generate" "catppuccin-mocha" | str trim | wl-copy`
-$env.LS_COLORS = (open ~/commafiles/users/modules/shell/config/ls-colors | str trim)
+$env.LS_COLORS = (open ~/commafiles/users/modules/nushell/config/ls-colors | str trim)
 
 let stheme = $catppuccin.mocha
 

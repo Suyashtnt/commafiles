@@ -14,19 +14,24 @@
     ezModules.hyprland
     ezModules.openrgb
     ezModules.playerctl
-    ezModules.shell
     ezModules.swaylock
     ezModules.syncthing
     ezModules.xdg
-
     ezModules.ags
-    ezModules.kitty
     ezModules.neofetch
     ezModules.neovim
     ezModules.obs
     ezModules.spotify
     ezModules.vscode
     ezModules.webcord
+
+    ezModules.shell
+    ezModules.nushell
+
+    ezModules.terminal
+    ezModules.kitty
+
+    ezModules.theme
   ];
 
   home = {

@@ -8,6 +8,8 @@
     fish # nushell completion partly relies on it
   ];
 
+  tntman.home.shell.executable = "${pkgs.nushell}/bin/nu";
+
   programs = {
     direnv = {
       enable = true;
@@ -53,7 +55,7 @@
               then let
                 path = lib.strings.removePrefix "$XCURSOR_PATH$\{XCURSOR_PATH:+:}" value;
               in ''$env.${name} = ($env.${name} | split row (char esep) | append "${path}")''
-              else ''$env.${name} = ${toString value}''
+              else ''$env.${name} = "${toString value}"''
           )
           envVars;
 

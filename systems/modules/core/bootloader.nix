@@ -1,12 +1,7 @@
 {
   pkgs,
-  inputs,
   ...
-}: let
-  catppuccin-plymouth-mocha = pkgs.catppuccin-plymouth.override {
-    variant = "mocha";
-  };
-in {
+}: {
   boot = {
     loader = {
       grub = {
@@ -14,7 +9,6 @@ in {
         efiSupport = true;
         device = "nodev";
         useOSProber = true;
-        theme = inputs.grub-theme + "/src/catppuccin-mocha-grub-theme";
       };
       efi = {
         canTouchEfiVariables = true;
@@ -30,9 +24,6 @@ in {
 
     plymouth = {
       enable = true;
-      logo = ./nix.png;
-      theme = "catppuccin-mocha";
-      themePackages = [catppuccin-plymouth-mocha];
     };
   };
 }

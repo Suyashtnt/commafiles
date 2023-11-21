@@ -15,7 +15,7 @@ const ImageSelector = ({
   imagePath,
 }) =>
   Button({
-    className: "rounded-xl pa-0",
+    className: "rounded-xl pa-0 border-none",
     onClicked: () =>
       execAsync(
         `swww img -t wave --transition-angle 30 --transition-bezier 0.41,0.26,0.98,1 --transition-step 180 --transition-fps 60 --transition-duration 1.2 ${imagePath}`,
@@ -64,7 +64,7 @@ export const Left = () => {
       Calendar({
         showDayNames: false,
         showHeading: true,
-        className: "rounded-rt-6 bg-surface_background/60 border-none",
+        className: "rounded-rt-6 bg-surface_background/60 border-none text-surface_foreground/100",
       }),
       Scrollable({
         className: "min-h-100 ma-3 mt-0 pa-3 bg-surface_background/60 rounded-4",

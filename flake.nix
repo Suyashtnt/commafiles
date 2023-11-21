@@ -117,6 +117,12 @@
       flake = false;
     };
 
+    stylix = {
+      url = "github:bluskript/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     swww-src = {
       url = "github:Horus645/swww";
       flake = false;
@@ -158,6 +164,7 @@
         globalArgs = {
           inherit inputs;
           inherit (self) packages;
+          wallpapers = ./wallpapers;
         };
       };
     };

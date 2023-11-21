@@ -1,9 +1,8 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
-}:
+}@args:
 with lib; let
   mkService = lib.recursiveUpdate {
     Unit.PartOf = ["graphical-session.target"];
@@ -46,7 +45,7 @@ in {
     xwayland.enable = true;
     systemd.enable = true;
 
-    extraConfig = builtins.readFile ./hyprland.conf;
+    extraConfig = import ./hyprland.conf.nix args;
   };
 
   services.gammastep = {

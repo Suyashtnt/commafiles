@@ -32,7 +32,11 @@ const Workspaces = () => {
             const active = Hyprland.active.workspace.id === i;
             // @ts-ignore
             const occupied = Hyprland.getWorkspace(i)?.windows > 0 && !active;
-            btn.className = `${baseClasses} ${occupied ? 'bg-overlay_background/100' : ''} ${active ? 'bg-primary_foreground/100' : ''}`;
+
+            const colour  = active ? 'bg-primary_foreground/100' 
+            : occupied ? 'bg-subtle_background/100' : 'bg-overlay_background/100';
+
+            btn.className = `${baseClasses} ${colour}`;
         }]],
     })),
   })

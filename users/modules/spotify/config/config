@@ -24,8 +24,7 @@ channels = mono
 [smoothing]
 monstercat = 1
 waves = 1
-
-noise_reduction = 0.30
+noise_reduction = 30
 
 [eq]
 1 = 2 # bass
