@@ -4,7 +4,7 @@
     settings = {
       background.path = "${wallpapers}/Particles.png";
       GTK = {
-        theme_name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+        theme_name = "Adw-gtk3";
         icon_theme_name = "Papirus-Dark";
         font_name = "Inter 13";
         cursor_theme_name = "Catppuccin-Mocha-Lavender-Cursors";
