@@ -10,9 +10,12 @@
     ezModules.git
     ezModules.kitty
     ezModules.neofetch
-    ezModules.shell
+    ezModules.nushell
     ezModules.syncthing
     ezModules.xdg
+
+    ezModules.terminal
+    ezModules.shell
   ];
 
   home = {
