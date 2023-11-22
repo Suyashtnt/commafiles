@@ -9,11 +9,9 @@
 
       hosts = {
         GAMER-PC = {
-          arch = "x86_64";
           userHomeModules = ["tntman"];
         };
         tau = {
-          arch = "aarch64";
           userHomeModules = ["tau"];
         };
       };

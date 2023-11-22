@@ -6,6 +6,7 @@
     initialPassword = "password"; # Change this with passwd
     shell = pkgs.nushell;
   };
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   networking.hostName = "GAMER-PC";
 

@@ -4,6 +4,7 @@
   sdImage.compressImage = false;
   console.keyMap = "us";
   nixpkgs.config.allowUnsupportedSystem = true;
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   networking.hostName = "tau";
   networking.wireless.enable = false;
