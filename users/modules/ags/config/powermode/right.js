@@ -13,7 +13,7 @@ import {
   toCSS,
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
-import { ShowPowerMode } from "./variables.js";0
+import { ShowPowerMode } from "./variables.js";
 
 const { execAsync, exec } = Utils
 
@@ -46,18 +46,18 @@ const getAlbumArtPath = (/** @type {{ album: { images: { url: string; }[]; }; }}
 
 const MusicHeader = () => {
   const box = Box({
-    className: "bg-overlay_background/90 rounded-2xl p-sm",
+    class_name: "bg-overlay_background/90 rounded-2xl p-sm",
     hexpand: false,
     vpack: "start",
     vertical: true,
     children: [
       Label({
-        className: "text-2xl text-bold text-primary_foreground/100",
+        class_name: "text-2xl text-bold text-primary_foreground/100",
         wrap: true,
         label: "No title",
       }),
       Label({
-        className: "text-lg",
+        class_name: "text-lg",
         wrap: true,
         label: "No artist",
       }),
@@ -75,7 +75,7 @@ const MusicHeader = () => {
 const MusicProgress = () => {
   const progressBar = Slider({
     hexpand: true,
-    drawValue: false,
+    draw_value: false,
     onChange: ({ value }) => {
       console.log(`Trying to change position to ${value} without player`);
     },
@@ -86,7 +86,7 @@ const MusicProgress = () => {
 
   const progressText = Box({
     hexpand: true,
-    className: "text-sm mx-2 mb-0",
+    class_name: "text-sm mx-2 mb-0",
     children: [
       Label({ label: "0:00" }),
       Box({ hexpand: true }),
@@ -97,7 +97,7 @@ const MusicProgress = () => {
   progressBar.updatePlayer = (player) => {
     if (!player) return;
 
-    progressBar.onChange = ({ value }) => {
+    progressBar.on_change = ({ value }) => {
       player.position = value;
     };
 
@@ -146,28 +146,28 @@ const MusicControls = () => {
   const buttonCss = "rounded-2xl mx-md min-h-12 min-w-12 text-4xl icon text-primary_foreground/100 bg-primary_background/60";
 
   const controls = Box({
-    className: "min-h-2",
+    class_name: "min-h-2",
     spacing: 16,
     vpack: "end",
     hexpand: true,
     children: [
       Button({
         child: Label("󰒮"),
-        className: buttonCss,
+        class_name: buttonCss,
         hexpand: true,
-        onClicked: () => {},
+        on_clicked: () => {},
       }),
       Button({
         child: Label("󰐎"),
-        className: buttonCss,
+        class_name: buttonCss,
         hexpand: true,
-        onClicked: () => {},
+        on_clicked: () => {},
       }),
       Button({
         child: Label("󰒭"),
-        className: buttonCss,
+        class_name: buttonCss,
         hexpand: true,
-        onClicked: () => {},
+        on_clicked: () => {},
       }),
     ],
   });
@@ -175,19 +175,19 @@ const MusicControls = () => {
   const progress = MusicProgress();
 
   controls.updatePlayer = (player) => {
-    controls.children[0].onClicked = () => player?.previous();
+    controls.children[0].on_clicked = () => player?.previous();
 
     controls.children[1].child.label = player?.playBackStatus === "Playing"
       ? "󰏤"
       : "󰐊";
 
-    controls.children[1].onClicked = () => player?.playPause();
+    controls.children[1].on_clicked = () => player?.playPause();
 
-    controls.children[2].onClicked = () => player?.next();
+    controls.children[2].on_clicked = () => player?.next();
   };
 
   const box = Box({
-    className: "bg-overlay_background/90 rounded-2xl p-sm",
+    class_name: "bg-overlay_background/90 rounded-2xl p-sm",
     vertical: true,
     vexpand: true,
     vpack: "end",
@@ -244,9 +244,9 @@ const Music = () => {
       }],
     ],
     vertical: true,
-    startWidget,
-    endWidget,
-    className: "bg-surface_background/100 pa-4 rounded-tl-6 rounded-b-6",
+    start_widget: startWidget,
+    end_widget: endWidget,
+    class_name: "bg-surface_background/100 pa-4 rounded-tl-6 rounded-b-6",
   });
 };
 
@@ -289,7 +289,7 @@ const UpNext = () => {
       [
         currentQueue,
         (box) => {
-          currentQueue.value.slice(0, 10).forEach(({ name, artists, coverArt }, idx) => {
+          /** @type {Array} */ (currentQueue.value).slice(0, 10).forEach(({ name, artists, coverArt }, idx) => {
             const coverArtBox = box.children[idx].children[0];
             coverArtBox.css = toCSS({
               backgroundImage: `url('${coverArt}')`,
@@ -299,6 +299,7 @@ const UpNext = () => {
             })
 
             const songInfo = box.children[idx].children[1]
+
             songInfo.children[0].label = name;
             songInfo.children[1].label = artists;
           })
@@ -308,24 +309,24 @@ const UpNext = () => {
     spacing: 8,
     children: Array(10).fill(0).map((_, idx) =>
       Box({
-        className: "bg-overlay_background/40 rounded-lg pa-3",
+        class_name: "bg-overlay_background/40 rounded-lg pa-3",
         hexpand: true,
         children: [
           Box({
-            className: "bg-overlay_background/100 rounded-lg min-h-10 min-w-10",
+            class_name: "bg-overlay_background/100 rounded-lg min-h-10 min-w-10",
           }),
           Box({
             vertical: true,
-            className: "mx-2",
+            class_name: "mx-2",
             children: [
               Label({
-                className: "text-lg mb-1",
+                class_name: "text-lg mb-1",
                 xalign: 0,
                 truncate: 'end',
                 label: `Title`,
               }),
               Label({
-                className: "text-md text-subtle/80",
+                class_name: "text-md text-subtle/80",
                 xalign: 0,
                 truncate: 'end',
                 label: `Artist`,
@@ -334,9 +335,9 @@ const UpNext = () => {
           }),
           Box({ hexpand: true }),
           Button({
-            className: "icon text-2xl px-4 py-2 ml-4 bg-overlay_background/60 text-primary_foreground/100",
+            class_name: "icon text-2xl px-4 py-2 ml-4 bg-overlay_background/60 text-primary_foreground/100",
             child: Label("󰒬"),
-            onClicked: () => {
+            on_clicked: () => {
               for (let i = 0; i <= idx; i++) {
                 Mpris.getPlayer("spotify_player")?.next();
               }
@@ -350,12 +351,12 @@ const UpNext = () => {
 
 export const Right = () => {
   const content = Box({
-    className: "bg-base_background/60 rounded-l-6 min-w-48 my-2",
+    class_name: "bg-base_background/60 rounded-l-6 my-2",
     vertical: true,
     children: [
       Music(),
       Scrollable({
-        className: "min-h-100 ma-3 pa-3 bg-surface_background/60 rounded-4",
+        class_name: "min-h-100 ma-3 pa-3 bg-surface_background/60 rounded-4",
         vscroll: "automatic",
         hscroll: "never",
         vexpand: true,
@@ -366,10 +367,13 @@ export const Right = () => {
 
   return Window({
     name: "powermode-right",
-    className: "bg-transparent",
+    class_name: "bg-transparent",
     anchor: ["top", "bottom", "right"],
     visible: true,
     exclusivity: "exclusive",
-    child: SetupRevealer("slide_left", content, true),
+    child: SetupRevealer("slide_left", content, {
+      width: 320,
+      height: "max",
+    } ,true),
   });
 };

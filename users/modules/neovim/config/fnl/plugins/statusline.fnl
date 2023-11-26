@@ -11,7 +11,7 @@
  (tset vim.opt :cmdheight 0)
 
  ;; basic statusline
- (local mocha ((. (require :catppuccin.palettes) :get_palette) :mocha))                                                                                                                                                                        	
+ (local mocha ((. (require :catppuccin.palettes) :get_palette) :mocha))
  (statusline.setup mocha))
 
 [{ 1 :windwp/windline.nvim

@@ -8,24 +8,23 @@ import {
   Utils,
   SystemTray,
   Icon,
-  GLib,
   Variable,
-  ProgressBar
+  ProgressBar,
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 
-const Workspaces = () => {
+const StartModule = () => {
   const baseClasses = "rounded-full text-0 ma-2 py-0 px-[5px]"
 
   return Box({
-    className: 'bg-surface_background/60 rounded-full ma-2',
+    class_name: 'bg-surface_background/60 rounded-full ma-2',
     children: Array
       .from({ length: 10 }, (_, i) => i + 1)
       .map(i => Button({
-        onClicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+        on_clicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
         child: Label({
             label: `${i}`,
-            className: baseClasses,
+            class_name: baseClasses,
             vpack: 'center',
         }),
         connections: [[Hyprland, btn => {
@@ -36,29 +35,27 @@ const Workspaces = () => {
             const colour  = active ? 'bg-primary_foreground/100' 
             : occupied ? 'bg-subtle_background/100' : 'bg-overlay_background/100';
 
-            btn.className = `${baseClasses} ${colour}`;
+            btn.class_name = `${baseClasses} ${colour}`;
         }]],
     })),
   })
 }
 
-const Clock = () => Label({
-    className: 'text-2xl ma-2 py-2 px-4 bg-surface_background/60 rounded-full',
+const CenterModule = () => {
+  return Label({
+    class_name: "text-surface_foreground/100 text-2xl rounded-full ma-2 bg-surface_background/60 px-3 py-1",
+    label: "Sample text",
     vpack: 'center',
-    connections: [[1000, label =>
-         label.label = GLib.DateTime.new_now_local().format("%H:%M:%S · %A %d/%m")
-    ]],
-})
+  })
+}
 
 const longitude = 28.0436
 const latitude = -26.2023
 const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weathercode,is_day&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`
 
-/** @type {{ value: import("./weatherSchema.js").WeatherSchema }} */
 const WeatherInfo = Variable({}, {
   poll: [1000 * 60 * 60, `curl -s ${url}`, (out) => JSON.parse(out)],
 })
-
 
 const Weather = () => {
   const currentTemperature = Label({
@@ -70,7 +67,7 @@ const Weather = () => {
 
   const temperatureSlider = ProgressBar({
     value: 0,
-    className: "min-w-24 mx-2",
+    class_name: "min-w-24 mx-2",
     vpack: 'center',
     connections: [[WeatherInfo, slider => {
       const { current, daily } = WeatherInfo.value
@@ -103,7 +100,7 @@ const Weather = () => {
 
 
   const weatherIcon = Icon({
-    className: 'bg-transparent mx-2',
+    class_name: 'bg-transparent mx-2',
     size: 24,
     vpack: 'center',
     connections: [[WeatherInfo, icon => {
@@ -178,7 +175,7 @@ const Weather = () => {
   })
 
   return Box({
-    className: 'bg-transparent rounded-full my-2 mx-4',
+    class_name: 'bg-transparent rounded-full my-2 mx-4',
     vertical: false,
     hexpand: true,
     children: [
@@ -189,22 +186,22 @@ const Weather = () => {
   })
 }
 
-const SysTrayItem = item => Button({
+const SysTrayItem = (item) => Button({
     child: Icon({ 
       binds: [['icon', item, 'icon']],
       size: 24,
       hpack: 'center',
       vpack: 'center',
-      className: 'bg-transparent'
+      class_name: 'bg-transparent'
     }),
-    className: "ma-2 rounded-full bg-transparent",
+    class_name: "ma-2 rounded-full bg-transparent",
     binds: [['tooltip-markup', item, 'tooltip-markup']],
-    onPrimaryClick: (_, event) => item.activate(event),
-    onSecondaryClick: (_, event) => item.openMenu(event),
+    on_primary_click: (_, event) => item.activate(event),
+    on_secondary_click: (_, event) => item.openMenu(event),
 });
 
-const Right = () => Box({
-    className: 'rounded-full bg-surface_background/60 ma-2',
+const EndModule = () => Box({
+    class_name: 'rounded-full bg-surface_background/60 ma-2',
     binds: [['children', SystemTray, 'items', item => [
       Weather(),
       Box({ hexpand: true }),
@@ -214,20 +211,23 @@ const Right = () => Box({
 
 export const Top = () => {
   const content = CenterBox({
-    className: "bg-base_background/60 rounded-b-6 mx-4",
+    class_name: "bg-base_background/60 rounded-b-6 mx-4",
     vexpand: true,
     hexpand: true,
-    startWidget: Workspaces(),
-    centerWidget: Clock(),
-    endWidget: Right()
+    start_widget: StartModule(),
+    center_widget: CenterModule(),
+    end_widget: EndModule()
   });
 
   return Window({
     name: "powermode-top",
-    className: "bg-transparent",
+    class_name: "bg-transparent",
     anchor: ["top", "left", "right"],
     visible: true,
     exclusivity: "exclusive",
-    child: SetupRevealer("slide_down", content),
+    child: SetupRevealer("slide_down", content, {
+      width: "max",
+      height: 60
+    }),
   });
 };

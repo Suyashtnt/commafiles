@@ -3,29 +3,107 @@ import { Top } from "./top.js";
 import { Bottom } from "./bottom.js";
 import { Left } from "./left.js";
 import { Right } from "./right.js";
-import { Revealer, Box, toCSS } from "../imports.js";
+import { Revealer, Box, toCSS, Gtk, AgsWidget, GObject, Service } from "../imports.js";
+
+/**
+ * @template {typeof Gtk.Widget} T
+ * @param {T} Widget
+ */
+function createCtor(Widget) {
+    return (/** @type {ConstructorParameters<T>} */ ...props) => /** @type {InstanceType<T>} */ (new Widget(...props))
+}
+
+/**
+ * @typedef {number | 'max'} GtkSize
+ */
+
+/**
+ * @typedef  {import("types/widgets/widget.js").BaseProps<ForceSizedClass> & Gtk.Bin.ConstructorProperties & { width?: GtkSize, height?: GtkSize }} ForceSizedProps
+ */
+
+class ForceSizedClass extends AgsWidget(Gtk.Bin, "ForceSized") {
+  static {
+    GObject.registerClass({
+      GTypeName: 'ForceSized',
+      CssName: 'force-sized',
+      Properties: {
+        'width': Service.pspec('width', 'int', 'rw'),
+        'height': Service.pspec('height', 'int', 'rw')
+      }
+    }, this)
+  }
+
+  /** @returns {GtkSize} */
+  get height() { return this._get('height') }
+  /** @param {GtkSize} v */
+  set height(v) { 
+    if (v === 'max') {
+      this.vexpand = true
+    } else {
+      this._set('height', v) 
+    }
+  }
+
+  /** @returns {GtkSize} */
+  get width() { return this._get('width') }
+  /** @param {GtkSize} v */
+  set width(v) { 
+    if (v === 'max') {
+      this.hexpand = true
+    } else {
+      this._set('width', v) 
+    }
+  }
+
+  constructor(/** @type ForceSizedProps */ props = {}) {
+    super(props)
+
+    if (props.width === 'max') {
+      this.hexpand = true
+    }
+
+    if (props.height === 'max') {
+      this.vexpand = true
+    }
+  }
+
+  vfunc_get_preferred_height() {
+    return /** @type {[number, number]} */ ([this.height, this.height])
+  }
+
+  vfunc_get_preferred_width() {
+    return /** @type {[number, number]} */ ([this.width, this.width])
+  }
+}
+
+export const ForceSized = createCtor(ForceSizedClass)
 
 export const SetupRevealer = (
-  /** @type {string} */ transition,
-  /** @type {any} */ content,
+  /** @type {NonNullable<Parameters<typeof Revealer>[0]>['transition']} */ transition,
+  /** @type {Gtk.Widget} */ content,
+  /** @type {{width: GtkSize, height: GtkSize}} */ sizing,
   isMusic = false
 ) => Box({
   css: toCSS({
     padding: '1px'
   }),
   child: Revealer({
-    revealChild: false,
+    reveal_child: false,
     transition,
-    connections: [[ShowPowerMode, (/** @type {InstanceType<Revealer>} */ revealer) => {
+    child: ForceSized({
+      width: sizing.width,
+      height: sizing.height,
+      child: content
+    }),
+    connections: [[ShowPowerMode, (revealer) => {
       if (isMusic) {
-        revealer.revealChild = ShowPowerMode.value.powerMode || ShowPowerMode.value.musicOnly
+        revealer.reveal_child = ShowPowerMode.value.powerMode || ShowPowerMode.value.musicOnly
       } else {
-        revealer.revealChild = ShowPowerMode.value.powerMode
+        revealer.reveal_child = ShowPowerMode.value.powerMode
       }
 
-      revealer.className = revealer.revealChild ? 'bg-mantle/100' : ''
+      revealer.class_name = revealer.reveal_child ? 'bg-mantle/100' : ''
     }]],
-    child: content
   }),
 })
 

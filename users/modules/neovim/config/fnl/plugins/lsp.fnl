@@ -5,7 +5,6 @@
   (local coq_3p (require :coq_3p))
   (local inc_rename (require :inc_rename))
   (local dressing (require :dressing))
-  (local aerial (require :aerial))
   (local ufo (require :ufo))
   (local lspsaga (require :lspsaga))
   (local lsp-format (require :lsp-format))
@@ -71,7 +70,6 @@
   (ufo.setup {:fold_virt_text_handler handler})
   ;; extra
   (lspsaga.setup)
-  (aerial.setup)
   (inc_rename.setup {:input_buffer_type :dressing})
   (dressing.setup {:input {:override (fn [conf]
                                        (set conf.col (- 1))
@@ -83,6 +81,25 @@
   (lsp-format.setup)
   (coq_3p [{:src :copilot :short_name :COP :accept_key :<c-f>}])
   (crates.setup {:src {:coq {:enabled true :name :crates}}}))
+
+(local wkeys #(let [ufo (require :ufo)]
+                {:zR [#(ufo.openAllFolds) "Open all folds"]
+                 :zM [#(ufo.closeAllFolds) "Close all folds"]
+                 :<A-d> {1 "<cmd>Lspsaga term_toggle<cr>" 
+                         2 "Toggle terminal" 
+                         :mode [:n :t]}
+                 :g {
+                       :name "+LSP"
+                       :r ["<cmd>Lspsaga finder<CR>" "LSP Finder"]
+                       :d ["<cmd>Lspsaga peek_definition<CR>" "LSP Preview Definition"]
+                       :D ["<cmd>Lspsaga goto_definition<CR>" "LSP Go To Definition"]
+                       :t ["<cmd>Lspsaga peek_type_definition<CR>" "LSP Preview Type"]
+                       :T ["<cmd>Lspsaga goto_type_definition<CR>" "LSP Go To Type"]}
+                 :K ["<cmd>Lspsaga hover_doc<CR>" "LSP Hover Doc"]
+                 :<leader>a ["<cmd>Lspsaga code_action<CR>" "LSP Code Action"]
+                 :<leader>r {1 #(.. ":IncRename " (vim.fn.expand :<cword>)) 2 "LSP Code Action" :expr true}
+                 "]e" ["<cmd>Lspsaga diagnostic_jump_next<CR>" "LSP Next Diagnostic"]
+                 "[e" ["<cmd>Lspsaga diagnostic_jump_prev<CR>" "LSP Prev Diagnostic"]}))
 
 [{1 :neovim/nvim-lspconfig
   :dependencies [:ms-jpq/coq_nvim
@@ -98,12 +115,12 @@
                  :nvim-treesitter/nvim-treesitter
                  :smjonas/inc-rename.nvim
                  :stevearc/dressing.nvim
-                 :stevearc/aerial.nvim
                  :ray-x/lsp_signature.nvim
                  :kevinhwang91/nvim-ufo
                  :lukas-reineke/lsp-format.nvim
                  :kevinhwang91/promise-async]
-  : config}
+  : config
+  : wkeys}
  {1 :j-hui/fidget.nvim
   :opts {:notification {:override_vim_notify true
                         :window {:winblend 90 :border :rounded}}}}]

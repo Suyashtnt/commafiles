@@ -9,6 +9,8 @@ interface Config {
         [key: string]: number;
     };
     maxStreamVolume: number;
+    onWindowToggled?: (windowName: string, visible: boolean) => void;
+    onConfigParsed?: () => void;
 }
 export declare class App extends Gtk.Application {
     private _dbus;

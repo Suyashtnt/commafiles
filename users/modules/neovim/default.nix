@@ -123,7 +123,13 @@
     }
     // custom-neovide-name);
 in {
-  home.packages = with pkgs; [zig fzf custom-neovide]; # zig for treesitter, fzf for telescope
+  home.packages = with pkgs; [
+    zig # tree-sitter
+    fzf # telescope
+    ripgrep # telescope
+    custom-neovide # beautiful ui
+    universal-ctags # coq_nvim
+  ];
 
   programs.neovim = {
     enable = true;

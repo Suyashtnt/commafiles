@@ -1,9 +1,11 @@
 (tset vim.wo :relativenumber true)
 (tset vim.wo :number true)
-(tset vim.opt :guifont "ComicCodeLigatures Nerd Font:h12")
-(tset vim.opt :mouse "a")
+(tset vim.opt :guifont
+      "Comic Code Ligatures,ComicCodeLigatures Nerd Font,JetBrainsMono Nerd Font Mono:h13")
+
+(tset vim.opt :mouse :a)
 (tset vim.opt :clipboard :unnamedplus)
-(tset vim.opt :linespace -4)
+(tset vim.opt :linespace 1)
 
 ;; for nvim-ufo
 (tset vim.o :foldcolumn :1)
@@ -12,6 +14,7 @@
 (tset vim.o :foldenable true)
 
 (tset vim.g :maplocalleader " m")
+(tset vim.g :mapleader " ")
 
 (tset vim.g :coq_settings {:auto_start :shut-up})
 
@@ -28,15 +31,31 @@
 (tset vim.g :neovide_floating_blur_amount_y 10)
 
 (local plugins (require :plugins))
-(local plugins-folder (.. (vim.fn.stdpath "config") "/fnl/plugins"))
+(local plugins-folder (.. (vim.fn.stdpath :config) :/fnl/plugins))
 
 (when (vim.loop.fs_stat plugins-folder)
   (each [file (vim.fs.dir plugins-folder)]
     (set-forcibly! file (file:match "^(.*)%.fnl$"))
-                  
-    (table.insert plugins (require (.. :plugins. file)))))                                                                                                                          	
+    (let [plugin-spec (require (.. :plugins. file))]
+      (each [_ spec (ipairs plugin-spec)]
+        (table.insert plugins spec)))))
 
-(local lazy (require "lazy"))
-(lazy.setup plugins)
+(fn wrap-init [current-init wkeys]
+  (if current-init
+      (current-init))
+  (let [which-key (require :which-key)
+        wkeys (if (= (type wkeys) :function)
+                  (wkeys)
+                  wkeys)]
+    (if wkeys
+        (which-key.register wkeys))))
 
-(vim.api.nvim_cmd {:cmd :colorscheme :args [:catppuccin]} {})
+(fn wrap-wk [specs]
+  (each [_ spec (ipairs specs)]
+    (if spec.wkeys
+        (let [current-init spec.init]
+          (tset spec :init #(wrap-init current-init spec.wkeys)))))
+  specs)
+
+(local lazy (require :lazy))
+(lazy.setup (wrap-wk plugins))

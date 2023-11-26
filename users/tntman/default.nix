@@ -51,7 +51,7 @@
       blender # 3D modeling go brrr
       prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
-      inputs.camillemndn.packages.${pkgs.system}.zotero # reference manager go brrr
+      # inputs.camillemndn.packages.${pkgs.system}.zotero # reference manager go brrr https://github.com/camillemndn/nixos-config/issues/1
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
 
