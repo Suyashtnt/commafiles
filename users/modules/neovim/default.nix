@@ -123,23 +123,17 @@
     }
     // custom-neovide-name);
 in {
-  home.packages = with pkgs; [
-    zig # tree-sitter
-    fzf # telescope
-    ripgrep # telescope
-    custom-neovide # beautiful ui
-    universal-ctags # coq_nvim
+  home.packages = [
+    custom-neovide
   ];
 
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-nightly;
-    extraPackages = with pkgs; [tree-sitter nodejs ripgrep fd unzip];
+    extraPackages = with pkgs; [tree-sitter nodejs ripgrep fd unzip zig universal-ctags];
+    extraLuaConfig = builtins.readFile ./config/init.lua;
   };
 
-  xdg.configFile.nvim = {
-    source = ./config;
-
-    recursive = true;
-  };
+  xdg.configFile."nvim/lua".source = ./config/lua;
+  xdg.configFile."nvim/fnl".source = ./config/fnl;
 }

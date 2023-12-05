@@ -61,7 +61,9 @@ const Weather = () => {
   const currentTemperature = Label({
     connections: [[WeatherInfo, label => {
       const { current, current_units } = WeatherInfo.value
-        label.label = `${current.temperature_2m}${current_units.temperature_2m}`;
+      if(!current) return;
+
+      label.label = `${current.temperature_2m}${current_units.temperature_2m}`;
     }]]
   })
 
@@ -71,6 +73,7 @@ const Weather = () => {
     vpack: 'center',
     connections: [[WeatherInfo, slider => {
       const { current, daily } = WeatherInfo.value
+      if(!current) return;
 
       // get a 0-1 range between min and max (who said we would'nt be using this?)
       const min = daily.temperature_2m_min;
@@ -104,7 +107,9 @@ const Weather = () => {
     size: 24,
     vpack: 'center',
     connections: [[WeatherInfo, icon => {
-      const { current: { weathercode, is_day } } = WeatherInfo.value
+      const { current } = WeatherInfo.value
+      if (!current) return
+      const { weathercode, is_day } = current
 
       const dayIconSet = {
         [0]: 'weather-clear',

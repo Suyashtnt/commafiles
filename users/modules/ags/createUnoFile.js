@@ -28,6 +28,8 @@ const classesToYeet = [
   ".text-shadow",
   ".visible",
   ".static",
+  ".filter",
+  ".transition",
   ".truncate"
 ]
 

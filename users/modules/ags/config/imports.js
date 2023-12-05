@@ -15,6 +15,7 @@ export {
   Icon,
   Revealer,
   Calendar,
+  Entry,
   default as Widget,
 } from "resource:///com/github/Aylur/ags/widget.js"
 export { default as AgsWidget } from "resource:///com/github/Aylur/ags/widgets/widget.js"
@@ -25,6 +26,7 @@ export { default as Hyprland } from "resource:///com/github/Aylur/ags/service/hy
 export { default as SystemTray } from "resource:///com/github/Aylur/ags/service/systemtray.js"
 export { default as Variable } from "resource:///com/github/Aylur/ags/variable.js"
 export { default as Service } from "resource:///com/github/Aylur/ags/service.js"
+export { default as Applications } from "resource:///com/github/Aylur/ags/service/applications.js"
 
 export { default as App } from "resource:///com/github/Aylur/ags/app.js"
 

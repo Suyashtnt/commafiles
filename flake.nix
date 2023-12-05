@@ -26,8 +26,6 @@
       flake = false;
     };
 
-    camillemndn.url = "github:camillemndn/nixos-config";
-
     copilot-mode-src = {
       url = "github:zerolfx/copilot.el";
       flake = false;
@@ -142,6 +140,8 @@
       url = "github:catppuccin/xresources";
       flake = false;
     };
+
+    zotero-nix.url = "github:camillemndn/zotero-nix";
   };
 
   outputs = inputs @ {self, ...}:

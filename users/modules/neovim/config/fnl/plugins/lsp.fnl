@@ -4,7 +4,6 @@
   (local coq (require :coq))
   (local coq_3p (require :coq_3p))
   (local inc_rename (require :inc_rename))
-  (local dressing (require :dressing))
   (local ufo (require :ufo))
   (local lspsaga (require :lspsaga))
   (local lsp-format (require :lsp-format))
@@ -38,7 +37,8 @@
                                                   : settings
                                                   : capabilities}))))
   (rust-tools.setup {:server (coq.lsp_ensure_capabilities {:on_attach on-attach
-                                                           :settings {:rust-analyzer {:checkOnSave {:command :clippy}}}
+                                                           :settings {:rust-analyzer {:checkOnSave {:command :clippy}
+                                                                                      :cargo {:sysroot :discover}}}
                                                            : capabilities})})
   ;; ufo
 
@@ -70,11 +70,7 @@
   (ufo.setup {:fold_virt_text_handler handler})
   ;; extra
   (lspsaga.setup)
-  (inc_rename.setup {:input_buffer_type :dressing})
-  (dressing.setup {:input {:override (fn [conf]
-                                       (set conf.col (- 1))
-                                       (set conf.row 0)
-                                       conf)}})
+  (inc_rename.setup)
   (lspsaga.setup {:ui {:kind ((. (require :catppuccin.groups.integrations.lsp_saga)
                                  :custom_kind))
                        :border :rounded}})
@@ -114,7 +110,6 @@
                  :nvimdev/lspsaga.nvim
                  :nvim-treesitter/nvim-treesitter
                  :smjonas/inc-rename.nvim
-                 :stevearc/dressing.nvim
                  :ray-x/lsp_signature.nvim
                  :kevinhwang91/nvim-ufo
                  :lukas-reineke/lsp-format.nvim

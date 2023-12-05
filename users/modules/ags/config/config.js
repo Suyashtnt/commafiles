@@ -1,6 +1,7 @@
 import { SetupPowerMode } from "./powermode/index.js";
 import { App } from './imports.js'
 import { NotificationsPopup } from "./notifications/index.js";
+import { Launcher } from "./launcher/index.js";
 
 export default {
   notificationPopupTimeout: 5000, // milliseconds
@@ -8,5 +9,6 @@ export default {
   windows: [
     ...SetupPowerMode(),
     NotificationsPopup(),
+    Launcher()
   ],
 };

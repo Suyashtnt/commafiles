@@ -95,7 +95,6 @@ in ''
 
   # utils
   bind=SUPER,Q,exec,${config.tntman.home.terminal.executable}
-  bind=SUPER,D,exec,wofi --show drun
   bind=SUPERSHIFT,L,exec,swaylock
   bind=SUPERSHIFT,P,exec,nu -c 'spotify_player get key playback | from json | get item.external_urls.spotify | wl-copy; notify-send "copied current song to clipboard!"'
 
@@ -107,8 +106,12 @@ in ''
   # ags
   bind=SUPER,W,exec,ags -r 'togglePowerMode();'
   bind=SUPER,P,exec,ags -r 'toggleMusicOnly();'
+  bind=SUPER,D,exec,ags -r 'toggleAppLauncher();'
+
   layerrule = blur, powermode-.*
+  layerrule = blur, applauncher
   layerrule = ignorealpha 0.4, powermode-.*
+  layerrule = ignorealpha 0.4, applauncher
 
   bind=SUPER,left,movefocus,l
   bind=SUPER,right,movefocus,r
