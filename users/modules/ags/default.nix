@@ -8,6 +8,8 @@
   programs.ags = {
     enable = true;
 
+    extraPackages = [ pkgs.vte ];
+
     configDir = pkgs.stdenv.mkDerivation rec {
       name = "ags-config";
       src = ./.;

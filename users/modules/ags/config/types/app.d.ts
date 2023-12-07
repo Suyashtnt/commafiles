@@ -10,7 +10,7 @@ interface Config {
     };
     maxStreamVolume: number;
     onWindowToggled?: (windowName: string, visible: boolean) => void;
-    onConfigParsed?: () => void;
+    onConfigParsed?: (app: App) => void;
 }
 export declare class App extends Gtk.Application {
     private _dbus;
@@ -38,11 +38,12 @@ export declare class App extends Gtk.Application {
     addWindow(w: Gtk.Window): void;
     private _load;
     private _register;
-    RunJs(js: string): string;
+    RunJs(js: string, clientBusName?: string, clientObjPath?: string): void;
+    RunFile(file: string, bus?: string, path?: string): void;
     RunPromise(js: string, busName?: string, objPath?: string): void;
     ToggleWindow(name: string): string;
     Inspector(): void;
     Quit(): void;
 }
-declare const _default: App;
-export default _default;
+export declare const app: App;
+export default app;

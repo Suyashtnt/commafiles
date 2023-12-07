@@ -110,8 +110,10 @@ in ''
 
   layerrule = blur, powermode-.*
   layerrule = blur, applauncher
+  layerrule = blur, lyrics-terminal
   layerrule = ignorealpha 0.4, powermode-.*
   layerrule = ignorealpha 0.4, applauncher
+  layerrule = ignorealpha 0.4, lyrics-terminal
 
   bind=SUPER,left,movefocus,l
   bind=SUPER,right,movefocus,r

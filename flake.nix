@@ -19,7 +19,10 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    ags.url = "github:Aylur/ags";
+    ags = {
+     url = "github:Aylur/ags";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     btop-theme = {
       url = "github:catppuccin/btop";

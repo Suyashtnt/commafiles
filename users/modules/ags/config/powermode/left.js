@@ -28,8 +28,8 @@ const ImageSelector = ({
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minWidth: '380px',
-          minHeight: '180px'
+          minWidth: '280px',
+          minHeight: '118px'
       }),
       class_name: "min-h-38 rounded-xl",
     }),
@@ -122,7 +122,7 @@ const DateModule = () => {
     class_name: "rounded-rt-6 bg-transparent border-none",
     on_clicked: () => revealer.reveal_child = !revealer.reveal_child,
     child: Label({
-      class_name: "text-surface_foreground/100 text-2xl pt-[2px]",
+      class_name: "text-surface_foreground/100 text-xl pt-[2px]",
       label: "Date",
       vpack: 'center',
       connections: [[1000, label =>

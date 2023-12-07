@@ -8,7 +8,7 @@ export default class Service extends GObject.Object {
     }, properties?: {
         [prop: string]: [type?: PspecType, handle?: PspecFlag];
     }): void;
-    connect(signal: string | undefined, callback: (_: this, ...args: any[]) => void): number;
+    connect(signal: string | undefined, callback: (_: typeof this, ...args: any[]) => void): number;
     updateProperty(prop: string, value: unknown): void;
     changed(property: string): void;
 }

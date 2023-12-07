@@ -16,6 +16,7 @@
       "./node_modules/@girs"
     ],
     "skipLibCheck": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   }
 }

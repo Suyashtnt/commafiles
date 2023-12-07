@@ -150,3 +150,11 @@ declare module 'gi://GLib' {
     const exports: typeof import('node_modules/@girs/glib-2.0/glib-2.0')
     export = exports
 }
+declare module 'gi://Vte' {
+  const exports: typeof import('node_modules/@girs/vte-2.91/vte-2.91')
+  export = exports
+}
+declare module 'gi://Gdk' {
+    const exports: typeof import('node_modules/@girs/gdk-3.0/gdk-3.0')
+    export = exports
+}

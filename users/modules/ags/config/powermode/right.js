@@ -7,13 +7,29 @@ import {
   Scrollable,
   Slider,
   GLib,
+  Gdk,
   Utils,
   Variable,
   Window,
   toCSS,
+  Widget,
+  Revealer,
+  Vte,
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 import { ShowPowerMode } from "./variables.js";
+
+
+const Terminal = Widget.subclass(Vte.Terminal, "AgsVteTerminal")
+
+/** @type {Vte.Terminal} */
+const terminal = Terminal({
+  class_name: "bg-surface_background/60 rounded-4 ma-2",
+  name: "lyrics-terminal"
+})
+const bgCol = new Gdk.RGBA()
+bgCol.parse("rgba(9, 8, 27, 0.8)")
+terminal.set_color_background(bgCol)
 
 const { execAsync, exec } = Utils
 
@@ -283,13 +299,16 @@ ShowPowerMode.connect("changed", () => {
 
 
 const UpNext = () => {
-  return Box({
+  const queue = Box({
     vertical: true,
     connections: [
       [
         currentQueue,
         (box) => {
-          /** @type {Array} */ (currentQueue.value).slice(0, 10).forEach(({ name, artists, coverArt }, idx) => {
+          /** @type {Array} */ (currentQueue.value).slice(1, 10).forEach(({ name, artists, coverArt }, idx) => {
+
+            /** @type {ReturnType<Box>} */
+            // @ts-expect-error this is fine
             const coverArtBox = box.children[idx].children[0];
             coverArtBox.css = toCSS({
               backgroundImage: `url('${coverArt}')`,
@@ -298,6 +317,8 @@ const UpNext = () => {
               backgroundPosition: 'center'
             })
 
+            /** @type {ReturnType<Box>} */
+            // @ts-expect-error this is fine
             const songInfo = box.children[idx].children[1]
 
             songInfo.children[0].label = name;
@@ -307,7 +328,8 @@ const UpNext = () => {
       ],
     ],
     spacing: 8,
-    children: Array(10).fill(0).map((_, idx) =>
+    class_name: "pa-[1px]",
+    children: Array(9).fill(0).map((_, idx) =>
       Box({
         class_name: "bg-overlay_background/40 rounded-lg pa-3",
         hexpand: true,
@@ -347,7 +369,121 @@ const UpNext = () => {
       })
     ),
   });
+
+  const revealer = Revealer({
+    reveal_child: false,
+    transition: "slide_down",
+    transition_duration: 300,
+    child: Scrollable({
+      class_name: "min-h-60 ma-3 pa-3 bg-surface_background/60 rounded-4",
+      vscroll: "automatic",
+      hscroll: "never",
+      vexpand: true,
+      child: queue
+    }),
+  })
+
+  const button = Button({
+    class_name: "rounded-2xl p-0 mx-4 mt-4 bg-transparent",
+    child: Box({
+      class_name: "bg-surface_background/40 rounded-lg pa-3",
+      connections: [[
+        currentQueue,
+        box => {
+            const { name, artists, coverArt } = currentQueue.value[0];
+
+            /** @type {ReturnType<Box>} */
+            // @ts-expect-error this is fine
+            const coverArtBox = box.children[0];
+            coverArtBox.css = toCSS({
+              backgroundImage: `url('${coverArt}')`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center'
+            })
+
+            /** @type {ReturnType<Box>} */
+            // @ts-expect-error this is fine
+            const songInfo = box.children[1]
+
+            songInfo.children[0].label = name;
+            songInfo.children[1].label = artists;
+        }
+      ]],
+      children: [
+        Box({
+          class_name: "bg-overlay_background/100 rounded-lg min-h-10 min-w-10",
+        }),
+        Box({
+          vertical: true,
+          class_name: "mx-2",
+          children: [
+            Label({
+              class_name: "text-lg mb-1",
+              xalign: 0,
+              truncate: 'end',
+              max_width_chars: 15,
+              label: `Title`,
+            }),
+            Label({
+              class_name: "text-md text-subtle/80",
+              xalign: 0,
+              truncate: 'end',
+              max_width_chars: 20,
+              label: `Artist`,
+            })
+          ]
+        }),
+      ]
+    }),
+    on_clicked: () => {
+      revealer.reveal_child = !revealer.reveal_child
+      setTimeout(() => {
+        if(revealer.reveal_child) {
+          terminal.set_size(18, 10)
+        } else {
+          terminal.set_size(18, 25)
+        }
+      }, 300)
+    }
+  })
+
+  return Box({
+    vertical: true,
+    children: [
+      button,
+      revealer
+    ]
+  })
 };
+
+
+const Lyrics = () => {
+  terminal.set_size(18, 25)
+
+  // spawn `sptlrx --current "bold" --before "#a6adc8,faint,italic" --after "104,faint"`
+  terminal.spawn_async(
+    Vte.PtyFlags.DEFAULT,
+    GLib.get_home_dir(),
+    [
+      "sptlrx",
+      "--current",
+      "bold",
+      "--before",
+      "#a6adc8,faint,italic",
+      "--after",
+      "104,faint",
+    ],
+    [],
+    GLib.SpawnFlags.SEARCH_PATH,
+    null,
+    GLib.MAXINT32,
+    null,
+    null
+  );
+
+  return terminal
+}
 
 export const Right = () => {
   const content = Box({
@@ -355,13 +491,8 @@ export const Right = () => {
     vertical: true,
     children: [
       Music(),
-      Scrollable({
-        class_name: "min-h-100 ma-3 pa-3 bg-surface_background/60 rounded-4",
-        vscroll: "automatic",
-        hscroll: "never",
-        vexpand: true,
-        child: UpNext(),
-      }),
+      UpNext(),
+      Lyrics()
     ],
   });
 

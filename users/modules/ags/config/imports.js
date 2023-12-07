@@ -1,6 +1,10 @@
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js"
+
 export { default as Gtk } from 'gi://Gtk';
 export { default as GLib }  from 'gi://GLib';
+export { default as Gdk }  from 'gi://Gdk';
 export { default as GObject }  from 'gi://GObject';
+export { default as Vte } from 'gi://Vte';
 
 export {
   Window,
@@ -30,7 +34,6 @@ export { default as Applications } from "resource:///com/github/Aylur/ags/servic
 
 export { default as App } from "resource:///com/github/Aylur/ags/app.js"
 
-import * as Utils from "resource:///com/github/Aylur/ags/utils.js"
 export { Utils }
 
 export const toCSS = (/** @type {Record<string, any>} */ style) => {
