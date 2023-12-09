@@ -4,11 +4,11 @@
   fennel,
   src,
   version,
+  pname,
   ...
 }:
 stdenv.mkDerivation {
-  inherit src version;
-  pname = "fennel-ls";
+  inherit src version pname;
 
   nativeBuildInputs = [
     luajit

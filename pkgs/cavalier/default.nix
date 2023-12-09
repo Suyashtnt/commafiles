@@ -2,30 +2,28 @@
   buildDotnetModule,
   src,
   version,
+  pname,
   lib,
   gtk4,
   libadwaita,
   blueprint-compiler,
   wrapGAppsHook,
-  dotnet-sdk_7,
-  dotnet-runtime_7,
+  dotnet-sdk_8,
+  dotnet-runtime_8,
   makeDesktopItem,
   ...
 }:
 buildDotnetModule rec {
-  inherit src version;
-  pname = "cavalier";
+  inherit src version pname;
 
-  desktopItems = [
-    (makeDesktopItem {
-      name = "cavalier";
-      exec = "NickvisionCavalier.GNOME";
-      icon = "cava";
-      desktopName = "Cavalier";
-      comment = meta.description;
-      categories = ["AudioVideo" "Audio" "Video"];
-    })
-  ];
+  desktopItem = makeDesktopItem {
+    name = "cavalier";
+    exec = "NickvisionCavalier.GNOME";
+    icon = "cava";
+    desktopName = "Cavalier";
+    comment = meta.description;
+    categories = ["AudioVideo" "Audio" "Video"];
+  };
 
   meta = with lib; {
     description = "A gtk frontend for CAVA";
@@ -46,8 +44,8 @@ buildDotnetModule rec {
     wrapGAppsHook
   ];
 
-  dotnet-sdk = dotnet-sdk_7;
-  dotnet-runtime = dotnet-runtime_7;
+  dotnet-sdk = dotnet-sdk_8;
+  dotnet-runtime = dotnet-runtime_8;
   executables = ["NickvisionCavalier.GNOME"];
   selfContainedBuild = true;
   nugetDeps = ./deps.nix;

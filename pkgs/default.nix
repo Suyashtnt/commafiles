@@ -10,10 +10,10 @@
       getPackage = pname: (pkgs.callPackage ../_sources/generated.nix {}).${pname};
     in {
       fennel-ls = pkgs.callPackage ./fennel-ls {
-        inherit (getPackage "fennel-ls") src version;
+        inherit (getPackage "fennel-ls") src version pname;
       };
       cavalier = pkgs.callPackage ./cavalier {
-        inherit (getPackage "cavalier") src version;
+        inherit (getPackage "cavalier") src version pname;
       };
     };
   };
