@@ -1,7 +1,7 @@
 (fn config []
-  (vim.cmd "let g:neo_tree_remove_legacy_commands = 1")
-  (local neo-tree (require :neo-tree))
-  (neo-tree.setup {:popup_border_style :rounded}))
+  (let [neo-tree (require :neo-tree)]
+    (vim.cmd "let g:neo_tree_remove_legacy_commands = 1")
+    (neo-tree.setup {:popup_border_style :rounded})))
 
 (local wkeys {:<leader>p ["<cmd>Neotree toggle position=float<cr>"
                           "File explorer"]})

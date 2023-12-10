@@ -1,8 +1,8 @@
 (fn config []
-  (local telescope (require :telescope))
-  (local harpoon (require :harpoon))
-  (harpoon.setup {:tabline true})
-  (telescope.load_extension :harpoon))
+  (let [telescope (require :telescope)
+        harpoon (require :harpoon)]
+    (harpoon.setup {:tabline true})
+    (telescope.load_extension :harpoon)))
 
 (local wkeys #(let [marks (require :harpoon.mark)
                     ui (require :harpoon.ui)]
