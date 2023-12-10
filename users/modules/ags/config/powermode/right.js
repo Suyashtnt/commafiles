@@ -20,9 +20,11 @@ import { SetupRevealer } from "./index.js";
 import { ShowPowerMode } from "./variables.js";
 
 
+// @ts-expect-error this is fine
 const Terminal = Widget.subclass(Vte.Terminal, "AgsVteTerminal")
 
 /** @type {Vte.Terminal} */
+// @ts-expect-error this is fine
 const terminal = Terminal({
   class_name: "bg-surface_background/60 rounded-4 ma-2",
   name: "lyrics-terminal"
@@ -221,7 +223,7 @@ const MusicControls = () => {
   return box;
 };
 
-const Music = () => {
+const MusicPlayer = () => {
   const startWidget = MusicHeader();
   const endWidget = MusicControls();
 
@@ -260,11 +262,13 @@ const Music = () => {
       }],
     ],
     vertical: true,
+    vexpand: true,
+    hexpand: true,
     start_widget: startWidget,
     end_widget: endWidget,
     class_name: "bg-surface_background/100 pa-4 rounded-tl-6 rounded-b-6",
   });
-};
+}
 
 const currentQueue = Variable([], {
   poll: [10000, "spotify_player get key queue", (out) => {
@@ -305,7 +309,7 @@ const UpNext = () => {
       [
         currentQueue,
         (box) => {
-          /** @type {Array} */ (currentQueue.value).slice(1, 10).forEach(({ name, artists, coverArt }, idx) => {
+          /** @type {Array} */ (currentQueue.value).slice(0, 10).forEach(({ name, artists, coverArt }, idx) => {
 
             /** @type {ReturnType<Box>} */
             // @ts-expect-error this is fine
@@ -329,7 +333,7 @@ const UpNext = () => {
     ],
     spacing: 8,
     class_name: "pa-[1px]",
-    children: Array(9).fill(0).map((_, idx) =>
+    children: Array(10).fill(0).map((_, idx) =>
       Box({
         class_name: "bg-overlay_background/40 rounded-lg pa-3",
         hexpand: true,
@@ -343,15 +347,15 @@ const UpNext = () => {
             children: [
               Label({
                 class_name: "text-lg mb-1",
-                xalign: 0,
-                truncate: 'end',
-                label: `Title`,
+                justification: "left",
+                truncate: "end",
+                label: "Title",
               }),
               Label({
                 class_name: "text-md text-subtle/80",
-                xalign: 0,
-                truncate: 'end',
-                label: `Artist`,
+                justification: "left",
+                truncate: "end",
+                label: "Artist",
               })
             ]
           }),
@@ -370,98 +374,53 @@ const UpNext = () => {
     ),
   });
 
-  const revealer = Revealer({
+  return Revealer({
     reveal_child: false,
     transition: "slide_down",
     transition_duration: 300,
+    class_name: "pa-0 ma-0",
     child: Scrollable({
-      class_name: "min-h-60 ma-3 pa-3 bg-surface_background/60 rounded-4",
+      class_name: "min-h-60 mx-3 pt-3 pa-3 bg-surface_background/60 rounded-b-4",
       vscroll: "automatic",
       hscroll: "never",
-      vexpand: true,
+      hexpand: true,
       child: queue
     }),
   })
+};
+
+const Music = () => {
+  const upNext = UpNext()
+  const player = MusicPlayer()
 
   const button = Button({
-    class_name: "rounded-2xl p-0 mx-4 mt-4 bg-transparent",
-    child: Box({
-      class_name: "bg-surface_background/40 rounded-lg pa-3",
-      connections: [[
-        currentQueue,
-        box => {
-            const { name, artists, coverArt } = currentQueue.value[0];
-
-            /** @type {ReturnType<Box>} */
-            // @ts-expect-error this is fine
-            const coverArtBox = box.children[0];
-            coverArtBox.css = toCSS({
-              backgroundImage: `url('${coverArt}')`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center'
-            })
-
-            /** @type {ReturnType<Box>} */
-            // @ts-expect-error this is fine
-            const songInfo = box.children[1]
-
-            songInfo.children[0].label = name;
-            songInfo.children[1].label = artists;
-        }
-      ]],
-      children: [
-        Box({
-          class_name: "bg-overlay_background/100 rounded-lg min-h-10 min-w-10",
-        }),
-        Box({
-          vertical: true,
-          class_name: "mx-2",
-          children: [
-            Label({
-              class_name: "text-lg mb-1",
-              xalign: 0,
-              truncate: 'end',
-              max_width_chars: 15,
-              label: `Title`,
-            }),
-            Label({
-              class_name: "text-md text-subtle/80",
-              xalign: 0,
-              truncate: 'end',
-              max_width_chars: 20,
-              label: `Artist`,
-            })
-          ]
-        }),
-      ]
+    class_name: "rounded-2xl p-0 bg-transparent",
+    child: Label({
+      label: "",
+      justification: "center",
+      class_name: "text-4xl text-primary_foreground/100 icon",
     }),
-    on_clicked: () => {
-      revealer.reveal_child = !revealer.reveal_child
-      setTimeout(() => {
-        if(revealer.reveal_child) {
-          terminal.set_size(18, 10)
-        } else {
-          terminal.set_size(18, 25)
-        }
-      }, 300)
+    on_clicked: (self) => {
+      upNext.reveal_child = !upNext.reveal_child
+      self.child.label = upNext.reveal_child ? "" : ""
     }
   })
 
   return Box({
+    class_name: "bg-transparent",
     vertical: true,
     children: [
+      player,
+      upNext,
       button,
-      revealer
-    ]
+    ],
   })
 };
 
 
 const Lyrics = () => {
-  terminal.set_size(18, 25)
+  terminal.set_size(26, 20)
 
-  // spawn `sptlrx --current "bold" --before "#a6adc8,faint,italic" --after "104,faint"`
   terminal.spawn_async(
     Vte.PtyFlags.DEFAULT,
     GLib.get_home_dir(),
@@ -478,11 +437,17 @@ const Lyrics = () => {
     GLib.SpawnFlags.SEARCH_PATH,
     null,
     GLib.MAXINT32,
+    // @ts-expect-error outdated typedefs
     null,
     null
   );
 
-  return terminal
+  return Box({
+    // @ts-expect-error this is fine
+    child: terminal,
+    hpack: "center",
+    class_name: "bg-transparent rounded-4 pa-2",
+  })
 }
 
 export const Right = () => {
@@ -491,7 +456,6 @@ export const Right = () => {
     vertical: true,
     children: [
       Music(),
-      UpNext(),
       Lyrics()
     ],
   });

@@ -26,9 +26,9 @@ in ''
   general {
       gaps_in=5
       gaps_out=10
-      border_size=2
+      border_size=3
       col.active_border=0xff${theme.base0D} 0xff${theme.base08} 0xff${theme.base0A} 60deg
-      col.inactive_border=0xff${theme.base02}
+      col.inactive_border=0x00${theme.base02}
       apply_sens_to_raw=0 # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
   }
 
@@ -72,6 +72,7 @@ in ''
 
   windowrule = opacity 0.8 0.8,^(Code)$
   windowrule = opacity 0.8 0.8,^(code-url-handler)$
+  windowrule = noblur,^(org.nickvision.cavalier)$
 
   exec-once=swww init
   exec-once=ags

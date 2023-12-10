@@ -3,3 +3,10 @@
 .icon {
   font-family: "JetBrains Mono Nerd Font Mono", monospace;
 }
+
+VteTerminal,
+TerminalScreen,
+vte-terminal {
+    padding: 10px 10px 10px 10px;
+    -VteTerminal-inner-border: 10px 10px 10px 10px;
+}
