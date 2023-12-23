@@ -1,10 +1,9 @@
-(local wkeys {
-              :<leader>k [:<cmd>Legendary<cr> "Keybind explorer"]
+(local wkeys {:<leader>k [:<cmd>Legendary<cr> "Keybind explorer"]
               :k [:gk "Go up"]
               :j [:gj "Go down"]
               :<C-Space> {1 "<C-\\><C-n>" 2 "Exit terminal mode" :mode :t}
-              :<C-d> ["<C-d>zz" "Half page down"]
-              :<C-u> ["<C-u>zz" "Half page up"]})
+              :<C-d> [:<C-d>zz "Half page down"]
+              :<C-u> [:<C-u>zz "Half page up"]})
 
 [{1 :mrjones2014/legendary.nvim
   :priority 100000

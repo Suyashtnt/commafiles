@@ -5,4 +5,5 @@
  {1 :folke/flash.nvim
   ;; @type Flash.Config
   :opts {}
+  :event :VeryLazy
   : wkeys}]

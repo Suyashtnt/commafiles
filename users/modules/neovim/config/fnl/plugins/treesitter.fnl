@@ -29,6 +29,7 @@
     (rainbow-setup {:strategy strat})))
 
 [{1 :nvim-treesitter/nvim-treesitter
+  :event :VeryLazy
   :dependencies [:nvim-treesitter/nvim-treesitter-context
                  :HiPhish/rainbow-delimiters.nvim
                  :nvim-treesitter/nvim-treesitter-textobjects

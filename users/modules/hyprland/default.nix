@@ -41,7 +41,6 @@ in {
     enable = true;
     package = pkgs.hyprland;
 
-    enableNvidiaPatches = true;
     xwayland.enable = true;
     systemd.enable = true;
 

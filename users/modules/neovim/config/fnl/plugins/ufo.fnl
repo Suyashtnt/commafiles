@@ -33,4 +33,4 @@
                 {:zR [#(ufo.openAllFolds) "Open all folds"]
                  :zM [#(ufo.closeAllFolds) "Close all folds"]}))
 
-[{1 :kevinhwang91/nvim-ufo : config : wkeys}]
+[{1 :kevinhwang91/nvim-ufo : config : wkeys :event :VeryLazy}]

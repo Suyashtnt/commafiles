@@ -23,4 +23,4 @@
               "[e" ["<cmd>Lspsaga diagnostic_jump_prev<CR>"
                     "LSP Prev Diagnostic"]})
 
-[{1 :nvimdev/lspsaga.nvim : config : wkeys}]
+[{1 :nvimdev/lspsaga.nvim : config : wkeys :event :VeryLazy}]
