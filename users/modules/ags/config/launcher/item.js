@@ -8,8 +8,6 @@ export const AppItem = app => Button({
         app.launch();
     },
     class_name: 'bg-surface_background/60 rounded-4',
-    // @ts-expect-error app is fine
-    setup: self => self.app = app,
     child: Box({
         children: [
             Icon({

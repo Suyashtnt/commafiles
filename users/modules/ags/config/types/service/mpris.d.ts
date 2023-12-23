@@ -56,8 +56,9 @@ export declare class MprisPlayer extends Service {
     loop(): void;
 }
 export declare class Mpris extends Service {
-    private _players;
     private _proxy;
+    private _players;
+    private _initialzed;
     get players(): MprisPlayer[];
     constructor();
     private _addPlayer;

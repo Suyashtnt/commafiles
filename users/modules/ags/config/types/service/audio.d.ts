@@ -1,3 +1,4 @@
+/// <reference types="@girs/gvc-1.0/gvc-1.0-ambient.js" />
 import Service from '../service.js';
 import Gvc from 'node_modules/@girs/gvc-1.0/gvc-1.0';
 export declare class Stream extends Service {

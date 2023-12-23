@@ -1,3 +1,4 @@
+/// <reference types="@girs/nm-1.0/nm-1.0-ambient.js" />
 import NM from 'node_modules/@girs/nm-1.0/nm-1.0';
 import Service from '../service.js';
 export declare class Wifi extends Service {
@@ -37,7 +38,7 @@ export declare class Network extends Service {
     private _client;
     wifi: Wifi;
     wired: Wired;
-    primary?: string;
+    primary: null | 'wifi' | 'wired';
     connectivity: string;
     constructor();
     toggleWifi(): void;

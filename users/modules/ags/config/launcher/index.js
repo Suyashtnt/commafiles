@@ -54,19 +54,17 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 } = {}) => {
             }),
         ],
 
-        // make entry.text empty on launch
-        // and update the list's children so it is sorted by frequency
-        // @ts-expect-error app is fine
-        connections: [[App, (_, name, visible) => {
+        setup: self => self.
+          hook(App, (_, name, visible) => {
             if (name !== WINDOW_NAME)
-                return;
+              return;
 
             list.children = Applications.list.map(AppItem);
 
             entry.text = '';
             if (visible)
-                entry.grab_focus();
-        }]],
+              entry.grab_focus();
+          }),
     });
 };
 

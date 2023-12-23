@@ -4,8 +4,12 @@
   ...
 }: {
   environment.defaultPackages = [];
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = false;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0" # obsidian :pensive:
+  ];
 
   nixpkgs.overlays = [
     inputs.nixpkgs-f2k.overlays.default

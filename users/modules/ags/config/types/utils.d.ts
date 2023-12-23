@@ -1,23 +1,42 @@
-/// <reference types="gjs" />
-import Gtk from 'node_modules/@girs/gtk-3.0/gtk-3.0';
-import Gio from 'node_modules/@girs/gio-2.0/gio-2.0';
-import GObject from 'node_modules/@girs/gobject-2.0/gobject-2.0';
+import * as Exec from './utils/exec.js';
+import * as File from './utils/file.js';
+import * as Etc from './utils/etc.js';
+import * as Timeout from './utils/timeout.js';
+import * as Fetch from './utils/fetch.js';
 export declare const USER: string;
 export declare const CACHE_DIR: string;
-export declare function readFile(file: string | Gio.File): string;
-export declare function readFileAsync(file: string | Gio.File): Promise<string>;
-export declare function writeFile(string: string, path: string): Promise<Gio.File>;
-export declare function monitorFile(path: string, callback?: (file: Gio.File, event: Gio.FileMonitorEvent) => void, type?: 'file' | 'directory', flags?: Gio.FileMonitorFlags): Gio.FileMonitor | null;
-export declare function loadInterfaceXML(iface: string): string | null;
-export declare function bulkConnect(service: GObject.Object, list: [
-    event: string,
-    callback: (...args: any[]) => void
-][]): number[];
-export declare function bulkDisconnect(service: GObject.Object, ids: number[]): void;
-export declare function interval(interval: number, callback: () => void, bind?: Gtk.Widget): number;
-export declare function timeout(ms: number, callback: () => void): number;
-export declare function lookUpIcon(name?: string, size?: number): Gtk.IconInfo | null;
-export declare function ensureDirectory(path?: string): void;
-export declare function execAsync(cmd: string | string[]): Promise<string>;
-export declare function exec(cmd: string): string;
-export declare function subprocess(cmd: string | string[], callback: (out: string) => void, onError?: typeof logError, bind?: Gtk.Widget): Gio.Subprocess | null;
+export declare const exec: typeof Exec.exec;
+export declare const execAsync: typeof Exec.execAsync;
+export declare const subprocess: typeof Exec.subprocess;
+export declare const readFile: typeof File.readFile;
+export declare const readFileAsync: typeof File.readFileAsync;
+export declare const writeFile: typeof File.writeFile;
+export declare const monitorFile: typeof File.monitorFile;
+export declare const timeout: typeof Timeout.timeout;
+export declare const interval: typeof Timeout.interval;
+export declare const idle: typeof Timeout.idle;
+export declare const loadInterfaceXML: typeof Etc.loadInterfaceXML;
+export declare const bulkConnect: typeof Etc.bulkConnect;
+export declare const bulkDisconnect: typeof Etc.bulkDisconnect;
+export declare const ensureDirectory: typeof Etc.ensureDirectory;
+export declare const lookUpIcon: typeof Etc.lookUpIcon;
+export declare const fetch: typeof Fetch.fetch;
+declare const _default: {
+    exec: typeof Exec.exec;
+    execAsync: typeof Exec.execAsync;
+    subprocess: typeof Exec.subprocess;
+    readFile: typeof File.readFile;
+    readFileAsync: typeof File.readFileAsync;
+    writeFile: typeof File.writeFile;
+    monitorFile: typeof File.monitorFile;
+    timeout: typeof Timeout.timeout;
+    interval: typeof Timeout.interval;
+    idle: typeof Timeout.idle;
+    loadInterfaceXML: typeof Etc.loadInterfaceXML;
+    bulkConnect: typeof Etc.bulkConnect;
+    bulkDisconnect: typeof Etc.bulkDisconnect;
+    ensureDirectory: typeof Etc.ensureDirectory;
+    lookUpIcon: typeof Etc.lookUpIcon;
+    fetch: typeof Fetch.fetch;
+};
+export default _default;

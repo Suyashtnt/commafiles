@@ -3,7 +3,7 @@ import { Top } from "./top.js";
 import { Bottom } from "./bottom.js";
 import { Left } from "./left.js";
 import { Right } from "./right.js";
-import { Revealer, Box, toCSS, Gtk, AgsWidget, GObject, Service } from "../imports.js";
+import { Revealer, Box, toCSS, Gtk, AgsWidget } from "../imports.js";
 
 /**
  * @template {typeof Gtk.Widget} T
@@ -18,19 +18,19 @@ function createCtor(Widget) {
  */
 
 /**
- * @typedef  {import("types/widgets/widget.js").BaseProps<ForceSizedClass> & Gtk.Bin.ConstructorProperties & { width?: GtkSize, height?: GtkSize }} ForceSizedProps
+ * @typedef  {import("types/widgets/widget.js").BaseProps<ForceSizedClass, Gtk.Bin.ConstructorProperties & { width?: GtkSize, height?: GtkSize }>} ForceSizedProps
  */
 
 class ForceSizedClass extends AgsWidget(Gtk.Bin, "ForceSized") {
   static {
-    GObject.registerClass({
-      GTypeName: 'ForceSized',
-      CssName: 'force-sized',
-      Properties: {
-        'width': Service.pspec('width', 'int', 'rw'),
-        'height': Service.pspec('height', 'int', 'rw')
+    AgsWidget.register(this, {
+      typename: 'ForceSized',
+      cssName: 'force-sized',
+      properties: {
+        'width': ['int', 'rw'],
+        'height': ['int', 'rw']
       }
-    }, this)
+    })
   }
 
   /** @returns {GtkSize} */
@@ -56,7 +56,7 @@ class ForceSizedClass extends AgsWidget(Gtk.Bin, "ForceSized") {
   }
 
   constructor(/** @type ForceSizedProps */ props = {}) {
-    super(props)
+    super(/** @type Gtk.Bin.ConstructorProperties */ (props))
 
     if (props.width === 'max') {
       this.hexpand = true

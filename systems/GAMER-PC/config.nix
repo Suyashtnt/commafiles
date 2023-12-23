@@ -32,7 +32,7 @@
 
     usbmuxd.enable = true;
     avahi.enable = true;
-    avahi.nssmdns = true;
+    avahi.nssmdns4 = true;
     flatpak.enable = true;
     openssh.enable = true;
     jellyfin.enable = true;

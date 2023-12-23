@@ -1,3 +1,6 @@
+/// <reference types="@girs/glib-2.0/glib-2.0-ambient.js" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/glib-2.0/glib-2.0-ambient.js" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/harfbuzz-0.0/node_modules/@girs/glib-2.0/glib-2.0-ambient.js" />
 import GLib from 'node_modules/@girs/glib-2.0/glib-2.0';
 import Service from '../service.js';
 interface Action {

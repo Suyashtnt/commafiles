@@ -14,6 +14,14 @@ declare module 'resource:///com/github/Aylur/ags/app.js' {
     const exports: typeof import('./app')
     export = exports
 }
+declare module 'resource:///com/github/Aylur/ags/gobject.js' {
+    const exports: typeof import('./gobject')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/overrides.js' {
+    const exports: typeof import('./overrides')
+    export = exports
+}
 declare module 'resource:///com/github/Aylur/ags/service.js' {
     const exports: typeof import('./service')
     export = exports
@@ -60,6 +68,10 @@ declare module 'resource:///com/github/Aylur/ags/service/network.js' {
 }
 declare module 'resource:///com/github/Aylur/ags/service/notifications.js' {
     const exports: typeof import('./service/notifications')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/service/powerprofiles.js' {
+    const exports: typeof import('./service/powerprofiles')
     export = exports
 }
 declare module 'resource:///com/github/Aylur/ags/service/systemtray.js' {
@@ -151,8 +163,8 @@ declare module 'gi://GLib' {
     export = exports
 }
 declare module 'gi://Vte' {
-  const exports: typeof import('node_modules/@girs/vte-2.91/vte-2.91')
-  export = exports
+    const exports: typeof import('node_modules/@girs/vte-2.91/vte-2.91')
+    export = exports
 }
 declare module 'gi://Gdk' {
     const exports: typeof import('node_modules/@girs/gdk-3.0/gdk-3.0')

@@ -27,16 +27,15 @@ const StartModule = () => {
             class_name: baseClasses,
             vpack: 'center',
         }),
-        connections: [[Hyprland, btn => {
+        class_name: Hyprland.bind('workspaces').transform(_ => {
             const active = Hyprland.active.workspace.id === i;
-            // @ts-ignore
-            const occupied = Hyprland.getWorkspace(i)?.windows > 0 && !active;
+            const occupied = (Hyprland.getWorkspace(i)?.windows ?? 0) > 0 && !active;
 
             const colour  = active ? 'bg-primary_foreground/100' 
             : occupied ? 'bg-subtle_background/100' : 'bg-overlay_background/100';
 
-            btn.class_name = `${baseClasses} ${colour}`;
-        }]],
+            return `${baseClasses} ${colour}`;
+        })
     })),
   })
 }
@@ -59,29 +58,26 @@ const WeatherInfo = Variable({}, {
 
 const Weather = () => {
   const currentTemperature = Label({
-    connections: [[WeatherInfo, label => {
-      const { current, current_units } = WeatherInfo.value
-      if(!current) return;
+    label: WeatherInfo.bind('value').transform(value => {
+      const { current, current_units } = value
+      if(!current) return "???";
 
-      label.label = `${current.temperature_2m}${current_units.temperature_2m}`;
-    }]]
+      return `${current.temperature_2m}${current_units.temperature_2m}`;
+    })
   })
 
   const temperatureSlider = ProgressBar({
-    value: 0,
     class_name: "min-w-24 mx-2",
     vpack: 'center',
-    connections: [[WeatherInfo, slider => {
-      const { current, daily } = WeatherInfo.value
-      if(!current) return;
+    value: WeatherInfo.bind('value').transform(value => {
+      const { current, daily } = value
+      if(!current) return 0;
 
       // get a 0-1 range between min and max (who said we would'nt be using this?)
       const min = daily.temperature_2m_min;
       const max = daily.temperature_2m_max;
-      const value = (current.temperature_2m - min) / (max - min);
-
-      slider.value = value;
-    }]]
+      return (current.temperature_2m - min) / (max - min);
+    })
   })
 
   // WMO Weather interpretation codes (WW)
@@ -106,8 +102,8 @@ const Weather = () => {
     class_name: 'bg-transparent mx-2',
     size: 24,
     vpack: 'center',
-    connections: [[WeatherInfo, icon => {
-      const { current } = WeatherInfo.value
+    icon: WeatherInfo.bind('value').transform(value => {
+      const { current } = value
       if (!current) return
       const { weathercode, is_day } = current
 
@@ -175,8 +171,8 @@ const Weather = () => {
 
       const iconSet = is_day ? dayIconSet : nightIconSet;
 
-      icon.icon = iconSet[weathercode];
-    }]]
+      return iconSet[weathercode];
+    })
   })
 
   return Box({

@@ -1,8 +1,14 @@
+/// <reference types="@girs/gio-2.0/gio-2.0-ambient" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/gio-2.0/gio-2.0-ambient" />
+/// <reference types="@girs/nm-1.0/node_modules/@girs/gio-2.0/gio-2.0-ambient" />
+/// <reference types="@girs/glib-2.0/glib-2.0-ambient" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/glib-2.0/glib-2.0-ambient" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/harfbuzz-0.0/node_modules/@girs/glib-2.0/glib-2.0-ambient" />
 import GLib from 'node_modules/@girs/glib-2.0/glib-2.0';
 import Gio from 'node_modules/@girs/gio-2.0/gio-2.0';
 export interface DBusProxy extends Gio.DBusProxy {
     new (...args: unknown[]): DBusProxy;
-    ListNamesRemote: (callback: (names: string[][]) => void) => void;
+    ListNamesAsync: () => Promise<string[][]>;
 }
 export interface PlayerProxy extends Gio.DBusProxy {
     new (...args: unknown[]): PlayerProxy;
@@ -94,4 +100,19 @@ export interface StatusNotifierItemProxy extends Gio.DBusProxy {
     ActivateAsync: (x: number, y: number) => Promise<void>;
     SecondaryActivateAsync: (x: number, y: number) => Promise<void>;
     ScrollAsync: (delta: number, orientation: string) => Promise<void>;
+}
+export interface PowerProfilesProxy extends Gio.DBusProxy {
+    new (...args: unknown[]): PowerProfilesProxy;
+    ActiveProfile: string;
+    PerformanceInhibited: string;
+    PerformanceDegraded: string;
+    Profiles: [{
+        [key: string]: GLib.Variant;
+    }];
+    Actions: [string];
+    ActiveProfileHolds: [{
+        [key: string]: GLib.Variant;
+    }];
+    HoldProfile(profile: string, reason: string, application_id: string): number;
+    ReleaseProfile(cookie: number): void;
 }

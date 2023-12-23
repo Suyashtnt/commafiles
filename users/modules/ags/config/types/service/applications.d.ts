@@ -1,3 +1,6 @@
+/// <reference types="@girs/gio-2.0/gio-2.0-ambient.js" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/gio-2.0/gio-2.0-ambient.js" />
+/// <reference types="@girs/nm-1.0/node_modules/@girs/gio-2.0/gio-2.0-ambient.js" />
 import Gio from 'node_modules/@girs/gio-2.0/gio-2.0';
 import Service from '../service.js';
 export declare class Application extends Service {
@@ -28,7 +31,7 @@ export declare class Applications extends Service {
         [app: string]: number;
     };
     private _launched;
-    private _sync;
+    reload(): void;
 }
 export declare const applications: Applications;
 export default applications;

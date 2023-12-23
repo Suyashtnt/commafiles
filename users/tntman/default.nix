@@ -43,13 +43,9 @@
     packages = with pkgs; [
       vivaldi # chrome but better
       obsidian # notes
-      wofi # launcher
-      authy # 2fa
       gnome.nautilus # file manager
       kooha # for screen recording
 
-      blender # 3D modeling go brrr
-      prismlauncher # minecraft go brrr
       temurin-jre-bin-17 # java go brrr
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr

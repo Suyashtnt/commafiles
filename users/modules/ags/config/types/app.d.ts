@@ -1,3 +1,5 @@
+/// <reference types="@girs/dbusmenugtk3-0.4/node_modules/@girs/gtk-3.0/gtk-3.0-ambient.js" />
+/// <reference types="@girs/gtk-3.0/gtk-3.0-ambient.js" />
 import Gtk from 'node_modules/@girs/gtk-3.0/gtk-3.0';
 interface Config {
     windows?: Gtk.Window[];
@@ -5,6 +7,7 @@ interface Config {
     notificationPopupTimeout: number;
     notificationForceTimeout: boolean;
     cacheNotificationActions: boolean;
+    cacheCoverArt: boolean;
     closeWindowDelay: {
         [key: string]: number;
     };
@@ -38,6 +41,13 @@ export declare class App extends Gtk.Application {
     addWindow(w: Gtk.Window): void;
     private _load;
     private _register;
+    toJSON(): {
+        bus: string | null;
+        configDir: string;
+        windows: {
+            [k: string]: Gtk.Window;
+        };
+    };
     RunJs(js: string, clientBusName?: string, clientObjPath?: string): void;
     RunFile(file: string, bus?: string, path?: string): void;
     RunPromise(js: string, busName?: string, objPath?: string): void;

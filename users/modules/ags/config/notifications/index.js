@@ -1,18 +1,15 @@
-import { Box, Notifications, Window, toCSS } from '../imports.js'
+import { Box, Notifications, Window } from '../imports.js'
 import { Notification } from './popup.js'
 
 const PopupList = () => Box({
-    className: 'ma-8 bg-transparent',
-    css: toCSS({
-      padding: '1px'
-    }), 
+    class_name: 'ma-8 bg-transparent pa-[1px]',
     vertical: true,
-    binds: [['children', Notifications, 'popups',
-        popups => popups.map(Notification)]],
+     // @ts-expect-error this works. Generic types do be weird
+    children: Notifications.bind('popups').transform(notifs => notifs.map(Notification))
 });
 
 export const NotificationsPopup = () => Window({
-    className: 'bg-transparent',
+    class_name: 'bg-transparent',
     name: 'notification-popup-window',
     anchor: ['top', 'right'],
     child: PopupList(),
