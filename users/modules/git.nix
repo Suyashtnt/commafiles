@@ -3,7 +3,7 @@
     openssl
     pinentry-qt
     gitui
-    ghq
+    gh
   ];
 
   programs.git = {
@@ -25,10 +25,6 @@
     };
     lfs.enable = true;
     delta.enable = true;
-  };
-
-  programs.gh = {
-    enable = true;
   };
 
   programs.gpg.enable = true;
