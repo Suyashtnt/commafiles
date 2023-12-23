@@ -18,7 +18,10 @@
         line-numbers = true;
       };
 
-      credential.helper = "${pkgs.gitFull}/bin/git-credential-libsecret";
+      credential = {
+        credentialStore = "secretservice";
+        helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
+      };
 
       # Sign commits
       commit.gpgsign = true;
