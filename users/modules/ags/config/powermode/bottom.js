@@ -1,4 +1,4 @@
-import { Label, Window, Box } from "../imports.js";
+import { Box, Label, Window } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 
 export const Bottom = () => {
@@ -7,9 +7,9 @@ export const Bottom = () => {
     vexpand: true,
     hexpand: true,
     child: Label({
-      label: "Sample text"
-    })
-  })
+      label: "Sample text",
+    }),
+  });
 
   return Window({
     name: "powermode-bottom",
@@ -19,7 +19,7 @@ export const Bottom = () => {
     exclusivity: "exclusive",
     child: SetupRevealer("slide_up", content, {
       width: "max",
-      height: 60
+      height: 60,
     }),
   });
 };

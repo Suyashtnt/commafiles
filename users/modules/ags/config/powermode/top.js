@@ -1,84 +1,93 @@
-import { 
-  Window,
-  Hyprland,
-  CenterBox,
-  Button,
+import {
   Box,
-  Label,
-  Utils,
-  SystemTray,
+  Button,
+  CenterBox,
+  Hyprland,
   Icon,
-  Variable,
+  Label,
   ProgressBar,
+  SystemTray,
+  Utils,
+  Variable,
+  Window,
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 
 const StartModule = () => {
-  const baseClasses = "rounded-full text-0 ma-2 py-0 px-[5px]"
+  const baseClasses = "rounded-full text-0 ma-2 py-0 px-[5px]";
 
   return Box({
-    class_name: 'bg-surface_background/60 rounded-full ma-2',
+    class_name: "bg-surface_background/60 rounded-full ma-2",
     children: Array
       .from({ length: 10 }, (_, i) => i + 1)
-      .map(i => Button({
-        on_clicked: () => Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
-        child: Label({
+      .map((i) =>
+        Button({
+          on_clicked: () =>
+            Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+          child: Label({
             label: `${i}`,
             class_name: baseClasses,
-            vpack: 'center',
-        }),
-        class_name: Hyprland.bind('workspaces').transform(_ => {
+            vpack: "center",
+          }),
+          class_name: Hyprland.bind("workspaces").transform((_) => {
             const active = Hyprland.active.workspace.id === i;
-            const occupied = (Hyprland.getWorkspace(i)?.windows ?? 0) > 0 && !active;
+            const occupied = (Hyprland.getWorkspace(i)?.windows ?? 0) > 0 &&
+              !active;
 
-            const colour  = active ? 'bg-primary_foreground/100' 
-            : occupied ? 'bg-subtle_background/100' : 'bg-overlay_background/100';
+            const colour = active
+              ? "bg-primary_foreground/100"
+              : occupied
+              ? "bg-subtle_background/100"
+              : "bg-overlay_background/100";
 
             return `${baseClasses} ${colour}`;
+          }),
         })
-    })),
-  })
-}
+      ),
+  });
+};
 
 const CenterModule = () => {
   return Label({
-    class_name: "text-surface_foreground/100 text-2xl rounded-full ma-2 bg-surface_background/60 px-3 py-1",
+    class_name:
+      "text-surface_foreground/100 text-2xl rounded-full ma-2 bg-surface_background/60 px-3 py-1",
     label: "Sample text",
-    vpack: 'center',
-  })
-}
+    vpack: "center",
+  });
+};
 
-const longitude = 28.0436
-const latitude = -26.2023
-const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weathercode,is_day&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`
+const longitude = 28.0436;
+const latitude = -26.2023;
+const url =
+  `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weathercode,is_day&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=1`;
 
 const WeatherInfo = Variable({}, {
   poll: [1000 * 60 * 60, `curl -s ${url}`, (out) => JSON.parse(out)],
-})
+});
 
 const Weather = () => {
   const currentTemperature = Label({
-    label: WeatherInfo.bind('value').transform(value => {
-      const { current, current_units } = value
-      if(!current) return "???";
+    label: WeatherInfo.bind("value").transform((value) => {
+      const { current, current_units } = value;
+      if (!current) return "???";
 
       return `${current.temperature_2m}${current_units.temperature_2m}`;
-    })
-  })
+    }),
+  });
 
   const temperatureSlider = ProgressBar({
     class_name: "min-w-24 mx-2",
-    vpack: 'center',
-    value: WeatherInfo.bind('value').transform(value => {
-      const { current, daily } = value
-      if(!current) return 0;
+    vpack: "center",
+    value: WeatherInfo.bind("value").transform((value) => {
+      const { current, daily } = value;
+      if (!current) return 0;
 
       // get a 0-1 range between min and max (who said we would'nt be using this?)
       const min = daily.temperature_2m_min;
       const max = daily.temperature_2m_max;
       return (current.temperature_2m - min) / (max - min);
-    })
-  })
+    }),
+  });
 
   // WMO Weather interpretation codes (WW)
   // Code	Description
@@ -97,118 +106,119 @@ const Weather = () => {
   // 96, 99 *	Thunderstorm with slight and heavy hail
   // (*) Thunderstorm forecast with hail is only available in Central Europe
 
-
   const weatherIcon = Icon({
-    class_name: 'bg-transparent mx-2',
+    class_name: "bg-transparent mx-2",
     size: 24,
-    vpack: 'center',
-    icon: WeatherInfo.bind('value').transform(value => {
-      const { current } = value
-      if (!current) return
-      const { weathercode, is_day } = current
+    vpack: "center",
+    icon: WeatherInfo.bind("value").transform((value) => {
+      const { current } = value;
+      if (!current) return;
+      const { weathercode, is_day } = current;
 
       const dayIconSet = {
-        [0]: 'weather-clear',
-        [1]: 'weather-few-clouds',
-        [2]: 'weather-clouds',
-        [3]: 'weather-overcast',
-        [45]: 'weather-fog',
-        [48]: 'weather-fog',
-        [51]: 'weather-showers-scattered-day',
-        [53]: 'weather-showers-scattered-day',
-        [55]: 'weather-showers-scattered-day',
-        [56]: 'weather-showers-scattered-day',
-        [57]: 'weather-showers-scattered-day',
-        [61]: 'weather-showers-day',
-        [63]: 'weather-showers-day',
-        [65]: 'weather-showers-day',
-        [66]: 'weather-showers-day',
-        [67]: 'weather-showers-day',
-        [71]: 'weather-snow-scattered-day',
-        [73]: 'weather-snow-scattered-day',
-        [75]: 'weather-snow-scattered-day',
-        [77]: 'weather-snow-scattered-day',
-        [80]: 'weather-showers-scattered-day',
-        [81]: 'weather-showers-day',
-        [82]: 'weather-showers-day',
-        [85]: 'weather-snow-scattered-day',
-        [86]: 'weather-snow-scattered-day',
-        [95]: 'weather-storm-day',
-        [96]: 'weather-storm-day',
-        [99]: 'weather-storm-day',
-      }
+        [0]: "weather-clear",
+        [1]: "weather-few-clouds",
+        [2]: "weather-clouds",
+        [3]: "weather-overcast",
+        [45]: "weather-fog",
+        [48]: "weather-fog",
+        [51]: "weather-showers-scattered-day",
+        [53]: "weather-showers-scattered-day",
+        [55]: "weather-showers-scattered-day",
+        [56]: "weather-showers-scattered-day",
+        [57]: "weather-showers-scattered-day",
+        [61]: "weather-showers-day",
+        [63]: "weather-showers-day",
+        [65]: "weather-showers-day",
+        [66]: "weather-showers-day",
+        [67]: "weather-showers-day",
+        [71]: "weather-snow-scattered-day",
+        [73]: "weather-snow-scattered-day",
+        [75]: "weather-snow-scattered-day",
+        [77]: "weather-snow-scattered-day",
+        [80]: "weather-showers-scattered-day",
+        [81]: "weather-showers-day",
+        [82]: "weather-showers-day",
+        [85]: "weather-snow-scattered-day",
+        [86]: "weather-snow-scattered-day",
+        [95]: "weather-storm-day",
+        [96]: "weather-storm-day",
+        [99]: "weather-storm-day",
+      };
 
       const nightIconSet = {
-        [0]: 'weather-clear-night',
-        [1]: 'weather-few-clouds-night',
-        [2]: 'weather-clouds-night',
-        [3]: 'weather-overcast',
-        [45]: 'weather-fog',
-        [48]: 'weather-fog',
-        [51]: 'weather-showers-scattered-night',
-        [53]: 'weather-showers-scattered-night',
-        [55]: 'weather-showers-scattered-night',
-        [56]: 'weather-showers-scattered-night',
-        [57]: 'weather-showers-scattered-night',
-        [61]: 'weather-showers-night',
-        [63]: 'weather-showers-night',
-        [65]: 'weather-showers-night',
-        [66]: 'weather-showers-night',
-        [67]: 'weather-showers-night',
-        [71]: 'weather-snow-scattered-night',
-        [73]: 'weather-snow-scattered-night',
-        [75]: 'weather-snow-scattered-night',
-        [77]: 'weather-snow-scattered-night',
-        [80]: 'weather-showers-scattered-night',
-        [81]: 'weather-showers-night',
-        [82]: 'weather-showers-night',
-        [85]: 'weather-snow-scattered-night',
-        [86]: 'weather-snow-scattered-night',
-        [95]: 'weather-storm-night',
-        [96]: 'weather-storm-night',
-        [99]: 'weather-storm-night',
-      }
+        [0]: "weather-clear-night",
+        [1]: "weather-few-clouds-night",
+        [2]: "weather-clouds-night",
+        [3]: "weather-overcast",
+        [45]: "weather-fog",
+        [48]: "weather-fog",
+        [51]: "weather-showers-scattered-night",
+        [53]: "weather-showers-scattered-night",
+        [55]: "weather-showers-scattered-night",
+        [56]: "weather-showers-scattered-night",
+        [57]: "weather-showers-scattered-night",
+        [61]: "weather-showers-night",
+        [63]: "weather-showers-night",
+        [65]: "weather-showers-night",
+        [66]: "weather-showers-night",
+        [67]: "weather-showers-night",
+        [71]: "weather-snow-scattered-night",
+        [73]: "weather-snow-scattered-night",
+        [75]: "weather-snow-scattered-night",
+        [77]: "weather-snow-scattered-night",
+        [80]: "weather-showers-scattered-night",
+        [81]: "weather-showers-night",
+        [82]: "weather-showers-night",
+        [85]: "weather-snow-scattered-night",
+        [86]: "weather-snow-scattered-night",
+        [95]: "weather-storm-night",
+        [96]: "weather-storm-night",
+        [99]: "weather-storm-night",
+      };
 
       const iconSet = is_day ? dayIconSet : nightIconSet;
 
       return iconSet[weathercode];
-    })
-  })
+    }),
+  });
 
   return Box({
-    class_name: 'bg-transparent rounded-full my-2 mx-4',
+    class_name: "bg-transparent rounded-full my-2 mx-4",
     vertical: false,
     hexpand: true,
     children: [
       weatherIcon,
       currentTemperature,
       temperatureSlider,
-    ]
-  })
-}
+    ],
+  });
+};
 
-const SysTrayItem = (item) => Button({
-    child: Icon({ 
-      binds: [['icon', item, 'icon']],
+const SysTrayItem = (item) =>
+  Button({
+    child: Icon({
+      binds: [["icon", item, "icon"]],
       size: 24,
-      hpack: 'center',
-      vpack: 'center',
-      class_name: 'bg-transparent'
+      hpack: "center",
+      vpack: "center",
+      class_name: "bg-transparent",
     }),
     class_name: "ma-2 rounded-full bg-transparent",
-    binds: [['tooltip-markup', item, 'tooltip-markup']],
+    binds: [["tooltip-markup", item, "tooltip-markup"]],
     on_primary_click: (_, event) => item.activate(event),
     on_secondary_click: (_, event) => item.openMenu(event),
-});
+  });
 
-const EndModule = () => Box({
-    class_name: 'rounded-full bg-surface_background/60 ma-2',
-    binds: [['children', SystemTray, 'items', item => [
+const EndModule = () =>
+  Box({
+    class_name: "rounded-full bg-surface_background/60 ma-2",
+    binds: [["children", SystemTray, "items", (item) => [
       Weather(),
       Box({ hexpand: true }),
-      ...item.map(SysTrayItem)
+      ...item.map(SysTrayItem),
     ]]],
-})
+  });
 
 export const Top = () => {
   const content = CenterBox({
@@ -217,7 +227,7 @@ export const Top = () => {
     hexpand: true,
     start_widget: StartModule(),
     center_widget: CenterModule(),
-    end_widget: EndModule()
+    end_widget: EndModule(),
   });
 
   return Window({
@@ -228,7 +238,7 @@ export const Top = () => {
     exclusivity: "exclusive",
     child: SetupRevealer("slide_down", content, {
       width: "max",
-      height: 60
+      height: 60,
     }),
   });
 };
