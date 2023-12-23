@@ -18,7 +18,7 @@
         line-numbers = true;
       };
 
-      credential.helper = "libsecret";
+      credential.helper = "${pkgs.gitFull}/bin/git-credential-libsecret";
 
       # Sign commits
       commit.gpgsign = true;
