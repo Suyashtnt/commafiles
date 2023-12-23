@@ -10,12 +10,15 @@
     enable = true;
     userName = "Suyashtnt";
     userEmail = "suyashtnt@gmail.com";
+    package = pkgs.gitFull;
     extraConfig = {
       init = {defaultBranch = "main";};
       delta = {
         syntax-theme = "Nord";
         line-numbers = true;
       };
+
+      credential.helper = "libsecret";
 
       # Sign commits
       commit.gpgsign = true;

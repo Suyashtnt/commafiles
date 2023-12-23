@@ -248,7 +248,7 @@ const currentQueue = Variable([], {
         };
       });
     } catch (e) {
-      // @ts-ignore
+      // @ts-expect-error why the hell does gtk override the type
       console.log(e)
       return [];
     }
