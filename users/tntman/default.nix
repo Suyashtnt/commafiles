@@ -11,6 +11,7 @@
     ezModules.gammastep
     ezModules.git
     ezModules.gtk
+    ezModules.helix
     ezModules.hyprland
     ezModules.openrgb
     ezModules.playerctl

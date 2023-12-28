@@ -8,8 +8,8 @@ in ''
 
   input {
       kb_file=
-      kb_layout=
-      kb_variant=
+      kb_layout=us
+      kb_variant=workman-p
       kb_model=
       kb_options=
       kb_rules=
@@ -105,9 +105,9 @@ in ''
   bind=SUPERSHIFT,S,exec,grim - | wl-copy -t image/png && notify-send "Screenshot copied to clipboard!"
 
   # ags
-  bind=SUPER,W,exec,ags -r 'togglePowerMode();'
-  bind=SUPER,P,exec,ags -r 'toggleMusicOnly();'
-  bind=SUPER,D,exec,ags -r 'toggleAppLauncher();'
+  bind=SUPER,a,exec,ags -r 'togglePowerMode();'
+  bind=SUPER,p,exec,ags -r 'toggleMusicOnly();'
+  bind=SUPER,h,exec,ags -r 'toggleAppLauncher();'
 
   layerrule = blur, powermode-.*
   layerrule = blur, applauncher
@@ -121,28 +121,28 @@ in ''
   bind=SUPER,up,movefocus,u
   bind=SUPER,down,movefocus,d
 
-  bind=SUPER,1,workspace,1
-  bind=SUPER,2,workspace,2
-  bind=SUPER,3,workspace,3
-  bind=SUPER,4,workspace,4
-  bind=SUPER,5,workspace,5
-  bind=SUPER,6,workspace,6
-  bind=SUPER,7,workspace,7
-  bind=SUPER,8,workspace,8
-  bind=SUPER,9,workspace,9
-  bind=SUPER,0,workspace,10
+  bind=SUPER,exclam,workspace,1
+  bind=SUPER,at,workspace,2
+  bind=SUPER,numbersign,workspace,3
+  bind=SUPER,dollar,workspace,4
+  bind=SUPER,percent,workspace,5
+  bind=SUPER,asciicircum,workspace,6
+  bind=SUPER,ampersand,workspace,7
+  bind=SUPER,asterisk,workspace,8
+  bind=SUPER,parenleft,workspace,9
+  bind=SUPER,parenright,workspace,10
 
-  bind=SUPERSHIFT,1,movetoworkspace,1
-  bind=SUPERSHIFT,2,movetoworkspace,2
-  bind=SUPERSHIFT,3,movetoworkspace,3
-  bind=SUPERSHIFT,4,movetoworkspace,4
-  bind=SUPERSHIFT,5,movetoworkspace,5
-  bind=SUPERSHIFT,6,movetoworkspace,6
-  bind=SUPERSHIFT,7,movetoworkspace,7
-  bind=SUPERSHIFT,8,movetoworkspace,8
-  bind=SUPERSHIFT,9,movetoworkspace,9
-  bind=SUPERSHIFT,0,movetoworkspace,10
-
+  bind=SUPERSHIFT,exclam,movetoworkspace,1
+  bind=SUPERSHIFT,at,movetoworkspace,2
+  bind=SUPERSHIFT,numbersign,movetoworkspace,3
+  bind=SUPERSHIFT,dollar,movetoworkspace,4
+  bind=SUPERSHIFT,percent,movetoworkspace,5
+  bind=SUPERSHIFT,asciicircum,movetoworkspace,6
+  bind=SUPERSHIFT,ampersand,movetoworkspace,7
+  bind=SUPERSHIFT,asterisk,movetoworkspace,8
+  bind=SUPERSHIFT,parenleft,movetoworkspace,9
+  bind=SUPERSHIFT,parenright,movetoworkspace,10
+  
   bind=SUPER,mouse_down,workspace,e+1
   bind=SUPER,mouse_up,workspace,e-1
 ''

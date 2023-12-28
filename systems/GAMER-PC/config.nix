@@ -18,7 +18,7 @@
   services = {
     xserver = {
       layout = "za";
-      xkbVariant = "";
+      xkbVariant = "workman-p";
     };
 
     gnome = {
