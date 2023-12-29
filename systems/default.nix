@@ -14,6 +14,9 @@
         tau = {
           userHomeModules = ["tau"];
         };
+        EVIL-LAPTOP = {
+          userHomeModules = ["tntman"];
+        };
       };
     };
   };
