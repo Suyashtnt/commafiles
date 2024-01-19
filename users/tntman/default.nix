@@ -8,6 +8,7 @@
     inputs.nix-index-database.hmModules.nix-index
 
     ezModules.electron
+    ezModules.firefox
     ezModules.gammastep
     ezModules.git
     ezModules.gtk
@@ -42,10 +43,10 @@
     stateVersion = "22.05";
 
     packages = with pkgs; [
-      vivaldi # chrome but better
       obsidian # notes
       gnome.nautilus # file manager
       kooha # for screen recording
+      thunderbird # email go brrr
 
       temurin-jre-bin-17 # java go brrr
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr

@@ -63,7 +63,7 @@ in {
       plymouth.logo = ./nix.png;
     };
 
-    image = "${wallpapers}/Particles.png";
+    image = "${wallpapers}/Orbit.png";
 
     cursor = {
       package = pkgs.catppuccin-cursors.mochaLavender;
