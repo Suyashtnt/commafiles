@@ -29,9 +29,12 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
-
+  
   security = {
     # allow wayland lockers to unlock the screen
     pam.services.swaylock.text = "auth include login";

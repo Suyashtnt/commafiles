@@ -48,6 +48,7 @@ export const Images = () => {
     "/home/tntman/commafiles/wallpapers/Particles.png",
     "/home/tntman/commafiles/wallpapers/theAlmightyHexagon.png",
     "/home/tntman/commafiles/wallpapers/waves.png",
+    "/home/tntman/commafiles/wallpapers/Orbit.png",
   ];
 
   const imageWidgets = images.map((path, idx) =>

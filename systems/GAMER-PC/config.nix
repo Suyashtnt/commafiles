@@ -51,6 +51,8 @@
     gnome.adwaita-icon-theme
     ifuse
     virt-manager
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
   ];
 
   environment.variables = {

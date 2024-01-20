@@ -8,6 +8,7 @@
     inputs.nix-index-database.hmModules.nix-index
 
     ezModules.electron
+    ezModules.firefox
     ezModules.gammastep
     ezModules.git
     ezModules.gtk
@@ -41,9 +42,12 @@
 
     stateVersion = "22.05";
 
+    sessionVariables = {
+      LD_PATH = "$(nix build --print-out-paths --no-link nixpkgs#libGL)/lib";    
+    };
+
     packages = with pkgs; [
-      vivaldi # chrome but better
-      obsidian # notes
+      obsidian-wayland # notes
       gnome.nautilus # file manager
       kooha # for screen recording
 
