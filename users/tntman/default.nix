@@ -50,6 +50,7 @@
       obsidian-wayland # notes
       gnome.nautilus # file manager
       kooha # for screen recording
+      thunderbird # email go brrr
 
       temurin-jre-bin-17 # java go brrr
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
