@@ -2,7 +2,7 @@
   description = "Suyashtnt's (maybe) good dotfiles";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nix-darwin = {
         url = "github:lnl7/nix-darwin/master";
