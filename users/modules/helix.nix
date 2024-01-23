@@ -20,10 +20,10 @@
       };
       keys = {
         normal = {
-          "," = "command_mode";
-
           "A-." = "goto_previous_buffer";
           "A-minus" = "goto_next_buffer";
+          "A-<" = "goto_previous_buffer";
+          "A->" = "goto_next_buffer";
           "A-w" = ":buffer-close";
           "A-/" = "repeat_last_motion";
         };

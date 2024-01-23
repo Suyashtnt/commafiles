@@ -70,6 +70,7 @@
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
+    zellij.enable = true;
   };
 
   xresources.extraConfig = builtins.readFile (
