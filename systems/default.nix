@@ -24,6 +24,8 @@
   flake = {
     images = {
       tau = config.nixosSystems.tau.config.system.build.sdImage;
+      pc = config.nixosSystems.GAMER-PC.config.system.build.sdImage;    
+      laptop = config.nixosSystems.EVIL-LAPTOP.config.system.build.sdImage;        
     };
   };
 }

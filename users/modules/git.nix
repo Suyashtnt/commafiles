@@ -13,9 +13,12 @@
     package = pkgs.gitFull;
     extraConfig = {
       init = {defaultBranch = "main";};
-      delta = {
-        syntax-theme = "Nord";
-        line-numbers = true;
+
+      diff = { tool = "difftastic"; };
+      difftool = { prompt = false; };
+      pager = { difftool = true; };
+      "difftool \"difftastic\"" = {
+        cmd = ''difft "$LOCAL" "$REMOTE"'';
       };
 
       credential = {
@@ -30,7 +33,10 @@
       user.signingkey = "~/.ssh/id_ed25519.pub";
     };
     lfs.enable = true;
-    delta.enable = true;
+    difftastic = {
+      enable = true;
+      background = "dark";
+    };
   };
 
   programs.gpg.enable = true;
