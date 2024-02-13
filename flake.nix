@@ -152,29 +152,33 @@
     };
 
     zotero-nix.url = "github:camillemndn/zotero-nix";
+
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+    };
   };
 
   outputs = inputs @ {self, ...}:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux" "aarch64-darwin" "x86_64-darwin" "aarch64-linux"];
-
-      debug = true;
-
+      systems = ["x86_64-linux" "aarch64-linux"];
+      
       imports = [
         inputs.ez-configs.flakeModule
         ./devshell.nix
         ./pkgs
+        ./pkgs/overlay.nix
         ./systems
         ./users
       ];
 
       ezConfigs = {
-        root = ./..;
+        root = ./.;
 
         globalArgs = {
           inherit inputs;
           inherit (self) packages;
           wallpapers = ./wallpapers;
+          flakeOverlays = self.overlays;
         };
       };
     };

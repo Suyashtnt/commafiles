@@ -15,6 +15,7 @@ import {
   Vte,
   Widget,
   Window,
+  disp
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
 import { ShowPowerMode } from "./variables.js";
@@ -22,11 +23,9 @@ import { ShowPowerMode } from "./variables.js";
 /** @typedef {import("../types/service/mpris.js").MprisPlayer | null} MprisPlayer */
 /** @typedef {import("../types/service.js").Binding<any, any, MprisPlayer>} PlayerSignal */
 
-// @ts-expect-error this is fine
 const Terminal = Widget.subclass(Vte.Terminal, "AgsVteTerminal");
 
 /** @type {Vte.Terminal} */
-// @ts-expect-error this is fine
 const terminal = Terminal({
   class_name: "bg-surface_background/60 rounded-4 ma-2",
   name: "lyrics-terminal",
@@ -104,9 +103,18 @@ const MusicProgress = (/** @type MprisPlayer */ player) => {
         console.log(`Trying to change position to ${value} without player`);
       }
     },
+    setup: self => {
+       if (!player) return;
+
+       const update = (/** @type {any} */ _, /** @type {number} */ time) => {
+         self.value = time || player.position;
+       };
+       self.hook(player, update, 'position');
+       self.poll(500, update);
+    },        
     min: 0,
-    max: player?.bind("length") || 1,
-    value: player?.bind("position") || 0.5,
+    max: player?.bind("length"),
+    value: 0,
   });
 
   const progressText = Box({
@@ -114,12 +122,17 @@ const MusicProgress = (/** @type MprisPlayer */ player) => {
     class_name: "text-sm mx-2 mb-0",
     children: [
       Label({
-        setup: (self) =>
-          self
-            .poll(500, (self) => {
-              self.label = formatTime(player?.position || 0);
-            }),
-        label: "0:00",
+       setup: self => {
+            if (!player) return;
+
+            const update = (/** @type {any} */ _, /** @type {number} */ time) => {
+                player.length > 0
+                    ? self.label = formatTime(time || player.position)
+                    : self.visible = !!player;
+            };
+            self.hook(player, update, 'position');
+            self.poll(500, update);
+        },        
       }),
       Box({ hexpand: true }),
       Label({
@@ -171,7 +184,6 @@ const MusicControls = (/** @type {MprisPlayer} */ player) => {
       }),
       Button({
         child: Label({
-          // @ts-expect-error this is fine
           label: player?.bind("play_back_status").transform((status) =>
             status === "Playing" ? "󰏤" : "󰐊"
           ) || "󰐊",
@@ -372,8 +384,6 @@ const Music = () => {
     on_clicked: (self) => {
       upNext.reveal_child = !upNext.reveal_child;
 
-      /** @type {ReturnType<Label>} **/
-      // @ts-expect-error look above
       const child = self.child;
       child.label = upNext.reveal_child ? "" : "";
     },
@@ -409,13 +419,11 @@ const Lyrics = () => {
     GLib.SpawnFlags.SEARCH_PATH,
     null,
     GLib.MAXINT32,
-    // @ts-expect-error outdated typedefs
     null,
     null,
   );
 
   return Box({
-    // @ts-expect-error this is fine
     child: terminal,
     hpack: "center",
     class_name: "bg-transparent rounded-4 pa-2",

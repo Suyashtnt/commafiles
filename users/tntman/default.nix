@@ -12,7 +12,6 @@
     ezModules.gammastep
     ezModules.git
     ezModules.gtk
-    ezModules.helix
     ezModules.hyprland
     ezModules.openrgb
     ezModules.playerctl
@@ -26,12 +25,17 @@
     ezModules.spotify
     ezModules.vscode
     ezModules.webcord
+    ezModules.yazi
+    ezModules.zellij
 
     ezModules.shell
     ezModules.nushell
 
     ezModules.terminal
-    ezModules.kitty
+    ezModules.wezterm
+
+    ezModules.editor
+    ezModules.helix
 
     ezModules.theme
   ];
@@ -42,15 +46,16 @@
 
     stateVersion = "22.05";
 
-    sessionVariables = {
-      LD_PATH = "$(nix build --print-out-paths --no-link nixpkgs#libGL)/lib";    
-    };
-
     packages = with pkgs; [
-      obsidian-wayland # notes
+      (pkgs.obsidian.override {
+        electron = pkgs.electron_24;
+      }) # notes
+
       gnome.nautilus # file manager
       kooha # for screen recording
       thunderbird # email go brrr
+      fragments # for torrenting... :cluelesser:
+      loupe
 
       temurin-jre-bin-17 # java go brrr
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
@@ -70,7 +75,6 @@
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
-    zellij.enable = true;
   };
 
   xresources.extraConfig = builtins.readFile (

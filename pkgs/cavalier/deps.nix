@@ -8,8 +8,8 @@
   })
   (fetchNuGet {
     pname = "Cake.Tool";
-    version = "3.2.0";
-    sha256 = "sha256-Z5tZoTMSHaRatMAJ+jNBMwhGlPGDCRRAMbiEnEEebks=";
+    version = "4.0.0";
+    sha256 = "sha256-guIxNh+ENqZroPaoh7bJ+R0OP9Ed64BAMYSbWKMrbIc=";
   })
   (fetchNuGet {
     pname = "CommandLineParser";
@@ -118,8 +118,8 @@
   })
   (fetchNuGet {
     pname = "Nickvision.Aura";
-    version = "2023.11.3";
-    sha256 = "sha256-LWO5BkAg73QLEHtPP11JsHvvAIhLsgjRm1pVdMMc5hk=";
+    version = "2023.11.4";
+    sha256 = "sha256-us9K5RayuZGe2fkhk/c2Qw45gKmrfvyNBvHdcOnzWj0=";
   })
   (fetchNuGet {
     pname = "Nickvision.GirExt";

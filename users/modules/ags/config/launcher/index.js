@@ -14,6 +14,8 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 } = {}) => {
   const list = Box({
     vertical: true,
     spacing,
+    /** @type {ReturnType<AppItem>[]} */
+    children: []
   });
 
   const entry = Entry({
@@ -32,9 +34,8 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 } = {}) => {
 
     // filter out the list
     on_change: ({ text }) =>
-      list.children.map((item) => {
-        // @ts-expect-error app is fine
-        item.visible = item.app.match(text);
+      list.children.map((/** @type {ReturnType<AppItem>} */ item) => {
+        item.visible = item.attribute.app.match(text ?? '');
       }),
   });
 
@@ -78,7 +79,7 @@ export const Launcher = () => {
     class_name: "bg-transparent",
     popup: true,
     visible: false,
-    focusable: true,
+    keymode: 'exclusive',
     child: Applauncher(),
   });
 

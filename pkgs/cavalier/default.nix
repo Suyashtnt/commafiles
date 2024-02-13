@@ -11,19 +11,20 @@
   dotnet-sdk_8,
   dotnet-runtime_8,
   makeDesktopItem,
+  copyDesktopItems,
   ...
 }:
 buildDotnetModule rec {
   inherit src version pname;
 
-  desktopItem = makeDesktopItem {
+  desktopItems = [(makeDesktopItem {
     name = "cavalier";
-    exec = "NickvisionCavalier.GNOME";
-    icon = "cava";
     desktopName = "Cavalier";
+    icon = "cava";
+    exec = "NickvisionCavalier.GNOME %u";
     comment = meta.description;
     categories = ["AudioVideo" "Audio" "Video"];
-  };
+  })];
 
   meta = with lib; {
     description = "A gtk frontend for CAVA";
@@ -42,6 +43,7 @@ buildDotnetModule rec {
     libadwaita
     blueprint-compiler
     wrapGAppsHook
+    copyDesktopItems
   ];
 
   dotnet-sdk = dotnet-sdk_8;

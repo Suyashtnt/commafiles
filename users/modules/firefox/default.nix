@@ -4,6 +4,11 @@
     recursive = true;
   };
 
+  # home.packages = [
+  #   pkgs.firefox-pwa # PWAs go brrr
+  # ];
+  # programs.firefox.nativeMessagingHosts.packages = [ pkgs.firefox-pwa ];
+
   programs.firefox = {
     enable = true;
     package = pkgs.firefox;

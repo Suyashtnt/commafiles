@@ -49,3 +49,11 @@ const toKebabCase = (/** @type {string} */ str) => {
       : letter;
   }).join("");
 };
+
+/**
+* @template T
+*/
+export const disp = (/** @type {T} */ input) => {
+  log(input)
+  return input;
+}

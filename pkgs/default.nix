@@ -15,6 +15,7 @@
       cavalier = pkgs.callPackage ./cavalier {
         inherit (getPackage "cavalier") src version pname;
       };
+      firefox-pwa = pkgs.callPackage ./firepwa {};
     };
   };
 }

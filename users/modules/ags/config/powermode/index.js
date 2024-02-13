@@ -3,7 +3,7 @@ import { Top } from "./top.js";
 import { Bottom } from "./bottom.js";
 import { Left } from "./left.js";
 import { Right } from "./right.js";
-import { AgsWidget, Box, Gtk, Revealer, toCSS } from "../imports.js";
+import { Widget, Box, Gtk, Revealer, toCSS } from "../imports.js";
 
 /**
  * @template {typeof Gtk.Widget} T
@@ -23,9 +23,9 @@ function createCtor(Widget) {
  * @typedef  {import("types/widgets/widget.js").BaseProps<ForceSizedClass, Gtk.Bin.ConstructorProperties & { width?: GtkSize, height?: GtkSize }>} ForceSizedProps
  */
 
-class ForceSizedClass extends AgsWidget(Gtk.Bin, "ForceSized") {
+class ForceSizedClass extends Gtk.Bin {
   static {
-    AgsWidget.register(this, {
+    Widget.register(this, {
       typename: "ForceSized",
       cssName: "force-sized",
       properties: {
@@ -102,7 +102,10 @@ export const SetupRevealer = (
         height: sizing.height,
         child: content,
       }),
-      connections: [[ShowPowerMode, (revealer) => {
+    })
+    .hook(
+      ShowPowerMode,
+      (revealer) => {
         if (isMusic) {
           revealer.reveal_child = ShowPowerMode.value.powerMode ||
             ShowPowerMode.value.musicOnly;
@@ -111,8 +114,8 @@ export const SetupRevealer = (
         }
 
         revealer.class_name = revealer.reveal_child ? "bg-mantle/100" : "";
-      }]],
-    }),
+      }
+    ),
   });
 
 export const SetupPowerMode = () => {

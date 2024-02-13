@@ -1,15 +1,16 @@
 {
   pkgs,
   inputs,
+  packages,
   ...
 }: {
   environment.defaultPackages = [];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = false;
+
   nixpkgs.config.permittedInsecurePackages = [
-    # "electron-25.9.0" # obsidian :pensive:
-    "electron-24.8.6" # Obsidian Wayland, above does not work 
+     "electron-24.8.6" # Obsidian Wayland, above does not work 
   ];
 
   nixpkgs.overlays = [
@@ -32,7 +33,8 @@
         nativeBuildInputs = with pkgs; [pkg-config libxkbcommon];
         doCheck = false; # breaks on nixOS
       };
-      obsidian-wayland = super.obsidian.override { electron = final.electron_24; }; 
+
+      inherit (packages.${pkgs.system}) fennel-ls cavalier firefox-pwa;
     })
   ];
 

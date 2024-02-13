@@ -8,6 +8,7 @@ export const AppItem = (app) =>
       App.closeWindow(WINDOW_NAME);
       app.launch();
     },
+    attribute: { app },
     class_name: "bg-surface_background/60 rounded-4",
     child: Box({
       children: [

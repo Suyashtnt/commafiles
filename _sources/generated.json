@@ -13,15 +13,15 @@
             "name": null,
             "owner": "NickvisionApps",
             "repo": "Cavalier",
-            "rev": "2023.11.0",
-            "sha256": "sha256-QFNx+NX+6OvnU9T7tKr3Z5vwr76saW+bjx+l98LXOp4=",
+            "rev": "2024.1.0",
+            "sha256": "sha256-SFhEKtYrlnkbLMnxU4Uf4jnFsw0MJHstgZgLLnGC2d8=",
             "type": "github"
         },
-        "version": "2023.11.0"
+        "version": "2024.1.0"
     },
     "fennel-ls": {
         "cargoLocks": null,
-        "date": "2023-12-06",
+        "date": "2024-02-02",
         "extract": null,
         "name": "fennel-ls",
         "passthru": null,
@@ -31,11 +31,11 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "a29cbe496e7c110b304b0119e7d8b91aa0fa713d",
-            "sha256": "sha256-RW3WFJGwascD4YnnrAm/2LFnVigzgtfzVubLMDW9J5s=",
+            "rev": "8a988cb8be8ccd563781e7666d95895908e3a70c",
+            "sha256": "sha256-iGpyCnAKchFpaOwoWtJ4fABcrd1WIqUvB40cfQBO2G8=",
             "type": "git",
             "url": "https://git.sr.ht/~xerool/fennel-ls"
         },
-        "version": "a29cbe496e7c110b304b0119e7d8b91aa0fa713d"
+        "version": "8a988cb8be8ccd563781e7666d95895908e3a70c"
     }
 }

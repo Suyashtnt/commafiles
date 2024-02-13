@@ -95,10 +95,13 @@ export const Images = () => {
     child: Box({
       css: genBoxCss(images[selectedImage.value]),
       class_name: "min-h-38 rounded-xl",
-      connections: [[selectedImage, (box) => {
+    })
+    .hook(
+      selectedImage,
+      (box) => {
         box.css = genBoxCss(images[selectedImage.value]);
-      }]],
-    }),
+      }
+    ),
   });
 
   return Box({
@@ -130,14 +133,15 @@ const DateModule = () => {
       class_name: "text-surface_foreground/100 text-xl pt-[2px]",
       label: "Date",
       vpack: "center",
-      connections: [[
-        1000,
-        (label) =>
+    })
+    .poll(
+      1000, 
+      (label) => {
           label.label =
             GLib.DateTime.new_now_local().format("%H:%M:%S · %A %d/%m") ??
-              "No date",
-      ]],
-    }),
+              "No date"
+      }
+    ),
   });
 
   return Box({

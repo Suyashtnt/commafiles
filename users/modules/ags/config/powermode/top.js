@@ -198,27 +198,37 @@ const Weather = () => {
 const SysTrayItem = (item) =>
   Button({
     child: Icon({
-      binds: [["icon", item, "icon"]],
       size: 24,
       hpack: "center",
       vpack: "center",
       class_name: "bg-transparent",
-    }),
+    }).bind(
+      "icon",
+      item,
+      "icon"
+    ),
     class_name: "ma-2 rounded-full bg-transparent",
-    binds: [["tooltip-markup", item, "tooltip-markup"]],
     on_primary_click: (_, event) => item.activate(event),
     on_secondary_click: (_, event) => item.openMenu(event),
-  });
+  })
+  .bind(
+    "tooltip_markup",
+    item,
+    "tooltip-markup"
+  );
 
 const EndModule = () =>
-  Box({
-    class_name: "rounded-full bg-surface_background/60 ma-2",
-    binds: [["children", SystemTray, "items", (item) => [
+  Box({ class_name: "rounded-full bg-surface_background/60 ma-2" })
+  .bind(
+    "children",
+    SystemTray,
+    "items",
+    (item) => [
       Weather(),
       Box({ hexpand: true }),
       ...item.map(SysTrayItem),
-    ]]],
-  });
+    ]
+  );
 
 export const Top = () => {
   const content = CenterBox({

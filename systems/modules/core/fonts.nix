@@ -6,6 +6,7 @@
       font-awesome
       inter
       emacs-all-the-icons-fonts
+      hack-font
     ];
 
     fontconfig = {

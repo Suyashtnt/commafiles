@@ -3,26 +3,26 @@
 {
   cavalier = {
     pname = "cavalier";
-    version = "2023.11.0";
+    version = "2024.1.0";
     src = fetchFromGitHub {
       owner = "NickvisionApps";
       repo = "Cavalier";
-      rev = "2023.11.0";
+      rev = "2024.1.0";
       fetchSubmodules = false;
-      sha256 = "sha256-QFNx+NX+6OvnU9T7tKr3Z5vwr76saW+bjx+l98LXOp4=";
+      sha256 = "sha256-SFhEKtYrlnkbLMnxU4Uf4jnFsw0MJHstgZgLLnGC2d8=";
     };
   };
   fennel-ls = {
     pname = "fennel-ls";
-    version = "a29cbe496e7c110b304b0119e7d8b91aa0fa713d";
+    version = "8a988cb8be8ccd563781e7666d95895908e3a70c";
     src = fetchgit {
       url = "https://git.sr.ht/~xerool/fennel-ls";
-      rev = "a29cbe496e7c110b304b0119e7d8b91aa0fa713d";
+      rev = "8a988cb8be8ccd563781e7666d95895908e3a70c";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "sha256-RW3WFJGwascD4YnnrAm/2LFnVigzgtfzVubLMDW9J5s=";
+      sha256 = "sha256-iGpyCnAKchFpaOwoWtJ4fABcrd1WIqUvB40cfQBO2G8=";
     };
-    date = "2023-12-06";
+    date = "2024-02-02";
   };
 }
