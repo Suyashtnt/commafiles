@@ -50,6 +50,7 @@
       (pkgs.obsidian.override {
         electron = pkgs.electron_24;
       }) # notes
+      anki # cards (obsidian spaced reptition has failed me again)
 
       gnome.nautilus # file manager
       kooha # for screen recording
