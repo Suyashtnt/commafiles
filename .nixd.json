@@ -1,0 +1,1 @@
+{"eval":{"depth":10,"target":{"args":["-f","default.nix"],"installable":"nixosConfigurations.GAMER-PC.config.system.build.toplevel"},"workers":3},"formatting":{"command":"alejandra"},"options":{"depth":10,"enable":true,"target":{"args":[],"installable":".#nixosConfigurations.GAMER-PC.options"}}}

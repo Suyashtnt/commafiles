@@ -1,6 +1,6 @@
 import presetUno from "@unocss/preset-uno";
-import darkTheme from "./kleur-dark.json" assert { type: "json" };
 
+const darkTheme = JSON.parse(await Deno.readTextFile("./kleur-dark.json"));
 
 const flattenTheme = (
   /** @type {typeof darkTheme} */

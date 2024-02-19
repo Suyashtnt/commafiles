@@ -1,7 +1,6 @@
-{
-  inputs,
-  pkgs,
-  ...
+{ inputs
+, pkgs
+, ...
 }: {
   imports = [ inputs.ags.homeManagerModules.default ];
 
@@ -13,7 +12,7 @@
     configDir = pkgs.stdenv.mkDerivation rec {
       name = "ags-config";
       src = ./.;
-      nativeBuildInputs = [pkgs.deno pkgs.nodejs];
+      nativeBuildInputs = [ pkgs.deno pkgs.nodejs ];
 
       uno-comp = pkgs.deno2nix.mkExecutable {
         pname = "ags-uno-compiler";
@@ -29,9 +28,12 @@
         additionalDenoFlags = "-A";
       };
 
+      patchPhase = ''
+        echo '${builtins.toJSON inputs.kleur.themes.${pkgs.system}.dark.json}' > kleur-dark.json
+      '';
+
       installPhase = ''
         mkdir $out
-        ls ${uno-comp}/bin
         ${uno-comp}/bin/uno-comp
         cp -r ./config/* $out
       '';

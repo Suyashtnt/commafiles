@@ -7,6 +7,7 @@
       inter
       emacs-all-the-icons-fonts
       hack-font
+      recursive
     ];
 
     fontconfig = {

@@ -19,6 +19,11 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    flake-compat = {
+      url = "github:inclyc/flake-compat";
+      flake = false;
+    };
+
     ags = {
      url = "github:Aylur/ags";
      inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +83,11 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland/2df0d034bc4a18fafb3524401eeeceaa6b23e753";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    kleur = {
+      url = "github:suyashtnt/kleur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -161,6 +171,8 @@
   outputs = inputs @ {self, ...}:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
+
+      debug = true;
       
       imports = [
         inputs.ez-configs.flakeModule

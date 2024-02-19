@@ -6,6 +6,19 @@
 
   programs.helix = {
     enable = true;
+    defaultEditor = true;
+    languages = {
+      language-server.nixd = {
+        command = "${pkgs.nixd}/bin/nixd";
+        args = [];
+      };
+      language = [
+        {
+          name = "nix";
+          language-servers = ["nixd"];
+        }
+      ];      
+    };
     settings = {
       editor = {
         bufferline = "multiple";

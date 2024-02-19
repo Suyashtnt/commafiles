@@ -17,8 +17,4 @@ in
       description = "The name of the editor.";
     };
   };
-
-  config.home.sessionVariables = {
-    EDITOR = cfg.executable;
-  };
 }
