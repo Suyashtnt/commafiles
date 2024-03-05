@@ -28,12 +28,6 @@
 
       craneLib = inputs.crane.lib.${pkgs.system};
 
-      swww = craneLib.buildPackage {
-        src = craneLib.cleanCargoSource inputs.swww-src;
-        nativeBuildInputs = with pkgs; [pkg-config libxkbcommon];
-        doCheck = false; # breaks on nixOS
-      };
-
       inherit (packages.${pkgs.system}) fennel-ls cavalier firefox-pwa;
     })
   ];

@@ -141,11 +141,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    swww-src = {
-      url = "github:Horus645/swww";
-      flake = false;
-    };
-
     typst-mode-src = {
       url = "github:Ziqi-Yang/typst-mode.el";
       flake = false;
@@ -161,7 +156,10 @@
       flake = false;
     };
 
-    zotero-nix.url = "github:camillemndn/zotero-nix";
+    zotero-nix = {
+      url = "github:camillemndn/zotero-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     zjstatus = {
       url = "github:dj95/zjstatus";

@@ -14,27 +14,13 @@
       src = ./.;
       nativeBuildInputs = [ pkgs.deno pkgs.nodejs ];
 
-      uno-comp = pkgs.deno2nix.mkExecutable {
-        pname = "ags-uno-compiler";
-        version = "0.1.0";
-
-        src = ./.;
-        bin = "uno-comp";
-
-        entrypoint = "./createUnoFile.js";
-        lockfile = "./deno.lock";
-        config = "./deno.json";
-
-        additionalDenoFlags = "-A";
-      };
-
       patchPhase = ''
         echo '${builtins.toJSON inputs.kleur.themes.${pkgs.system}.dark.json}' > kleur-dark.json
       '';
 
       installPhase = ''
         mkdir $out
-        ${uno-comp}/bin/uno-comp
+        deno run -A uno.js
         cp -r ./config/* $out
       '';
     };

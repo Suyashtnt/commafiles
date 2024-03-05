@@ -9,7 +9,6 @@
 
     ezModules.electron
     ezModules.firefox
-    ezModules.gammastep
     ezModules.git
     ezModules.gtk
     ezModules.hyprland
@@ -20,7 +19,6 @@
     ezModules.xdg
     ezModules.ags
     ezModules.neofetch
-    ezModules.neovim
     ezModules.obs
     ezModules.spotify
     ezModules.vscode
@@ -56,7 +54,6 @@
       kooha # for screen recording
       thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
-      loupe
 
       temurin-jre-bin-17 # java go brrr
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
