@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     openssl
-    pinentry-qt
     gitui
     gh
   ];
@@ -44,7 +43,7 @@
   services = {
     gpg-agent = {
       enable = true;
-      pinentryFlavor = "qt";
+      pinentryPackage = pkgs.pinentry-qt;
     };
   };
 }

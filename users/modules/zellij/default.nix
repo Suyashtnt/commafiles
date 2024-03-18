@@ -22,5 +22,4 @@
 	};
 
 	xdg.configFile."zellij/layouts".source = ./layouts;
-	xdg.configFile."zellij/zjstatus.wasm".source = "${inputs.zjstatus.packages.${pkgs.system}.default}/bin/zjstatus.wasm";
 }

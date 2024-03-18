@@ -4,7 +4,7 @@ layout {
     }
 
     pane size=1 borderless=true {
-        plugin location="https://github.com/dj95/zjstatus/releases/download/v0.12.0/zjstatus.wasm" {
+        plugin location="https://github.com/dj95/zjstatus/releases/download/v0.13.1/zjstatus.wasm" {
             format_left  "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
             format_right "{command_git_branch} {datetime}"
             format_space ""

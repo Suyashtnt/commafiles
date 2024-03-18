@@ -33,11 +33,11 @@ in ''
   }
 
   decoration {
-      rounding=14
+      rounding=16
 
       blur {
         enabled=1
-        size = 2
+        size = 8
         passes = 4
       }
 

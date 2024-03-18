@@ -8,7 +8,6 @@
   }: {
     devShells.default = pkgs.mkShell {
       packages = with pkgs; [
-        nixd # nix LSP
         yaml-language-server # yaml LSP
         alejandra # uncomprimising nix formatter
         fnlfmt # fennel formatter

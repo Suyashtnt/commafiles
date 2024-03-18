@@ -34,7 +34,6 @@
       };
       "breadcrumbs.enabled" = true;
       "cSpell.userWords" = ["figcaption" "glitched" "imagetools" "metaframework" "scrset" "srcset" "truegray"];
-      "catppuccin.accentColor" = "sapphire";
       "css.validate" = true;
       "debug.allowBreakpointsEverywhere" = true;
       "debug.javascript.autoAttachFilter" = "onlyWithFlag";

@@ -74,8 +74,4 @@
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
   };
-
-  xresources.extraConfig = builtins.readFile (
-    inputs.xresources + "/mocha.Xresources"
-  );
 }

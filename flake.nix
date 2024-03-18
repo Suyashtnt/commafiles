@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nix-darwin = {
-        url = "github:lnl7/nix-darwin/master";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -29,11 +24,6 @@
      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    btop-theme = {
-      url = "github:catppuccin/btop";
-      flake = false;
-    };
-
     copilot-mode-src = {
       url = "github:zerolfx/copilot.el";
       flake = false;
@@ -41,11 +31,6 @@
 
     crane = {
       url = "github:ipetkov/crane";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    deno2nix = {
-      url = "github:SnO2WMaN/deno2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -69,20 +54,13 @@
       };
     };
 
-    grub-theme = {
-      url = "github:catppuccin/grub";
-      flake = false;
-    };
-
     helix = {
       url = "github:helix-editor/helix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/2df0d034bc4a18fafb3524401eeeceaa6b23e753";
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -103,6 +81,14 @@
       flake = false;
     };
 
+    nixd = {
+      url = "github:nix-community/nixd";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nixpkgs-f2k = {
@@ -117,11 +103,6 @@
 
     nyoom-src = {
       url = "github:nyoom-engineering/nyoom.nvim";
-      flake = false;
-    };
-
-    plymouth-theme = {
-      url = "github:catppuccin/plymouth";
       flake = false;
     };
 
@@ -151,18 +132,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    xresources = {
-      url = "github:catppuccin/xresources";
-      flake = false;
-    };
-
     zotero-nix = {
       url = "github:camillemndn/zotero-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zjstatus = {
-      url = "github:dj95/zjstatus";
     };
   };
 
