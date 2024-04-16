@@ -8,11 +8,10 @@
     inputs.stylix.nixosModules.stylix
 
     ezModules.core
-    ezModules.amd
+    ezModules.intel
     ezModules.ld
     ezModules.printing
     ezModules.wayland
-    ezModules.geoclue
 
     ezModules.theme
     ezModules.kleur
