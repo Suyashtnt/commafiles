@@ -10,6 +10,8 @@
     ezModules.core
     ezModules.intel
     ezModules.nvidia
+    ezModules.navidrome
+    ezModules.sops
     ezModules.ld
     ezModules.printing
     ezModules.wayland

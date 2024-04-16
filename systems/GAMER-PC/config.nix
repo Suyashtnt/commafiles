@@ -50,6 +50,7 @@
     vim # backup editor
     libimobiledevice
     gnome.adwaita-icon-theme
+    cloudflared
     ifuse
     virt-manager
     xdg-desktop-portal-gtk

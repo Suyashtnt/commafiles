@@ -111,6 +111,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     spotify-player-src = {
       url = "github:aome510/spotify-player";
       flake = false;
@@ -160,6 +165,7 @@
           inherit inputs;
           inherit (self) packages;
           wallpapers = ./wallpapers;
+          secrets = ./secrets;
           flakeOverlays = self.overlays;
         };
       };

@@ -1,0 +1,7 @@
+keys:
+  - &suyashtnt age1wc2azunqm69j6uwdfrtw6z2td7me2qmqf5rfndwke2mner5g94nsc0j2ns
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *suyashtnt

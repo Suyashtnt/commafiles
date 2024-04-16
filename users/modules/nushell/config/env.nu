@@ -30,3 +30,9 @@ $env.NU_PLUGIN_DIRS = [
 $env.WLR_NO_HARDWARE_CURSORS = 1
 $env.LIBVA_DRIVER_NAME = 'nvidia'
 
+mkdir ~/.local/share/atuin/
+atuin init nu | save -f ~/.local/share/atuin/init.nu
+## Temporary fix for Nushell deprecating --redirect-stderr
+## https://github.com/atuinsh/atuin/pull/1913/commits/4c564aca2f385d38f26c13f5b4aeeee318dce0d4
+open ~/.local/share/atuin/init.nu | str replace --all 'run-external --redirect-stderr atuin search' 'run-external atuin search' | save -f ~/.local/share/atuin/init.nu;
+open ~/.local/share/atuin/init.nu | str replace --all '| complete | $in.stderr | str substring ..-1)' 'e>| str trim)' | save -f ~/.local/share/atuin/init.nu;

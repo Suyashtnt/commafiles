@@ -96,7 +96,7 @@ in ''
   bind=SUPER,F,togglesplit
 
   # utils
-  bind=SUPER,Q,exec,${config.tntman.home.terminal.executable}
+  bind=SUPER,Q,exec, [float;tile] ${config.tntman.home.terminal.executable}
   bind=SUPERSHIFT,L,exec,swaylock
   bind=SUPERSHIFT,P,exec,nu -c 'spotify_player get key playback | from json | get item.external_urls.spotify | wl-copy; notify-send "copied current song to clipboard!"'
 

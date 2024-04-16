@@ -37,6 +37,7 @@
     systemd
     icu
     openssl
+    webkitgtk
     xorg.libX11
     xorg.libXScrnSaver
     xorg.libXcomposite

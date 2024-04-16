@@ -1,8 +1,6 @@
 {...}: {
   perSystem = {
     config,
-    self',
-    inputs',
     pkgs,
     ...
   }: {
@@ -17,6 +15,8 @@
         deno # deno LSP for ags transpiler
         nodejs
         nodePackages.typescript-language-server # typescript LSP for ags autocomplete
+        sops
+        nixd
       ];
     };
   };

@@ -479,14 +479,14 @@ let multiple_completers = {|spans: list<string>|
     return $specialized_completer_result
   }
 
-  let carapace_completer_result = do $carapace_completer $spans
-  if $carapace_completer_result != null {
-    return $carapace_completer_result
-  }
-
   let fish_completer_result = do $fish_completer $spans
   if $fish_completer_result != null {
     return $fish_completer_result
+  }
+
+  let carapace_completer_result = do $carapace_completer $spans
+  if $carapace_completer_result != null {
+    return $carapace_completer_result
   }
 
   $null_completer

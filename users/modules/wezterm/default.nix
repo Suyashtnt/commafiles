@@ -6,7 +6,7 @@
   };
 
   tntman.home.terminal = {
-    executable = "${config.programs.wezterm.package}/bin/wezterm";
+    executable = "${config.programs.wezterm.package}/bin/wezterm start --always-new-process";
     name = "wezterm";
   };
 }

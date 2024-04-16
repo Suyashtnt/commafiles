@@ -19,7 +19,7 @@
 
     atuin = {
       enable = true;
-      enableNushellIntegration = true;
+      enableNushellIntegration = false; # handled manually
     };
 
     zoxide = {

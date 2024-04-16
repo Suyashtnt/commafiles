@@ -20,7 +20,6 @@
     ezModules.ags
     ezModules.neofetch
     ezModules.obs
-    ezModules.spotify
     ezModules.vscode
     ezModules.webcord
     ezModules.yazi
@@ -54,6 +53,7 @@
       kooha # for screen recording
       thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
+      cavalier
 
       temurin-jre-bin-17 # java go brrr
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr

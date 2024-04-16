@@ -15,6 +15,7 @@ config.font = wezterm.font_with_fallback {
 config.window_background_opacity = 0.6
 config.enable_wayland = true
 config.enable_tab_bar = false
+config.underline_thickness = "2pt"
 
 local gpus = wezterm.gui.enumerate_gpus()
 config.front_end = "WebGpu"

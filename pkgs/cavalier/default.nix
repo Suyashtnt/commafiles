@@ -12,6 +12,7 @@
   dotnet-runtime_8,
   makeDesktopItem,
   copyDesktopItems,
+  cava,
   ...
 }:
 buildDotnetModule rec {
@@ -36,6 +37,7 @@ buildDotnetModule rec {
   runtimeDeps = [
     gtk4
     libadwaita
+    cava
   ];
 
   nativeBuildInputs = [
