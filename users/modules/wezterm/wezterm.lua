@@ -12,7 +12,6 @@ config.font = wezterm.font_with_fallback {
   "ComicCodeLigatures Nerd Font",
   "JetBrains Mono Nerd Font Mono",
 }
-config.window_background_opacity = 0.6
 config.enable_wayland = true
 config.enable_tab_bar = false
 config.underline_thickness = "2pt"

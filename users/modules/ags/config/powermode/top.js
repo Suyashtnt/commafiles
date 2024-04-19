@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   CenterBox,
-  Hyprland,
   Icon,
   Label,
   ProgressBar,
@@ -23,25 +22,13 @@ const StartModule = () => {
       .map((i) =>
         Button({
           on_clicked: () =>
-            Utils.execAsync(`hyprctl dispatch workspace ${i}`).catch(print),
+            Utils.execAsync(`niri msg action focus-workspace ${i}`).catch(print),
           child: Label({
             label: `${i}`,
             class_name: baseClasses,
             vpack: "center",
           }),
-          class_name: Hyprland.bind("workspaces").transform((_) => {
-            const active = Hyprland.active.workspace.id === i;
-            const occupied = (Hyprland.getWorkspace(i)?.windows ?? 0) > 0 &&
-              !active;
-
-            const colour = active
-              ? "bg-primary_foreground/100"
-              : occupied
-              ? "bg-subtle_background/100"
-              : "bg-overlay_background/100";
-
-            return `${baseClasses} ${colour}`;
-          }),
+          class_name: baseClasses
         })
       ),
   });

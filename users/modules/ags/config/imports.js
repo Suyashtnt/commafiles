@@ -26,7 +26,6 @@ export { default as AgsWidget } from "resource:///com/github/Aylur/ags/widgets/w
 
 export { default as Mpris } from "resource:///com/github/Aylur/ags/service/mpris.js";
 export { default as Notifications } from "resource:///com/github/Aylur/ags/service/notifications.js";
-export { default as Hyprland } from "resource:///com/github/Aylur/ags/service/hyprland.js";
 export { default as SystemTray } from "resource:///com/github/Aylur/ags/service/systemtray.js";
 export { default as Variable } from "resource:///com/github/Aylur/ags/variable.js";
 export { default as Service } from "resource:///com/github/Aylur/ags/service.js";

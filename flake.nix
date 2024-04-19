@@ -81,6 +81,15 @@
       flake = false;
     };
 
+    niri = {
+      url = "github:sodiboo/niri-flake";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
     nixd = {
       url = "github:nix-community/nixd";
       inputs = {

@@ -12,6 +12,7 @@
     ezModules.git
     ezModules.gtk
     ezModules.hyprland
+    ezModules.niri
     ezModules.openrgb
     ezModules.playerctl
     ezModules.swaylock

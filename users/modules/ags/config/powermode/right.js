@@ -258,144 +258,15 @@ const MusicPlayer = () => {
   });
 };
 
-/** @type {ReturnType<typeof Variable<{name: string; artists: string; coverArt: string; }[]>>} */
-const currentQueue = Variable([], {
-  poll: [5000, "spotify_player get key queue", (out) => {
-    try {
-      const { queue } = JSON.parse(out);
-
-      return queue.map(
-        (
-          /** @type {{ name: string; artists: {name: string}[]; album: { images: { url: string; }[]; }; }} */ item,
-        ) => {
-          const coverArt = getAlbumArtPath(item);
-
-          return {
-            name: item.name,
-            artists: item.artists.map((artist) => artist.name).join(", "),
-            coverArt,
-          };
-        },
-      );
-    } catch (e) {
-      // @ts-expect-error why the hell does gtk override the type
-      console.log(e);
-      return [];
-    }
-  }],
-});
-
-// since we refresh so often its beneficial to only start polling when we need to
-ShowPowerMode.connect("changed", () => {
-  if (ShowPowerMode.value.powerMode || ShowPowerMode.value.musicOnly) {
-    currentQueue.startPoll();
-  } else {
-    currentQueue.stopPoll();
-  }
-});
-
-const UpNext = () => {
-  const queue = Box({
-    vertical: true,
-    spacing: 8,
-    class_name: "pa-[1px]",
-    children: Array(10).fill(0).map((_, idx) =>
-      Box({
-        class_name: "bg-overlay_background/40 rounded-lg pa-3",
-        hexpand: true,
-        children: [
-          Box({
-            class_name:
-              "bg-overlay_background/100 rounded-lg min-h-10 min-w-10",
-            css: currentQueue.bind("value").transform((queue) =>
-              toCSS({
-                backgroundImage: `url('${queue[idx]?.coverArt}')`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-              })
-            ),
-          }),
-          Box({
-            vertical: true,
-            class_name: "mx-2",
-            children: [
-              Label({
-                class_name: "text-lg mb-1",
-                justification: "left",
-                truncate: "end",
-                label: currentQueue.bind("value").transform((queue) =>
-                  queue[idx]?.name || "No title"
-                ),
-              }),
-              Label({
-                class_name: "text-md text-subtle/80",
-                justification: "left",
-                truncate: "end",
-                label: currentQueue.bind("value").transform((queue) =>
-                  queue[idx]?.artists || "No artist"
-                ),
-              }),
-            ],
-          }),
-          Box({ hexpand: true }),
-          Button({
-            class_name:
-              "icon text-2xl px-4 py-2 ml-4 bg-overlay_background/60 text-primary_foreground/100",
-            child: Label("󰒬"),
-            on_clicked: () => {
-              for (let i = 0; i <= idx; i++) {
-                Mpris.getPlayer("spotify_player")?.next();
-              }
-            },
-          }),
-        ],
-      })
-    ),
-  });
-
-  return Revealer({
-    reveal_child: false,
-    transition: "slide_down",
-    transition_duration: 300,
-    class_name: "pa-0 ma-0",
-    child: Scrollable({
-      class_name:
-        "min-h-60 mx-3 pt-3 pa-3 bg-surface_background/60 rounded-b-4",
-      vscroll: "automatic",
-      hscroll: "never",
-      hexpand: true,
-      child: queue,
-    }),
-  });
-};
-
 const Music = () => {
-  const upNext = UpNext();
   const player = MusicPlayer();
 
-  const button = Button({
-    class_name: "rounded-2xl p-0 bg-transparent",
-    child: Label({
-      label: "",
-      justification: "center",
-      class_name: "text-4xl text-primary_foreground/100 icon",
-    }),
-    on_clicked: (self) => {
-      upNext.reveal_child = !upNext.reveal_child;
-
-      const child = self.child;
-      child.label = upNext.reveal_child ? "" : "";
-    },
-  });
 
   return Box({
     class_name: "bg-transparent",
     vertical: true,
     children: [
-      player,
-      upNext,
-      button,
+      player
     ],
   });
 };

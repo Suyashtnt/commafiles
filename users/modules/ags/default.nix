@@ -4,12 +4,16 @@
 }: {
   imports = [ inputs.ags.homeManagerModules.default ];
 
+  home.packages = [
+    pkgs.sptlrx
+  ];
+
   programs.ags = {
     enable = true;
 
     extraPackages = [ pkgs.vte ];
 
-    configDir = pkgs.stdenv.mkDerivation rec {
+    configDir = pkgs.stdenv.mkDerivation {
       name = "ags-config";
       src = ./.;
       nativeBuildInputs = [ pkgs.deno pkgs.nodejs ];

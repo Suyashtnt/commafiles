@@ -53,11 +53,11 @@ in {
       };
     };
 
-    opacity = {
-      desktop = 0.6;
-      terminal = 0.6;
-      applications = 0.6;
-    };
+    # opacity = {
+    #   desktop = 0.6;
+    #   terminal = 0.6;
+    #   applications = 0.6;
+    # };
 
     targets = {
       plymouth.logo = ./nix.png;

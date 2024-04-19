@@ -12,6 +12,7 @@
     ezModules.ld
     ezModules.printing
     ezModules.wayland
+    ezModules.niri
 
     ezModules.theme
     ezModules.kleur
