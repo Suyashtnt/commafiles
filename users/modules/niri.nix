@@ -12,8 +12,23 @@ in {
       "Mod+W".action = spawn "ags" "-r" "'togglePowerMode()'";
       "Mod+P".action = spawn "ags" "-r" "'toggleMusicOnly()'";
 
+      "Mod+F".action = fullscreen-window;
+
+      "Mod+H".action = focus-column-left;
+      "Mod+J".action = focus-window-or-workspace-down;
+      "Mod+K".action = focus-window-or-workspace-up;
+      "Mod+L".action = focus-column-right;
+
+      "Mod+Shift+H".action = move-column-left;
+      "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
+      "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
+      "Mod+Shift+L".action = move-column-right;
+
       "Mod+Minus".action = set-column-width "-10%";
-      "Mod+Plus".action = set-column-width "+10%";
+      "Mod+Shift+Equal".action = set-column-width "+10%";
+
+      "Mod+Ctrl+Minus".action = set-window-height "-10%";
+      "Mod+Ctrl+Shift+Equal".action = set-window-height "+10%";
 
       "Mod+S".action = screenshot;
       "Mod+Shift+S".action = screenshot-screen;
@@ -71,7 +86,7 @@ in {
       border = {
         active = {
           gradient = {
-            angle = 145;
+            angle = 130;
             relative-to = "workspace-view";
             from = "#${theme.base0D}";
             to = "#${theme.base0E}";
@@ -79,13 +94,18 @@ in {
         };
         inactive = { 
           gradient = {
-            angle = 145;
+            angle = 130;
             relative-to = "workspace-view";
             from = "#${theme.base0D}90";
             to = "#${theme.base0E}90";
          };  
        };
       };
+    };
+
+    input = {
+      focus-follows-mouse = true;
+      touchpad.click-method = "clickfinger";
     };
 
     window-rules = [

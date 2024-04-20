@@ -56,15 +56,13 @@
       fragments # for torrenting... :cluelesser:
       cavalier
 
-      temurin-jre-bin-17 # java go brrr
-      inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
+      # inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
       fractal # matrix go brrr
 
       # CLI utils
       btop # monitoring stuff
-      unzip # unzipping stuff
       ripgrep # searching stuff
       cachix # caching stuff
       bitwarden-cli # password manager stuff
