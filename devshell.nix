@@ -16,7 +16,6 @@
         nodejs
         nodePackages.typescript-language-server # typescript LSP for ags autocomplete
         sops
-        nixd
       ];
     };
   };
