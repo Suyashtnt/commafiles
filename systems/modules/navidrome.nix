@@ -1,29 +1,46 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
+  # sops required to run this anyways
+  sops.secrets."lastfm/key" = {
+    owner = config.systemd.services.navidrome.serviceConfig.User;
+    restartUnits = [ "navidrome.service" ];
+  };
+  sops.secrets."lastfm/secret" = {
+    owner = config.systemd.services.navidrome.serviceConfig.User;
+    restartUnits = [ "navidrome.service" ];
+  };
+  sops.templates."navidrome-config.toml" = {
+    content = ''
+      MusicFolder = "/mnt/BulkStorage/Music"
+      Address = "192.168.1.42"
+      LastFM.Enabled = true
+      LastFM.ApiKey = "${config.sops.placeholder."lastfm/key"}"
+      LastFM.Secret = "${config.sops.placeholder."lastfm/secret"}"
+      EnableSharing = true
+      EnableExternalServices = true
+      Scanner.GroupAlbumReleases = true
+    '';
+    owner = config.users.users.navidrome.name;
+  };
+
   services.navidrome = {
     enable = true;
     openFirewall = true;
-    settings = {
-      MusicFolder = "/mnt/BulkStorage/Music";
-      Address = "192.168.1.42"; #todo: not hard code this
-      LastFM.Enabled = true;
-      EnableSharing = true;
-      Scanner.GroupAlbumReleases = true;
-    };
   };
 
   systemd.services.navidrome = {
-    after = pkgs.lib.mkForce [ "network.target" "sops-nix.service" ];
-    serviceConfig.DynamicUser = pkgs.lib.mkForce false;
-    serviceConfig.User = config.users.users.navidrome.name;
+    after = lib.mkForce [ "network.target" "sops-nix.service" ];
 
-    serviceConfig.ExecStart = let
-      settingsFormat = pkgs.formats.json {};
-      cfg = config.services.navidrome;
-    in pkgs.lib.mkForce (pkgs.writeShellScript "start-navidrome" ''
-      export ND_LASTFM_APIKEY=$(cat ${config.sops.secrets."lastfm/key".path})
-      export ND_LASTFM_SECRET=$(cat ${config.sops.secrets."lastfm/secret".path})
-      ${cfg.package}/bin/navidrome --configfile ${settingsFormat.generate "navidrome.json" cfg.settings}
-    '');
+    serviceConfig.BindReadOnlyPaths = [
+      # navidrome uses online services to download additional album metadata / covers
+      "${config.environment.etc."ssl/certs/ca-certificates.crt".source}:/etc/ssl/certs/ca-certificates.crt"
+      builtins.storeDir
+      "/etc"
+      "/mnt/BulkStorage/Music"
+      "/run/secrets-rendered"
+    ];
+    serviceConfig.DynamicUser = lib.mkForce false;
+    serviceConfig.User = config.users.users.navidrome.name;
+    serviceConfig.ExecStart = lib.mkForce "${pkgs.navidrome}/bin/navidrome --configfile ${config.sops.templates."navidrome-config.toml".path}";
   };
 
   users.users.navidrome = {
