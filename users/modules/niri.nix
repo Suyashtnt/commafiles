@@ -4,13 +4,15 @@ in {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
   home.packages = [ pkgs.swww ];
   programs.niri.settings = {
-    binds = with config.lib.niri.actions; {
+    binds = with config.lib.niri.actions; let
+      sh = spawn "sh" "-c";
+    in {
       "Mod+Shift+Slash".action = show-hotkey-overlay;
 
       "Mod+Q".action = spawn "wezterm";
-      "Mod+D".action = spawn "ags" "-t" "applauncher";
-      "Mod+W".action = spawn "ags" "-r" "'togglePowerMode()'";
-      "Mod+P".action = spawn "ags" "-r" "'toggleMusicOnly()'";
+      "Mod+D".action = sh "ags -t applauncher";
+      "Mod+W".action = sh "ags -r 'togglePowerMode()'";
+      "Mod+P".action = sh "ags -r 'toggleMusicOnly()'";
 
       "Mod+F".action = fullscreen-window;
 
@@ -51,6 +53,14 @@ in {
 
       "Mod+Comma".action = consume-window-into-column;
       "Mod+Period".action = expel-window-from-column;
+
+      "XF86AudioRaiseVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+";
+      "XF86AudioLowerVolume".action = sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
+      "XF86AudioMute".action = sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+
+      "XF86MonBrightnessUp".action = sh "brightnessctl set 5%+";
+      "XF86MonBrightnessDown".action = sh "brightnessctl set 5%-";
+      "XF86Calculator".action = sh "${pkgs.qalculate-gtk}/bin/qalculate-gtk";
 
       "Mod+1".action = focus-workspace 1;
       "Mod+2".action = focus-workspace 2;
@@ -106,6 +116,20 @@ in {
     input = {
       focus-follows-mouse = true;
       touchpad.click-method = "clickfinger";
+    };
+
+    animations = let
+      movement-conf = {
+        spring = {
+          damping-ratio = 0.760000;
+          epsilon = 0.000100;
+          stiffness = 700;
+        };
+      };
+    in {
+      horizontal-view-movement = movement-conf;
+      window-movement = movement-conf;
+      workspace-switch = movement-conf;
     };
 
     window-rules = [
