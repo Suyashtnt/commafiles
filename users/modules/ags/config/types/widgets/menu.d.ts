@@ -9,35 +9,16 @@ type MenuEventHandler<Self> = {
 export type MenuProps<MenuItem extends Gtk.MenuItem = Gtk.MenuItem, Attr = unknown, Self = Menu<MenuItem, Attr>> = BaseProps<Self, Gtk.Menu.ConstructorProperties & {
     children?: MenuItem[];
 } & MenuEventHandler<Self>, Attr>;
+export declare function newMenu<MenuItem extends Gtk.MenuItem = Gtk.MenuItem, Attr = unknown>(...props: ConstructorParameters<typeof Menu<MenuItem, Attr>>): Menu<MenuItem, Attr>;
 export interface Menu<MenuItem, Attr> extends Widget<Attr> {
 }
 export declare class Menu<MenuItem extends Gtk.MenuItem, Attr> extends Gtk.Menu {
-    constructor(props?: MenuProps<MenuItem, Attr>, ...children: MenuItem[]);
+    constructor(props?: MenuProps<MenuItem, Attr>, ...children: Gtk.MenuItem[]);
     get on_popup(): MenuEventHandler<this>['on_popup'];
     set on_popup(callback: MenuEventHandler<this>['on_popup']);
     get on_move_scroll(): MenuEventHandler<this>['on_move_scroll'];
     set on_move_scroll(callback: MenuEventHandler<this>['on_move_scroll']);
     get children(): MenuItem[];
     set children(children: MenuItem[]);
-}
-type EventHandler<Self> = (self: Self) => boolean | unknown;
-export type MenuItemProps<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown, Self = MenuItem<Child, Attr>> = BaseProps<Self, Gtk.MenuItem.ConstructorProperties & {
-    child?: Child;
-    on_activate?: EventHandler<Self>;
-    on_select?: EventHandler<Self>;
-    on_deselct?: EventHandler<Self>;
-}, Attr>;
-export interface MenuItem<Child, Attr> extends Widget<Attr> {
-}
-export declare class MenuItem<Child extends Gtk.Widget, Attr> extends Gtk.MenuItem {
-    constructor(props?: MenuItemProps<Child, Attr>, child?: Child);
-    get child(): Child;
-    set child(child: Child);
-    get on_activate(): EventHandler<this>;
-    set on_activate(callback: EventHandler<this>);
-    get on_select(): EventHandler<this>;
-    set on_select(callback: EventHandler<this>);
-    get on_deselect(): EventHandler<this>;
-    set on_deselect(callback: EventHandler<this>);
 }
 export default Menu;

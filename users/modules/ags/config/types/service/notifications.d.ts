@@ -103,6 +103,7 @@ export declare class Notifications extends Service {
     popupTimeout: number;
     forceTimeout: boolean;
     cacheActions: boolean;
+    clearDelay: number;
     private _dbus;
     private _notifications;
     private _dnd;
@@ -121,7 +122,7 @@ export declare class Notifications extends Service {
     InvokeAction(id: number, actionId: string): void;
     GetCapabilities(): string[];
     GetServerInformation(): GLib.Variant;
-    readonly clear: () => void;
+    readonly clear: () => Promise<unknown[]>;
     private _addNotification;
     private _onDismissed;
     private _onClosed;

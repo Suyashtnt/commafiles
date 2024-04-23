@@ -35,6 +35,11 @@ export type StackProps<Children extends {
     children?: Children;
     items?: [string, Gtk.Widget][];
 }, Attr>;
+export declare function newStack<Children extends {
+    [name: string]: Gtk.Widget;
+} = {
+    [name: string]: Gtk.Widget;
+}, Attr = unknown>(...props: ConstructorParameters<typeof Stack<Children, Attr>>): Stack<Children, Attr>;
 export interface Stack<Children, Attr> extends Widget<Attr> {
 }
 export declare class Stack<Children extends {

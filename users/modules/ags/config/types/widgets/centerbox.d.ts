@@ -9,6 +9,7 @@ export type CenterBoxProps<StartWidget extends Gtk.Widget = Gtk.Widget, CenterWi
     center_widget?: CenterWidget;
     end_widget?: EndWidget;
 }, Attr>;
+export declare function newCenterBox<StartWidget extends Gtk.Widget = Gtk.Widget, CenterWidget extends Gtk.Widget = Gtk.Widget, EndWidget extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof CenterBox<StartWidget, CenterWidget, EndWidget, Attr>>): CenterBox<StartWidget, CenterWidget, EndWidget, Attr>;
 export interface CenterBox<StartWidget, CenterWidget, EndWidget, Attr> extends Widget<Attr> {
 }
 export declare class CenterBox<StartWidget extends Gtk.Widget, CenterWidget extends Gtk.Widget, EndWidget extends Gtk.Widget, Attr> extends Gtk.Box {

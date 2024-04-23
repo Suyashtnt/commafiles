@@ -22,6 +22,7 @@ export type SliderProps<Attr = unknown, Self = Slider<Attr>> = BaseProps<Slider<
     step?: number;
     marks?: Mark[];
 }, Attr>;
+export declare function newSlider<Attr = unknown>(...props: ConstructorParameters<typeof Slider<Attr>>): Slider<Attr>;
 export interface Slider<Attr> extends Widget<Attr> {
 }
 export declare class Slider<Attr> extends Gtk.Scale {
@@ -40,7 +41,7 @@ export declare class Slider<Attr> extends Gtk.Scale {
     get dragging(): boolean;
     set dragging(dragging: boolean);
     get vertical(): boolean;
-    set vertical(vertical: boolean);
+    set vertical(v: boolean);
     vfunc_button_release_event(event: Gdk.EventButton): boolean;
     vfunc_button_press_event(event: Gdk.EventButton): boolean;
     vfunc_key_press_event(event: Gdk.EventKey): boolean;

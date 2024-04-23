@@ -18,15 +18,15 @@ declare const TRUNCATE: {
 };
 type Justification = keyof typeof JUSTIFICATION;
 type Truncate = keyof typeof TRUNCATE;
-export type Props<Attr = unknown, Self = Label<Attr>> = BaseProps<Self, Gtk.Label.ConstructorProperties & {
+export type LabelProps<Attr = unknown, Self = Label<Attr>> = BaseProps<Self, Gtk.Label.ConstructorProperties & {
     justification?: Justification;
     truncate?: Truncate;
 }, Attr>;
-export type LabelProps<Attr> = Props<Attr> | string | undefined;
+export declare function newLabel<Attr = unknown>(...props: ConstructorParameters<typeof Label<Attr>>): Label<Attr>;
 export interface Label<Attr> extends Widget<Attr> {
 }
 export declare class Label<Attr> extends Gtk.Label {
-    constructor(props?: LabelProps<Attr>);
+    constructor(props?: LabelProps<Attr> | string);
     get label(): string;
     set label(label: string);
     get truncate(): Truncate;

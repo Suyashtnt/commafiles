@@ -34,12 +34,13 @@ export type WindowProps<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown, S
     margins?: number[];
     monitor?: number;
     gdkmonitor?: Gdk.Monitor;
-    popup?: boolean;
     visible?: boolean;
     keymode?: Keymode;
+    popup?: boolean;
     exclusive?: boolean;
     focusable?: boolean;
 }, Attr>;
+export declare function newWindow<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof Window<Child, Attr>>): Window<Child, Attr>;
 export interface Window<Child, Attr> extends Widget<Attr> {
 }
 export declare class Window<Child extends Gtk.Widget, Attr> extends Gtk.Window {
@@ -47,8 +48,8 @@ export declare class Window<Child extends Gtk.Widget, Attr> extends Gtk.Window {
     get child(): Child;
     set child(child: Child);
     get gdkmonitor(): Gdk.Monitor | null;
-    set gdkmonitor(monitor: Gdk.Monitor);
-    get monitor(): Gdk.Monitor;
+    set gdkmonitor(monitor: Gdk.Monitor | null);
+    get monitor(): number;
     set monitor(monitor: number);
     get exclusive(): boolean;
     set exclusive(exclusive: boolean);

@@ -36,35 +36,6 @@ terminal.set_color_background(bgCol);
 
 const { execAsync, exec } = Utils;
 
-const getAlbumArtPath = (
-  /** @type {{ album: { images: { url: string; }[]; }; }} */ song,
-) => {
-  const url = song.album.images[0].url;
-  const filename = url.split("/").pop();
-
-  const fileExists = async (/** @type {string} */ path) => {
-    try {
-      await execAsync(`test -f ${path}`);
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
-  const homePath = GLib.get_home_dir();
-  const filePath = `${homePath}/.cache/ags/media/${filename}`;
-
-  fileExists(filePath).then((exists) => {
-    if (!exists) {
-      execAsync(`curl -s ${url} -o ${filePath}`).catch((e) => {
-        console.log(`failed to download file: ${e}`);
-      });
-    }
-  });
-
-  return filePath;
-};
-
 const MusicHeader = (/** @type MprisPlayer */ player) => {
   const box = Box({
     class_name: "bg-overlay_background/90 rounded-2xl p-sm",
@@ -220,25 +191,28 @@ const MusicControls = (/** @type {MprisPlayer} */ player) => {
 const MusicPlayer = () => {
   return CenterBox({
     attribute: {
-      hadPlayer: false,
+      currentPlayerName: ""
     },
     setup: (self) =>
       self.hook(Mpris, (self) => {
-        const player = Mpris.getPlayer("spotify_player");
-        if (Boolean(player) !== self.attribute.hadPlayer) {
-          console.log("switching player...");
+        const players = Mpris.players
+        const hasName = (/** @type {string} */ name) => (/** @type {MprisPlayer} */ player) => player?.name === name
+        const player = 
+          players.find(hasName("strawberry"))
+          ?? players.find(hasName("feishin"))
+        if (player && player.name !== self.attribute.currentPlayerName) {
+          console.log(`switching player to ${player.name}`);
           const startWidget = MusicHeader(player);
           const endWidget = MusicControls(player);
 
           self.start_widget = startWidget;
           self.end_widget = endWidget;
 
-          self.attribute.hadPlayer = Boolean(player);
+          self.attribute.currentPlayerName = player.name;
         }
 
         if (player) {
-          const song = JSON.parse(exec("spotify_player get key playback"));
-          const songArt = getAlbumArtPath(song.item);
+          const songArt = player.track_cover_url;
 
           self.css = toCSS({
             backgroundImage: `url('${songArt}')`,

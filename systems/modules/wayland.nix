@@ -25,14 +25,14 @@
       eval $(gnome-keyring-daemon --start)
       export GPG_TTY=$TTY
     '';
+    systemPackages = [
+      pkgs.libsForQt5.qt5.qtwayland
+      pkgs.qt6.qtwayland
+    ];
   };
 
   xdg.portal = {
     enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      # pkgs.xdg-desktop-portal-gtk
-    ];
   };
   
   security = {

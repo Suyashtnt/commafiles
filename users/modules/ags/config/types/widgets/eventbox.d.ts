@@ -19,6 +19,7 @@ export type EventBoxProps<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown,
     on_middle_click_release?: EventHandler<Self>;
     on_secondary_click_release?: EventHandler<Self>;
 }, Attr>;
+export declare function newEventBox<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof EventBox<Child, Attr>>): EventBox<Child, Attr>;
 export interface EventBox<Child, Attr> extends Widget<Attr> {
 }
 export declare class EventBox<Child extends Gtk.Widget, Attr> extends Gtk.EventBox {

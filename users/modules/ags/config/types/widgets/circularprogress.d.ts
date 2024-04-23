@@ -19,6 +19,7 @@ export type CircularProgressProps<Child extends Gtk.Widget = Gtk.Widget, Attr = 
     start_at?: number;
     end_at?: number;
 }, Attr>;
+export declare function newCircularProgress<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof CircularProgress<Child, Attr>>): CircularProgress<Child, Attr>;
 export interface CircularProgress<Child, Attr> extends Widget<Attr> {
 }
 export declare class CircularProgress<Child extends Gtk.Widget, Attr = unknown> extends Gtk.Bin {

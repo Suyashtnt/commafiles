@@ -7,6 +7,7 @@ export type EntryProps<Attr = unknown, Self = Entry<Attr>> = BaseProps<Self, Gtk
     on_accept?: EventHandler<Self>;
     on_change?: EventHandler<Self>;
 }, Attr>;
+export declare function newEntry<Attr = unknown>(...props: ConstructorParameters<typeof Entry<Attr>>): Entry<Attr>;
 export interface Entry<Attr> extends Widget<Attr> {
 }
 export declare class Entry<Attr> extends Gtk.Entry {

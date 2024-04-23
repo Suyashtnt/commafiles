@@ -3,6 +3,10 @@
 /// <reference types="@girs/gtk-3.0/node_modules/@girs/harfbuzz-0.0/node_modules/@girs/gobject-2.0/gobject-2.0-ambient.js" />
 import GObject from 'node_modules/@girs/gobject-2.0/gobject-2.0';
 import { PspecFlag, PspecType } from './utils/gobject.js';
+export type Connectable = {
+    connect: (sig: string, callback: (...args: unknown[]) => unknown) => number;
+    disconnect: (id: number) => void;
+};
 export type OnlyString<S extends string | unknown> = S extends string ? S : never;
 export type Props<T> = Omit<Pick<T, {
     [K in keyof T]: T[K] extends (...args: any[]) => any ? never : OnlyString<K>;
@@ -15,6 +19,8 @@ export declare class Binding<Emitter extends GObject.Object, Prop extends keyof 
     prop: Prop;
     transformFn: (v: any) => any;
     constructor(emitter: Emitter, prop: Prop);
+    /** alias for transform */
+    as<T>(fn: (v: Return) => T): Binding<Emitter, Prop, T>;
     transform<T>(fn: (v: Return) => T): Binding<Emitter, Prop, T>;
 }
 interface Services {

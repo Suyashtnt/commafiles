@@ -7,9 +7,13 @@ declare class PowerProfiles extends Service {
     set active_profile(profile: string);
     get performance_inhibited(): string;
     get performance_degraded(): string;
-    get profiles(): {}[];
-    get actions(): [string];
-    get active_profile_holds(): {}[];
+    get profiles(): {
+        [key: string]: string;
+    }[];
+    get actions(): string[];
+    get active_profile_holds(): {
+        [key: string]: string;
+    }[];
     get icon_name(): string;
 }
 declare const service: PowerProfiles;

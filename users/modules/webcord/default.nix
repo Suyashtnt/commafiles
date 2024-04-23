@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   home.packages = [
-    pkgs.webcord-vencord
+    (pkgs.vesktop.override {
+      withSystemVencord = false;
+    })
   ];
 }

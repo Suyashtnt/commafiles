@@ -77,11 +77,13 @@ export const Launcher = () => {
   const launcher = Window({
     name: WINDOW_NAME,
     class_name: "bg-transparent",
-    popup: true,
     visible: false,
     keymode: 'exclusive',
     child: Applauncher(),
   });
+
+  
+  launcher.keybind("Escape", () => App.closeWindow("window-name"))
 
   globalThis.toggleAppLauncher = () => {
     App.toggleWindow(WINDOW_NAME);

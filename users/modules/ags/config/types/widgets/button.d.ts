@@ -20,6 +20,7 @@ export type ButtonProps<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown, S
     on_middle_click_release?: EventHandler<Self>;
     on_secondary_click_release?: EventHandler<Self>;
 }, Attr>;
+export declare function newButton<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof Button<Child, Attr>>): Button<Child, Attr>;
 export interface Button<Child, Attr> extends Widget<Attr> {
 }
 export declare class Button<Child extends Gtk.Widget, Attr> extends Gtk.Button {

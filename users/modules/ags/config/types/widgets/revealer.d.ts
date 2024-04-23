@@ -15,6 +15,7 @@ export type RevealerProps<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown,
     child?: Child;
     transition?: Transition;
 }, Attr>;
+export declare function newRevealer<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof Revealer<Child, Attr>>): Revealer<Child, Attr>;
 export interface Revealer<Child, Attr> extends Widget<Attr> {
 }
 export declare class Revealer<Child extends Gtk.Widget, Attr> extends Gtk.Revealer {

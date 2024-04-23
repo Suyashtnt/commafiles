@@ -14,7 +14,7 @@ export declare class Stream extends Service {
     get id(): number | null;
     get name(): string | null;
     get state(): string;
-    get is_muted(): boolean;
+    get is_muted(): boolean | null;
     set is_muted(mute: boolean);
     get volume(): number;
     set volume(value: number);

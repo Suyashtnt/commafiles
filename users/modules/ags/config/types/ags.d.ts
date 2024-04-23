@@ -86,6 +86,10 @@ declare module 'resource:///com/github/Aylur/ags/widgets/button.js' {
     const exports: typeof import('./widgets/button')
     export = exports
 }
+declare module 'resource:///com/github/Aylur/ags/widgets/calendar.js' {
+    const exports: typeof import('./widgets/calendar')
+    export = exports
+}
 declare module 'resource:///com/github/Aylur/ags/widgets/centerbox.js' {
     const exports: typeof import('./widgets/centerbox')
     export = exports
@@ -94,16 +98,36 @@ declare module 'resource:///com/github/Aylur/ags/widgets/circularprogress.js' {
     const exports: typeof import('./widgets/circularprogress')
     export = exports
 }
+declare module 'resource:///com/github/Aylur/ags/widgets/colorbutton.js' {
+    const exports: typeof import('./widgets/colorbutton')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/drawingarea.js' {
+    const exports: typeof import('./widgets/drawingarea')
+    export = exports
+}
 declare module 'resource:///com/github/Aylur/ags/widgets/entry.js' {
     const exports: typeof import('./widgets/entry')
     export = exports
 }
-declare module 'resource:///com/github/Aylur/ags/widgets/etc.js' {
-    const exports: typeof import('./widgets/etc')
-    export = exports
-}
 declare module 'resource:///com/github/Aylur/ags/widgets/eventbox.js' {
     const exports: typeof import('./widgets/eventbox')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/filechooserbutton.js' {
+    const exports: typeof import('./widgets/filechooserbutton')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/fixed.js' {
+    const exports: typeof import('./widgets/fixed')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/flowbox.js' {
+    const exports: typeof import('./widgets/flowbox')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/fontbutton.js' {
+    const exports: typeof import('./widgets/fontbutton')
     export = exports
 }
 declare module 'resource:///com/github/Aylur/ags/widgets/icon.js' {
@@ -112,6 +136,22 @@ declare module 'resource:///com/github/Aylur/ags/widgets/icon.js' {
 }
 declare module 'resource:///com/github/Aylur/ags/widgets/label.js' {
     const exports: typeof import('./widgets/label')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/levelbar.js' {
+    const exports: typeof import('./widgets/levelbar')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/listbox.js' {
+    const exports: typeof import('./widgets/listbox')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/menubar.js' {
+    const exports: typeof import('./widgets/menubar')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/menuitem.js' {
+    const exports: typeof import('./widgets/menuitem')
     export = exports
 }
 declare module 'resource:///com/github/Aylur/ags/widgets/menu.js' {
@@ -134,12 +174,32 @@ declare module 'resource:///com/github/Aylur/ags/widgets/scrollable.js' {
     const exports: typeof import('./widgets/scrollable')
     export = exports
 }
+declare module 'resource:///com/github/Aylur/ags/widgets/separator.js' {
+    const exports: typeof import('./widgets/separator')
+    export = exports
+}
 declare module 'resource:///com/github/Aylur/ags/widgets/slider.js' {
     const exports: typeof import('./widgets/slider')
     export = exports
 }
+declare module 'resource:///com/github/Aylur/ags/widgets/spinbutton.js' {
+    const exports: typeof import('./widgets/spinbutton')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/spinner.js' {
+    const exports: typeof import('./widgets/spinner')
+    export = exports
+}
 declare module 'resource:///com/github/Aylur/ags/widgets/stack.js' {
     const exports: typeof import('./widgets/stack')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/switch.js' {
+    const exports: typeof import('./widgets/switch')
+    export = exports
+}
+declare module 'resource:///com/github/Aylur/ags/widgets/togglebutton.js' {
+    const exports: typeof import('./widgets/togglebutton')
     export = exports
 }
 declare module 'resource:///com/github/Aylur/ags/widgets/widget.js' {

@@ -6,6 +6,7 @@ import * as Fetch from './utils/fetch.js';
 import * as Notify from './utils/notify.js';
 import * as Pam from './utils/pam.js';
 import * as Gobject from './utils/gobject.js';
+import * as Binding from './utils/binding.js';
 export declare const USER: string;
 export declare const HOME: string;
 export declare const CACHE_DIR: string;
@@ -17,6 +18,7 @@ export declare const authenticate: typeof Pam.authenticate, authenticateUser: ty
 export declare const fetch: typeof Fetch.fetch;
 export declare const notify: typeof Notify.notify;
 export declare const kebabify: (str: string) => string, pspec: typeof Gobject.pspec, registerGObject: typeof Gobject.registerGObject;
+export declare const merge: typeof Binding.merge, derive: typeof Binding.derive, watch: typeof Binding.watch;
 declare const _default: {
     USER: string;
     HOME: string;
@@ -44,5 +46,8 @@ declare const _default: {
     kebabify: (str: string) => string;
     pspec: typeof Gobject.pspec;
     registerGObject: typeof Gobject.registerGObject;
+    merge: typeof Binding.merge;
+    derive: typeof Binding.derive;
+    watch: typeof Binding.watch;
 };
 export default _default;

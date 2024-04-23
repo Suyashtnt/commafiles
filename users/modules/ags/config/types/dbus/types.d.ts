@@ -106,13 +106,13 @@ export interface PowerProfilesProxy extends Gio.DBusProxy {
     ActiveProfile: string;
     PerformanceInhibited: string;
     PerformanceDegraded: string;
-    Profiles: [{
+    Profiles: Array<{
         [key: string]: GLib.Variant;
-    }];
-    Actions: [string];
-    ActiveProfileHolds: [{
+    }>;
+    Actions: string[];
+    ActiveProfileHolds: Array<{
         [key: string]: GLib.Variant;
-    }];
+    }>;
     HoldProfile(profile: string, reason: string, application_id: string): number;
     ReleaseProfile(cookie: number): void;
 }

@@ -1,16 +1,15 @@
-/// <reference types="@girs/gobject-2.0/gobject-2.0-ambient.js" />
-/// <reference types="@girs/gtk-3.0/node_modules/@girs/gobject-2.0/gobject-2.0-ambient.js" />
-/// <reference types="@girs/gtk-3.0/node_modules/@girs/harfbuzz-0.0/node_modules/@girs/gobject-2.0/gobject-2.0-ambient.js" />
 /// <reference types="@girs/gdk-3.0/gdk-3.0-ambient.js" />
 /// <reference types="@girs/gtk-3.0/node_modules/@girs/gdk-3.0/gdk-3.0-ambient.js" />
 /// <reference types="@girs/dbusmenugtk3-0.4/node_modules/@girs/gtk-3.0/gtk-3.0-ambient.js" />
 /// <reference types="@girs/gtk-3.0/gtk-3.0-ambient.js" />
+/// <reference types="@girs/gobject-2.0/gobject-2.0-ambient.js" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/gobject-2.0/gobject-2.0-ambient.js" />
+/// <reference types="@girs/gtk-3.0/node_modules/@girs/harfbuzz-0.0/node_modules/@girs/gobject-2.0/gobject-2.0-ambient.js" />
 import GObject from 'node_modules/@girs/gobject-2.0/gobject-2.0';
 import Gtk from 'node_modules/@girs/gtk-3.0/gtk-3.0';
 import Gdk from 'node_modules/@girs/gdk-2.0/gdk-2.0?version=3.0';
-import { Props, BindableProps } from '../service.js';
+import { Props, BindableProps, Connectable } from '../service.js';
 import { registerGObject, type CtorProps } from '../utils/gobject.js';
-import { App } from '../app.js';
 declare const ALIGN: {
     readonly fill: Gtk.Align.FILL;
     readonly start: Gtk.Align.START;
@@ -18,8 +17,14 @@ declare const ALIGN: {
     readonly center: Gtk.Align.CENTER;
     readonly baseline: Gtk.Align.BASELINE;
 };
-export type Align = keyof typeof ALIGN;
-export type Cursor = 'default' | 'help' | 'pointer' | 'context-menu' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'no-drop' | 'move' | 'not-allowed' | 'grab' | 'grabbing' | 'all-scroll' | 'col-resize' | 'row-resize' | 'n-resize' | 'e-resize' | 's-resize' | 'w-resize' | 'ne-resize' | 'nw-resize' | 'sw-resize' | 'se-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'zoom-in' | 'zoom-out';
+type Align = keyof typeof ALIGN;
+type Keys = {
+    [K in keyof typeof Gdk as K extends `KEY_${infer U}` ? U : never]: number;
+};
+type ModifierKey = {
+    [K in keyof typeof Gdk.ModifierType as K extends `${infer M}_MASK` ? M : never]: number;
+};
+type Cursor = 'default' | 'help' | 'pointer' | 'context-menu' | 'progress' | 'wait' | 'cell' | 'crosshair' | 'text' | 'vertical-text' | 'alias' | 'copy' | 'no-drop' | 'move' | 'not-allowed' | 'grab' | 'grabbing' | 'all-scroll' | 'col-resize' | 'row-resize' | 'n-resize' | 'e-resize' | 's-resize' | 'w-resize' | 'ne-resize' | 'nw-resize' | 'sw-resize' | 'se-resize' | 'ew-resize' | 'ns-resize' | 'nesw-resize' | 'nwse-resize' | 'zoom-in' | 'zoom-out';
 type Property = [prop: string, value: unknown];
 type Connection<Self> = [GObject.Object, (self: Self, ...args: unknown[]) => unknown, string?] | [string, (self: Self, ...args: unknown[]) => unknown] | [number, (self: Self, ...args: unknown[]) => unknown];
 type Bind = [
@@ -41,14 +46,16 @@ interface CommonProps<Attr> {
 export type BaseProps<Self, Props, Attr = unknown> = {
     setup?: (self: Self) => void;
 } & BindableProps<CtorProps<Props & CommonProps<Attr>>>;
-type Requierd<T> = {
+type Required<T> = {
     [K in keyof T]-?: T[K];
 };
-export interface Widget<Attr> extends Requierd<CommonProps<Attr>> {
-    hook<Gobject extends GObject.Object>(gobject: Gobject | App, callback: (self: this, ...args: any[]) => void, signal?: string): this;
-    bind<Prop extends keyof Props<this>, Gobject extends GObject.Object, ObjProp extends keyof Props<Gobject>>(prop: Prop, gobject: Gobject, objProp?: ObjProp, transform?: (value: Gobject[ObjProp]) => this[Prop]): this;
+export interface Widget<Attr> extends Required<CommonProps<Attr>> {
+    hook(gobject: Connectable, callback: (self: this, ...args: any[]) => void, signal?: string): this;
+    bind<Prop extends keyof Props<this>, GObj extends Connectable, ObjProp extends keyof Props<GObj>>(prop: Prop, gobject: GObj, objProp?: ObjProp, transform?: (value: GObj[ObjProp]) => this[Prop]): this;
     on(signal: string, callback: (self: this, ...args: any[]) => void): this;
     poll(timeout: number, callback: (self: this) => void): this;
+    keybind<Fn extends (self: this, event: Gdk.Event) => void, Key extends keyof Keys>(key: Key, callback: Fn): this;
+    keybind<Fn extends (self: this, event: Gdk.Event) => void, Key extends keyof Keys, Mod extends Array<keyof ModifierKey>>(mods: Mod, key: Key, callback: Fn): this;
     readonly is_destroyed: boolean;
     _handleParamProp(prop: keyof this, value: any): void;
     _get<T>(field: string): T;
@@ -60,10 +67,11 @@ export interface Widget<Attr> extends Requierd<CommonProps<Attr>> {
 export declare class AgsWidget<Attr> extends Gtk.Widget implements Widget<Attr> {
     set attribute(attr: Attr);
     get attribute(): Attr;
-    hook<Gobject extends GObject.Object>(gobject: Gobject | App, callback: (self: this, ...args: any[]) => void, signal?: string): this;
-    bind<Prop extends keyof Props<this>, Gobject extends GObject.Object, ObjProp extends keyof Props<Gobject>>(prop: Prop, gobject: Gobject, objProp?: ObjProp, transform?: (value: Gobject[ObjProp]) => this[Prop]): this;
+    hook(gobject: Connectable, callback: (self: this, ...args: any[]) => void, signal?: string): this;
+    bind<Prop extends keyof Props<this>, GObj extends Connectable, ObjProp extends keyof Props<GObj>>(prop: Prop, gobject: GObj, objProp?: ObjProp, transform?: (value: GObj[ObjProp]) => this[Prop]): this;
     on(signal: string, callback: (self: this, ...args: any[]) => void): this;
     poll(timeout: number, callback: (self: this) => void): this;
+    keybind<Fn extends (self: this, event: Gdk.Event) => void, Key extends keyof Keys, Mod extends Array<keyof ModifierKey>>(modsOrKey: Key | Mod, keyOrCallback: Key | Fn, callback?: Fn): this;
     _init(config?: BaseProps<this, Gtk.Widget.ConstructorProperties & {
         child?: Gtk.Widget;
     }, Attr>, child?: Gtk.Widget): void;

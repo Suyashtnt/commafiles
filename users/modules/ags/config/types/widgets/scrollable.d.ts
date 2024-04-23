@@ -14,6 +14,7 @@ export type ScrollableProps<Child extends Gtk.Widget = Gtk.Widget, Attr = unknow
     hscroll?: Policy;
     vscroll?: Policy;
 }, Attr>;
+export declare function newScrollable<Child extends Gtk.Widget = Gtk.Widget, Attr = unknown>(...props: ConstructorParameters<typeof Scrollable<Child, Attr>>): Scrollable<Child, Attr>;
 export interface Scrollable<Child, Attr> extends Widget<Attr> {
 }
 export declare class Scrollable<Child extends Gtk.Widget, Attr> extends Gtk.ScrolledWindow {
