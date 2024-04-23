@@ -54,7 +54,10 @@
       kooha # for screen recording
       thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
-      cavalier
+
+      cavalier # le music vif
+      cava # le dep for le music vis
+      sptlrx # funni lyrics
 
       # inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
