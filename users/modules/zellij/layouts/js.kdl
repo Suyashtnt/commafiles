@@ -10,6 +10,6 @@ layout {
 	}
 
     pane size=1 borderless=true {
-        plugin location="https://github.com/dj95/zjstatus/releases/download/v0.13.1/zjstatus.wasm"
+        plugin location="https://github.com/dj95/zjstatus/releases/download/v0.14.0/zjstatus.wasm"
     }
 }
