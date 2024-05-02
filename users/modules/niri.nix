@@ -83,6 +83,10 @@ in {
       "Mod+Shift+9".action = move-column-to-workspace 9;
     };     
 
+    outputs."eDP-1" = {     
+      # variable-refresh-rate = true;
+    };
+
     spawn-at-startup = [
       {
         command = ["ags"];

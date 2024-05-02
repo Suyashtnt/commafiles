@@ -8,6 +8,7 @@
     inputs.stylix.nixosModules.stylix
 
     ezModules.core
+    ezModules.laptop
     ezModules.intel
     ezModules.ld
     ezModules.printing

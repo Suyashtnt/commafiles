@@ -63,6 +63,7 @@
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
       fractal # matrix go brrr
+      krita # for the random drawing stuff
 
       # CLI utils
       btop # monitoring stuff

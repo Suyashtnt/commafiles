@@ -16,6 +16,8 @@
       };
     };
 
+    initrd.systemd.enable = true;
+
     extraModprobeConfig = "options kvm_intel nested=1";
     supportedFilesystems = ["ntfs" "mtpfs"];
 
