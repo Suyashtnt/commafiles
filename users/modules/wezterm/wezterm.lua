@@ -18,7 +18,7 @@ config.underline_thickness = "2pt"
 
 local gpus = wezterm.gui.enumerate_gpus()
 config.front_end = "WebGpu"
-config.webgpu_preferred_adapter = gpus[2]
+config.webgpu_preferred_adapter = gpus[1]
 
 -- and finally, return the configuration to wezterm
 return config

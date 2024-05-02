@@ -73,6 +73,10 @@
     ];
   };
 
+  home.sessionVariables = {
+    FLAKE = "/home/tntman/commafiles";
+  };
+
   programs = {
     home-manager.enable = true;
     nix-index-database.comma.enable = true;

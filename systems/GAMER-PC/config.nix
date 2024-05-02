@@ -56,8 +56,4 @@
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
   ];
-
-  environment.variables = {
-    FLAKE = "~/commafiles";
-  };
 }
