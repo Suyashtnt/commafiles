@@ -14,15 +14,15 @@
   };
   fennel-ls = {
     pname = "fennel-ls";
-    version = "8a988cb8be8ccd563781e7666d95895908e3a70c";
+    version = "944f57cc0898d96e6222b456e247ea01216d869d";
     src = fetchgit {
       url = "https://git.sr.ht/~xerool/fennel-ls";
-      rev = "8a988cb8be8ccd563781e7666d95895908e3a70c";
+      rev = "944f57cc0898d96e6222b456e247ea01216d869d";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "sha256-iGpyCnAKchFpaOwoWtJ4fABcrd1WIqUvB40cfQBO2G8=";
+      sha256 = "sha256-XdK61SUc79bcQ9+9MeJVWhSUQZVIhaHDVqpXnmxoXvA=";
     };
-    date = "2024-02-02";
+    date = "2024-04-30";
   };
 }
