@@ -70,8 +70,6 @@ in ''
       preserve_split=1
   }
 
-  windowrule = opacity 0.8 0.8,^(Code)$
-  windowrule = opacity 0.8 0.8,^(code-url-handler)$
   windowrule = noblur,^(org.nickvision.cavalier)$
   windowrule = opacity 0.99, obsidian
 
