@@ -55,7 +55,7 @@
       thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
 
-      cavalier # le music vif
+      cavalier # le music vis
       cava # le dep for le music vis
       sptlrx # funni lyrics
 
@@ -63,7 +63,9 @@
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
       fractal # matrix go brrr
-      krita # for the random drawing stuff
+      krita # drawing go brrr
+      strawberry-qt6 # music go brrr
+      libreoffice # presentations and stuff go brrr
 
       # CLI utils
       btop # monitoring stuff
