@@ -33,10 +33,6 @@
 
   nix = {
     package = pkgs.nixStable;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-    };
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
