@@ -2,9 +2,8 @@
   programs.regreet = {
     enable = true;
     settings = {
-      background.path = "${wallpapers}/Particles.png";
+      background.path = "${wallpapers}/Orbit.png";
       GTK = {
-        theme_name = "Adw-gtk3";
         icon_theme_name = "Papirus-Dark";
         font_name = "Inter 13";
         cursor_theme_name = "Catppuccin-Mocha-Lavender-Cursors";
@@ -24,7 +23,7 @@
           exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
         '';
       in {
-        command = "${pkgs.hyprland}/bin/Hyprland --config ${hyprland-conf}";
+        command = "dbus-run-session ${pkgs.hyprland}/bin/Hyprland --config ${hyprland-conf}";
         user = "tntman";
       };
     };

@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  browser = ["vivaldi.desktop"];
+  browser = ["firefox.desktop"];
 
   associations = {
     "text/html" = browser;
@@ -14,6 +14,8 @@
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
+    "image/svg" = ["org.inkscape.Inkscape.desktop"];
+    "image/svg+xml" = ["org.inkscape.Inkscape.desktop"];
 
     "audio/*" = ["mpv.desktop"];
     "video/*" = ["mpv.dekstop"];

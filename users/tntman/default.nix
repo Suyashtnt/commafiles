@@ -59,11 +59,12 @@
       cava # le dep for le music vis
       sptlrx # funni lyrics
 
-      # inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
+      inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
       jetbrains-toolbox # jetbran go brrr
       bitwarden # password manager go brrr
       fractal # matrix go brrr
       krita # drawing go brrr
+      inkscape # drawing vectors go brrr
       strawberry-qt6 # music go brrr
       libreoffice # presentations and stuff go brrr
 

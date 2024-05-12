@@ -9,9 +9,10 @@
     defaultEditor = true;
     themes.stylix-edit = {
       inherits = "stylix";
-      "ui.virtual.inlay-hint"= { fg = "base04"; };
-      "ui.virtual.inlay-hint.parameter"= { fg = "base04"; };
-      "ui.virtual.inlay-hint.type"= { fg = "base04"; };
+      "ui.virtual.inlay-hint" = { fg = "base04"; };
+      "ui.virtual.inlay-hint.parameter" = { fg = "base04"; };
+      "ui.virtual.inlay-hint.type" = { fg = "base04"; };
+      "ui.virtual.jump-label" = { fg = "base0F"; };
     };
     settings = {
       theme = lib.mkForce "stylix-edit";
