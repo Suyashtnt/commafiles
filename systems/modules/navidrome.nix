@@ -8,6 +8,14 @@
     owner = config.systemd.services.navidrome.serviceConfig.User;
     restartUnits = [ "navidrome.service" ];
   };
+  sops.secrets."spotify/id" = {
+    owner = config.systemd.services.navidrome.serviceConfig.User;
+    restartUnits = [ "navidrome.service" ];
+  };
+  sops.secrets."spotify/secret" = {
+    owner = config.systemd.services.navidrome.serviceConfig.User;
+    restartUnits = [ "navidrome.service" ];
+  };
   sops.templates."navidrome-config.toml" = {
     content = ''
       MusicFolder = "/mnt/BulkStorage/Music"
@@ -15,6 +23,8 @@
       LastFM.Enabled = true
       LastFM.ApiKey = "${config.sops.placeholder."lastfm/key"}"
       LastFM.Secret = "${config.sops.placeholder."lastfm/secret"}"
+      Spotify.ID = "${config.sops.placeholder."spotify/id"}"
+      Spotify.Secret = "${config.sops.placeholder."spotify/secret"}"
       EnableSharing = true
       EnableExternalServices = true
       Scanner.GroupAlbumReleases = true

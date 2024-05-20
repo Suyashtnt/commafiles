@@ -14,6 +14,28 @@
       "ui.virtual.inlay-hint.type" = { fg = "base04"; };
       "ui.virtual.jump-label" = { fg = "base0F"; };
     };
+    languages = {
+      language-server.copilot = {
+        command = "${pkgs.helix-gpt}/bin/helix-gpt --handler copilot --copilotKey $(cat /run/secrets/copilot/key)";
+      };
+
+      language = [
+        {
+          name = "rust";
+          language-servers = [
+            "rust-analyzer"
+            "copilot"
+          ];
+        }
+        {
+          name = "typescript";
+          language-servers = [
+            "typescript-language-server"
+            "copilot"
+          ];
+        }
+      ];
+    };
     settings = {
       theme = lib.mkForce "stylix-edit";
       editor = {

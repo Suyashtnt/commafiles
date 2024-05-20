@@ -17,11 +17,11 @@ export const log = (/** @type {T} */ input) => {
 
 Notifications.popupTimeout = 5000;
 
-export default {
+App.config({
   style: App.configDir + "/style.css",
   windows: [
     ...SetupPowerMode(),
     NotificationsPopup(),
     Launcher(),
   ],
-};
+});

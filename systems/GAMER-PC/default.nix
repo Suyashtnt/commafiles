@@ -17,7 +17,6 @@
     ezModules.wayland
     ezModules.greetd
     ezModules.geoclue
-    ezModules.hyprland
     ezModules.niri
     ezModules.openrgb
 

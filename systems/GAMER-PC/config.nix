@@ -54,6 +54,5 @@
     ifuse
     virt-manager
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
   ];
 }

@@ -1,3 +1,8 @@
-{...}: {
-  home-manager.useGlobalPkgs = true;
+{inputs, ...}: {
+  home-manager = {
+    useGlobalPkgs = true;
+    sharedModules = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+  };
 }

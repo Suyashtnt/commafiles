@@ -94,6 +94,9 @@ in {
       {
         command = ["swww-daemon"];
       }
+      {
+        command = ["dbus-update-activation-environment --all --systemd"];
+      }
     ];
 
     layout = {

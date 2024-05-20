@@ -9,4 +9,8 @@
       keyFile = "/var/lib/sops-nix/key.txt";
     };
   };
+
+  sops.secrets."copilot/key" = {
+    owner = "tntman";
+  };
 }
