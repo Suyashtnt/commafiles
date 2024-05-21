@@ -73,6 +73,7 @@
       ripgrep # searching stuff
       cachix # caching stuff
       bitwarden-cli # password manager stuff
+      cloudflared # ssh tunnel stuff
     ];
   };
 
