@@ -1,7 +1,7 @@
 { config, pkgs, ... }: let
   theme = config.lib.stylix.colors;
 in {
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
   home.packages = [ pkgs.swww pkgs.brightnessctl ];
   programs.niri.settings = {
     binds = with config.lib.niri.actions; let
