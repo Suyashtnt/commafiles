@@ -2,7 +2,7 @@
   theme = config.lib.stylix.colors;
 in {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  home.packages = [ pkgs.swww ];
+  home.packages = [ pkgs.swww pkgs.brightnessctl ];
   programs.niri.settings = {
     binds = with config.lib.niri.actions; let
       sh = spawn "sh" "-c";
