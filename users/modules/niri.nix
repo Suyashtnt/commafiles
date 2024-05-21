@@ -95,7 +95,16 @@ in {
         command = ["swww-daemon"];
       }
       {
-        command = ["dbus-update-activation-environment --all --systemd"];
+        command = ["dbus-update-activation-environment" "--all" "--systemd"];
+      }
+      {
+        command = [
+          "sh" "-c" 
+          ''
+            eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh);
+            export SSH_AUTH_SOCK;
+          ''
+        ];
       }
     ];
 
