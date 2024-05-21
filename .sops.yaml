@@ -1,8 +1,9 @@
 keys:
-  - &suyashtnt age1wc2azunqm69j6uwdfrtw6z2td7me2qmqf5rfndwke2mner5g94nsc0j2ns
-  - &suyashtnt age1yw5pd3kn7ss7h7zs822xweduggg6fr9l3cw3366699034jkegseq0wdps7
+  - &suyashtnt_desktop age1wc2azunqm69j6uwdfrtw6z2td7me2qmqf5rfndwke2mner5g94nsc0j2ns
+  - &suyashtnt_laptop age1yw5pd3kn7ss7h7zs822xweduggg6fr9l3cw3366699034jkegseq0wdps7
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
-      - *suyashtnt
+      - *suyashtnt_desktop
+      - *suyashtnt_laptop
