@@ -50,6 +50,8 @@
       anki # cards (obsidian spaced reptition has failed me again)
 
       gnome.nautilus # file manager
+      gnome.sushi # file preview
+      loupe # image viewer
       kooha # for screen recording
       thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
