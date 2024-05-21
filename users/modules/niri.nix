@@ -84,7 +84,7 @@ in {
     };     
 
     outputs."eDP-1" = {     
-      # variable-refresh-rate = true;
+      variable-refresh-rate = true;
     };
 
     spawn-at-startup = [
