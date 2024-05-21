@@ -1,8 +1,8 @@
 { config, pkgs, ... }: let
   theme = config.lib.stylix.colors;
 in {
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  home.packages = [ pkgs.swww ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
+  home.packages = [ pkgs.swww pkgs.brightnessctl ];
   programs.niri.settings = {
     binds = with config.lib.niri.actions; let
       sh = spawn "sh" "-c";
@@ -84,7 +84,7 @@ in {
     };     
 
     outputs."eDP-1" = {     
-      # variable-refresh-rate = true;
+      variable-refresh-rate = true;
     };
 
     spawn-at-startup = [

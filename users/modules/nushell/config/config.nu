@@ -499,3 +499,4 @@ $env.config.completions.external = {
 }
 
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env
+gnome-keyring-daemon | parse "{name}={value}" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env
