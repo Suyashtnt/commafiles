@@ -498,5 +498,11 @@ $env.config.completions.external = {
   completer: $multiple_completers
 }
 
+let cachixExists = ("/etc/cachix-agent.token" | path exists)
+
 ssh-agent -c | lines | first 2 | parse "setenv {name} {value};" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env
 gnome-keyring-daemon | parse "{name}={value}" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env
+
+if $cachixExists {
+  open /etc/cachix-agent.token | lines | parse "setenv {name} {value};" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env
+}

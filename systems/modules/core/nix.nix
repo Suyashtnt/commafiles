@@ -26,7 +26,6 @@
         super.makeModulesClosure (x // {allowMissing = true;});
 
       craneLib = inputs.crane.lib.${pkgs.system};
-
       inherit (packages.${pkgs.system}) fennel-ls cavalier firefox-pwa;
     })
   ];
@@ -66,6 +65,9 @@
     enable = true;
     clean.enable = true;
   };
+
+  # CD via cachix
+  services.cachix-agent.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
