@@ -36,7 +36,13 @@
     avahi.enable = true;
     avahi.nssmdns4 = true;
     flatpak.enable = true;
-    openssh.enable = true;
+    openssh = {
+      enable = true;
+      # require public key authentication for better security
+      settings.PasswordAuthentication = false;
+      settings.KbdInteractiveAuthentication = false;
+      #settings.PermitRootLogin = "yes";
+    };
     gvfs.enable = true;
   };
 
