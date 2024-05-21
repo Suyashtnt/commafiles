@@ -6,4 +6,6 @@
     enable = true;
     package = pkgs.niri-unstable;
   };
+
+  services.gnome.sushi.enable = true;
 }
