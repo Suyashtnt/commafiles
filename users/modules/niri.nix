@@ -101,7 +101,7 @@ in {
         command = [
           "sh" "-c" 
           ''
-            eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh);
+            eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh);
             export SSH_AUTH_SOCK;
           ''
         ];
