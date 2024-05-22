@@ -500,6 +500,8 @@ $env.config.completions.external = {
 
 let cachixExists = ("/etc/cachix-agent.token" | path exists)
 
+$env.SSH_AUTH_SOCK = /run/user/1000/keyring/ssh 
+
 if $cachixExists {
   open /etc/cachix-agent.token | lines | parse "{name}={value}" | reduce -f {} { |it, acc| $acc | upsert $it.name $it.value } | load-env
 }
