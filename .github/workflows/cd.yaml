@@ -14,6 +14,10 @@ jobs:
       with:
         name: suyashtnt
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+    - run: cachix use helix
+    - run: cachix use niri
+    - run: cachix use fortuneteller2k
+    - run: cachix use nix-community
     - run: nix build -L
     - name: Deploy
       if: github.ref == 'refs/heads/main'
