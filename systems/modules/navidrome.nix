@@ -35,6 +35,11 @@
   services.navidrome = {
     enable = true;
     openFirewall = true;
+    # unused but required by nixos module
+    settings = {
+      MusicFolder = "/mnt/BulkStorage/Music";
+      Address = "192.168.1.42";
+    };
   };
 
   systemd.services.navidrome = {
