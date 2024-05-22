@@ -19,7 +19,6 @@
       WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     };
     loginShellInit = ''
-      dbus-update-activation-environment --systemd --all
       eval $(ssh-agent)
       export GPG_TTY=$TTY
     '';
