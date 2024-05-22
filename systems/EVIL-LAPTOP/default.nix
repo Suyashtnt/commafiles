@@ -14,6 +14,7 @@
     ezModules.printing
     ezModules.wayland
     ezModules.niri
+    ezModules.sops
 
     ezModules.theme
     ezModules.kleur
