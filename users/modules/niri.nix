@@ -2,7 +2,7 @@
   theme = config.lib.stylix.colors;
 in {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
-  home.packages = [ pkgs.swww pkgs.brightnessctl ];
+  home.packages = [ pkgs.swww pkgs.brightnessctl pkgs.wl-clipboard ];
   programs.niri.settings = {
     binds = with config.lib.niri.actions; let
       sh = spawn "sh" "-c";
