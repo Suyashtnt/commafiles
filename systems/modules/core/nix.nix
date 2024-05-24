@@ -16,7 +16,7 @@
   nixpkgs.overlays = [
     inputs.nixpkgs-f2k.overlays.terminal-emulators
     inputs.xdg-desktop-portal-hyprland.overlays.default
-    inputs.neovim-nightly-overlay.overlay
+    inputs.neovim-nightly-overlay.overlays.default
     inputs.rust-overlay.overlays.default
     inputs.emacs-overlay.overlays.default
     inputs.eww.overlays.default
