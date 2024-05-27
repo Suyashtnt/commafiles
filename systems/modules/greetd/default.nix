@@ -18,14 +18,8 @@
   services.greetd = {
     enable = true;
     settings = {
-      default_session = let 
-        hyprland-conf = pkgs.writeText "hyprland-greeter.conf" ''
-          exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
-        '';
-      in {
-        command = "dbus-run-session ${pkgs.hyprland}/bin/Hyprland --config ${hyprland-conf}";
-        user = "tntman";
-      };
+      command = "dbus-run-session cage -s -- regreet";
+      user = "tntman";
     };
   };
 }
