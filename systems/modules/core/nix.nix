@@ -26,7 +26,7 @@
         super.makeModulesClosure (x // {allowMissing = true;});
 
       craneLib = inputs.crane.lib.${pkgs.system};
-      inherit (packages.${pkgs.system}) fennel-ls cavalier firefox-pwa;
+      inherit (packages.${pkgs.system}) fennel-ls firefox-pwa;
     })
   ];
 
