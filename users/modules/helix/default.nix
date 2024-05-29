@@ -54,6 +54,11 @@
           display-messages = true;
           display-inlay-hints = true;
         };
+
+        indent-guides = {
+          character = "╎";
+          render = true;
+        };
       };
       keys = {
         normal = {
