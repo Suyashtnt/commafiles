@@ -26,10 +26,6 @@
       glib-networking.enable = true;
     };
 
-    udev.packages = with pkgs; [
-      gnome.gnome-settings-daemon
-    ];
-
     openssh = {
       enable = true;
       # require public key authentication for better security
