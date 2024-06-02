@@ -4,6 +4,9 @@ My new dots, since my old ones broke
 
 ## Niri
 ![image](https://github.com/Suyashtnt/commafiles/assets/45307955/b7d5d258-ec4f-49e5-af35-c78ca4c4c421)
+![image](https://github.com/Suyashtnt/commafiles/assets/45307955/e7e03dc5-79fb-4a83-9fb7-8ebeb8805adf)
+
+
 
 
 ## Hyprland
