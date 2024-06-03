@@ -13,12 +13,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -44,7 +38,6 @@
   ];
 
   services = {
-
     usbmuxd.enable = true;
     avahi.enable = true;
     avahi.nssmdns4 = true;
