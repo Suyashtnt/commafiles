@@ -55,7 +55,21 @@
       thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
 
-      cavalier # le music vis
+      (pkgs.cavalier.overrideAttrs (old: rec {
+        runtimeDeps = old.runtimeDeps ++ [
+          pkgs.libGL
+          pkgs.mesa_drivers
+        ];
+
+        nativeBuildInputs = old.nativeBuildInputs ++ [
+          pkgs.makeWrapper
+        ];
+
+        postFixup = ''
+          wrapProgram $out/bin/NickvisionCavalier.GNOME \
+            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeDeps}
+        '';
+      })) # le music vis
       cava # le dep for le music vis
       sptlrx # funni lyrics
 

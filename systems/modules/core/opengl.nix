@@ -11,7 +11,9 @@
         vaapiVdpau
         libvdpau-va-gl
         nvidia-vaapi-driver
+        libGL
       ];
+      setLdLibraryPath = true;
     };
   };
 }

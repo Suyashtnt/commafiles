@@ -157,6 +157,15 @@ in {
         ];
         default-column-width = {};    
       }
+
+      {
+        matches = [
+          {
+            app-id = "^org.nickvision.cavalier$";
+          }
+        ];
+        draw-border-with-background = false;
+      }
       {
         geometry-corner-radius = {
           bottom-left = 12.0;
