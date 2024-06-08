@@ -14,7 +14,6 @@
     ezModules.niri
     ezModules.openrgb
     ezModules.playerctl
-    ezModules.swaylock
     ezModules.syncthing
     ezModules.xdg
     ezModules.ags
@@ -52,7 +51,6 @@
       gnome.nautilus # file manager
       loupe # image viewer
       kooha # for screen recording
-      thunderbird # email go brrr
       fragments # for torrenting... :cluelesser:
 
       (pkgs.cavalier.overrideAttrs (old: rec {
@@ -70,23 +68,16 @@
             --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeDeps}
         '';
       })) # le music vis
-      cava # le dep for le music vis
       sptlrx # funni lyrics
 
       inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
-      jetbrains-toolbox # jetbran go brrr
-      bitwarden # password manager go brrr
       fractal # matrix go brrr
-      krita # drawing go brrr
-      inkscape # drawing vectors go brrr
-      strawberry-qt6 # music go brrr
       libreoffice # presentations and stuff go brrr
 
       # CLI utils
       btop # monitoring stuff
       ripgrep # searching stuff
       cachix # caching stuff
-      bitwarden-cli # password manager stuff
       cloudflared # ssh tunnel stuff
       nix-output-monitor # building stuff
     ];
@@ -100,4 +91,6 @@
     home-manager.enable = true;
     nix-index-database.comma.enable = true;
   };
+
+  services.easyeffects.enable = true;
 }

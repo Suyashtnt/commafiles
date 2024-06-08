@@ -13,9 +13,7 @@
     extraConfig = {
       init = {defaultBranch = "main";};
 
-      diff = { tool = "difftastic"; };
-      difftool = { prompt = false; };
-      pager = { difftool = true; };
+      difftool = { prompt = false; tool = "difftastic"; };
       "difftool \"difftastic\"" = {
         cmd = ''difft "$LOCAL" "$REMOTE"'';
       };
@@ -43,7 +41,7 @@
   services = {
     gpg-agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-qt;
+      pinentryPackage = pkgs.pinentry-gnome3;
       defaultCacheTtl = 1800;
       maxCacheTtl = 7200;
     };
