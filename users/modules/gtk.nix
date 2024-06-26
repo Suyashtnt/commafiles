@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   gtk = {
     enable = true;
-
     iconTheme.name = "Papirus-Dark";
+    iconTheme.package = pkgs.papirus-icon-theme;
 
     gtk4.extraConfig = {
       gtk-xft-antialias = 1;

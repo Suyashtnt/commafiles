@@ -23,6 +23,7 @@ in {
   };
 
   config.stylix = {
+    enable = true;
     polarity = "dark";
     base16Scheme = theme.base16;
 

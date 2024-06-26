@@ -2,8 +2,6 @@
   hardware = {
     opengl = {
       enable = pkgs.lib.mkDefault true;
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
         intel-media-driver
@@ -13,7 +11,6 @@
         nvidia-vaapi-driver
         libGL
       ];
-      setLdLibraryPath = true;
     };
   };
 }

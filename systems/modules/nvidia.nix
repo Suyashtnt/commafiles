@@ -11,8 +11,6 @@
 
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     extraPackages = [ pkgs.libvdpau-va-gl pkgs.mesa pkgs.mesa.drivers ];
   };

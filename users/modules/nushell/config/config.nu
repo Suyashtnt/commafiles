@@ -49,44 +49,6 @@ let stheme = {
     "teal": "#00c2ba"
 }
 
-let theme = {
-  separator: $stheme.overlay.foreground
-  leading_trailing_space_bg: $stheme.overlay.foreground
-  header: $stheme.primary.foreground
-  date: $stheme.mauve
-  filesize: $stheme.secondary.foreground
-  row_index: $stheme.primary.foreground
-  bool: $stheme.primary.foreground
-  int: $stheme.primary.foreground
-  duration: $stheme.primary.foreground
-  range: $stheme.primary.foreground
-  float: $stheme.primary.foreground
-  string: $stheme.green
-  nothing: $stheme.primary.foreground
-  binary: $stheme.primary.foreground
-  cellpath: $stheme.primary.foreground
-
-  hints: dark_gray
-
-  shape_garbage: { fg: $stheme.base.foreground bg: $stheme.red attr: b }
-  shape_bool: $stheme.secondary.foreground
-  shape_int: { fg: $stheme.mauve attr: b}
-  shape_float: { fg: $stheme.mauve attr: b}
-  shape_range: { fg: $stheme.orange attr: b}
-  shape_internalcall: { fg: $stheme.secondary.foreground attr: b}
-  shape_external: { fg: $stheme.secondary.foreground attr: b}
-  shape_externalarg: $stheme.surface.foreground 
-  shape_literal: $stheme.secondary.foreground
-  shape_operator: $stheme.orange
-  shape_signature: { fg: $stheme.green attr: b}
-  shape_string: $stheme.green
-  shape_filepath: $stheme.orange
-  shape_globpattern: { fg: $stheme.secondary.foreground attr: b}
-  shape_variable: $stheme.surface.foreground
-  shape_flag: { fg: $stheme.secondary.foreground attr: b}
-  shape_custom: {attr: b}
-}
-
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
   ls: {
@@ -146,7 +108,6 @@ $env.config = {
     metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
     format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
   }
-  color_config: $theme   # if you want a light theme, replace `$dark_theme` to `$light_theme`
   use_grid_icons: true
   footer_mode: "25" # always, never, number_of_rows, auto
   float_precision: 2
