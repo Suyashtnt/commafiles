@@ -20,30 +20,30 @@
     };
 
     ags = {
-     url = "github:Aylur/ags";
-     inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    copilot-mode-src = {
-      url = "github:zerolfx/copilot.el";
-      flake = false;
-    };
-
-    crane = {
-      url = "github:ipetkov/crane";
+      url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # copilot-mode-src = {
+    #   url = "github:zerolfx/copilot.el";
+    #   flake = false;
+    # };
 
-    eww = {
-      url = "github:elkowar/eww";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    # crane = {
+    #   url = "github:ipetkov/crane";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # emacs-overlay = {
+    #   url = "github:nix-community/emacs-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # eww = {
+    #   url = "github:elkowar/eww";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.rust-overlay.follows = "rust-overlay";
+    # };
 
     ez-configs = {
       url = "github:ehllie/ez-configs";
@@ -59,27 +59,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     kleur = {
       url = "github:suyashtnt/kleur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovide-src = {
-      url = "github:neovide/neovide";
-      flake = false;
-    };
+    # neovide-src = {
+    #   url = "github:neovide/neovide";
+    #   flake = false;
+    # };
 
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    doom-emacs = {
-      url = "github:doomemacs/doomemacs";
-      flake = false;
-    };
+    # doom-emacs = {
+    #   url = "github:doomemacs/doomemacs";
+    #   flake = false;
+    # };
 
     niri = {
       url = "github:sodiboo/niri-flake";
@@ -102,25 +102,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nyoom-src = {
-      url = "github:nyoom-engineering/nyoom.nvim";
-      flake = false;
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # rust-overlay = {
+    #   url = "github:oxalica/rust-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    spotify-player-src = {
-      url = "github:aome510/spotify-player";
-      flake = false;
-    };
+    # spotify-player-src = {
+    #   url = "github:aome510/spotify-player";
+    #   flake = false;
+    # };
 
     stylix = {
       url = "github:danth/stylix";
@@ -128,15 +123,15 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    typst-mode-src = {
-      url = "github:Ziqi-Yang/typst-mode.el";
-      flake = false;
-    };
+    # typst-mode-src = {
+    #   url = "github:Ziqi-Yang/typst-mode.el";
+    #   flake = false;
+    # };
 
-    xdg-desktop-portal-hyprland = {
-      url = "github:hyprwm/xdg-desktop-portal-hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # xdg-desktop-portal-hyprland = {
+    #   url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     zotero-nix = {
       url = "github:camillemndn/zotero-nix";

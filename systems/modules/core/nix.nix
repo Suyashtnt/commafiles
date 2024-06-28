@@ -15,18 +15,12 @@
 
   nixpkgs.overlays = [
     inputs.nixpkgs-f2k.overlays.terminal-emulators
-    inputs.xdg-desktop-portal-hyprland.overlays.default
-    inputs.neovim-nightly-overlay.overlays.default
-    inputs.rust-overlay.overlays.default
-    inputs.emacs-overlay.overlays.default
-    inputs.eww.overlays.default
     inputs.helix.overlays.default
     (final: super: rec {
       makeModulesClosure = x:
         super.makeModulesClosure (x // {allowMissing = true;});
 
-      craneLib = inputs.crane.lib.${pkgs.system};
-      inherit (packages.${pkgs.system}) fennel-ls firefox-pwa;
+      inherit (packages.${pkgs.system}) firefox-pwa;
     })
   ];
 

@@ -6,19 +6,14 @@ import {
   GLib,
   Label,
   Mpris,
-  Revealer,
-  Scrollable,
   Slider,
   toCSS,
   Utils,
-  Variable,
   Vte,
   Widget,
-  Window,
-  disp
+  Window
 } from "../imports.js";
 import { SetupRevealer } from "./index.js";
-import { ShowPowerMode } from "./variables.js";
 
 /** @typedef {import("../types/service/mpris.js").MprisPlayer | null} MprisPlayer */
 /** @typedef {import("../types/service.js").Binding<any, any, MprisPlayer>} PlayerSignal */
