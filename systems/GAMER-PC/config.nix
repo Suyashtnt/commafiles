@@ -13,8 +13,6 @@
   time.timeZone = "Africa/Johannesburg";
   i18n.defaultLocale = "en_ZA.UTF-8";
 
-  programs.xwayland.enable = true;
-
   services = {
     xserver = {
       xkb = {
@@ -43,6 +41,7 @@
   };
 
   programs.dconf.enable = true;
+  programs.wshowkeys.enable = true;
 
   virtualisation = {
     docker.enable = true;
