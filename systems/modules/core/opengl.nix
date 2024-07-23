@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   hardware = {
-    opengl = {
+    graphics = {
       enable = pkgs.lib.mkDefault true;
       extraPackages = with pkgs; [
         intel-compute-runtime

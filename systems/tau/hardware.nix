@@ -9,14 +9,17 @@
   };
 
   hardware = {
-    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+    raspberry-pi."4" = {
+      fkms-3d.enable = true;
+      apply-overlays-dtmerge.enable = true;
+    };
     deviceTree = {
       enable = true;
-      filter = "*rpi-4-*.dtb";
+      filter = lib.mkForce "*rpi-4-*.dtb";
     };
     enableRedistributableFirmware = true;
 
-    opengl.enable = false;
+    graphics.enable = false;
   };
 
   fileSystems = {

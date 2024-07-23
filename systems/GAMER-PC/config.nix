@@ -32,6 +32,12 @@
       #settings.PermitRootLogin = "yes";
     };
 
+    sunshine = {
+      enable = true;
+      capSysAdmin = true;
+      openFirewall = true;
+    };
+
     jellyfin.enable = true;
     usbmuxd.enable = true;
     avahi.enable = true;

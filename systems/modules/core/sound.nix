@@ -1,5 +1,4 @@
 {...}: {
-  sound.enable = false; # Pipewire doesn't like this on
   hardware.pulseaudio.enable = false;
 
   services.pipewire = {

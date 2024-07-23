@@ -7,13 +7,6 @@
   programs.helix = {
     enable = true;
     defaultEditor = true;
-    themes.stylix-edit = {
-      inherits = "stylix";
-      "ui.virtual.inlay-hint" = { fg = "base04"; };
-      "ui.virtual.inlay-hint.parameter" = { fg = "base04"; };
-      "ui.virtual.inlay-hint.type" = { fg = "base04"; };
-      "ui.virtual.jump-label" = { fg = "base0F"; };
-    };
     # languages = {
     #   language-server.copilot = {
     #     command = "${pkgs.helix-gpt}/bin/helix-gpt --handler copilot --copilotKey $(cat /run/secrets/copilot/key)";
@@ -37,7 +30,7 @@
     #   ];
     # };
     settings = {
-      theme = lib.mkForce "stylix-edit";
+      theme = lib.mkForce "kleur";
       editor = {
         bufferline = "multiple";
         cursorline = true;

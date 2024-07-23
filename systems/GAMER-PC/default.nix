@@ -6,6 +6,7 @@
   imports = [
     inputs.home-manager.nixosModules.default
     inputs.stylix.nixosModules.stylix
+    inputs.lix-module.nixosModules.default
 
     ezModules.core
     ezModules.intel

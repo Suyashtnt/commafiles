@@ -14,6 +14,7 @@
     ezModules.niri
     ezModules.openrgb
     ezModules.playerctl
+    ezModules.kleur
     ezModules.syncthing
     ezModules.xdg
     ezModules.ags
@@ -56,7 +57,7 @@
       (pkgs.cavalier.overrideAttrs (old: rec {
         runtimeDeps = old.runtimeDeps ++ [
           pkgs.libGL
-          pkgs.mesa_drivers
+          pkgs.mesa
         ];
 
         nativeBuildInputs = old.nativeBuildInputs ++ [

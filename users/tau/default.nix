@@ -26,6 +26,7 @@
 
     packages = with pkgs; [
       cachix # caching stuff
+      moonlight-qt
     ];
   };
 

@@ -7,6 +7,7 @@
     inputs.home-manager.nixosModules.default
     inputs.stylix.nixosModules.stylix
 
+    ezModules.bluetooth
     ezModules.core
     ezModules.laptop
     ezModules.intel

@@ -19,7 +19,7 @@
       nativeBuildInputs = [ pkgs.deno pkgs.nodejs ];
 
       patchPhase = ''
-        echo '${builtins.toJSON inputs.kleur.themes.${pkgs.system}.dark.json}' > kleur-dark.json
+        echo '${builtins.toJSON inputs.kleur.themes.${pkgs.system}.dark.base16}' > kleur-dark.json
       '';
 
       installPhase = ''
