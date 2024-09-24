@@ -49,31 +49,18 @@
       }) # notes
       anki # cards (obsidian spaced reptition has failed me again)
 
-      gnome.nautilus # file manager
+      nautilus # file manager
       loupe # image viewer
-      kooha # for screen recording
       fragments # for torrenting... :cluelesser:
+      kicad # PCB gaming
 
-      (pkgs.cavalier.overrideAttrs (old: rec {
-        runtimeDeps = old.runtimeDeps ++ [
-          pkgs.libGL
-          pkgs.mesa
-        ];
-
-        nativeBuildInputs = old.nativeBuildInputs ++ [
-          pkgs.makeWrapper
-        ];
-
-        postFixup = ''
-          wrapProgram $out/bin/NickvisionCavalier.GNOME \
-            --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath runtimeDeps}
-        '';
-      })) # le music vis
+      pkgs.cavalier # le music vis
       sptlrx # funni lyrics
 
-      inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
+      # inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
       fractal # matrix go brrr
       libreoffice # presentations and stuff go brrr
+      feishin # music go brrr
 
       # CLI utils
       btop # monitoring stuff
@@ -81,6 +68,9 @@
       cachix # caching stuff
       cloudflared # ssh tunnel stuff
       nix-output-monitor # building stuff
+      lutris
+      protonup-qt
+      cartridges
     ];
   };
 

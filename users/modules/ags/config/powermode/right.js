@@ -194,6 +194,7 @@ const MusicPlayer = () => {
         const hasName = (/** @type {string} */ name) => (/** @type {MprisPlayer} */ player) => player?.name === name
         const player = 
           players.find(hasName("strawberry"))
+          ?? players.find(hasName("Feishin"))
           ?? players.find(hasName("firefox"))
         if (player && player.name !== self.attribute.currentPlayerName) {
           console.log(`switching player to ${player.name}`);

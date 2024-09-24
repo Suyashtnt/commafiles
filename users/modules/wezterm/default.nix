@@ -1,10 +1,7 @@
 {config, pkgs, ...}: {
   programs.wezterm = {
     enable = true;
-    package = pkgs.wezterm-git.overrideAttrs (old: {
-        doCheck = false;
-        doInstallCheck = false;
-    });
+    package = pkgs.wezterm;
     extraConfig = builtins.readFile ./wezterm.lua;
   };
 

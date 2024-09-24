@@ -19,7 +19,15 @@
     kernelModules = ["kvm-intel"];
     extraModulePackages = [];
     supportedFilesystems = ["ntfs"];
-    binfmt.emulatedSystems = ["aarch64-linux"];
+    binfmt = {
+      emulatedSystems = ["aarch64-linux"];
+
+      registrations."aarch64-linux" = {
+        preserveArgvZero = true;
+        matchCredentials = true;
+        fixBinary = true;
+      };
+    };
   };
 
   fileSystems."/" = {
@@ -35,6 +43,14 @@
   fileSystems."/mnt/BulkStorage" = {
     device = "/dev/disk/by-uuid/36F2637DF263406B";
     fsType = "ntfs";
+    options = [
+      "user"
+      "exec"
+      "uid=1000"
+      "gid=100"
+      "rw"
+      "umask=000"
+    ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

@@ -56,7 +56,7 @@
   environment.systemPackages = with pkgs; [
     vim # backup editor
     libimobiledevice
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     cloudflared
     ifuse
     virt-manager

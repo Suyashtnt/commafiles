@@ -4,7 +4,7 @@ in {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
   home.packages = [ pkgs.swww pkgs.brightnessctl pkgs.wl-clipboard ];
   programs.niri.settings = {
-    binds = with config.lib.niri.actions; let
+   binds = with config.lib.niri.actions; let
       sh = spawn "sh" "-c";
     in {
       "Mod+Shift+Slash".action = show-hotkey-overlay;
@@ -25,6 +25,16 @@ in {
       "Mod+Shift+J".action = move-window-down-or-to-workspace-down;
       "Mod+Shift+K".action = move-window-up-or-to-workspace-up;
       "Mod+Shift+L".action = move-column-right;
+
+      "Mod+Left".action = focus-column-left;
+      "Mod+Down".action = focus-window-or-workspace-down;
+      "Mod+Up".action = focus-window-or-workspace-up;
+      "Mod+Right".action = focus-column-right;
+
+      "Mod+Shift+Left".action = move-column-left;
+      "Mod+Shift+Down".action = move-window-down-or-to-workspace-down;
+      "Mod+Shift+Up".action = move-window-up-or-to-workspace-up;
+      "Mod+Shift+Right".action = move-column-right;
 
       "Mod+Minus".action = set-column-width "-10%";
       "Mod+Shift+Equal".action = set-column-width "+10%";
@@ -83,6 +93,10 @@ in {
       "Mod+Shift+9".action = move-column-to-workspace 9;
     };     
 
+    environment = {
+      DISPLAY = ":0"; # xwayland-satellite
+    };
+
     outputs."eDP-1" = {     
       variable-refresh-rate = true;
     };
@@ -98,6 +112,9 @@ in {
         command = ["dbus-update-activation-environment" "--all" "--systemd"];
       }
       {
+        command = ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"];
+      }
+      {
         command = [
           "sh" "-c" 
           ''
@@ -105,6 +122,9 @@ in {
             export SSH_AUTH_SOCK;
           ''
         ];
+      }
+      {
+        command = ["${pkgs.xwayland-satellite}/bin/xwayland-satellite"];
       }
     ];
 
@@ -130,7 +150,7 @@ in {
     };
 
     input = {
-      focus-follows-mouse = true;
+      focus-follows-mouse.enable = true;
       touchpad.click-method = "clickfinger";
     };
 
