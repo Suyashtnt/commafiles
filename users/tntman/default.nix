@@ -57,10 +57,16 @@
       pkgs.cavalier # le music vis
       sptlrx # funni lyrics
 
-      # inputs.zotero-nix.packages.${pkgs.system}.zotero # reference manager go brrr
+      zotero_7 # reference manager go brrr
       fractal # matrix go brrr
       libreoffice # presentations and stuff go brrr
       feishin # music go brrr
+      lutris # games go brrr
+      protonup-qt # proton-GE go brrr
+      protontricks # proton sound go brrr
+      pavucontrol # sound go brrr
+      qgis # GIS go brrr
+      openttd # gamig time
 
       # CLI utils
       btop # monitoring stuff
@@ -68,9 +74,6 @@
       cachix # caching stuff
       cloudflared # ssh tunnel stuff
       nix-output-monitor # building stuff
-      lutris
-      protonup-qt
-      cartridges
     ];
   };
 

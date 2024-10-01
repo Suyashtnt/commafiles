@@ -137,11 +137,6 @@
     #   url = "github:hyprwm/xdg-desktop-portal-hyprland";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-
-    zotero-nix = {
-      url = "github:camillemndn/zotero-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {self, ...}:

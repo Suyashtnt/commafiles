@@ -12,6 +12,7 @@
       emacs-all-the-icons-fonts
       hack-font
       recursive
+      open-sans
     ];
 
     fontconfig = {
