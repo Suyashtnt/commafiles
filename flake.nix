@@ -137,6 +137,11 @@
     #   url = "github:hyprwm/xdg-desktop-portal-hyprland";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {self, ...}:

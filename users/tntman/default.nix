@@ -67,6 +67,7 @@
       pavucontrol # sound go brrr
       qgis # GIS go brrr
       openttd # gamig time
+      inputs.zen-browser.packages."${system}".specific # browser go brrr
 
       # CLI utils
       btop # monitoring stuff

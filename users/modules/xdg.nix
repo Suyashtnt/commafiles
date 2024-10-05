@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  browser = ["firefox.desktop"];
+  browser = ["zen.desktop"];
 
   associations = {
     "text/html" = browser;
