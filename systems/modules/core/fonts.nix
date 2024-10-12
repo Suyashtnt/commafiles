@@ -17,7 +17,7 @@
 
     fontconfig = {
       defaultFonts = {
-        sansSerif = ["Inter" "Noto Sans"];
+        sansSerif = ["Recursive Sans Linear" "Inter"];
         emoji = ["Noto Color Emoji"];
         monospace = ["ComicCodeLigatures Nerd Font" "JetBrainsMono Nerd Font"];
       };
