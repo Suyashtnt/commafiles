@@ -1,5 +1,0 @@
-builds:
-  exclude: []
-  include:
-  - devShell.x86_64-linux
-  - nixosConfigurations.*
