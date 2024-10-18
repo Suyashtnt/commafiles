@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   time.timeZone = "Africa/Johannesburg";
   i18n.defaultLocale = "en_ZA.UTF-8";
   sdImage.compressImage = false;
@@ -12,7 +12,7 @@
   users.users.tau = {
     isNormalUser = true;
     description = "The superior pi";
-    extraGroups = ["networkmanager" "wheel" "scanner" "lp"];
+    extraGroups = ["networkmanager" "wheel" "scanner" "lp" "gpio"];
     initialPassword = "password"; # Change this with passwd
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBzVQvEJjRAY51R49ytUC7RstLEWNELtlniyXXb7wZQe Suyashtnt@gmail.com"
@@ -20,13 +20,15 @@
     shell = pkgs.nushell;
   };
 
-  qt.platformTheme = "kde";
+  # Create gpio group
+  users.groups.gpio = {};
 
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = ["fbdev"];
-  services.displayManager.defaultSession = "plasma";
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Change permissions gpio devices
+  services.udev.extraRules = ''
+    SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio",MODE="0660"
+    SUBSYSTEM=="gpio", KERNEL=="gpiochip*", ACTION=="add", RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys/class/gpio/export /sys/class/gpio/unexport ; chmod 220 /sys/class/gpio/export /sys/class/gpio/unexport'"
+    SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add",RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
+  '';
 
   # systemd.services.btattach = {
   #   before = ["bluetooth.service"];
@@ -50,4 +52,21 @@
     raspberrypi-eeprom
     helix
   ];
+
+  # cloudflared
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      "d9b6c172-5236-4cfe-b441-10f2e83e5eb4" = {
+         credentialsFile = "${config.sops.secrets."cloudflared/tau".path}";
+         default = "http_status:404";       
+      };
+    };
+  };
+
+  sops.secrets."cloudflared/tau" = {
+      # Both are "cloudflared" by default
+      owner = config.services.cloudflared.user;
+      group = config.services.cloudflared.group;
+  };
 }

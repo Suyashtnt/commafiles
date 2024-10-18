@@ -18,8 +18,8 @@
   };
   sops.templates."navidrome-config.toml" = {
     content = ''
-      MusicFolder = "/mnt/BulkStorage/Music"
-      Address = "192.168.1.42"
+      MusicFolder = "/music"
+      Address = "192.168.1.23"
       LastFM.Enabled = true
       LastFM.ApiKey = "${config.sops.placeholder."lastfm/key"}"
       LastFM.Secret = "${config.sops.placeholder."lastfm/secret"}"
@@ -37,8 +37,8 @@
     openFirewall = true;
     # unused but required by nixos module
     settings = {
-      MusicFolder = "/mnt/BulkStorage/Music";
-      Address = "192.168.1.42";
+      MusicFolder = "/music";
+      Address = "192.168.1.23";
     };
   };
 
@@ -50,7 +50,7 @@
       "${config.environment.etc."ssl/certs/ca-certificates.crt".source}:/etc/ssl/certs/ca-certificates.crt"
       builtins.storeDir
       "/etc"
-      "/mnt/BulkStorage/Music"
+      "/music"
       "/run/secrets-rendered"
     ];
     serviceConfig.DynamicUser = lib.mkForce false;

@@ -18,8 +18,6 @@
       filter = lib.mkForce "*rpi-4-*.dtb";
     };
     enableRedistributableFirmware = true;
-
-    graphics.enable = false;
   };
 
   fileSystems = {

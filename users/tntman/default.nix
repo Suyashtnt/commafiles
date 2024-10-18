@@ -75,6 +75,10 @@
       cachix # caching stuff
       cloudflared # ssh tunnel stuff
       nix-output-monitor # building stuff
+      dive
+      podman-tui
+      podman-compose
+      rsync
     ];
   };
 

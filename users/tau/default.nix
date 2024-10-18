@@ -2,14 +2,14 @@
   inputs,
   ezModules,
   pkgs,
+  config,
   ...
 }: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index
 
     ezModules.git
-    ezModules.kitty
-    ezModules.neofetch
+    ezModules.wezterm
     ezModules.nushell
     ezModules.syncthing
     ezModules.xdg
@@ -26,7 +26,7 @@
 
     packages = with pkgs; [
       cachix # caching stuff
-      moonlight-qt
+      rsync
     ];
   };
 

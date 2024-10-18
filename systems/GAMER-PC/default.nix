@@ -29,4 +29,8 @@
     ./config.nix
     ./hardware.nix
   ];
+
+  sops.secrets."copilot/key" = {
+    owner = "tntman";
+  };
 }
