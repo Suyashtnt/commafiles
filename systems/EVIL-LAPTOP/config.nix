@@ -1,16 +1,12 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+{pkgs, ...}: {
+  networking.hostName = "EVIL-LAPTOP";
 
-{ config, pkgs, ... }:
-
-{
-  networking.hostName = "EVIL-LAPTOP"; # Define your hostname.
+  boot = {
+    loader.grub.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Africa/Johannesburg";
-
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Configure keymap in X11
@@ -33,7 +29,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    vim 
+    vim
     helix
   ];
 

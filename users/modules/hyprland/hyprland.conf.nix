@@ -70,7 +70,6 @@ in ''
       preserve_split=1
   }
 
-  windowrule = noblur,^(org.nickvision.cavalier)$
   windowrule = opacity 0.99, obsidian
 
   exec-once=swww init

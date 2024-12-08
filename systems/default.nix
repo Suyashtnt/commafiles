@@ -1,8 +1,4 @@
-{
-  config,
-  inputs,
-  ...
-}: {
+{config, ...}: {
   ezConfigs = {
     nixos = {
       modulesDirectory = ./modules;

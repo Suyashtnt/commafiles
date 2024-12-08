@@ -3,6 +3,7 @@
     openssl
     gitui
     gh
+    jujutsu
   ];
 
   programs.git = {

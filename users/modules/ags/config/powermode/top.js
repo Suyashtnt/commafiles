@@ -69,7 +69,6 @@ const Weather = () => {
       const { current, daily } = value;
       if (!current) return 0;
 
-      // get a 0-1 range between min and max (who said we would'nt be using this?)
       const min = daily.temperature_2m_min;
       const max = daily.temperature_2m_max;
       return (current.temperature_2m - min) / (max - min);

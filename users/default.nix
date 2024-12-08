@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   ezConfigs = {
     home = {
       modulesDirectory = ./modules;

@@ -19,7 +19,6 @@ in {
     spotifyPlayer # spotify terminal edition
     sptlrx # spotify lyrics
     cava # the funny music visualizer
-    packages.${pkgs.system}.cavalier # the funnier music visualizer
   ];
 
   xdg.configFile.cava.source = ./config;

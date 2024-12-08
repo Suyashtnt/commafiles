@@ -17,6 +17,7 @@
     ezModules.niri
     ezModules.greetd
     ezModules.sops
+    ezModules.niri
 
     ezModules.theme
     ezModules.kleur

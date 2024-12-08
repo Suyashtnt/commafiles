@@ -1,3 +1,37 @@
 {
-    "nixEnvSelector.nixFile": "${workspaceFolder}/flake.nix"
+  "nix.enableLanguageServer": true,
+  "nix.formatterPath": "alejandra",
+  "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    // settings for 'nixd' LSP
+    "nixd": {
+      "formatting": {
+        // This is the default if ommited.
+        "command": [
+          "alejandra"
+        ]
+      },
+      "options": {
+        // By default, this entriy will be read from `import <nixpkgs> { }`
+        // You can write arbitary nix expression here, to produce valid "options" declaration result.
+        // Tip: for flake-based configuration, utilize `builtins.getFlake`
+        "nixos": {
+          "expr": "(builtins.getFlake \"/home/tntman/commafiles\").debug.config.flake.nixosConfigurations.GAMER-PC.options"
+        },
+        "home-manager": {
+          "expr": "(builtins.getFlake \"/home/tntman/commafiles\").debug.config.flake.homeConfigurations.\"tntman@GAMER-PC\".options"
+        },
+        // For flake-parts opitons.
+        // Firstly read the docs here to enable "debugging", exposing declarations for nixd.
+        // https://flake.parts/debug
+        "flake-parts": {
+          "expr": "(builtins.getFlake \"/home/tntman/commafiles\").debug.options"
+        },
+        // For a `perSystem` flake-parts option:
+        "flake-parts2": {
+          "expr": "(builtins.getFlake \"/home/tntman/commafiles\").currentSystem.options"
+        }
+      }
+    }
+  }
 }

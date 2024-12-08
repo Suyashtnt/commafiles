@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake-parts = {
@@ -20,12 +20,24 @@
     };
 
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags = {
-      url = "github:Aylur/ags";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        # rust-overlay.follows = "rust-overlay";
+        flake-parts.follows = "flake-parts";
+        # crane.follows = "crane";
+        flake-compat.follows = "flake-compat";
+      };
+    };
+
+    astal = {
+      url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -91,7 +103,6 @@
 
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
       };
     };
 
@@ -149,7 +160,7 @@
       systems = ["x86_64-linux" "aarch64-linux"];
 
       debug = true;
-      
+
       imports = [
         inputs.ez-configs.flakeModule
         ./devshell.nix

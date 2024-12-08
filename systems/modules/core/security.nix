@@ -18,8 +18,6 @@
   
   services.udev.packages = with pkgs; [
     gnome-settings-daemon
-    qmk-udev-rules
-    vial
   ];
 
   # add nushell to list of valid shells

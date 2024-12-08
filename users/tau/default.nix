@@ -27,6 +27,8 @@
     packages = with pkgs; [
       cachix # caching stuff
       rsync
+      zellij
+      (openocd.override { extraHardwareSupport = ["bcm2835gpio"]; })
     ];
   };
 

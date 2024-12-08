@@ -30,6 +30,10 @@
     SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add",RUN+="${pkgs.bash}/bin/bash -c 'chown root:gpio /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value ; chmod 660 /sys%p/active_low /sys%p/direction /sys%p/edge /sys%p/value'"
   '';
 
+  services.udev.packages = [
+    pkgs.openocd
+  ];
+
   # systemd.services.btattach = {
   #   before = ["bluetooth.service"];
   #   after = ["dev-ttyAMA0.device"];

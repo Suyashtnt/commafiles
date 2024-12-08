@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   users.users.tntman = {
     isNormalUser = true;
     description = "Tabiasgeee Human";
@@ -7,6 +7,15 @@
     shell = pkgs.nushell;
   };
   nixpkgs.hostPlatform = "x86_64-linux";
+
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+
+  boot = {
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+  };
 
   networking.hostName = "GAMER-PC";
 
@@ -44,6 +53,7 @@
     avahi.nssmdns4 = true;
     flatpak.enable = true;
     gvfs.enable = true;
+    teamviewer.enable = true; # Being school tech support moment
   };
 
   programs.dconf.enable = true;
@@ -65,5 +75,6 @@
     ifuse
     virt-manager
     xdg-desktop-portal-gtk
+    sbctl
   ];
 }

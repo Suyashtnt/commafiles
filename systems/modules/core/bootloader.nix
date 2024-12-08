@@ -1,11 +1,14 @@
 {
+  inputs,
   pkgs,
+  lib,
   ...
 }: {
   boot = {
     loader = {
+      systemd-boot.enable = lib.mkForce false;
       grub = {
-        enable = true;
+        enable = lib.mkDefault false; # enable when setting up/not securebooting
         efiSupport = true;
         device = "nodev";
         useOSProber = true;
@@ -22,7 +25,7 @@
     supportedFilesystems = ["ntfs" "mtpfs"];
 
     kernelModules = ["kvm-intel"];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
 
     plymouth = {
       enable = true;

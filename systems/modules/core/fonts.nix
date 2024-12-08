@@ -2,7 +2,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
-      (nerdfonts.override {fonts = ["JetBrainsMono"];})
+      nerd-fonts.jetbrains-mono
       font-awesome
       noto-fonts
       noto-fonts-color-emoji

@@ -2,6 +2,7 @@
   pkgs,
   ezModules,
   inputs,
+  config,
   ...
 }: {
   imports = [
@@ -17,9 +18,10 @@
     ezModules.kleur
     ezModules.syncthing
     ezModules.xdg
-    ezModules.ags
+    # ezModules.ags TODO commashell/astal module
     ezModules.neofetch
     ezModules.obs
+    ezModules.wlsunset
     ezModules.vscode
     ezModules.webcord
     ezModules.yazi
@@ -53,8 +55,9 @@
       loupe # image viewer
       fragments # for torrenting... :cluelesser:
       kicad # PCB gaming
+      prismlauncher # minceraft
+      signal-desktop
 
-      pkgs.cavalier # le music vis
       sptlrx # funni lyrics
 
       zotero_7 # reference manager go brrr

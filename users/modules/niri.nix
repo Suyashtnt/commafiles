@@ -1,18 +1,23 @@
-{ config, pkgs, ... }: let
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: let
   theme = config.lib.stylix.colors;
 in {
   xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome pkgs.gnome-keyring];
-  home.packages = [ pkgs.swww pkgs.brightnessctl pkgs.wl-clipboard ];
+  home.packages = [pkgs.swww pkgs.brightnessctl pkgs.wl-clipboard inputs.astal.packages.${pkgs.system}.default];
   programs.niri.settings = {
-   binds = with config.lib.niri.actions; let
+    binds = with config.lib.niri.actions; let
       sh = spawn "sh" "-c";
     in {
       "Mod+Shift+Slash".action = show-hotkey-overlay;
 
       "Mod+Q".action = spawn "wezterm";
-      "Mod+D".action = sh "ags -t applauncher";
-      "Mod+W".action = sh "ags -r 'togglePowerMode()'";
-      "Mod+P".action = sh "ags -r 'toggleMusicOnly()'";
+      "Mod+D".action = sh "astal launcher";
+      "Mod+W".action = sh "astal toggle all";
+      "Mod+P".action = sh "astal toggle right";
 
       "Mod+F".action = fullscreen-window;
 
@@ -57,7 +62,7 @@ in {
 
       "Mod+Shift+WheelScrollDown".action = focus-column-right;
       "Mod+Shift+WheelScrollUp".action = focus-column-left;
-     
+
       "Mod+Shift+C".action = close-window;
       "Mod+Ctrl+Shift+C".action = quit;
 
@@ -91,13 +96,13 @@ in {
       "Mod+Shift+7".action = move-column-to-workspace 7;
       "Mod+Shift+8".action = move-column-to-workspace 8;
       "Mod+Shift+9".action = move-column-to-workspace 9;
-    };     
+    };
 
     environment = {
       DISPLAY = ":0"; # xwayland-satellite
     };
 
-    outputs."eDP-1" = {     
+    outputs."eDP-1" = {
       variable-refresh-rate = true;
     };
 
@@ -116,7 +121,8 @@ in {
       }
       {
         command = [
-          "sh" "-c" 
+          "sh"
+          "-c"
           ''
             eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh -f);
             export SSH_AUTH_SOCK;
@@ -138,14 +144,14 @@ in {
             to = "#${theme.base0E}";
           };
         };
-        inactive = { 
+        inactive = {
           gradient = {
             angle = 130;
             relative-to = "workspace-view";
             from = "#${theme.base0D}90";
             to = "#${theme.base0E}90";
-         };  
-       };
+          };
+        };
       };
     };
 
@@ -175,17 +181,9 @@ in {
             app-id = "^org.wezfurlong.wezterm$";
           }
         ];
-        default-column-width = {};    
+        default-column-width = {};
       }
 
-      {
-        matches = [
-          {
-            app-id = "^org.nickvision.cavalier$";
-          }
-        ];
-        draw-border-with-background = false;
-      }
       {
         geometry-corner-radius = {
           bottom-left = 12.0;

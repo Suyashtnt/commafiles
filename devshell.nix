@@ -9,6 +9,7 @@
         yaml-language-server # yaml LSP
         alejandra # uncomprimising nix formatter
         marksman # markdown LSP
+        nixd # nix LSP
         nodejs
         nodePackages.typescript-language-server # typescript LSP for ags autocomplete
         sops
